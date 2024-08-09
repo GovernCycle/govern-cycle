@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "dfx": "0.20.1",
+  "canisters": {
+    "test": {
+      "type": "motoko",
+      "main": "backend/test/main.mo",
+      "declarations": {
+        "node_compatibility": true,
+        "output": "frontend/src/declarations/test"
+      }
+    },
+    "frontend": {
+      "dependencies": ["test"],
+      "frontend": {
+        "entrypoint": "frontend/build/index.html"
+      },
+      "source": ["frontend/build"],
+      "type": "assets"
+    }
+  }
+}
