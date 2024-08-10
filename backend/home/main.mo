@@ -4,7 +4,7 @@ import Result "mo:base/Result";
 import Bool "mo:base/Bool";
 import Iter "mo:base/Iter";
 
-actor {
+actor Home {
     type Profile = {
         username : Text;
         bio : Text;

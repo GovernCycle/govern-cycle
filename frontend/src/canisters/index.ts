@@ -1,11 +1,11 @@
 import { CandidCanister } from "@bundly/ares-core";
 
-import { TestActor, test } from "./test";
+import { HomeActor, home } from "./home";
 
 export type CandidActors = {
-  test: TestActor;
+  home: HomeActor;
 };
 
 export let candidCanisters: Record<keyof CandidActors, CandidCanister> = {
-  test,
+  home,
 };

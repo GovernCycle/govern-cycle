@@ -16,9 +16,9 @@ export default function IcConnectPage() {
   const identities = useIdentities();
   const [profile, setProfile] = useState<Profile | undefined>();
   const [loading, setLoading] = useState(false); // State for loader
-  const test = useCandidActor<CandidActors>("test", currentIdentity, {
+  const test = useCandidActor<CandidActors>("home", currentIdentity, {
     canisterId: process.env.NEXT_PUBLIC_TEST_CANISTER_ID,
-  }) as CandidActors["test"];
+  }) as CandidActors["home"];
 
   useEffect(() => {
     getProfile();

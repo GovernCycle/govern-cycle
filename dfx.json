@@ -2,17 +2,17 @@
   "version": 1,
   "dfx": "0.22.0",
   "canisters": {
-    "test": {
+    "home": {
       "type": "motoko",
-      "main": "backend/test/main.mo",
+      "main": "backend/home/main.mo",
       "declarations": {
         "node_compatibility": true,
-        "output": "frontend/src/declarations/test"
+        "output": "frontend/src/declarations/home"
       }
     },
     "frontend": {
       "dependencies": [
-        "test"
+        "home"
       ],
       "frontend": {
         "entrypoint": "frontend/build/index.html"
