@@ -14,7 +14,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     candidCanisters,
     providers: [
       new InternetIdentity({
-        providerUrl:"https://identity.ic0.app/",
+        providerUrl:process.env.NEXT_PUBLIC_INTERNET_IDENTITY_URL || "http://bd3sg-teaaa-aaaaa-qaaba-cai.localhost:4943",
       }),
     ],
   });
