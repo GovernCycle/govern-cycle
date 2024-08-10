@@ -27,10 +27,10 @@ Get environment values:
 dfx canister create --all
 
 # Get backend canister id
-dfx canister id test
+dfx canister id home
 
 # Get internet-identity canister id
-dfx canister id internet-identity
+dfx canister id internet_identity
 
 # Get your Codespace name
 echo $CODESPACE_NAME
@@ -50,7 +50,7 @@ NEXT_PUBLIC_INTERNET_IDENTITY_URL=https://YOUR_CODESPACE_NAME-4943.app.github.de
 Generate did files:
 
 ```bash
-dfx generate test
+dfx generate home
 ```
 
 Deploy your canisters:
@@ -91,13 +91,13 @@ Ensure the following are installed on your system:
 Clone the project
 
 ```bash
-  git clone https://github.com/adrian-d-hidalgo/motoko-nextjs.git
+  git clone https://github.com/GovernCycle/govern-cycle.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd motoko-nextjs
+  cd govern-cycle
 ```
 
 Install dependencies
@@ -125,10 +125,10 @@ Get your canister ids:
 dfx canister create --all
 
 # Get backend canister id
-dfx canister id test
+dfx canister id home
 
 # Get internet-identity canister id
-dfx canister id internet-identity
+dfx canister id internet_identity
 ```
 
 Replace values in the .env file:
@@ -137,7 +137,7 @@ Replace values in the .env file:
 # Replace port if needed
 NEXT_PUBLIC_IC_HOST_URL=http://localhost:4943
 # Replace YOUR_TEST_CANISTER_ID with your test canister id
-NEXT_PUBLIC_TEST_CANISTER_ID=YOUR_TEST_CANISTER_ID
+NEXT_PUBLIC_HOME_CANISTER_ID=YOUR_HOME_CANISTER_ID
 # Replace YOUR_INTERNET_IDENTITY_CANISTER_ID with your internet-identity canister id
 NEXT_PUBLIC_INTERNET_IDENTITY_URL=http://YOUR_INTERNET_IDENTITY_CANISTER_ID.localhost:4943
 ```
@@ -145,7 +145,7 @@ NEXT_PUBLIC_INTERNET_IDENTITY_URL=http://YOUR_INTERNET_IDENTITY_CANISTER_ID.loca
 Generate did files:
 
 ```bash
-dfx generate test
+dfx generate home
 ```
 
 Deploy your canisters:
