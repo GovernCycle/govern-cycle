@@ -3,63 +3,22 @@ import HashMap "mo:base/HashMap";
 import Result "mo:base/Result";
 import Bool "mo:base/Bool";
 import Iter "mo:base/Iter";
+import Map "mo:map/Map";
+import { nhash } "mo:map/Map";
+import UserData "/types";
+import UserVal "/validations";
 
 actor Home {
-    type Profile = {
-        username : Text;
-        bio : Text;
-    };
 
-    type GetProfileError = {
-        #userNotAuthenticated;
-        #profileNotFound;
-    };
 
-    type GetProfileResponse = Result.Result<Profile, GetProfileError>;
+    let users = Map.new<Principal, UserData.User>();
 
-    type CreateProfileError = {
-        #profileAlreadyExists;
-        #userNotAuthenticated;
-    };
+    public shared ({caller}) func createProfile (user: UserData.User) : async UserVal.AuthenticationResult {
+        if (Principal.isAnonymous(caller)) return #err(#UserNotAuthenticated);
 
-    type CreateProfileResponse = Result.Result<Bool, CreateProfileError>;
+        Map.set(users, nhash, caller, user);
 
-    let profiles = HashMap.HashMap<Principal, Profile>(0, Principal.equal, Principal.hash);
+        return #ok("User created successfully");
 
-    public query ({caller}) func getProfile () : async GetProfileResponse {
-        if (Principal.isAnonymous(caller)) return #err(#userNotAuthenticated);
-
-        let profile = profiles.get(caller);
-
-        switch profile {
-            case (?profile) {
-                #ok(profile);
-            };
-            case null {
-                #err(#profileNotFound);
-            };
-        }
-    };
-
-    public query func getAllProfiles () : async [Profile] {
-
-        return Iter.toArray(profiles.vals());
-    };
-
-    public shared ({caller}) func createProfile (username : Text, bio : Text) : async CreateProfileResponse {
-        if (Principal.isAnonymous(caller)) return #err(#userNotAuthenticated);
-
-        let profile = profiles.get(caller);
-
-        if (profile != null) return #err(#profileAlreadyExists);
-
-        let newProfile: Profile = {
-            username = username;
-            bio = bio;
-        };
-        
-        profiles.put(caller, newProfile);
-
-        #ok(true);
     };
 }
