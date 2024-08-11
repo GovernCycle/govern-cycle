@@ -1,4 +1,5 @@
 import Text "mo:base/Text";
+import UserData "/types";
 import Result "mo:base/Result";
 
 module{
@@ -11,7 +12,10 @@ module{
         #UserNotApproved;
     };
 
-    private type SuccessAuthentication  = Text;
+    private type SuccessAuthentication  = {
+        #SuccessText: Text.Text;
+        #User: UserData.User;
+    };
 
     public type AuthenticationResult = Result.Result<SuccessAuthentication, AuthenticationError>;
 }

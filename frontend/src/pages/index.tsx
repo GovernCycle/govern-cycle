@@ -5,6 +5,7 @@ import { LogoutButton, useAuth, useCandidActor, useIdentities } from "@bundly/ar
 
 import { CandidActors } from "@app/canisters";
 import Header from "@app/components/header";
+import { SuccessAuthentication } from "@app/declarations/home/home.did";
 
 type Profile = {
   username: string;
@@ -14,7 +15,7 @@ type Profile = {
 export default function IcConnectPage() {
   const { isAuthenticated, currentIdentity, changeCurrentIdentity } = useAuth();
   const identities = useIdentities();
-  const [profile, setProfile] = useState<Profile | undefined>();
+  const [profile, setProfile] = useState<SuccessAuthentication | undefined>();
   const [loading, setLoading] = useState(false); // State for loader
   const test = useCandidActor<CandidActors>("home", currentIdentity, {
     canisterId: process.env.NEXT_PUBLIC_TEST_CANISTER_ID,
@@ -45,7 +46,7 @@ export default function IcConnectPage() {
       }
 
       const profile = "ok" in response ? response.ok : undefined;
-      setProfile(profile);
+      setProfile(profile.);
     } catch (error) {
       console.error({ error });
     }

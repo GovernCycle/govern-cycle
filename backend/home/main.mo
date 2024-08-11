@@ -37,12 +37,28 @@ actor Home {
 
         Map.set(users, phash, caller, newUser);
 
-        return #ok("User created successfully");
+        return #ok(#SuccessText("User created successfully"));
 
     };
 
-    public func getAllUsers() : async [UserData.User] {
+    public func getAllProfiles() : async [UserData.User] {
         return Iter.toArray(Map.vals(users));
+    };
+
+    public shared ({caller}) func getProfile () : async UserVal.AuthenticationResult {
+        if (Principal.isAnonymous(caller)) return #err(#UserNotAuthenticated);
+
+        let userFound = Map.get(users, phash, caller);
+
+        switch (userFound) {
+            case (null) {
+                return #err(#UserNotFound);
+            };
+            case (?userFound) {
+                return #ok(#User(userFound));
+            };
+        };
+
     };
 
     public shared ({ caller }) func changeUserState(state : UserData.State, user : Principal) : async UserVal.AuthenticationResult {
@@ -86,6 +102,6 @@ actor Home {
             };
         };
 
-        return #ok("User state changed successfully");
+        return #ok(#SuccessText("User state changed successfully"));
     };
 };
