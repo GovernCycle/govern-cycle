@@ -8,6 +8,7 @@ module{
         #UserNotAuthorized;
         #UserNotFound;
         #UserAlreadyExists;
+        #UserNotApproved;
     };
 
     private type SuccessAuthentication  = Text;

@@ -2,5 +2,8 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[motoko]": {
+    "editor.defaultFormatter": "dfinity-foundation.vscode-motoko"
   }
 }

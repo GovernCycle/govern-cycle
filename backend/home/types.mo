@@ -4,7 +4,7 @@ import Nat32 "mo:base/Nat32";
 
 module {
 
-    private type Role = {
+    public type Role = {
         #projectDeveloper;
         #community;
         #government;
@@ -14,32 +14,40 @@ module {
         #technicalSecretariat;
         #register;
         #standard;
-};
+    };
 
-    private type State = {
+    public type State = {
         #pending;
         #approved;
         #rejected;
     };
 
-    private type Jurisdiction = {
-        continent: Text;
-        country: Text;
-        region: Text;
+    public type Jurisdiction = {
+        continent : Text;
+        country : Text;
+        region : Text;
     };
 
     public type User = {
-        name: Text;
-        role: [Role];
-        state: State;
-        jurisdiction: [Jurisdiction];
-        email: Text;
-        phone: Text;
-        logo: Blob;
-        manager: ?Text;
-        tokens: Nat32;
+        name : Text;
+        role : [Role];
+        state : State;
+        jurisdiction : [Jurisdiction];
+        email : Text;
+        phone : Text;
+        logo : Blob;
+        manager : ?Text;
+        tokens : Nat32;
     };
 
+    public type UserRequest = {
+        name : Text;
+        role : [Role];
+        jurisdiction : [Jurisdiction];
+        email : Text;
+        phone : Text;
+        logo : Blob;
+        manager : ?Text;
+    };
 
-    
-}
+};

@@ -1,6 +1,11 @@
 {
   "version": 1,
   "dfx": "0.22.0",
+  "defaults": {
+    "build": {
+      "packtool": "mops sources"
+    }
+  },
   "canisters": {
     "home": {
       "type": "motoko",

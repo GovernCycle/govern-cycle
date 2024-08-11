@@ -1,26 +1,91 @@
 import Principal "mo:base/Principal";
-import HashMap "mo:base/HashMap";
-import Result "mo:base/Result";
-import Bool "mo:base/Bool";
 import Iter "mo:base/Iter";
-import Nat "mo:base/Nat";
-import Text "mo:base/Text";
 import Map "mo:map/Map";
 import { phash } "mo:map/Map";
 import UserData "/types";
 import UserVal "/validations";
+import UserUtils "/utils";
 
 actor Home {
 
     let users = Map.new<Principal, UserData.User>();
 
-    public shared ({caller}) func createProfile (user: UserData.User) : async UserVal.AuthenticationResult {
+    public shared ({ caller }) func createProfile(user : UserData.UserRequest) : async UserVal.AuthenticationResult {
         if (Principal.isAnonymous(caller)) return #err(#UserNotAuthenticated);
 
         let userFound = Map.get(users, phash, caller);
-        Map.set(users, phash, caller, user);
+
+        if (userFound != null) {
+            return #err(#UserAlreadyExists);
+        };
+
+        let jurisdictions = UserUtils.deleteDuplicateJur(user.jurisdiction);
+
+        let roles = UserUtils.deleteDuplicatedRoles(user.role);
+
+        let newUser : UserData.User = {
+            name = user.name;
+            role = roles;
+            state = #pending;
+            jurisdiction = jurisdictions;
+            email = user.email;
+            phone = user.phone;
+            logo = user.logo;
+            manager = user.manager;
+            tokens = 0;
+        };
+
+        Map.set(users, phash, caller, newUser);
 
         return #ok("User created successfully");
 
     };
-}
+
+    public func getAllUsers() : async [UserData.User] {
+        return Iter.toArray(Map.vals(users));
+    };
+
+    public shared ({ caller }) func changeUserState(state : UserData.State, user : Principal) : async UserVal.AuthenticationResult {
+        if (Principal.isAnonymous(caller)) return #err(#UserNotAuthenticated);
+
+        let userAdmin = Map.get(users, phash, caller);
+
+        switch (userAdmin) {
+            case (null) {
+                return #err(#UserNotFound);
+            };
+            case (?userAdmin) {
+                if (not UserUtils.isAdmin(userAdmin.role)) {
+                    return #err(#UserNotAuthorized);
+                };
+                if (not UserUtils.isApproved(userAdmin.state)) {
+                    return #err(#UserNotApproved);
+                };
+            };
+        };
+
+        let userFound = Map.get(users, phash, user);
+
+        switch (userFound) {
+            case (null) {
+                return #err(#UserNotFound);
+            };
+            case (?userFound) {
+                let newuser : UserData.User = {
+                    name = userFound.name;
+                    role = userFound.role;
+                    state = state;
+                    jurisdiction = userFound.jurisdiction;
+                    email = userFound.email;
+                    phone = userFound.phone;
+                    logo = userFound.logo;
+                    manager = userFound.manager;
+                    tokens = userFound.tokens;
+                };
+                Map.set(users, phash, user, newuser);
+            };
+        };
+
+        return #ok("User state changed successfully");
+    };
+};
