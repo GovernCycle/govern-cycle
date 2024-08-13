@@ -35,7 +35,7 @@ module {
 
     public func isAdmin(roles : [UserData.Role]) : Bool {
         for (role in roles.vals()) {
-            if (role == #technicalSecretariat) {
+            if (role == #TechnicalSecretariat) {
                 return true;
             };
         };
@@ -43,6 +43,6 @@ module {
     };
 
     public func isApproved(state : UserData.State) : Bool {
-        return state == #approved;
+        return state == #Approved;
     };
 };

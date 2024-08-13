@@ -1,5 +1,6 @@
 import Principal "mo:base/Principal";
 import Iter "mo:base/Iter";
+import Nat32 "mo:base/Nat32";
 import Map "mo:map/Map";
 import { phash } "mo:map/Map";
 import UserData "/types";
@@ -9,6 +10,7 @@ import UserUtils "/utils";
 actor Home {
 
     let users = Map.new<Principal, UserData.User>();
+    let ledger = Map.new<Principal, Nat32>();
 
     public shared ({ caller }) func createProfile(user : UserData.UserRequest) : async UserVal.AuthenticationResult {
         if (Principal.isAnonymous(caller)) return #err(#UserNotAuthenticated);
@@ -26,16 +28,21 @@ actor Home {
         let newUser : UserData.User = {
             name = user.name;
             role = roles;
-            state = #pending;
+            state = #Pending;
             jurisdiction = jurisdictions;
             email = user.email;
             phone = user.phone;
             logo = user.logo;
             manager = user.manager;
-            tokens = 0;
         };
 
+        //save user
         Map.set(users, phash, caller, newUser);
+        //create wallet for user
+        let tokens:Nat32 = 0;
+        
+        Map.set(ledger, phash, caller, tokens);
+
 
         return #ok(#SuccessText("User created successfully"));
 
@@ -90,13 +97,12 @@ actor Home {
                 let newuser : UserData.User = {
                     name = userFound.name;
                     role = userFound.role;
-                    state = state;
+                    state;
                     jurisdiction = userFound.jurisdiction;
                     email = userFound.email;
                     phone = userFound.phone;
                     logo = userFound.logo;
                     manager = userFound.manager;
-                    tokens = userFound.tokens;
                 };
                 Map.set(users, phash, user, newuser);
             };
