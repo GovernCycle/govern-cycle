@@ -104,4 +104,46 @@ actor Home {
 
         return #ok(#SuccessText("User state changed successfully"));
     };
+
+
+    ////////////
+
+     public shared ({ caller }) func deletUser(user : Principal) : async UserVal.AuthenticationResult {
+        if (Principal.isAnonymous(caller)) return #err(#UserNotAuthenticated);
+
+        let userAdmin = Map.get(users, phash, caller);
+
+        switch (userAdmin) {
+            case (null) {
+                return #err(#UserNotFound);
+            };
+            case (?userAdmin) {
+                if (not UserUtils.isAdmin(userAdmin.role)) {
+                    return #err(#UserNotAuthorized);
+                };
+                if (not UserUtils.isApproved(userAdmin.state)) {
+                    return #err(#UserNotApproved);
+                };
+            };
+        };
+
+        let userFound = Map.get(users, phash, user);
+
+        switch (userFound) {
+            case (null) {
+                return #err(#UserNotFound);
+            };
+            case (?userFound) {                
+                Map.delete(users, phash, user);
+            };
+        };
+
+        return #ok(#SuccessText("User delete successfully"));
+    };
+
+
+
+
+    //////////////
+
 };
