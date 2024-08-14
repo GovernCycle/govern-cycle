@@ -48,8 +48,8 @@ actor Home {
 
     };
 
-    public func getAllProfiles() : async [UserData.User] {
-        return Iter.toArray(Map.vals(users));
+    public func getAllProfiles() : async [(Principal,UserData.User)] {
+        return Iter.toArray(Map.entries(users));
     };
 
     public shared ({caller}) func getProfile () : async UserVal.AuthenticationResult {
@@ -111,10 +111,7 @@ actor Home {
         return #ok(#SuccessText("User state changed successfully"));
     };
 
-
-    ////////////
-
-     public shared ({ caller }) func deletUser(user : Principal) : async UserVal.AuthenticationResult {
+     public shared ({ caller }) func deleteUser(user : Principal) : async UserVal.AuthenticationResult {
         if (Principal.isAnonymous(caller)) return #err(#UserNotAuthenticated);
 
         let userAdmin = Map.get(users, phash, caller);
@@ -146,10 +143,5 @@ actor Home {
 
         return #ok(#SuccessText("User delete successfully"));
     };
-
-
-
-
-    //////////////
 
 };
