@@ -15,9 +15,19 @@
         "output": "frontend/src/declarations/home"
       }
     },
+
+    "proposal": {
+      "type": "motoko",
+      "main": "backend/proposal/main.mo",
+      "declarations": {
+        "node_compatibility": true,
+        "output": "frontend/src/declarations/proposal"
+      }
+    },
+
     "frontend": {
       "dependencies": [
-        "home"
+        "home", "proposal"
       ],
       "frontend": {
         "entrypoint": "frontend/build/index.html"
