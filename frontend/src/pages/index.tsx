@@ -1,74 +1,104 @@
-import { Identity } from "@dfinity/agent";
-import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
-
-import { LogoutButton, useAuth, useCandidActor, useIdentities } from "@bundly/ares-react";
-
-import { CandidActors } from "@app/canisters";
-import Header from "@app/components/header";
-import { SuccessAuthentication } from "@app/declarations/home/home.did";
-
-type Profile = {
-  username: string;
-  bio: string;
-};
+import React, { useState, useEffect } from 'react';
+import type { Principal } from '@dfinity/principal';
+import { useCandidActor, useAuth } from '@bundly/ares-react';
+import { CandidActors } from '@app/canisters';
+import Header from '@app/components/header';
+import type {User, UserRequest, AuthenticationResult, State, Role, Jurisdiction } from '@app/declarations/home/home.did';
 
 export default function IcConnectPage() {
-  const { isAuthenticated, currentIdentity, changeCurrentIdentity } = useAuth();
-  const identities = useIdentities();
-  const [profile, setProfile] = useState<SuccessAuthentication | undefined>();
+  const { isAuthenticated, currentIdentity } = useAuth();
+  const [profiles, setProfiles] = useState<Array<[Principal, User]>>([]);
+
+  // const { userPrincipal, setUserPrincipal } = useAuth();
+  const [profile, setProfile] = useState<AuthenticationResult | undefined>();
   const [loading, setLoading] = useState(false); // State for loader
   const test = useCandidActor<CandidActors>("home", currentIdentity, {
     canisterId: process.env.NEXT_PUBLIC_TEST_CANISTER_ID,
   }) as CandidActors["home"];
 
+  
+
   useEffect(() => {
-    getProfile();
+    if (isAuthenticated) {
+      getProfile();
+    }
   }, [currentIdentity]);
-
-  function formatPrincipal(principal: string): string {
-    const parts = principal.split("-");
-    const firstPart = parts.slice(0, 2).join("-");
-    const lastPart = parts.slice(-2).join("-");
-    return `${firstPart}-...-${lastPart}`;
-  }
-
-  function disableIdentityButton(identityButton: Identity): boolean {
-    return currentIdentity.getPrincipal().toString() === identityButton.getPrincipal().toString();
-  }
 
   async function getProfile() {
     try {
+      setLoading(true);
       const response = await test.getProfile();
-
-      if ("err" in response) {
-        if ("userNotAuthenticated" in response.err) console.log("User not authenticated");
-        else console.log("Error fetching profile");
-      }
-
-      const profile = "ok" in response ? response.ok : undefined;
-      setProfile(profile.);
+      setProfile(response);
+      setLoading(false);
     } catch (error) {
       console.error({ error });
+      setLoading(false);
     }
   }
 
-  async function registerProfile(username: string, bio: string) {
+
+  async function createUser() {
     try {
-      setLoading(true); // Show loader
-      const response = await test.createProfile(username, bio);
+      setLoading(true);
+      const newUser: UserRequest = {
+        'manager': ["Manager Name"],
+        'logo': new Uint8Array([123]),
+        'name': "User Name",
+        'role': [{ TechnicalExpert: null }],
+        'email': "user@example.com",
+        'jurisdiction': [
+          {
+            'region': ["North America"],
+            'country': ["United States"],
+            'continent': ["America"],
+          },
+        ],
+        'phone': "1234567890",
+      };
 
-      if ("err" in response) {
-        if ("userNotAuthenticated" in response.err) alert("User not authenticated");
-        if ("profileAlreadyExists" in response.err) alert("Profile already exists");
-
-        throw new Error("Error creating profile");
-      }
-
-      setProfile({ username, bio });
+      const response = await test.createProfile(newUser);
+      console.log("User created", response);
+      setLoading(false);
     } catch (error) {
       console.error({ error });
-    } finally {
-      setLoading(false); // Hide loader
+      setLoading(false);
+    }
+  }
+
+  async function changeUserState(newState: State, userPrincipal: Principal) {
+    try {
+      setLoading(true);
+      const response = await test.changeUserState(newState, userPrincipal);
+      console.log("User state changed", response);
+      setLoading(false);
+    } catch (error) {
+      console.error({ error });
+      setLoading(false);
+    }
+  }
+
+  async function deleteUser(userPrincipal: Principal) {
+    try {
+      setLoading(true);
+      const response = await test.deleteUser(userPrincipal);
+      console.log("User deleted", response);
+      setLoading(false);
+    } catch (error) {
+      console.error({ error });
+      setLoading(false);
+    }
+  }
+
+  async function getAllProfiles() {
+    try {
+      setLoading(true);
+      const profiles = await test.getAllProfiles();
+      console.log("All profiles", profiles);
+      setProfiles(profiles);  // Set profiles to state
+      setLoading(false);
+    } catch (error) {
+      console.error({ error });
+      setLoading(false);
     }
   }
 
@@ -79,125 +109,69 @@ export default function IcConnectPage() {
         <div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-8">
             <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-xl font-bold mb-2">User Info</h2>
-              <p className="mt-4 text-sm text-gray-500">
-                <strong>Status:</strong> {isAuthenticated ? "Authenticated" : "Not Authenticated"}
-              </p>
-              <p className="text-gray-700">
-                <strong>Current Identity:</strong> {currentIdentity.getPrincipal().toString()}
-              </p>
               <h2 className="text-xl font-bold mb-2">Profile</h2>
-              {profile ? (
-                <>
-                  <p>
-                    <strong>Username: </strong> {profile.username}
-                  </p>
-                  <p>
-                    <strong>Bio: </strong> {profile.bio}
-                  </p>
-                </>
-              ) : (
-                <CreateProfileForm onSubmit={registerProfile} loading={loading} />
-              )}
-            </div>
-
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-xl font-bold mb-2">Identities</h2>
-              <ul className="divide-y divide-gray-200">
-                {identities.map((identity, index) => (
-                  <li key={index} className="flex items-center justify-between py-4">
-                    <span className="text-gray-900">
-                      {identity.provider} : {formatPrincipal(identity.identity.getPrincipal().toString())}
-                    </span>
-                    <div className="flex gap-2">
-                      <button
-                        className={`px-3 py-1 text-sm rounded-md ${
-                          disableIdentityButton(identity.identity)
-                            ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                            : "bg-blue-500 text-white"
-                        }`}
-                        disabled={disableIdentityButton(identity.identity)}
-                        onClick={() => changeCurrentIdentity(identity.identity)}>
-                        Select
-                      </button>
-                      <LogoutButton identity={identity.identity} />
+              <button
+                className="bg-blue-500 text-white px-4 py-2 rounded"
+                onClick={createUser}
+                disabled={loading}
+              >
+                {loading ? "Creating User..." : "Create User"}
+              </button>
+              <button
+                className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
+                onClick={getAllProfiles}
+                disabled={loading}
+              >
+                {loading ? "Fetching Profiles..." : "Get All Profiles"}
+              </button>
+              <div className="profile-list mt-4">
+                {profiles.map(([principal, user], index) => (
+                  <div key={index} className="profile-card border p-4 mb-4 rounded">
+                    <div className="profile-field">
+                      <label className="profile-label">Principal:</label>
+                      <span className="profile-value">{principal.toText()}</span>
                     </div>
-                  </li>
+                    <div className="profile-field">
+                      <label className="profile-label">Email:</label>
+                      <span className="profile-value">{user.email}</span>
+                    </div>
+                    <div className="profile-field">
+                      <label className="profile-label">Name:</label>
+                      <span className="profile-value">{user.name}</span>
+                    </div>
+                    <div className="profile-field">
+                      <label className="profile-label">Phone:</label>
+                      <span className="profile-value">{user.phone}</span>
+                    </div>
+                    <div className="profile-field">
+                      <label className="profile-label">Role:</label>
+                      <span className="profile-value">{user.role.map(role => Object.keys(role)[0]).join(", ")}</span>
+                    </div>
+                    <div className="profile-field">
+                      <label className="profile-label">State:</label>
+                      <span className="profile-value">{Object.keys(user.state)[0]}</span>
+                    </div>
+                    <div className="profile-field">
+                      <label className="profile-label">Jurisdiction:</label>
+                      <span className="profile-value">
+                        {user.jurisdiction.map(j => `${j.continent[0]} - ${j.country[0]} - ${j.region[0]}`).join(", ")}
+                      </span>
+                    </div>
+                  </div>
                 ))}
-              </ul>
+              </div>
+              {/* <button
+                className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
+                onClick={deleteUser()}
+                disabled={loading}
+              >
+                {loading ? "Fetching Profiles..." : "Get All Profiles"}
+              </button> */}
+              {/* Additional UI elements for displaying profiles, changing state, and deleting users */}
             </div>
           </div>
         </div>
       </main>
     </>
-  );
-}
-
-type ProfileFormProps = {
-  onSubmit: (username: string, bio: string) => Promise<void>;
-  loading: boolean; // Loader state
-};
-
-function CreateProfileForm({ onSubmit, loading }: ProfileFormProps) {
-  const [username, setUsername] = useState("");
-  const [bio, setBio] = useState("");
-
-  const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setUsername(event.target.value);
-  };
-
-  const handleBioChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setBio(event.target.value);
-  };
-
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    await onSubmit(username, bio);
-    resetForm();
-  };
-
-  const resetForm = () => {
-    setUsername("");
-    setBio("");
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-          Username
-        </label>
-        <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="username"
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={handleUsernameChange}
-        />
-      </div>
-      <div className="mb-6">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="bio">
-          Bio
-        </label>
-        <textarea
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="bio"
-          placeholder="Bio"
-          value={bio}
-          onChange={handleBioChange}
-        />
-      </div>
-      <div className="flex items-center justify-between">
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          type="submit"
-          disabled={loading} // Disable button while loading
-        >
-          {loading ? "Creating Profile..." : "Create Profile"}
-        </button>
-      </div>
-    </form>
   );
 }
