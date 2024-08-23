@@ -16,3 +16,6 @@ src/declarations
 .azle
 
 .mops
+
+# canister deploy
+canister_ids.json
