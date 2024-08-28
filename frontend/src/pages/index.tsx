@@ -13,7 +13,7 @@ export default function IcConnectPage() {
   const [profile, setProfile] = useState<AuthenticationResult | undefined>();
   const [loading, setLoading] = useState(false); // State for loader
   const test = useCandidActor<CandidActors>("home", currentIdentity, {
-    canisterId: process.env.NEXT_PUBLIC_TEST_CANISTER_ID,
+    canisterId: process.env.NEXT_PUBLIC_TEST_CANISTER_ID!,
   }) as CandidActors["home"];
 
   
