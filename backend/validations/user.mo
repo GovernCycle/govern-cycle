@@ -1,5 +1,5 @@
 import Text "mo:base/Text";
-import UserData "/types";
+import UserData "../types/user";
 import Result "mo:base/Result";
 
 module{
