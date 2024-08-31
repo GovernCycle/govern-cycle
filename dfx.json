@@ -25,6 +25,15 @@
       }
     },
 
+    "db": {
+      "type": "motoko",
+      "main": "backend/db/main.mo",
+      "declarations": {
+        "node_compatibility": true,
+        "output": "frontend/src/declarations/db"
+      }
+    },
+
     "frontend": {
       "dependencies": [
         "home", "proposal"

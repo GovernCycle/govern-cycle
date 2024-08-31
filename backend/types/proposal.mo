@@ -1,17 +1,7 @@
 import Text "mo:base/Text";
 import Blob "mo:base/Blob";
 import Nat "mo:base/Nat";
-import DateTime "mo:datetime/DateTime";
 import UserTypes "../home/types"
-
-/* 
-    import DateTime "mo:datetime/DateTime";
-    let text = "2020-02-01T00:00:00Z;
-    let format = "YYYY-MM-DDTHH:mm:ssZ";
-    let ?date = DateTime.fromText(text, format) else return #error("Failed to parse datetime");
-
-*/
-
 
 module {
     public type Proposal = {
@@ -19,13 +9,23 @@ module {
         sections : [Section];
         location : Text;
         enivironUnits : Nat;
-        startDate : DateTime;
-        deadline : DateTime;
+        startDate : Text;
+        deadline : Text;
         state : StateProposal;
         photo : Blob;
-        coments : [Coment];
+        comments : [Comment];
         description : ?Text;
 
+    };
+
+    public type ProposalRequest = {
+        name : Text;
+        sections : [Section];
+        location : Text;
+        enivironUnits : Nat;
+        deadline : Text;
+        photo : Blob;
+        description : ?Text;
     };
 
     public type StateProposal = {
@@ -37,20 +37,20 @@ module {
     public type Section = {
         name : Text;
         invitedRoles : [UserTypes.Role];
-        invitedUsers : [UserTypes.User];
+        invitedUsers : [Principal];
         votes : [Vote];
-        coments : [Coment];
+        comments : [Comment];
         minimumAccept : Nat;        
     };
 
-    public type Coment = {
+    public type Comment = {
         tema : Text;        
-        user : UserTypes.User;
+        user : Principal;
         detail : Text;               
     };
 
     public type Vote = {
-        user : UserTypes.User;
+        user :  Principal;
         approved : Bool;              
     };
 };

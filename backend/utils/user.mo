@@ -1,4 +1,4 @@
-import UserData "/types";
+import UserData "../types/user";
 import Buffer "mo:base/Buffer";
 
 module {

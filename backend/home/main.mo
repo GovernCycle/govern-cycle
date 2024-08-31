@@ -1,21 +1,18 @@
 import Principal "mo:base/Principal";
 import Iter "mo:base/Iter";
 import Nat32 "mo:base/Nat32";
-import Map "mo:map/Map";
 import { phash } "mo:map/Map";
-import UserData "/types";
-import UserVal "/validations";
-import UserUtils "/utils";
+import UserData "../types/user";
+import UserVal "../validations/user";
+import UserUtils "../utils/user";
+import DB "canister:db";
 
 actor Home {
-
-    let users = Map.new<Principal, UserData.User>();
-    let ledger = Map.new<Principal, Nat32>();
 
     public shared ({ caller }) func createProfile(user : UserData.UserRequest) : async UserVal.AuthenticationResult {
         if (Principal.isAnonymous(caller)) return #err(#UserNotAuthenticated);
 
-        let userFound = Map.get(users, phash, caller);
+        let userFound = await DB.getProfile(caller);
 
         if (userFound != null) {
             return #err(#UserAlreadyExists);
@@ -36,26 +33,21 @@ actor Home {
             manager = user.manager;
         };
 
-        //save user
-        Map.set(users, phash, caller, newUser);
-        //create wallet for user
-        let tokens:Nat32 = 0;
-        
-        Map.set(ledger, phash, caller, tokens);
-
+        //save user andcreate wallet for user
+        await DB.saveProfile(newUser, caller);
 
         return #ok(#SuccessText("User created successfully"));
 
     };
 
-    public func getAllProfiles() : async [(Principal,UserData.User)] {
-        return Iter.toArray(Map.entries(users));
+    public func getAllProfiles() : async [(Principal, UserData.User)] {
+        return await DB.getAllProfiles();
     };
 
-    public shared ({caller}) func getProfile () : async UserVal.AuthenticationResult {
+    public shared ({ caller }) func getProfile() : async UserVal.AuthenticationResult {
         if (Principal.isAnonymous(caller)) return #err(#UserNotAuthenticated);
 
-        let userFound = Map.get(users, phash, caller);
+        let userFound = await DB.getProfile(caller);
 
         switch (userFound) {
             case (null) {
@@ -71,7 +63,7 @@ actor Home {
     public shared ({ caller }) func changeUserState(state : UserData.State, user : Principal) : async UserVal.AuthenticationResult {
         if (Principal.isAnonymous(caller)) return #err(#UserNotAuthenticated);
 
-        let userAdmin = Map.get(users, phash, caller);
+        let userAdmin = await DB.getProfile(caller);
 
         switch (userAdmin) {
             case (null) {
@@ -87,7 +79,7 @@ actor Home {
             };
         };
 
-        let userFound = Map.get(users, phash, user);
+        let userFound = await DB.getProfile(user);
 
         switch (userFound) {
             case (null) {
@@ -104,17 +96,18 @@ actor Home {
                     logo = userFound.logo;
                     manager = userFound.manager;
                 };
-                Map.set(users, phash, user, newuser);
+
+                await DB.updateProfile(user, newuser);
             };
         };
 
         return #ok(#SuccessText("User state changed successfully"));
     };
 
-     public shared ({ caller }) func deleteUser(user : Principal) : async UserVal.AuthenticationResult {
+    public shared ({ caller }) func deleteUser(user : Principal) : async UserVal.AuthenticationResult {
         if (Principal.isAnonymous(caller)) return #err(#UserNotAuthenticated);
 
-        let userAdmin = Map.get(users, phash, caller);
+        let userAdmin = await DB.getProfile(caller);
 
         switch (userAdmin) {
             case (null) {
@@ -130,14 +123,14 @@ actor Home {
             };
         };
 
-        let userFound = Map.get(users, phash, user);
+        let userFound = await DB.getProfile(user);
 
         switch (userFound) {
             case (null) {
                 return #err(#UserNotFound);
             };
-            case (?userFound) {                
-                Map.delete(users, phash, user);
+            case (?userFound) {
+                await DB.deleteProfile(user);
             };
         };
 
