@@ -1,14 +1,23 @@
 import Text "mo:base/Text";
 import Blob "mo:base/Blob";
 import Nat "mo:base/Nat";
-import UserTypes "../home/types"
+import Principal "mo:base/Principal";
+import UserTypes "../types/user";
 
 module {
+
+    public type TypeProposal = {
+        #Project;
+        #Standard;
+    };
+
     public type Proposal = {
+        author: Principal;
         name : Text;
         sections : [Section];
         location : Text;
-        enivironUnits : Nat;
+        typeProposal: TypeProposal;
+        environUnits : Nat;
         startDate : Text;
         deadline : Text;
         state : StateProposal;
@@ -20,9 +29,8 @@ module {
 
     public type ProposalRequest = {
         name : Text;
-        sections : [Section];
         location : Text;
-        enivironUnits : Nat;
+        environUnits : Nat;
         deadline : Text;
         photo : Blob;
         description : ?Text;
@@ -32,6 +40,12 @@ module {
         #Pending;
         #Approved;
         #Rejected;
+    };
+
+    public type SectionRequest = {
+        name : Text;
+        invitedRoles : [UserTypes.Role];
+        minimumAccept : Nat;
     };
 
     public type Section = {

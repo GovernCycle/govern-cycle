@@ -1,5 +1,6 @@
 import UserData "../types/user";
 import Buffer "mo:base/Buffer";
+import Principal "mo:base/Principal";
 
 module {
 
@@ -44,5 +45,33 @@ module {
 
     public func isApproved(state : UserData.State) : Bool {
         return state == #Approved;
+    };
+
+    public func isProjectDeveloper(roles : [UserData.Role]) : Bool {
+        for (role in roles.vals()) {
+            if (role == #ProjectDeveloper) {
+                return true;
+            };
+        };
+        return false;
+    };
+
+    public func checkRole(roles : [UserData.Role], role : UserData.Role) : Bool {
+        for (r in roles.vals()) {
+            if (r == role) {
+                return true;
+            };
+        };
+        return false;
+    };
+
+    public func deleteAuthorFromInvitedUsers(author : Principal, invitedUsers : [Principal]) : [Principal] {
+        let invitedUsersBuffer = Buffer.Buffer<Principal>(1);
+        for (invitedUser in invitedUsers.vals()) {
+            if (not Principal.equal(author, invitedUser)) {
+                invitedUsersBuffer.add(invitedUser);
+            };
+        };
+        return Buffer.toArray(invitedUsersBuffer);
     };
 };
