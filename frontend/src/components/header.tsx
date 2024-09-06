@@ -7,8 +7,8 @@ export default function Header() {
         <div className="flex lg:flex-1">
           <strong>ARES CONNECT</strong>
         </div>
-        <div className="lg:flex lg:gap-x-12"></div>
-        <div className="lg:flex lg:flex-1 lg:justify-end">
+        <div className="lg:flex  lg:gap-x-12"></div>
+        <div className="lg:flex  lg:flex-1 lg:justify-end">
           <InternetIdentityButton />
         </div>
       </nav>

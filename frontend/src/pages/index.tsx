@@ -5,6 +5,8 @@ import { CandidActors } from '@app/canisters';
 import Header from '@app/components/header';
 import type {User, UserRequest, AuthenticationResult, State, Role, Jurisdiction } from '@app/declarations/home/home.did';
 
+
+
 export default function IcConnectPage() {
   const { isAuthenticated, currentIdentity } = useAuth();
   const [profiles, setProfiles] = useState<Array<[Principal, User]>>([]);
@@ -13,7 +15,7 @@ export default function IcConnectPage() {
   const [profile, setProfile] = useState<AuthenticationResult | undefined>();
   const [loading, setLoading] = useState(false); // State for loader
   const test = useCandidActor<CandidActors>("home", currentIdentity, {
-    canisterId: process.env.NEXT_PUBLIC_TEST_CANISTER_ID!,
+    canisterId: process.env.NEXT_PUBLIC_HOME_CANISTER_ID!,
   }) as CandidActors["home"];
 
   
@@ -104,7 +106,7 @@ export default function IcConnectPage() {
 
   return (
     <>
-      <Header />
+
       <main className="p-6">
         <div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-8">
@@ -126,7 +128,7 @@ export default function IcConnectPage() {
               </button>
               <div className="profile-list mt-4">
                 {profiles.map(([principal, user], index) => (
-                  <div key={index} className="profile-card border p-4 mb-4 rounded">
+                  <div key={index} className=" profile-card border p-4 mb-4 rounded  ">
                     <div className="profile-field">
                       <label className="profile-label">Principal:</label>
                       <span className="profile-value">{principal.toText()}</span>
@@ -143,15 +145,15 @@ export default function IcConnectPage() {
                       <label className="profile-label">Phone:</label>
                       <span className="profile-value">{user.phone}</span>
                     </div>
-                    <div className="profile-field">
+                    <div className="profile-field ">
                       <label className="profile-label">Role:</label>
                       <span className="profile-value">{user.role.map(role => Object.keys(role)[0]).join(", ")}</span>
                     </div>
-                    <div className="profile-field">
+                    <div className="profile-field ">
                       <label className="profile-label">State:</label>
                       <span className="profile-value">{Object.keys(user.state)[0]}</span>
                     </div>
-                    <div className="profile-field">
+                    <div className="profile-field ">
                       <label className="profile-label">Jurisdiction:</label>
                       <span className="profile-value">
                         {user.jurisdiction.map(j => `${j.continent[0]} - ${j.country[0]} - ${j.region[0]}`).join(", ")}

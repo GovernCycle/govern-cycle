@@ -5,6 +5,8 @@ import { Client, InternetIdentity } from "@bundly/ares-core";
 import { IcpConnectContextProvider } from "@bundly/ares-react";
 
 import { candidCanisters } from "@app/canisters";
+import { Navbar } from "@app/components/navbar";
+import RootLayout from "@app/app/layout";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const client = Client.create({
@@ -14,14 +16,19 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     candidCanisters,
     providers: [
       new InternetIdentity({
-        providerUrl: process.env.NEXT_PUBLIC_INTERNET_IDENTITY_URL! || "https://identity.ic0.app",
+        providerUrl: process.env.NEXT_PUBLIC_INTERNET_IDENTITY_URL! || "http:/b77ix-eeaaa-aaaaa-qaada-cai.localhost:4943",
       }),
     ],
   });
 
   return (
-    <IcpConnectContextProvider client={client}>
+    <IcpConnectContextProvider client={client}  >
+       <RootLayout>
+
       <Component {...pageProps} />
+
+       </RootLayout>
     </IcpConnectContextProvider>
   );
 }
+
