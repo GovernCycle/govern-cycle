@@ -43,7 +43,8 @@
         "frontend/build"
       ],
       "type": "assets",
-      "output_env_file": ".env"
+      "output_env_file": ".env",
+      "domains": ["gabbii.xyz"]
     },
     "internet_identity": {
       "type": "custom",
