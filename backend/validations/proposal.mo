@@ -10,7 +10,10 @@ module {
         #UserNotFound;
         #NoUsersFound;
         #ProposalNotFound;
-
+        #TokensNotSet;
+        #UserAlreadyVoted;
+        #UserNotInvited;
+        #ProposalAlreadyApproved;
     };
 
     private type SuccessProposal = {

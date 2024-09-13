@@ -135,4 +135,19 @@ actor Home {
         return #ok(#SuccessText("User delete successfully"));
     };
 
+    public shared ({ caller }) func getMyTokens() : async UserVal.AuthenticationResult {
+        if (Principal.isAnonymous(caller)) return #err(#UserNotAuthenticated);
+
+        let wallet = await DB.getTokens(caller);
+
+        switch (wallet) {
+            case (null) {
+                return #err(#UserNotFound);
+            };
+            case (?wallet) {
+                return #ok(#Wallet(wallet));
+            };
+        };
+
+    };
 };

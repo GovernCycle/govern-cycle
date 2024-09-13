@@ -9,11 +9,11 @@ import UserUtils "../utils/user";
 actor Db {
 
     let users = Map.new<Principal, UserData.User>();
-    let ledger = Map.new<Principal, Nat32>();
+    let ledger = Map.new<Principal, Int32>();
 
     public shared func saveProfile(user : UserData.User, caller : Principal) : async () {
         Map.set(users, phash, caller, user);
-        let tokens : Nat32 = 0;
+        let tokens : Int32 = 0;
         Map.set(ledger, phash, caller, tokens);
     };
 
@@ -33,20 +33,23 @@ actor Db {
         Map.delete(users, phash, user);
     };
 
-    public shared func findWithRoles(roles : [UserData.Role]) : async [Principal] {
+    public shared func findWithRolesAndJurisdiction(roles : [UserData.Role], jurisdictions : [UserData.Jurisdiction]) : async [Principal] {
 
-        let usersWithRoles = Buffer.Buffer<Principal>(1);
-
+        let usersBuffer = Buffer.Buffer<Principal>(1);
         for (user in Map.entries(users)) {
-            let userRoles = user.1.role;
-            label matching for (role in roles.vals()) {
-                if (UserUtils.checkRole(userRoles, role)) {
-                    usersWithRoles.add(user.0);
-                    break matching;
-                };
+            if (UserUtils.matchWithRoleAndJurisdiction(roles, jurisdictions, user.1)) {
+                usersBuffer.add(user.0);
             };
         };
 
-        return Buffer.toArray(usersWithRoles);
+        return Buffer.toArray(usersBuffer);
+    };
+
+    public shared func getTokens(user : Principal) : async ?Int32 {
+        return Map.get(ledger, phash, user);
+    };
+
+    public shared func setTokens(user : Principal, tokens : Int32) : async () {
+        Map.set(ledger, phash, user, tokens);
     };
 };

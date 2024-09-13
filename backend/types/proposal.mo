@@ -14,47 +14,36 @@ module {
     public type Proposal = {
         author: Principal;
         name : Text;
-        sections : [Section];
-        location : Text;
+        location : [UserTypes.Jurisdiction];
         typeProposal: TypeProposal;
-        environUnits : Nat;
+        environmentalUnits : Nat;
         startDate : Text;
         deadline : Text;
         state : StateProposal;
         photo : Blob;
         comments : [Comment];
+        threshold : Nat;
         description : ?Text;
-
+        invitedRoles: [UserTypes.Role];
+        invitedUsers: [Principal];
+        votes : [Vote];
     };
 
     public type ProposalRequest = {
         name : Text;
-        location : Text;
-        environUnits : Nat;
         deadline : Text;
         photo : Blob;
         description : ?Text;
+        environmentalUnits : Nat;
+        threshold : Nat;
+        location : [UserTypes.Jurisdiction];
+        invitedRoles: [UserTypes.Role];
     };
 
     public type StateProposal = {
         #Pending;
         #Approved;
         #Rejected;
-    };
-
-    public type SectionRequest = {
-        name : Text;
-        invitedRoles : [UserTypes.Role];
-        minimumAccept : Nat;
-    };
-
-    public type Section = {
-        name : Text;
-        invitedRoles : [UserTypes.Role];
-        invitedUsers : [Principal];
-        votes : [Vote];
-        comments : [Comment];
-        minimumAccept : Nat;        
     };
 
     public type Comment = {
