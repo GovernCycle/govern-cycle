@@ -1,46 +1,49 @@
 import Text "mo:base/Text";
 import Blob "mo:base/Blob";
 import Nat "mo:base/Nat";
-import UserTypes "../home/types"
+import Principal "mo:base/Principal";
+import UserTypes "../types/user";
 
 module {
+
+    public type TypeProposal = {
+        #Project;
+        #Standard;
+    };
+
     public type Proposal = {
+        author: Principal;
         name : Text;
-        sections : [Section];
-        location : Text;
-        enivironUnits : Nat;
+        location : [UserTypes.Jurisdiction];
+        typeProposal: TypeProposal;
+        environmentalUnits : Nat;
         startDate : Text;
         deadline : Text;
         state : StateProposal;
         photo : Blob;
         comments : [Comment];
+        threshold : Nat;
         description : ?Text;
-
+        invitedRoles: [UserTypes.Role];
+        invitedUsers: [Principal];
+        votes : [Vote];
     };
 
     public type ProposalRequest = {
         name : Text;
-        sections : [Section];
-        location : Text;
-        enivironUnits : Nat;
         deadline : Text;
         photo : Blob;
         description : ?Text;
+        environmentalUnits : Nat;
+        threshold : Nat;
+        location : [UserTypes.Jurisdiction];
+        invitedRoles: [UserTypes.Role];
     };
 
     public type StateProposal = {
         #Pending;
         #Approved;
         #Rejected;
-    };
-
-    public type Section = {
-        name : Text;
-        invitedRoles : [UserTypes.Role];
-        invitedUsers : [Principal];
-        votes : [Vote];
-        comments : [Comment];
-        minimumAccept : Nat;        
     };
 
     public type Comment = {

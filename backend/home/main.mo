@@ -1,6 +1,4 @@
 import Principal "mo:base/Principal";
-import Iter "mo:base/Iter";
-import Nat32 "mo:base/Nat32";
 import { phash } "mo:map/Map";
 import UserData "../types/user";
 import UserVal "../validations/user";
@@ -137,4 +135,19 @@ actor Home {
         return #ok(#SuccessText("User delete successfully"));
     };
 
+    public shared ({ caller }) func getMyTokens() : async UserVal.AuthenticationResult {
+        if (Principal.isAnonymous(caller)) return #err(#UserNotAuthenticated);
+
+        let wallet = await DB.getTokens(caller);
+
+        switch (wallet) {
+            case (null) {
+                return #err(#UserNotFound);
+            };
+            case (?wallet) {
+                return #ok(#Wallet(wallet));
+            };
+        };
+
+    };
 };
