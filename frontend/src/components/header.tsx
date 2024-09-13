@@ -9,7 +9,8 @@ export default function Header() {
         </div>
         <div className="lg:flex  lg:gap-x-12"></div>
         <div className="lg:flex  lg:flex-1 lg:justify-end">
-          <InternetIdentityButton />
+      
+
         </div>
       </nav>
     </header>

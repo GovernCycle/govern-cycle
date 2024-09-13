@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Navbar } from "@app/components/navbar";
+import { Footer } from "@app/components/footer";
 
 
 // export const metadata: Metadata = {
@@ -23,7 +24,9 @@ export default function RootLayout({
       </head>
       <body className="flex flex-col bg-white-as-heaven min-h-[100vh] font-inter text-black">
         <Navbar/>
-        {children}</body>
+        {children}
+        </body>
+        <Footer/>
       
     </html>
   );
