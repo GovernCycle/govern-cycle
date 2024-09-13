@@ -9,6 +9,8 @@ export type HomeActor = ActorSubclass<_SERVICE>;
 export const home: CandidCanister = {
   idlFactory,
   actorConfig: {
-    canisterId: process.env.NEXT_PUBLIC_TEST_CANISTER_ID!,
+    canisterId: process.env.NEXT_PUBLIC_HOME_CANISTER_ID! || "be2us-64aaa-aaaaa-qaabq-cai",
   },
 };
+
+
