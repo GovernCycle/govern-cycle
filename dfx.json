@@ -8,14 +8,21 @@
   },
   "canisters": {
     "home": {
+      "dependencies": [
+        "db"
+      ],
       "type": "motoko",
       "main": "backend/home/main.mo",
       "declarations": {
         "node_compatibility": true,
         "output": "frontend/src/declarations/home"
       }
+
     },
     "proposal": {
+      "dependencies": [
+        "db"
+      ],
       "type": "motoko",
       "main": "backend/proposal/main.mo",
       "declarations": {

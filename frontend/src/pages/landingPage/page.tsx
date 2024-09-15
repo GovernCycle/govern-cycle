@@ -1,7 +1,6 @@
-import { CenteredPageWrapper } from '@app/components/layouts/center-page-wrapper'
-import React from 'react'
+import { CenteredPageWrapper } from "@app/components/layouts/center-page-wrapper";
 
-export const LandingPage = () => {
+ const LandingPage = () => {
   return (
     <>
       <main className="bg-[url('/landing3.jpg')] bg-cover bg-center min-h-screen">
@@ -11,8 +10,14 @@ export const LandingPage = () => {
             <div className="flex justify-center items-center w-[600px] h-full">
               <div className="text-center">
                 {/* Aquí puedes ajustar el contenido */}
-                <h1 className="text-5xl font-bold bg-gradient-to-tr from-orange-600 via-orange-300 to-red-400 text-transparent bg-clip-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. </h1>
-                <p className="mt-4 font-bold ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam magnam est, recusandae reiciendis doloribus non nemo eius voluptates sint quidem tenetur, odit quod sunt sed qui officiis beatae aspernatur at!</p>
+                <h1 className="text-5xl font-bold bg-gradient-to-tr from-orange-600 via-orange-300 to-red-400 text-transparent bg-clip-text">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.{" "}
+                </h1>
+                <p className="mt-4 font-bold ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam magnam est, recusandae
+                  reiciendis doloribus non nemo eius voluptates sint quidem tenetur, odit quod sunt sed qui
+                  officiis beatae aspernatur at!
+                </p>
               </div>
             </div>
 
@@ -24,5 +29,7 @@ export const LandingPage = () => {
         </CenteredPageWrapper>
       </main>
     </>
-  )
-}
+  );
+};
+
+export default LandingPage;

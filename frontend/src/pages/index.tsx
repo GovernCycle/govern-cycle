@@ -4,7 +4,7 @@ import { useCandidActor, useAuth } from '@bundly/ares-react';
 import { CandidActors } from '@app/canisters';
 import Header from '@app/components/header';
 import type {User, UserRequest, AuthenticationResult, State, Role, Jurisdiction } from '@app/declarations/home/home.did';
-import { LandingPage } from './landingPage/page';
+import LandingPage from './landingPage/page';
 
 
 

@@ -21,7 +21,7 @@ export const Navbar = () => {
             </span>
          
 
-            <InternetIdentityButton className="bg-slate-700">
+            <InternetIdentityButton>
             Log in
           </InternetIdentityButton>
           
