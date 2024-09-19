@@ -11,7 +11,7 @@ import RootLayout from "@app/app/layout";
 export default function MyApp({ Component, pageProps }: AppProps) {
   const client = Client.create({
     agentConfig: {
-      host: process.env.NEXT_PUBLIC_IC_HOST_URL!,
+      host: process.env.NEXT_PUBLIC_IC_HOST_URL! || "https://asemq-fiaaa-aaaap-qht3q-cai.icp0.io",
     },
     candidCanisters,
     providers: [
