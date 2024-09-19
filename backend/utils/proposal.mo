@@ -41,5 +41,4 @@ module {
         };
         return Buffer.toArray(usersBuffer);
     };
-
 };

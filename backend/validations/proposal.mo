@@ -10,7 +10,7 @@ module {
         #UserNotFound;
         #NoUsersFound;
         #ProposalNotFound;
-        #TokensNotSet;
+        #ParticipationsNotSet;
         #UserAlreadyVoted;
         #UserNotInvited;
         #ProposalAlreadyApproved;

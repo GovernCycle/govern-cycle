@@ -9,12 +9,17 @@ import UserUtils "../utils/user";
 actor Db {
 
     let users = Map.new<Principal, UserData.User>();
-    let ledger = Map.new<Principal, Int32>();
+    let ledger = Map.new<Principal, UserData.Participation>();
 
     public shared func saveProfile(user : UserData.User, caller : Principal) : async () {
         Map.set(users, phash, caller, user);
-        let tokens : Int32 = 0;
-        Map.set(ledger, phash, caller, tokens);
+        let initialParticipation: UserData.Participation = {
+            active = [];
+            inactive = [];
+            done = [];
+        };
+        
+        Map.set(ledger, phash, caller, initialParticipation);
     };
 
     public shared func updateProfile(user : Principal, newUser : UserData.User) : async () {
@@ -45,11 +50,11 @@ actor Db {
         return Buffer.toArray(usersBuffer);
     };
 
-    public shared func getTokens(user : Principal) : async ?Int32 {
+    public shared func getParticipations(user : Principal) : async ?UserData.Participation {
         return Map.get(ledger, phash, user);
     };
 
-    public shared func setTokens(user : Principal, tokens : Int32) : async () {
-        Map.set(ledger, phash, user, tokens);
+    public shared func setParticipation(user : Principal, participation : UserData.Participation) : async () {
+        Map.set(ledger, phash, user, participation);
     };
 };

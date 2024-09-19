@@ -1,12 +1,16 @@
 import Map "mo:map/Map";
+import Nat "mo:base/Nat";
+import Order "mo:base/Order";
 import Iter "mo:base/Iter";
+import Array "mo:base/Array";
 import Buffer "mo:base/Buffer";
 import Principal "mo:base/Principal";
 import ProposalData "../types/proposal";
-import Array "mo:base/Array";
 import { nhash } "mo:map/Map";
 import DateTime "mo:datetime/DateTime";
 import ProposalVal "../validations/proposal";
+import DateVal "../validations/date";
+import UserData "../types/user";
 import UserUtils "../utils/user";
 import ProposalUtils "../utils/proposal";
 import DB "canister:db";
@@ -69,10 +73,10 @@ actor Proposal {
 
         Map.set(proposals, nhash, nextProposalId, newProposal);
 
-        //add tokens to invited users
-        let areTokensSet = await setTokens(invitedUsers, 1);
-        if (not areTokensSet) {
-            return #err(#TokensNotSet);
+        //add the proposal to the active participations of the invited users
+        let areParticipationsSet = await addActiveParticipation(invitedUsers, nextProposalId);
+        if (not areParticipationsSet) {
+            return #err(#ParticipationsNotSet);
         };
 
         return #ok(#SuccessText("Proposal created successfully"));
@@ -93,7 +97,7 @@ actor Proposal {
                 };
             };
         };
-
+        //search the proposal
         let proposal = Map.get(proposals, nhash, proposalId);
 
         switch (proposal) {
@@ -102,6 +106,8 @@ actor Proposal {
             };
             case (?proposal) {
 
+                //check if proposal has expired
+                
                 //check if the user is invited to vote
                 if (not ProposalUtils.isInvitedUser(caller, proposal.invitedUsers)) {
                     return #err(#UserNotInvited);
@@ -130,11 +136,12 @@ actor Proposal {
                 var newState = proposal.state;
                 if (proposal.threshold <= ProposalUtils.getApprovedVotes(currentVotesArray)) {
                     newState := #Approved;
-                    //remove tokens from invited users that have not voted
+
+                    //add the proposal to the inactive participations of the invited users that did not vote
                     let usersThatNotVoted = ProposalUtils.checkUsersThatNotVoted(proposal.invitedUsers, currentVotesArray);
-                    let areTokensSet = await setTokens(usersThatNotVoted, -1);
-                    if (not areTokensSet) {
-                        return #err(#TokensNotSet);
+                    let areParticipationsSet = await changeFromActiveToInactive(usersThatNotVoted, proposalId);
+                    if (not areParticipationsSet) {
+                        return #err(#ParticipationsNotSet);
                     };
                 };
 
@@ -158,10 +165,10 @@ actor Proposal {
                 //update the proposal
                 Map.set(proposals, nhash, proposalId, newProposal);
 
-                //remove tokens from the user
-                let areTokensSet = await setTokens([caller], -1);
-                if (not areTokensSet) {
-                    return #err(#TokensNotSet);
+                //
+                let isParticipationsSet = await changeFromAciveToDone(caller, proposalId);
+                if (not isParticipationsSet) {
+                    return #err(#ParticipationsNotSet);
                 };
             };
         };
@@ -170,21 +177,136 @@ actor Proposal {
     };
 
     public func getAllProposals() : async [(Nat, ProposalData.Proposal)] {
+        for (p in Map.entries(proposals)) {
+            let proposal = p.1;
+            if (proposal.state == #Pending) {
+                let dateResult = await checkDate(proposal.deadline);
+                switch (dateResult) {
+                    case (#ok(#Date(dateOrder))) {
+                        if (Order.isLess(dateOrder)) {
+                            let newProposal : ProposalData.Proposal = {
+                                author = proposal.author;
+                                name = proposal.name;
+                                location = proposal.location;
+                                typeProposal = proposal.typeProposal;
+                                environmentalUnits = proposal.environmentalUnits;
+                                startDate = proposal.startDate;
+                                deadline = proposal.deadline;
+                                state = #Rejected;
+                                photo = proposal.photo;
+                                threshold = proposal.threshold;
+                                comments = proposal.comments;
+                                votes = proposal.votes;
+                                description = proposal.description;
+                                invitedUsers = proposal.invitedUsers;
+                                invitedRoles = proposal.invitedRoles;
+                            };
+
+                            Map.set(proposals, nhash, p.0, newProposal);
+                        };
+                    };
+                    case(#err(InvalidDate)){
+
+                    };
+                };
+            };
+        };
         return Iter.toArray(Map.entries(proposals));
     };
 
-    private func setTokens(users : [Principal], amount : Int32) : async Bool {
+    private func addActiveParticipation(users : [Principal], proposalId : Nat) : async Bool {
         for (user in users.vals()) {
-            var wallet = await DB.getTokens(user);
-            switch (wallet) {
+            var participations = await DB.getParticipations(user);
+            switch (participations) {
                 case (null) {
                     return false;
                 };
-                case (?wallet) {
-                    await DB.setTokens(user, wallet + amount);
+                case (?participations) {
+                    var active = Buffer.fromArray<Nat>(participations.active);
+                    active.add(proposalId);
+                    let activeArray = Buffer.toArray<Nat>(active);
+                    let newParticipations : UserData.Participation = {
+                        active = activeArray;
+                        inactive = participations.inactive;
+                        done = participations.done;
+                    };
+                    await DB.setParticipation(user, newParticipations);
                 };
             };
         };
         return true;
+    };
+
+    private func changeFromActiveToInactive(users : [Principal], proposalId : Nat) : async Bool {
+        for (user in users.vals()) {
+            var participations = await DB.getParticipations(user);
+            switch (participations) {
+                case (null) {
+                    return false;
+                };
+                case (?participations) {
+                    let activeIndex = Array.indexOf<Nat>(proposalId, participations.active, Nat.equal);
+                    switch (activeIndex) {
+                        case (null) {
+                            return false;
+                        };
+                        case (?activeIndex) {
+                            var active = Buffer.fromArray<Nat>(participations.active);
+                            let removedId = active.remove(activeIndex);
+                            let activeArray = Buffer.toArray<Nat>(active);
+                            var inactive = Buffer.fromArray<Nat>(participations.inactive);
+                            inactive.add(removedId);
+                            let inactiveArray = Buffer.toArray<Nat>(inactive);
+                            let newParticipations : UserData.Participation = {
+                                active = activeArray;
+                                inactive = inactiveArray;
+                                done = participations.done;
+                            };
+                            await DB.setParticipation(user, newParticipations);
+                        };
+                    };
+                };
+            };
+        };
+        return true;
+    };
+
+    private func changeFromAciveToDone(user : Principal, proposalId : Nat) : async Bool {
+        var participations = await DB.getParticipations(user);
+        switch (participations) {
+            case (null) {
+                return false;
+            };
+            case (?participations) {
+                let activeIndex = Array.indexOf<Nat>(proposalId, participations.active, Nat.equal);
+                switch (activeIndex) {
+                    case (null) {
+                        return false;
+                    };
+                    case (?activeIndex) {
+                        var active = Buffer.fromArray<Nat>(participations.active);
+                        let removeId = active.remove(activeIndex);
+                        let activeArray = Buffer.toArray<Nat>(active);
+                        var done = Buffer.fromArray<Nat>(participations.done);
+                        done.add(removeId);
+                        let doneArray = Buffer.toArray<Nat>(done);
+                        let newParticipations : UserData.Participation = {
+                            active = activeArray;
+                            inactive = participations.inactive;
+                            done = doneArray;
+                        };
+                        await DB.setParticipation(user, newParticipations);
+                    };
+                };
+            };
+        };
+        return true;
+    };
+
+    public func checkDate(dateTimeText : Text) : async DateVal.DateResult {
+        let format = "YYYY-MM-DD:HH:MM";
+        let ?dateTime : ?DateTime.DateTime = DateTime.fromText(dateTimeText, format) else return #err(#InvalidDate);
+        let order : Order.Order = DateTime.compare(dateTime, DateTime.now());
+        return #ok(#Date(order));
     };
 };
