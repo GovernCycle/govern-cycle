@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { FormHeader } from '@/components/auth/FormHeader'
-import { Container } from '@/components/Shared/Container'
-import { ContainerOutline } from '@/components/Shared/ContainerOutline'
-import { Button } from '@/components/Shared/Button'
+import { Container } from '@/components/shared/Container'
+import { ContainerOutline } from '@/components/shared/ContainerOutline'
+import { Button } from '@/components/shared/Button'
 import { TextField } from '@/components/forms/TextField'
 import { ChevronRightIcon } from '@heroicons/react/16/solid'
 
