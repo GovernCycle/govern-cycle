@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import { HeroContainer } from '@/components/Shared/HeroContainer'
-import { Button } from '@/components/Shared/Button'
+import { HeroContainer } from '@/components/shared/HeroContainer'
+import { Button } from '@/components/shared/Button'
 import { Constellation } from '@/components/auth/Constellation'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 
