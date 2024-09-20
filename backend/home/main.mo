@@ -1,5 +1,4 @@
 import Principal "mo:base/Principal";
-import { phash } "mo:map/Map";
 import UserData "../types/user";
 import UserVal "../validations/user";
 import UserUtils "../utils/user";

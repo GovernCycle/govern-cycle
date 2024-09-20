@@ -7,6 +7,7 @@ module {
     private type ProposalError = {
         #UserNotAuthenticated;
         #UserNotAuthorized;
+        #UserNotApproved;
         #UserNotFound;
         #NoUsersFound;
         #ProposalNotFound;
@@ -19,8 +20,16 @@ module {
     private type SuccessProposal = {
         #SuccessText : Text.Text;
         #Proposal : ProposalData.Proposal;
+        #FullProposal : [(Nat, ProposalData.Proposal)];
+    };
+
+    private type ProposalFullError = {
+        #InvalidDate : Text;
+        #ParticipationsNotSet;
     };
 
     public type ProposalResult = Result.Result<SuccessProposal, ProposalError>;
+
+    public type GetProposalsResult = Result.Result<SuccessProposal, ProposalFullError>;
 
 };

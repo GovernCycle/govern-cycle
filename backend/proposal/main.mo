@@ -9,7 +9,6 @@ import ProposalData "../types/proposal";
 import { nhash } "mo:map/Map";
 import DateTime "mo:datetime/DateTime";
 import ProposalVal "../validations/proposal";
-import DateVal "../validations/date";
 import UserData "../types/user";
 import UserUtils "../utils/user";
 import ProposalUtils "../utils/proposal";
@@ -106,8 +105,6 @@ actor Proposal {
             };
             case (?proposal) {
 
-                //check if proposal has expired
-                
                 //check if the user is invited to vote
                 if (not ProposalUtils.isInvitedUser(caller, proposal.invitedUsers)) {
                     return #err(#UserNotInvited);
@@ -176,11 +173,11 @@ actor Proposal {
         return #ok(#SuccessText("Vote added successfully"));
     };
 
-    public func getAllProposals() : async [(Nat, ProposalData.Proposal)] {
+    public func getAllProposals() : async ProposalVal.GetProposalsResult {
         for (p in Map.entries(proposals)) {
             let proposal = p.1;
             if (proposal.state == #Pending) {
-                let dateResult = await checkDate(proposal.deadline);
+                let dateResult = await ProposalUtils.checkDate(proposal.deadline);
                 switch (dateResult) {
                     case (#ok(#Date(dateOrder))) {
                         if (Order.isLess(dateOrder)) {
@@ -202,16 +199,55 @@ actor Proposal {
                                 invitedRoles = proposal.invitedRoles;
                             };
 
+                            //add the proposal to the inactive participations of the invited
+                            let areParticipationsSet = await changeFromActiveToInactive(proposal.invitedUsers, p.0);
+                            if (not areParticipationsSet) {
+                                return #err(#ParticipationsNotSet);
+                            };
+
                             Map.set(proposals, nhash, p.0, newProposal);
                         };
                     };
-                    case(#err(InvalidDate)){
-
+                    case (#err(#InvalidDate)) {
+                        return #err(#InvalidDate("Invalid date"));
                     };
                 };
             };
         };
-        return Iter.toArray(Map.entries(proposals));
+        return #ok(#FullProposal(Iter.toArray(Map.entries(proposals))));
+    };
+
+    public shared ({ caller }) func deleteProposal(idProposal : Nat) : async ProposalVal.ProposalResult {
+        if (Principal.isAnonymous(caller)) return #err(#UserNotAuthenticated);
+
+        let userAdmin = await DB.getProfile(caller);
+
+        switch (userAdmin) {
+            case (null) {
+                return #err(#UserNotFound);
+            };
+            case (?userAdmin) {
+                if (not UserUtils.isAdmin(userAdmin.role)) {
+                    return #err(#UserNotAuthorized);
+                };
+                if (not UserUtils.isApproved(userAdmin.state)) {
+                    return #err(#UserNotApproved);
+                };
+            };
+        };
+
+        let proposalFound = Map.get(proposals, nhash, idProposal);
+
+        switch (proposalFound) {
+            case (null) {
+                return #err(#ProposalNotFound);
+            };
+            case (?proposalFound) {
+                Map.delete(proposals, nhash, idProposal);
+            };
+        };
+
+        return #ok(#SuccessText("Proposal deleted successfully"));
     };
 
     private func addActiveParticipation(users : [Principal], proposalId : Nat) : async Bool {
@@ -301,12 +337,5 @@ actor Proposal {
             };
         };
         return true;
-    };
-
-    public func checkDate(dateTimeText : Text) : async DateVal.DateResult {
-        let format = "YYYY-MM-DD:HH:MM";
-        let ?dateTime : ?DateTime.DateTime = DateTime.fromText(dateTimeText, format) else return #err(#InvalidDate);
-        let order : Order.Order = DateTime.compare(dateTime, DateTime.now());
-        return #ok(#Date(order));
     };
 };
