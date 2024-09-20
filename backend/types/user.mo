@@ -48,4 +48,10 @@ module {
         manager : ?Text;
     };
 
+    public type Participation = {
+        active: [Nat];
+        inactive: [Nat];
+        done: [Nat];
+    }
+
 };

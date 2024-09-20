@@ -15,7 +15,7 @@ module{
     private type SuccessAuthentication  = {
         #SuccessText: Text.Text;
         #User: UserData.User;
-        #Wallet: Int32;
+        #Participation: UserData.Participation;
     };
 
     public type AuthenticationResult = Result.Result<SuccessAuthentication, AuthenticationError>;

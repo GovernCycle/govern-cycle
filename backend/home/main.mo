@@ -1,5 +1,4 @@
 import Principal "mo:base/Principal";
-import { phash } "mo:map/Map";
 import UserData "../types/user";
 import UserVal "../validations/user";
 import UserUtils "../utils/user";
@@ -23,7 +22,7 @@ actor Home {
         let newUser : UserData.User = {
             name = user.name;
             role = roles;
-            state = #Pending;
+            state = #Approved;
             jurisdiction = jurisdictions;
             email = user.email;
             phone = user.phone;
@@ -135,17 +134,17 @@ actor Home {
         return #ok(#SuccessText("User delete successfully"));
     };
 
-    public shared ({ caller }) func getMyTokens() : async UserVal.AuthenticationResult {
+    public shared ({ caller }) func getMyParticipations() : async UserVal.AuthenticationResult {
         if (Principal.isAnonymous(caller)) return #err(#UserNotAuthenticated);
 
-        let wallet = await DB.getTokens(caller);
+        let participation = await DB.getParticipations(caller);
 
-        switch (wallet) {
+        switch (participation) {
             case (null) {
                 return #err(#UserNotFound);
             };
-            case (?wallet) {
-                return #ok(#Wallet(wallet));
+            case (?participation) {
+                return #ok(#Participation(participation));
             };
         };
 
