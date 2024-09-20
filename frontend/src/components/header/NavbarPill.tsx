@@ -36,6 +36,7 @@ import {
 
 import logo from '@/images/logo.png'
 import logoIcon from '@/images/logo-icon.png'
+import { InternetIdentityButton } from '@bundly/ares-react'
 
 const pages = [
   { label: 'Home', href: '/', icon: HomeIcon },
@@ -410,6 +411,8 @@ export const NavbarPill = () => {
                 >
                   Get started
                 </Button>
+                
+                <InternetIdentityButton/> 
               </Transition>
             </div>
           </div>
