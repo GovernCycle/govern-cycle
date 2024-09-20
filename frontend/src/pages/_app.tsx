@@ -4,9 +4,9 @@ import "tailwindcss/tailwind.css";
 import { Client, InternetIdentity } from "@bundly/ares-core";
 import { IcpConnectContextProvider } from "@bundly/ares-react";
 
-import { candidCanisters } from "@app/canisters";
-import { Navbar } from "@app/components/navbar";
-import RootLayout from "@app/app/layout";
+import { candidCanisters } from "@/canisters";
+import { Navbar } from "@/components/navbar";
+import RootLayout from "@/app/layout";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const client = Client.create({
