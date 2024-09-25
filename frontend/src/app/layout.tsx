@@ -1,4 +1,4 @@
-'use client';
+
 
 import clsx from 'clsx';
 import { GeistSans } from 'geist/font/sans';
@@ -16,23 +16,24 @@ type RootLayoutProps = {
   children: React.ReactNode;
 };
 
-export default function RootLayout({ children }: RootLayoutProps) {
-  const client = Client.create({
-    agentConfig: {
-      host: process.env.NEXT_PUBLIC_IC_HOST_URL!,
-    },
-    candidCanisters,
-    providers: [
-      new InternetIdentity({
-        providerUrl:
-          process.env.NEXT_PUBLIC_INTERNET_IDENTITY_URL! ||
-          'http://b77ix-eeaaa-aaaaa-qaada-cai.localhost:4943',
-      }),
-    ],
-  });
 
+const client = Client.create({
+  agentConfig: {
+    host: process.env.NEXT_PUBLIC_IC_HOST_URL!,
+  },
+  candidCanisters,
+  providers: [
+    new InternetIdentity({
+      providerUrl:
+        process.env.NEXT_PUBLIC_INTERNET_IDENTITY_URL! ||
+        'http://b77ix-eeaaa-aaaaa-qaada-cai.localhost:4943',
+    }),
+  ],
+});
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    
+
     <IcpConnectContextProvider client={client}>
     <html
     lang='en'
@@ -51,6 +52,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
       </div></body>
 
   </html>
-    </IcpConnectContextProvider>
+ </IcpConnectContextProvider>
   );
 }

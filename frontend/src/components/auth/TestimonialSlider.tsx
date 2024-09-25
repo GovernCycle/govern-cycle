@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide'
+import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import { useRef, useState } from 'react'
 import '@splidejs/splide/css'
 

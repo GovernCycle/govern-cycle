@@ -1,4 +1,4 @@
-'use client'
+
 import { HeroContainer } from '@/components/shared/HeroContainer'
 import { HomeHero } from '@/components/home/HomeHero'
 import { Divider } from '@/components/shared/Divider'

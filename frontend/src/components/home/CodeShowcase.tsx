@@ -14,7 +14,7 @@ import {
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide'
 import '@splidejs/splide/css'
 import clsx from 'clsx'
-import cosmicButterfly from '@/images/cosmic-butterfly-2.svg?url'
+import cosmicButterfly from '@/images/cosmic-butterfly-2.svg'
 
 type Icon = React.FC<Parameters<typeof PresentationChartLineIcon>[0]>
 

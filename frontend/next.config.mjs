@@ -1,6 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
+  async redirects() {
+    return [
+      {
+        source: '/app/page.tsx',
+        destination: '/', 
+        permanent: false, 
+      },
+    ]
+  },
   webpack(config) {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>

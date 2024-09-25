@@ -1,3 +1,5 @@
+'use server'
+
 import { CandidCanister } from "@bundly/ares-core";
 
 import { HomeActor, home } from "./home";
