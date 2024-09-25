@@ -73,6 +73,11 @@ code .line:not(:last-child)::before {
   );
 }
 
+.via-orange-100\/15 {
+  --tw-gradient-to: rgb(250 135 22 / 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), rgb(250 135 22 / 0.15) var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+
 /* Firefox specific styles */
 @-moz-document url-prefix() {
   .hover-gradient {

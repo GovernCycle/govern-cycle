@@ -40,16 +40,26 @@ import { InternetIdentityButton } from '@bundly/ares-react'
 
 const pages = [
   { label: 'Home', href: '/', icon: HomeIcon },
-  { label: 'About', href: '/about', icon: UsersIcon },
+  // { label: 'About', href: '/about', icon: UsersIcon },
+  // {
+  //   label: 'Pricing',
+  //   href: '/pricing',
+  //   icon: CreditCardIcon,
+  // },
+  // {
+  //   label: 'Contact',
+  //   href: '/contact',
+  //   icon: EnvelopeOpenIcon,
+  // },
   {
-    label: 'Pricing',
-    href: '/pricing',
-    icon: CreditCardIcon,
-  },
+    label: 'Acciones',
+    href: '/actions',
+    icon: UsersIcon,
+  },  
   {
-    label: 'Contact',
-    href: '/contact',
-    icon: EnvelopeOpenIcon,
+    label: 'Propuestas',
+    href: '/proposals',
+    icon: UsersIcon,
   },
   {
     label: 'Sign in',
@@ -67,9 +77,11 @@ const pages = [
 
 const links = [
   { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'Contact', href: '/contact' },
+  // { label: 'About', href: '/about' },
+  // { label: 'Pricing', href: '/pricing' },
+  // { label: 'Contact', href: '/contact' },
+  { label: 'Acciones', href: '/actions' },
+  { label: 'Propuestas', href: '/proposals' },
 ]
 
 function Hamburger() {
