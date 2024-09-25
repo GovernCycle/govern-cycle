@@ -335,12 +335,12 @@ export const NavbarPill = () => {
               >
                 <Image
                   src={logo}
-                  alt='Nebula Logo'
+                  alt='Gabbii Logo'
                   className='hidden h-[26px] w-auto min-[402px]:block'
                 />
                 <Image
                   src={logoIcon}
-                  alt='Nebula Logo Icon'
+                  alt='Gabbii Logo Icon'
                   className='h-[26px] w-auto min-[402px]:hidden'
                 />
               </Link>
