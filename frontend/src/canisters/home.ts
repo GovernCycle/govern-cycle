@@ -1,3 +1,4 @@
+
 import { ActorSubclass } from "@dfinity/agent";
 
 import { CandidCanister } from "@bundly/ares-core";

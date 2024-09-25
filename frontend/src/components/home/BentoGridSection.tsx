@@ -15,10 +15,10 @@ import {
   ChevronRightIcon,
 } from '@heroicons/react/16/solid'
 
-import globe from '@/images/globe.svg?url'
-import globeGlow from '@/images/globe-glow.svg?url'
-import binaryCodeBg from '@/images/binary-code-bg.svg?url'
-import encryptionIcon from '@/images/encryption-icon.svg?url'
+import globe from '@/images/globe.svg'
+import globeGlow from '@/images/globe-glow.svg'
+import binaryCodeBg from '@/images/binary-code-bg.svg'
+import encryptionIcon from '@/images/encryption-icon.svg'
 
 import spaceSpotlight from '@/images/space-spotlight-3.png'
 import encryptionGradient from '@/images/encryption-gradient.png'

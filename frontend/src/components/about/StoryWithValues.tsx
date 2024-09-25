@@ -5,7 +5,7 @@ import { BuildingOffice2Icon } from '@heroicons/react/16/solid'
 
 import spaceSpotlight from '@/images/space-spotlight.png'
 import teamPhoto from '@/images/team-photo.jpg'
-import cosmicButterfly from '@/images/cosmic-butterfly-2.svg?url'
+import cosmicButterfly from '@/images/cosmic-butterfly-2.svg'
 
 import logic from '@/icons/nucleo/logic-24-colored.svg'
 import meeting from '@/icons/nucleo/meeting-24-colored.svg'
