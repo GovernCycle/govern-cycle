@@ -15,6 +15,13 @@ export default function Home() {
         <HomeHero />
       </HeroContainer>
       <Divider />
+      <BentoGridSection />
+      <Divider />
+      <InteractiveCodeSection />
+      <Divider />
+      <Integrations />
+      <Features />
+      <Divider />
       <Testimonials />
       <Divider />
       <Footer />
