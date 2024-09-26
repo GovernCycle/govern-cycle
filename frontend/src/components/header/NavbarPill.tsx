@@ -36,7 +36,7 @@ import {
 
 import logo from '@/images/logo.png'
 import logoIcon from '@/images/logo-icon.png'
-import { InternetIdentityButton } from '@bundly/ares-react'
+// import { InternetIdentityButton } from '@bundly/ares-react'
 
 
 const pages = [
@@ -421,7 +421,7 @@ export const NavbarPill = () => {
                   )}
                   size='sm'
                 >
-                 <InternetIdentityButton/>
+                 {/* <InternetIdentityButton/> */}
                 </Button>
 
        
