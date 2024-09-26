@@ -2,8 +2,9 @@
 import { ActorSubclass } from "@dfinity/agent";
 
 import { CandidCanister } from "@bundly/ares-core";
+import _SERVICE, { idlFactory } from "@dfinity/agent/lib/cjs/canisters/management_service";
 
-import { _SERVICE, idlFactory } from "../declarations/home/home.did.js";
+
 
 export type HomeActor = ActorSubclass<_SERVICE>;
 

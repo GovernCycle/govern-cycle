@@ -1,12 +1,11 @@
-import type { AppProps } from "next/app";
-import "tailwindcss/tailwind.css";
+// __next_app__.tsx
+import type { AppProps } from 'next/app';
+import 'tailwindcss/tailwind.css';
 
-import { Client, InternetIdentity } from "@bundly/ares-core";
-import { IcpConnectContextProvider } from "@bundly/ares-react";
-
-import { candidCanisters } from "@app/canisters";
-import { Navbar } from "@app/components/navbar";
-import RootLayout from "@app/app/layout";
+import { candidCanisters } from '@/canisters';
+import RootLayout from '@/app/layout';
+import { Client, InternetIdentity } from '@bundly/ares-core';
+import { IcpConnectContextProvider } from '@bundly/ares-react';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const client = Client.create({
@@ -16,18 +15,20 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     candidCanisters,
     providers: [
       new InternetIdentity({
-        providerUrl: process.env.NEXT_PUBLIC_INTERNET_IDENTITY_URL! || "https://identity.ic0.app",
+        providerUrl:
+          process.env.NEXT_PUBLIC_INTERNET_IDENTITY_URL! || 'http:/br5f7-7uaaa-aaaaa-qaaca-cai.localhost:4943',
       }),
     ],
+    
   });
+  
 
   return (
-    <IcpConnectContextProvider client={client}  >
-       <RootLayout>
-
-      <Component {...pageProps} />
-
-       </RootLayout>
+    <IcpConnectContextProvider client={client}>
+      
+      <RootLayout>
+        <Component {...pageProps} />
+      </RootLayout>
     </IcpConnectContextProvider>
   );
 }
