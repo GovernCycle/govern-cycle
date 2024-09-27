@@ -5,6 +5,7 @@ import { IcpConnectContextProvider } from '@bundly/ares-react';
 import { candidCanisters } from '@app/canisters';
 import { useEffect, useState } from 'react';
 import RootLayout from '@app/layouts/layout';
+import '@/styles/globals.css';
 
 
 export default function MyApp({ Component, pageProps }: AppProps) {
