@@ -1,9 +1,6 @@
 import Principal "mo:base/Principal";
 import Buffer "mo:base/Buffer";
-import Order "mo:base/Order";
-import DateVal "../validations/date";
 import ProposalData "../types/proposal";
-import DateTime "mo:datetime/DateTime";
 
 
 module {
@@ -44,12 +41,5 @@ module {
             };
         };
         return Buffer.toArray(usersBuffer);
-    };
-
-    public func checkDate(dateTimeText : Text) : async DateVal.DateResult {
-        let format = "YYYY-MM-DD:HH:MM";
-        let ?dateTime : ?DateTime.DateTime = DateTime.fromText(dateTimeText, format) else return #err(#InvalidDate);
-        let order : Order.Order = DateTime.compare(dateTime, DateTime.now());
-        return #ok(#Date(order));
     };
 };

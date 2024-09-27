@@ -9,7 +9,7 @@ module{
     };
 
     private type SuccessDate = {
-        #Date : Order.Order;
+        #Date : Text;
     };
 
     public type DateResult = Result.Result<SuccessDate, DateError>;

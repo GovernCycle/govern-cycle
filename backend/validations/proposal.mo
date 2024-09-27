@@ -15,6 +15,8 @@ module {
         #UserAlreadyVoted;
         #UserNotInvited;
         #ProposalAlreadyApproved;
+        #InvalidDate;
+       
     };
 
     private type SuccessProposal = {

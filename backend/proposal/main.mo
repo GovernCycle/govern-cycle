@@ -17,6 +17,7 @@ import DB "canister:db";
 actor Proposal {
 
     stable var nextProposalId : Nat = 0;
+    
     let proposals = Map.new<Nat, ProposalData.Proposal>();
 
     public shared ({ caller }) func createProposal(proposal : ProposalData.ProposalRequest) : async ProposalVal.ProposalResult {
@@ -37,6 +38,7 @@ actor Proposal {
                 if (not UserUtils.isApproved(userFound.state)) {
                     return #err(#UserNotAuthorized);
                 };
+                
             };
         };
 
@@ -47,6 +49,18 @@ actor Proposal {
         if (Array.size(invitedUsers) == 0) {
             return #err(#NoUsersFound);
         };
+
+        //check Datetime format
+        let format = "YYYY-MM-DD:HH:MM";
+        let ?dateTime : ?DateTime.DateTime = DateTime.fromText(proposal.deadline, format) else return #err(#InvalidDate);
+
+        //Check deadline in the past
+        let order : Order.Order = DateTime.compare(dateTime, DateTime.now());
+
+        if (order == #less) {
+            return #err(#InvalidDate);
+        };
+
         //remove the user that is creating the proposal
         invitedUsers := UserUtils.deleteAuthorFromInvitedUsers(caller, invitedUsers);
 
@@ -176,42 +190,34 @@ actor Proposal {
     public func getAllProposals() : async ProposalVal.GetProposalsResult {
         for (p in Map.entries(proposals)) {
             let proposal = p.1;
-            if (proposal.state == #Pending) {
-                let dateResult = await ProposalUtils.checkDate(proposal.deadline);
-                switch (dateResult) {
-                    case (#ok(#Date(dateOrder))) {
-                        if (Order.isLess(dateOrder)) {
-                            let newProposal : ProposalData.Proposal = {
-                                author = proposal.author;
-                                name = proposal.name;
-                                location = proposal.location;
-                                typeProposal = proposal.typeProposal;
-                                environmentalUnits = proposal.environmentalUnits;
-                                startDate = proposal.startDate;
-                                deadline = proposal.deadline;
-                                state = #Rejected;
-                                photo = proposal.photo;
-                                threshold = proposal.threshold;
-                                comments = proposal.comments;
-                                votes = proposal.votes;
-                                description = proposal.description;
-                                invitedUsers = proposal.invitedUsers;
-                                invitedRoles = proposal.invitedRoles;
-                            };
-
-                            //add the proposal to the inactive participations of the invited
-                            let areParticipationsSet = await changeFromActiveToInactive(proposal.invitedUsers, p.0);
-                            if (not areParticipationsSet) {
-                                return #err(#ParticipationsNotSet);
-                            };
-
-                            Map.set(proposals, nhash, p.0, newProposal);
-                        };
-                    };
-                    case (#err(#InvalidDate)) {
-                        return #err(#InvalidDate("Invalid date"));
-                    };
+            if (proposal.state == #Pending) {             
+                
+                let newProposal : ProposalData.Proposal = {
+                    author = proposal.author;
+                    name = proposal.name;
+                    location = proposal.location;
+                    typeProposal = proposal.typeProposal;
+                    environmentalUnits = proposal.environmentalUnits;
+                    startDate = proposal.startDate;
+                    deadline = proposal.deadline;
+                    state = #Rejected;
+                    photo = proposal.photo;
+                    threshold = proposal.threshold;
+                    comments = proposal.comments;
+                    votes = proposal.votes;
+                    description = proposal.description;
+                    invitedUsers = proposal.invitedUsers;
+                    invitedRoles = proposal.invitedRoles;
                 };
+
+                //add the proposal to the inactive participations of the invited
+                let areParticipationsSet = await changeFromActiveToInactive(proposal.invitedUsers, p.0);
+                if (not areParticipationsSet) {
+                    return #err(#ParticipationsNotSet);
+                };
+
+                Map.set(proposals, nhash, p.0, newProposal);               
+                
             };
         };
         return #ok(#FullProposal(Iter.toArray(Map.entries(proposals))));
@@ -226,46 +232,38 @@ actor Proposal {
             };
             case (?proposal) {
                 if (proposal.state == #Pending) {
-                    let dateResult = await ProposalUtils.checkDate(proposal.deadline);
-                    switch (dateResult) {
-                        case (#ok(#Date(dateOrder))) {
-                            if (Order.isLess(dateOrder)) {
-                                let newProposal : ProposalData.Proposal = {
-                                    author = proposal.author;
-                                    name = proposal.name;
-                                    location = proposal.location;
-                                    typeProposal = proposal.typeProposal;
-                                    environmentalUnits = proposal.environmentalUnits;
-                                    startDate = proposal.startDate;
-                                    deadline = proposal.deadline;
-                                    state = #Rejected;
-                                    photo = proposal.photo;
-                                    threshold = proposal.threshold;
-                                    comments = proposal.comments;
-                                    votes = proposal.votes;
-                                    description = proposal.description;
-                                    invitedUsers = proposal.invitedUsers;
-                                    invitedRoles = proposal.invitedRoles;
-                                };
-
-                                //add the proposal to the inactive participations of the invited
-                                let areParticipationsSet = await changeFromActiveToInactive(proposal.invitedUsers, proposalId);
-                                if (not areParticipationsSet) {
-                                    return #err(#ParticipationsNotSet);
-                                };
-
-                                Map.set(proposals, nhash, proposalId, newProposal);
-                            };
-                        };
-                        case (#err(#InvalidDate)) {
-                            return #err(#InvalidDate("Invalid date"));
-                        };
+    
+                    let newProposal : ProposalData.Proposal = {
+                        author = proposal.author;
+                        name = proposal.name;
+                        location = proposal.location;
+                        typeProposal = proposal.typeProposal;
+                        environmentalUnits = proposal.environmentalUnits;
+                        startDate = proposal.startDate;
+                        deadline = proposal.deadline;
+                        state = #Rejected;
+                        photo = proposal.photo;
+                        threshold = proposal.threshold;
+                        comments = proposal.comments;
+                        votes = proposal.votes;
+                        description = proposal.description;
+                        invitedUsers = proposal.invitedUsers;
+                        invitedRoles = proposal.invitedRoles;
                     };
+
+                    //add the proposal to the inactive participations of the invited
+                    let areParticipationsSet = await changeFromActiveToInactive(proposal.invitedUsers, proposalId);
+                    if (not areParticipationsSet) {
+                        return #err(#ParticipationsNotSet);
+                    };
+
+                    Map.set(proposals, nhash, proposalId, newProposal);
                 };
                 return #ok(#Proposal(proposal));
             };
         };
     };
+    
 
     public shared ({ caller }) func deleteProposal(idProposal : Nat) : async ProposalVal.ProposalResult {
         if (Principal.isAnonymous(caller)) return #err(#UserNotAuthenticated);
