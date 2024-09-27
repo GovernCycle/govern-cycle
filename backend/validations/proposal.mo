@@ -26,6 +26,7 @@ module {
     private type ProposalFullError = {
         #InvalidDate : Text;
         #ParticipationsNotSet;
+        #ProposalNotFound;
     };
 
     public type ProposalResult = Result.Result<SuccessProposal, ProposalError>;
