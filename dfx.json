@@ -18,7 +18,6 @@
         "output": "frontend/src/declarations/home"
       }
     },
-
     "proposal": {
       "dependencies": [
         "db"
@@ -30,7 +29,6 @@
         "output": "frontend/src/declarations/proposal"
       }
     },
-
     "db": {
       "type": "motoko",
       "main": "backend/db/main.mo",
@@ -39,10 +37,10 @@
         "output": "frontend/src/declarations/db"
       }
     },
-
     "frontend": {
       "dependencies": [
-        "home", "proposal"
+        "home",
+        "proposal"
       ],
       "frontend": {
         "entrypoint": "frontend/build/index.html"
@@ -51,7 +49,21 @@
         "frontend/build"
       ],
       "type": "assets",
-      "output_env_file": ".env"    
-    }    
-  }  
+      "output_env_file": ".env",
+      "domains": [
+        "gabbii.xyz"
+      ]
+    },
+    "internet_identity": {
+      "type": "custom",
+      "candid": "https://github.com/dfinity/internet-identity/releases/download/release-2024-08-08/internet_identity.did",
+      "wasm": "https://github.com/dfinity/internet-identity/releases/download/release-2024-08-08/internet_identity_dev.wasm.gz",
+      "remote": {
+        "id": {
+          "ic": "rdmx6-jaaaa-aaaaa-aaadq-cai"
+        }
+      },
+      "frontend": {}
+    }
+  }
 }
