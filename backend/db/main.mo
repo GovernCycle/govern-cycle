@@ -6,7 +6,7 @@ import { phash } "mo:map/Map";
 import UserData "../types/user";
 import UserUtils "../utils/user";
 
-actor Db {
+actor Db () {
 
     let users = Map.new<Principal, UserData.User>();
     let ledger = Map.new<Principal, UserData.Participation>();

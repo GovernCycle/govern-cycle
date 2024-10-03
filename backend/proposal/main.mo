@@ -17,7 +17,7 @@ import DB "canister:db";
 actor Proposal {
 
     stable var nextProposalId : Nat = 0;
-    
+
     let proposals = Map.new<Nat, ProposalData.Proposal>();
 
     public shared ({ caller }) func createProposal(proposal : ProposalData.ProposalRequest) : async ProposalVal.ProposalResult {
@@ -38,7 +38,7 @@ actor Proposal {
                 if (not UserUtils.isApproved(userFound.state)) {
                     return #err(#UserNotAuthorized);
                 };
-                
+
             };
         };
 
@@ -187,11 +187,81 @@ actor Proposal {
         return #ok(#SuccessText("Vote added successfully"));
     };
 
+    public shared ({ caller }) func addComment(proposalId : Nat, topic : Text, comment : Text) : async ProposalVal.ProposalResult {
+        if (Principal.isAnonymous(caller)) return #err(#UserNotAuthenticated);
+
+        let userFound = await DB.getProfile(caller);
+
+        switch (userFound) {
+            case (null) {
+                return #err(#UserNotFound);
+            };
+            case (?userFound) {
+                if (not UserUtils.isApproved(userFound.state)) {
+                    return #err(#UserNotAuthorized);
+                };
+            };
+        };
+
+        //search the proposal
+        let proposal = Map.get(proposals, nhash, proposalId);
+
+        switch (proposal) {
+            case (null) {
+                return #err(#ProposalNotFound);
+            };
+            case (?proposal) {
+                //check if the user is invited to comment
+                if (not ProposalUtils.isInvitedUser(caller, proposal.invitedUsers)) {
+                    return #err(#UserNotInvited);
+                };
+
+                //check if the proposal is already approved
+                if (proposal.state == #Approved) {
+                    return #err(#ProposalAlreadyApproved);
+                };
+
+                let newComment : ProposalData.Comment = {
+                    tema = topic;
+                    user = caller;
+                    detail = comment;
+                };
+
+                var currentComments = Buffer.fromArray<ProposalData.Comment>(proposal.comments);
+                currentComments.add(newComment);
+                let currentCommentsArray = Buffer.toArray<ProposalData.Comment>(currentComments);
+
+                let newProposal : ProposalData.Proposal = {
+                    author = proposal.author;
+                    name = proposal.name;
+                    location = proposal.location;
+                    typeProposal = proposal.typeProposal;
+                    environmentalUnits = proposal.environmentalUnits;
+                    startDate = proposal.startDate;
+                    deadline = proposal.deadline;
+                    state = proposal.state;
+                    photo = proposal.photo;
+                    threshold = proposal.threshold;
+                    comments = currentCommentsArray;
+                    votes = proposal.votes;
+                    description = proposal.description;
+                    invitedUsers = proposal.invitedUsers;
+                    invitedRoles = proposal.invitedRoles;
+                };
+                //update the proposal
+                Map.set(proposals, nhash, proposalId, newProposal);
+            };
+        };
+
+        return #ok(#SuccessText("Comment added successfully"));
+
+    };
+
     public func getAllProposals() : async ProposalVal.GetProposalsResult {
         for (p in Map.entries(proposals)) {
             let proposal = p.1;
-            if (proposal.state == #Pending) {             
-                
+            if (proposal.state == #Pending) {
+
                 let newProposal : ProposalData.Proposal = {
                     author = proposal.author;
                     name = proposal.name;
@@ -216,8 +286,8 @@ actor Proposal {
                     return #err(#ParticipationsNotSet);
                 };
 
-                Map.set(proposals, nhash, p.0, newProposal);               
-                
+                Map.set(proposals, nhash, p.0, newProposal);
+
             };
         };
         return #ok(#FullProposal(Iter.toArray(Map.entries(proposals))));
@@ -232,7 +302,7 @@ actor Proposal {
             };
             case (?proposal) {
                 if (proposal.state == #Pending) {
-    
+
                     let newProposal : ProposalData.Proposal = {
                         author = proposal.author;
                         name = proposal.name;
@@ -263,7 +333,6 @@ actor Proposal {
             };
         };
     };
-    
 
     public shared ({ caller }) func deleteProposal(idProposal : Nat) : async ProposalVal.ProposalResult {
         if (Principal.isAnonymous(caller)) return #err(#UserNotAuthenticated);
