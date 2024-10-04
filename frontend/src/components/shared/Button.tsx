@@ -32,7 +32,7 @@ export const Button = forwardRef<
 
     const buttonVariant = {
       primary:
-        "relative shadow-btn-primary text-[#2D160E] bg-[#6B793E] after:content-[''] after:absolute after:inset-0 after:w-full after:h-full after:bg-[#FA7416] after:opacity-0 after:transition-all after:duration-200 hover:after:opacity-100 after:shadow-btn-primary-hover after:rounded-lg",
+        "relative shadow-btn-primary text-[#FFFFFFFF] bg-[#6B793E] after:content-[''] after:absolute after:inset-0 after:w-full after:h-full after:bg-[#FA7416] after:opacity-0 after:transition-all after:duration-200 hover:after:opacity-100 after:shadow-btn-primary-hover after:rounded-lg",
       secondary:
         "relative shadow-btn-secondary bg-[#6B793E]/[.01] text-[#2D160E] duration-200 ease-in-out hover:bg-[#6B793E]/[0.03] hover:text-white after:content-[''] after:absolute after:inset-0 after:w-full after:h-full after:opacity-0 after:transition-all after:duration-200 hover:after:opacity-100 after:shadow-btn-secondary-hover after:rounded-lg",
       tertiary: 'text-[#2D160E] hover:text-orange-400',

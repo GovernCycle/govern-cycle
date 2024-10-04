@@ -412,7 +412,6 @@ export const  NavbarPill = () => {
                 >
           <InternetIdentityButton />
                 </Button>
-
               </Transition>
             </div>
           </div>

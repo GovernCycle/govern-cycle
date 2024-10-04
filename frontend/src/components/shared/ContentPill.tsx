@@ -21,13 +21,13 @@ export function ContentPill({
   return (
     <div
       className={cn(
-        'inline-flex w-max rounded-full bg-zinc-950/[.01] shadow-inner-blur',
+        'inline-flex w-max rounded-full bg-white ',
         className
       )}
     >
       <div
         className={cn(
-          'flex h-full w-full items-center space-x-2 rounded-full border border-brown-200/[.06] px-4 py-1.5',
+          'flex h-full w-full items-center space-x-2 rounded-full px-4 py-1.5',
           innerClassName
         )}
       >

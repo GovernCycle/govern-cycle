@@ -6,12 +6,13 @@ import { Button } from '@/components/shared/Button'
 import { ContentPill } from '@/components/shared/ContentPill'
 import { useState } from 'react'
 import { Dialog, DialogPanel, DialogBackdrop } from '@headlessui/react'
-import { SparklesIcon, XMarkIcon } from '@heroicons/react/16/solid'
+import { BellIcon, FingerPrintIcon, SparklesIcon, XMarkIcon } from '@heroicons/react/16/solid'
 import { PlayCircleIcon } from '@heroicons/react/20/solid'
 import { CLIENTS } from '@/config'
 
 import appScreenshot from '@/images/app-screenshot.png'
 import cosmicButterfly from '@/images/cosmic-butterfly.png'
+import { BeakerIcon } from '@heroicons/react/24/solid'
 
 export const HomeHero = () => {
   let [isOpen, setIsOpen] = useState(false)
@@ -22,28 +23,27 @@ export const HomeHero = () => {
       <div>
         <div className='relative z-10 flex flex-col items-center'>
           <ContentPill
-            text='We just shipped version 2.0!'
-            Icon={SparklesIcon}
+            text='Cambia el mundo con tu voto.'
+            Icon={FingerPrintIcon}
           />
           <h1 className='mt-5 max-w-5xl text-center text-[2.75rem] font-bold leading-[1.125] text-brown-100  sm:text-5xl sm:leading-[1.125] md:text-6xl md:leading-[1.125] lg:text-[64px]'>
-            Meet the new standard for online&nbsp;
+            Bienvenido a &nbsp;
             <span className='relative inline-block text-nowrap'>
               <span className='relative z-10 bg-gradient-to-b from-orange-400 via-orange-400 to-white-500 bg-clip-text text-transparent'>
-                collaboration
+                GabbiiDAO
               </span>
               <span className='absolute -top-px left-0 -z-10 text-white-300'>
-                collaboration
+                GabbiiDAO
               </span>
             </span>
           </h1>
-          <p className='mt-5 max-w-xl text-center text-[17px] leading-8 text-zinc-200 sm:text-lg sm:leading-8'>
-            Iced pumpkin mug in ut shop a doppio panna milk press americano cup
-            bar fair, lait that galão irish redeye galão.
+          <p className='mt-5 max-w-xl text-center text-[17px] leading-8 text-brown-200 sm:text-lg sm:leading-8'>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at erat nulla. Pellentesque vitae orci turpis.
           </p>
           <div className='mt-8 flex items-center justify-center space-x-3 sm:space-x-5'>
             <Button id='top-cta' href='/signup'>
               {' '} 
-              Get started{' '}
+              Votar{' '}
             </Button>
             <Button
               variant='tertiary'
@@ -51,9 +51,9 @@ export const HomeHero = () => {
               className='overflow-hidden'
             >
               <span className='flex h-7 w-7 items-center justify-center rounded-full bg-white/[.07] transition duration-200 ease-in-out group-hover:bg-white/10'>
-                <PlayCircleIcon className='h-5 w-5 text-violet-50' />
+                <PlayCircleIcon className='h-5 w-5 text-brown-50' />
               </span>
-              <span>Watch video</span>
+              <span>¿Qué es internet Identity?</span>
             </Button>
           </div>
         </div>
@@ -95,31 +95,12 @@ export const HomeHero = () => {
         </Dialog>
       </div>
 
-      {/* App screenshot */}
-      <div className='relative mt-16 w-full rounded-2xl bg-white/[.01] p-2 shadow-inner-blur after:absolute after:inset-0 after:rounded-2xl after:border after:border-violet-200/[.04] sm:mt-20 lg:mt-24'>
-        <div className='absolute -bottom-16 -left-20 -right-20 -top-20 sm:-bottom-24 sm:-left-40 sm:-right-40 sm:-top-32 md:-bottom-32 md:-left-60 md:-right-60 md:-top-40 lg:-left-80 lg:-right-80 lg:-top-56'>
-          <Image
-            src={cosmicButterfly}
-            alt=''
-            className='h-full w-full object-contain'
-            sizes='100vw'
-            priority
-          />
-        </div>
 
-        <Image
-          src={appScreenshot}
-          alt='App screenshot'
-          className='relative h-auto w-full rounded-lg'
-          sizes='(max-width: 1280px) 100vw, 1200px'
-          priority
-        />
-      </div>
 
       {/* Social proof */}
       <div className='relative mx-auto mt-20 max-w-5xl overflow-hidden sm:mt-24 sm:px-10 lg:mt-28'>
         <p className='text-center text-[13px] font-bold uppercase tracking-wide text-brown-50/80 sm:text-sm sm:font-extrabold sm:tracking-wider'>
-          Trusted by innovative companies worldwide
+          Conoce a nuestros socios
         </p>
 
         {/* Logos */}
