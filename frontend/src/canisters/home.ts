@@ -12,3 +12,5 @@ export const home: CandidCanister = {
     canisterId: process.env.NEXT_PUBLIC_HOME_CANISTER_ID!,
   },
 };
+
+
