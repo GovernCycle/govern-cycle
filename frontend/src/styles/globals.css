@@ -98,3 +98,96 @@ code .line:not(:last-child)::before {
     @apply !from-[#575EFF]/10 !to-[#E478FF]/10;
   }
 }
+
+
+.text-white-300 {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-brown-50\/80 {
+  color: rgb(45 22 14 / 0.8);
+}
+.text-brown-100 {
+  --tw-text-opacity: 1;
+  color: rgb(45 22 14/ var(--tw-text-opacity));
+}
+
+
+.after\:border-violet-200\/\[\.04\]::after {
+  content: var(--tw-content);
+  border-color: rgb(221 214 254 / .04);
+}
+
+.from-orange-400 {
+  --tw-gradient-from: #FA7416 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(250 135 22/ 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.via-orange-400 {
+  --tw-gradient-to: rgb(250 135 22/ 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), #FA7416 var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+
+.via-orange-200\/15 {
+  --tw-gradient-to: rgb(250 135 22 / 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), rgb(250 135 22 / 0.15) var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+.text-brown-50 {
+  --tw-text-opacity: 1;
+  color: rgb(45 22 14 / var(--tw-text-opacity)) /* #f5f3ff */;
+}
+
+.text-brown-100 {
+  --tw-text-opacity: 1;
+  color: rgb(45 22 14/ var(--tw-text-opacity)) /* #ede9fe */;
+}
+
+.text-brown-400 {
+  --tw-text-opacity: 1;
+  color: rgb(45 22 14/ / var(--tw-text-opacity));
+}
+
+.text-orange-400 {
+  color: rgb(250 135 22 );
+}
+
+.via-brown-100\/15 {
+  --tw-gradient-to: rgb(45 22 14/ 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), rgb(45 22 14/ 0.15) var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+
+.border-brown-200\/\[\.06\] {
+  border-color: rgba(45, 22, 14, 0.355);
+}
+
+
+.text-brown-200 {
+  --tw-text-opacity: 1;
+  color: rgb(45 22 14 / var(--tw-text-opacity)) /* #e4e4e7 */;
+}
+
+.to-white-500 {
+  --tw-gradient-to: #ffffff var(--tw-gradient-to-position);
+}
+
+.hover\:text-orange-400\/95:hover {
+  color: rgb(250 135 22 / 0.95);
+}
+
+.from-orange-400\/0 {
+  --tw-gradient-from: rgb(250 135 22  / 0) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(250 135 22  / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.via-orange-400\/80 {
+  --tw-gradient-to: rgb(250 135 22 / 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), rgb(250 135 22 / 0.8) var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+
+.to-orange-400\/0 {
+  --tw-gradient-to: rgb(250 135 22/ 0) var(--tw-gradient-to-position);
+}
+  

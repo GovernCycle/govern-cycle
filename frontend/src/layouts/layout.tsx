@@ -10,10 +10,10 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang='en'
-      className={clsx('scroll-smooth')}
-    >
-      <body className='bg-zinc-900'>{children}</body>
-    </html>
+    lang='en'
+    className={clsx('scroll-smooth')}
+  >
+    <body >{children}</body>
+  </html>
   );
 }

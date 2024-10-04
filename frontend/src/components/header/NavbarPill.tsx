@@ -41,7 +41,7 @@ import { InternetIdentityButton } from '@bundly/ares-react'
 
 const pages = [
   { label: 'Home', href: '/', icon: HomeIcon },
-  { label: 'About', href: '/about', icon: UsersIcon },
+  { label: 'Actions', href: '/actions', icon: UsersIcon },
   {
     label: 'Pricing',
     href: '/pricing',
@@ -68,7 +68,7 @@ const pages = [
 
 const links = [
   { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
+  { label: 'Actions', href: '/actions' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'Contact', href: '/contact' },
 ]
@@ -186,7 +186,7 @@ function DropDownMenu({
   )
 }
 
-export const NavbarPill = () => {
+export const  NavbarPill = () => {
   const pathname = usePathname()
   // Initialize to true in order to dynamically get width of the cta button
   const [showButton, setShowButton] = useState(true)
@@ -326,7 +326,7 @@ export const NavbarPill = () => {
           ref={pillNavRef}
           className='relative z-40 flex w-full max-w-lg items-center overflow-hidden rounded-full bg-zinc-900/15 shadow-inner-blur backdrop-blur-lg backdrop-brightness-[85%] transition-[width] duration-500 ease-in-out after:absolute after:inset-0 after:z-10 after:rounded-full after:border after:border-violet-200/[.06] md:w-[unset] md:max-w-none'
         >
-          <div className='flex h-full w-full items-center justify-between rounded-full pl-[18px] pr-5 text-violet-50 md:w-fit md:justify-normal md:px-1.5'>
+          <div className='flex h-full w-full items-center justify-between rounded-full pl-[18px] pr-5 text-brown-50 md:w-fit md:justify-normal md:px-1.5'>
             {/* Logo mobile */}
             <div className='relative z-20 flex shrink-0 items-center md:hidden'>
               <Link
@@ -354,8 +354,8 @@ export const NavbarPill = () => {
                 className={clsx(
                   'relative z-40 hidden h-full items-center px-3 py-2.5 text-sm duration-200 ease-in-out md:inline-flex lg:px-4',
                   pathname === link.href
-                    ? 'font-semibold text-violet-400 drop-shadow-[-4px_-4px_6px_rgba(196,181,253,0.2)]'
-                    : 'font-medium text-violet-50 drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] hover:text-violet-400/95'
+                    ? 'font-semibold text-orange-400 drop-shadow-[-4px_-4px_6px_rgba(250,135, 22,0.2)]'
+                    : 'font-medium text-brown-50 drop-shadow-[-4px_-4px_6px_rgba(250, 135, 22,0.2)] hover:text-violet-400/95'
                 )}
               >
                 {link.label}

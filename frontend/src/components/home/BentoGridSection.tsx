@@ -54,18 +54,18 @@ export const BentoGridSection = () => {
       <Container className='py-20 sm:py-24'>
         {/* Text content */}
         <div className='relative z-10 flex flex-col items-center'>
-          <h1 className='max-w-5xl overflow-hidden text-wrap text-center text-4xl font-bold leading-extratight text-violet-100 sm:text-5xl sm:leading-extratight'>
+          <h1 className='max-w-5xl overflow-hidden text-wrap text-center text-4xl font-bold leading-extratight text-brown-100 sm:text-5xl sm:leading-extratight'>
             Simplify Your Workflow with&nbsp;
             <span className='relative inline-block text-nowrap'>
-              <span className='relative z-10 bg-gradient-to-b from-violet-400 via-violet-400 to-violet-500 bg-clip-text text-transparent'>
+              <span className='relative z-10 bg-gradient-to-b from-orange-400 via-orange-400 to-orange-500 bg-clip-text text-transparent'>
                 Versatile Tools
               </span>
-              <span className='absolute -top-px left-0 -z-10 text-violet-300'>
+              <span className='absolute -top-px left-0 -z-10 text-white-300'>
                 Versatile Tools
               </span>
             </span>
           </h1>
-          <p className='mt-5 max-w-xl text-center text-[17px] leading-8 text-zinc-200 sm:text-lg sm:leading-8'>
+          <p className='mt-5 max-w-xl text-center text-[17px] leading-8 text-brown-200 sm:text-lg sm:leading-8'>
             Iced pumpkin mug in ut shop a doppio panna milk press americano cup
             bar fair, lait that galão irish redeye galão.
           </p>

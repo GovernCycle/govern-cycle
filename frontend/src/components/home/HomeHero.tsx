@@ -25,13 +25,13 @@ export const HomeHero = () => {
             text='We just shipped version 2.0!'
             Icon={SparklesIcon}
           />
-          <h1 className='mt-5 max-w-5xl text-center text-[2.75rem] font-bold leading-[1.125] text-violet-100 sm:text-5xl sm:leading-[1.125] md:text-6xl md:leading-[1.125] lg:text-[64px]'>
+          <h1 className='mt-5 max-w-5xl text-center text-[2.75rem] font-bold leading-[1.125] text-brown-100  sm:text-5xl sm:leading-[1.125] md:text-6xl md:leading-[1.125] lg:text-[64px]'>
             Meet the new standard for online&nbsp;
             <span className='relative inline-block text-nowrap'>
-              <span className='relative z-10 bg-gradient-to-b from-violet-400 via-violet-400 to-violet-500 bg-clip-text text-transparent'>
+              <span className='relative z-10 bg-gradient-to-b from-orange-400 via-orange-400 to-white-500 bg-clip-text text-transparent'>
                 collaboration
               </span>
-              <span className='absolute -top-px left-0 -z-10 text-violet-300'>
+              <span className='absolute -top-px left-0 -z-10 text-white-300'>
                 collaboration
               </span>
             </span>
@@ -42,7 +42,7 @@ export const HomeHero = () => {
           </p>
           <div className='mt-8 flex items-center justify-center space-x-3 sm:space-x-5'>
             <Button id='top-cta' href='/signup'>
-              {' '}
+              {' '} 
               Get started{' '}
             </Button>
             <Button
@@ -118,7 +118,7 @@ export const HomeHero = () => {
 
       {/* Social proof */}
       <div className='relative mx-auto mt-20 max-w-5xl overflow-hidden sm:mt-24 sm:px-10 lg:mt-28'>
-        <p className='text-center text-[13px] font-bold uppercase tracking-wide text-violet-50/80 sm:text-sm sm:font-extrabold sm:tracking-wider'>
+        <p className='text-center text-[13px] font-bold uppercase tracking-wide text-brown-50/80 sm:text-sm sm:font-extrabold sm:tracking-wider'>
           Trusted by innovative companies worldwide
         </p>
 
