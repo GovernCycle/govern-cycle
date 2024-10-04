@@ -1,0 +1,55 @@
+type User = 
+ record {
+   email: text;
+   jurisdiction: vec Jurisdiction;
+   logo: blob;
+   manager: opt text;
+   name: text;
+   phone: text;
+   role: vec Role;
+   state: State;
+ };
+type State = 
+ variant {
+   Approved;
+   Pending;
+   Rejected;
+ };
+type Role = 
+ variant {
+   Academy;
+   Community;
+   Government;
+   ProjectDeveloper;
+   Register;
+   Standard;
+   TechnicalExpert;
+   TechnicalSecretariat;
+   Validator;
+ };
+type Participation = 
+ record {
+   active: vec nat;
+   done: vec nat;
+   inactive: vec nat;
+ };
+type Jurisdiction = 
+ record {
+   continent: opt text;
+   country: opt text;
+   region: opt text;
+ };
+service : {
+  deleteProfile: (principal) -> ();
+  findWithRolesAndJurisdiction: (vec Role, vec Jurisdiction) ->
+   (vec principal);
+  getAllProfiles: () -> (vec record {
+                               principal;
+                               User;
+                             });
+  getParticipations: (principal) -> (opt Participation);
+  getProfile: (principal) -> (opt User);
+  saveProfile: (User, principal) -> ();
+  setParticipation: (principal, Participation) -> ();
+  updateProfile: (principal, User) -> ();
+}
