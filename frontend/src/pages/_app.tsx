@@ -37,9 +37,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <IcpConnectContextProvider client={client}>
       {/* Wrap the Component inside RootLayout */}
-      <RootLayout>
         <Component {...pageProps} />
-      </RootLayout>
     </IcpConnectContextProvider>
   );
 }
