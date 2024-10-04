@@ -41,7 +41,7 @@ import { InternetIdentityButton } from '@bundly/ares-react'
 
 const pages = [
   { label: 'Home', href: '/', icon: HomeIcon },
-  { label: 'About', href: '/about', icon: UsersIcon },
+  { label: 'Actions', href: '/actions', icon: UsersIcon },
   {
     label: 'Pricing',
     href: '/pricing',
@@ -68,7 +68,7 @@ const pages = [
 
 const links = [
   { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
+  { label: 'Actions', href: '/actions' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'Contact', href: '/contact' },
 ]
@@ -186,7 +186,7 @@ function DropDownMenu({
   )
 }
 
-export const NavbarPill = () => {
+export const  NavbarPill = () => {
   const pathname = usePathname()
   // Initialize to true in order to dynamically get width of the cta button
   const [showButton, setShowButton] = useState(true)
@@ -324,9 +324,9 @@ export const NavbarPill = () => {
         <div
           id='pill-nav'
           ref={pillNavRef}
-          className='relative z-40 flex w-full max-w-lg items-center overflow-hidden rounded-full bg-zinc-900/15 shadow-inner-blur backdrop-blur-lg backdrop-brightness-[85%] transition-[width] duration-500 ease-in-out after:absolute after:inset-0 after:z-10 after:rounded-full after:border after:border-violet-200/[.06] md:w-[unset] md:max-w-none'
+          className='relative z-40 flex w-full max-w-lg items-center overflow-hidden rounded-full bg-green-900/15 shadow-inner-blur backdrop-blur-lg backdrop-brightness-[85%] transition-[width] duration-500 ease-in-out after:absolute after:inset-0 after:z-10 after:rounded-full after:border after:border-brown-200/[.06] md:w-[unset] md:max-w-none'
         >
-          <div className='flex h-full w-full items-center justify-between rounded-full pl-[18px] pr-5 text-violet-50 md:w-fit md:justify-normal md:px-1.5'>
+          <div className='flex h-full w-full items-center justify-between rounded-full pl-[18px] pr-5 text-brown-50 md:w-fit md:justify-normal md:px-1.5'>
             {/* Logo mobile */}
             <div className='relative z-20 flex shrink-0 items-center md:hidden'>
               <Link
@@ -354,13 +354,13 @@ export const NavbarPill = () => {
                 className={clsx(
                   'relative z-40 hidden h-full items-center px-3 py-2.5 text-sm duration-200 ease-in-out md:inline-flex lg:px-4',
                   pathname === link.href
-                    ? 'font-semibold text-violet-400 drop-shadow-[-4px_-4px_6px_rgba(196,181,253,0.2)]'
-                    : 'font-medium text-violet-50 drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] hover:text-violet-400/95'
+                    ? 'font-bold text-brown-400 drop-shadow-[-4px_-4px_6px_rgba(250,135, 22,0.2)]'
+                    : 'font-semibold text-white-50 drop-shadow-[-4px_-4px_6px_rgba(250, 135, 22,0.2)] hover:text-orange-100/95'
                 )}
               >
                 {link.label}
                 {pathname == link.href && (
-                  <span className='absolute bottom-0 left-2 right-2 h-px bg-gradient-to-r from-violet-400/0 via-violet-400/80 to-violet-400/0' />
+                  <span className='absolute bottom-0 left-2 right-2 h-3px bg-gradient-to-r from-brown-400/0 via-brown-400/80 to-brown-400/0' />
                 )}
               </Link>
             ))}
@@ -368,12 +368,12 @@ export const NavbarPill = () => {
             {/* Pages dropdown button */}
             <MenuButton
               type='button'
-              className='group relative z-40 hidden h-full items-center px-3 py-2.5 text-sm font-medium text-violet-50 outline-none drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out hover:text-violet-400/95 data-[open]:text-violet-400 data-[open]:drop-shadow-[-4px_-4px_6px_rgba(196,181,253,0.2)] md:inline-flex lg:px-4'
+              className='group relative z-40 hidden h-full items-center px-3 py-2.5 text-sm font-medium text-orange-100/95 outline-none drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out hover:text-violet-400/95 data-[open]:text-violet-400 data-[open]:drop-shadow-[-4px_-4px_6px_rgba(196,181,253,0.2)] md:inline-flex lg:px-4'
               ref={dropdownButtonRef}
             >
               <span>Pages</span>
 
-              <ChevronDownIcon className='ml-1 h-4.5 w-4.5 text-violet-50/90 duration-300 group-hover:text-violet-400/80 group-data-[open]:rotate-180 group-data-[open]:text-violet-400/90' />
+              <ChevronDownIcon className='ml-1 h-4.5 w-4.5 text-orange-100/ duration-300 group-hover:text-violet-400/80 group-data-[open]:rotate-180 group-data-[open]:text-violet-400/90' />
             </MenuButton>
 
             <div className='relative z-20 ml-1 flex items-center sm:ml-3 md:hidden'>

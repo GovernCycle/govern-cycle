@@ -182,7 +182,7 @@ export class Stars {
   private calculateDots(): number {
     const densityMultiplier = this.getDensityMultiplier(this.density)
     return Math.floor(
-      ((this.cssWidth / 2) * (this.cssHeight / 2)) / (1500 * densityMultiplier)
+      ((this.cssWidth / 2) * (this.cssHeight / 2)) / (1000 * densityMultiplier)
     )
   }
 
@@ -202,9 +202,9 @@ export class Stars {
       const y = Math.random() * (this.cssHeight - radius * 2) + radius
       const dx = (Math.random() * radius - 1) / 10
       const dy = (Math.random() * radius - 1) / 10
-      const fillColor = '#ede9fe'
+      const fillColor = '#6B793E'
       const shadowBlur = 10
-      const shadowColor = 'white'
+      const shadowColor = 'orange'
       const globalAlpha = Math.random() * 0.1 + 0.35
       const alpha = globalAlpha
 

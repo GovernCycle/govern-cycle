@@ -26,17 +26,6 @@ export const HeroContainer = ({
       {header && <Header />}
 
       <div className={cn('overflow-hidden', innerContainerClassName)}>
-        <Image
-          src={spaceWavesPng}
-          alt=''
-          className={cn(
-            'absolute inset-x-0 -top-80 -z-20 h-full w-full object-cover',
-            bgGradientClassName
-          )}
-          sizes='100vw'
-          priority
-        />
-
         {starField && (
           <div className='absolute inset-0 -z-10' aria-hidden='true'>
             <StarField />
