@@ -40,6 +40,15 @@
       }
     },
 
+    "whitelist": {
+      "type": "motoko",
+      "main": "backend/whitelist/main.mo",
+      "declarations": {
+        "node_compatibility": true,
+        "output": "frontend/src/declarations/whitelist"
+      }
+    },
+
     "frontend": {
       "dependencies": [
         "home", "proposal"

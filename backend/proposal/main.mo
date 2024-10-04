@@ -79,6 +79,7 @@ actor Proposal {
             threshold = proposal.threshold;
             comments = [];
             votes = [];
+            links = proposal.links;
             description = proposal.description;
             invitedUsers;
             invitedRoles = proposal.invitedRoles;
@@ -169,6 +170,7 @@ actor Proposal {
                     threshold = proposal.threshold;
                     comments = proposal.comments;
                     votes = currentVotesArray;
+                    links = proposal.links;
                     description = proposal.description;
                     invitedUsers = proposal.invitedUsers;
                     invitedRoles = proposal.invitedRoles;
@@ -244,6 +246,7 @@ actor Proposal {
                     threshold = proposal.threshold;
                     comments = currentCommentsArray;
                     votes = proposal.votes;
+                    links = proposal.links;
                     description = proposal.description;
                     invitedUsers = proposal.invitedUsers;
                     invitedRoles = proposal.invitedRoles;
@@ -275,6 +278,7 @@ actor Proposal {
                     threshold = proposal.threshold;
                     comments = proposal.comments;
                     votes = proposal.votes;
+                    links = proposal.links;
                     description = proposal.description;
                     invitedUsers = proposal.invitedUsers;
                     invitedRoles = proposal.invitedRoles;
@@ -316,6 +320,7 @@ actor Proposal {
                         threshold = proposal.threshold;
                         comments = proposal.comments;
                         votes = proposal.votes;
+                        links = proposal.links;
                         description = proposal.description;
                         invitedUsers = proposal.invitedUsers;
                         invitedRoles = proposal.invitedRoles;

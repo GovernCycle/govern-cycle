@@ -27,6 +27,7 @@ module {
         invitedRoles: [UserTypes.Role];
         invitedUsers: [Principal];
         votes : [Vote];
+        links : [Text];
     };
 
     public type ProposalRequest = {
@@ -38,6 +39,7 @@ module {
         threshold : Nat;
         location : [UserTypes.Jurisdiction];
         invitedRoles: [UserTypes.Role];
+        links: [Text];
     };
 
     public type StateProposal = {
