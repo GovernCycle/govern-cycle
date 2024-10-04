@@ -222,3 +222,12 @@ code .line:not(:last-child)::before {
 .to-brown-400\/0 {
   --tw-gradient-to: rgba(107, 121, 62, 0.126) var(--tw-gradient-to-position);
 }
+
+.via-brown-200\/15 {
+  --tw-gradient-to: rgb(45 22 14/ 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), rgb(45 22 14 / 0.15) var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+
+.bg-white-950\/\[\.01\] {
+  background-color: rgba(255, 255, 255, 0.01);
+}

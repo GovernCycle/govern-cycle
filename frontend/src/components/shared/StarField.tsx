@@ -9,8 +9,8 @@ interface StarFieldProps {
 }
 
 export const StarField = ({
-  maxRadius = 3,
-  minRadius = 1,
+  maxRadius = 5,
+  minRadius = 2,
   density = 'low',
 }: StarFieldProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
