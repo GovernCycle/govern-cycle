@@ -5,15 +5,13 @@ import { ContainerOutline } from '@/components/shared/ContainerOutline'
 import { Button } from '@/components/shared/Button'
 import { TextField } from '@/components/forms/TextField'
 import { ChevronRightIcon } from '@heroicons/react/16/solid'
+import AuthLayout from '../layout'
 
-export const metadata = {
-  title: 'Password Reset',
-  description:
-    'Need to reset your password? Follow the steps here to regain access to your Nebula account and resources.',
-}
 
 export default function PasswordReset() {
   return (
+    <AuthLayout> 
+      
     <Container className='max-w-lg py-5 sm:max-w-xl'>
       <div className='relative z-10 flex flex-col shadow-inner-blur'>
         <ContainerOutline />
@@ -53,5 +51,6 @@ export default function PasswordReset() {
         </form>
       </div>
     </Container>
+    </AuthLayout>
   )
 }

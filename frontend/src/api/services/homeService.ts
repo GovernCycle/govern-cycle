@@ -66,7 +66,7 @@ export class HomeAPI {
   }
 
   // Estado de la creación del perfil
-  public async getProfileCreationStatus(): Promise<any> { // Ajusta el tipo de retorno si tienes más detalles
+  public async getProfileCreationStatus(): Promise<any> {
     try {
       const result = await this.actor.getProfilecreaitonstatus();
       return result;

@@ -6,15 +6,12 @@ import { ContainerOutline } from '@/components/shared/ContainerOutline'
 import { Button } from '@/components/shared/Button'
 import { TextField } from '@/components/forms/TextField'
 import { ChevronRightIcon } from '@heroicons/react/16/solid'
+import AuthLayout from '../layout'
 
-export const metadata = {
-  title: 'Sign up',
-  description:
-    'Create your Nebula account today and unlock seamless remote work solutions and team collaboration.',
-}
 
 export default function Signup() {
   return (
+    <AuthLayout>
     <Container className='max-w-lg py-5 sm:max-w-xl lg:max-w-6xl'>
       <div className='lg:grid lg:grid-cols-2 lg:gap-x-8 xl:gap-x-36'>
         <div className='relative z-10 flex flex-col shadow-inner-blur'>
@@ -90,5 +87,6 @@ export default function Signup() {
         <TestimonialSlider />
       </div>
     </Container>
+        </AuthLayout>
   )
 }

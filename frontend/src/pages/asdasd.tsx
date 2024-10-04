@@ -2,17 +2,9 @@ import React, { useState, useEffect } from 'react';
 import type { Principal } from '@dfinity/principal';
 import { useCandidActor, useAuth } from '@bundly/ares-react';
 import { CandidActors } from '@app/canisters';
-import Header from '@/components/header';
+
 import type {User, UserRequest, AuthenticationResult, State, Role, Jurisdiction } from '@app/declarations/home/home.did';
-import { Footer } from '@app/components/shared/Footer';
-import { Divider } from '@app/components/shared/Divider';
-import { Testimonials } from '@app/components/home/Testimonials';
-import { HeroContainer } from '@app/components/shared/HeroContainer';
-import { HomeHero } from '@app/components/home/HomeHero';
-import { Features } from '@app/components/home/Features';
-import { Integrations } from '@app/components/home/Integrations';
-import { InteractiveCodeSection } from '@app/components/home/InteractiveCodeSection';
-import { BentoGridSection } from '@app/components/home/BentoGridSection';
+
 
 export default function IcConnectPage() {
   const { isAuthenticated, currentIdentity } = useAuth();

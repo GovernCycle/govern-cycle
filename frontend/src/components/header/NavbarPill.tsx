@@ -410,7 +410,7 @@ export const  NavbarPill = () => {
                   href='/signup'
                   size='sm'
                 >
-          <InternetIdentityButton />
+                <InternetIdentityButton />
                 </Button>
               </Transition>
             </div>
