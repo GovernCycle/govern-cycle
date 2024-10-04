@@ -21,7 +21,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         providers: [
           new InternetIdentity({
             providerUrl:
-              process.env.NEXT_PUBLIC_INTERNET_IDENTITY_URL! || 'https://identity.ic0.app',
+              process.env.NEXT_PUBLIC_INTERNET_IDENTITY_URL! ,
+              // process.env.NEXT_PUBLIC_INTERNET_IDENTITY_URL! || 'https://identity.ic0.app',
           }),
         ],
       });

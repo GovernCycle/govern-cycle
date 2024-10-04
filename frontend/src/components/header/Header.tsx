@@ -26,7 +26,7 @@ export const Header = () => {
 
           <div className='hidden items-center md:flex lg:space-x-3 xl:space-x-4'>
             <Button
-              href='/signin'
+              href='/auth/signin'
               variant='tertiary'
               size='sm'
               className='overflow-hidden'
@@ -35,7 +35,7 @@ export const Header = () => {
             </Button>
 
             {/* Call to action */}
-            <Button href='/signup' size='sm'>
+            <Button href='/auth/signup' size='sm'>
               Sign up
             </Button>
           </div>
