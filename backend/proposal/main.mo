@@ -3,6 +3,7 @@ import Array "mo:base/Array";
 import Buffer "mo:base/Buffer";
 import Principal "mo:base/Principal";
 import ProposalData "../types/proposal";
+import UserData "../types/user";
 import DateTime "mo:datetime/DateTime";
 import ProposalVal "../validations/proposal";
 import UserUtils "../utils/user";
@@ -79,7 +80,14 @@ actor Proposal {
         };
 
         // Add the proposal to the map of proposals
-        let response = await DB.saveProposal(newProposal, invitedUsers);
+        let response = await DB.saveProposal(newProposal);
+
+        // Add the proposal to the active participations of invited users
+        let nextProposalId = await DB.getNextProposalId();
+        let areParticipationsSet = await addActiveParticipation(invitedUsers, nextProposalId);
+        if (not areParticipationsSet) {
+            return #err(#ParticipationsNotSet);
+        };
 
         // if all is ok return success state
         return response;
@@ -145,7 +153,7 @@ actor Proposal {
 
                     // Move non-voting users to inactive participation
                     let usersThatNotVoted = ProposalUtils.checkUsersThatNotVoted(proposal.invitedUsers, currentVotesArray);
-                    let areParticipationsSet = await DB.changeFromActiveToInactive(usersThatNotVoted, proposalId);
+                    let areParticipationsSet = await changeFromActiveToInactive(usersThatNotVoted, proposalId);
                     if (not areParticipationsSet) {
                         return #err(#ParticipationsNotSet);
                     };
@@ -175,7 +183,7 @@ actor Proposal {
                 await DB.updateProposal(proposalId, newProposal);
 
                 // Update user's participation status
-                let isParticipationsSet = await DB.changeFromActiveToDone(caller, proposalId);
+                let isParticipationsSet = await changeFromActiveToDone(caller, proposalId);
                 if (not isParticipationsSet) {
                     return #err(#ParticipationsNotSet);
                 };
@@ -213,8 +221,7 @@ actor Proposal {
             case (?proposal) {
                 // Ensure the user is invited to comment
                 if (
-                    not ProposalUtils.isInvitedUser(caller, proposal.invitedUsers) 
-                    or not ProposalUtils.isAuthor(caller, proposal.author)
+                    not ProposalUtils.isInvitedUser(caller, proposal.invitedUsers) or not ProposalUtils.isAuthor(caller, proposal.author)
                 ) {
                     return #err(#UserNotInvited);
                 };
@@ -305,7 +312,7 @@ actor Proposal {
                             };
 
                             // Move the invited users' participations from active to inactive
-                            let areParticipationsSet = await DB.changeFromActiveToInactive(proposal.invitedUsers, p);
+                            let areParticipationsSet = await changeFromActiveToInactive(proposal.invitedUsers, p);
                             if (not areParticipationsSet) {
                                 return #err(#ParticipationsNotSet);
                             };
@@ -417,6 +424,110 @@ actor Proposal {
                 return response;
             };
         };
+    };
+
+    // give participation token to voters
+    private func addActiveParticipation(users : [Principal], proposalId : Nat) : async Bool {
+        // Iterate over the list of invited users
+        for (user in users.vals()) {
+            var participations = await DB.getParticipations(user);
+            switch (participations) {
+                case (null) {
+                    return false;
+                };
+                case (?participations) {
+                    // Add the proposal ID to the user's active participations
+                    var active = Buffer.fromArray<Nat>(participations.active);
+                    active.add(proposalId);
+                    let activeArray = Buffer.toArray<Nat>(active);
+                    let newParticipations : UserData.Participation = {
+                        active = activeArray;
+                        inactive = participations.inactive;
+                        done = participations.done;
+                    };
+                    // Update the user's participation data
+                    await DB.setParticipation(user, newParticipations);
+
+                };
+            };
+        };
+        return true;
+    };
+
+    // change vote from active to incative
+    private func changeFromActiveToInactive(users : [Principal], proposalId : Nat) : async Bool {
+        // Iterate over the list of users
+        for (user in users.vals()) {
+            var participations = await DB.getParticipations(user);
+            switch (participations) {
+                case (null) {
+                    return false;
+                };
+                case (?participations) {
+                    // Find the proposal ID in the active participations
+                    let activeIndex = Array.indexOf<Nat>(proposalId, participations.active, Nat.equal);
+                    switch (activeIndex) {
+                        case (null) {
+                            return false;
+                        };
+                        case (?activeIndex) {
+                            // Remove the proposal ID from active and add to inactive participations
+                            var active = Buffer.fromArray<Nat>(participations.active);
+                            let removedId = active.remove(activeIndex);
+                            let activeArray = Buffer.toArray<Nat>(active);
+                            var inactive = Buffer.fromArray<Nat>(participations.inactive);
+                            inactive.add(removedId);
+                            let inactiveArray = Buffer.toArray<Nat>(inactive);
+                            let newParticipations : UserData.Participation = {
+                                active = activeArray;
+                                inactive = inactiveArray;
+                                done = participations.done;
+                            };
+                            // Update the user's participation data
+                            await DB.setParticipation(user, newParticipations);
+                        };
+                    };
+                };
+            };
+        };
+        return true;
+    };
+
+    // change vote from active to done
+    private func changeFromActiveToDone(user : Principal, proposalId : Nat) : async Bool {
+        // Retrieve the user's participations
+        var participations = await DB.getParticipations(user);
+        switch (participations) {
+            case (null) {
+                return false;
+            };
+            case (?participations) {
+                // Find the proposal ID in the active participations
+                let activeIndex = Array.indexOf<Nat>(proposalId, participations.active, Nat.equal);
+                switch (activeIndex) {
+                    case (null) {
+                        return false;
+                    };
+                    case (?activeIndex) {
+                        // Move the proposal ID from active to done participations
+                        var active = Buffer.fromArray<Nat>(participations.active);
+                        let removeId = active.remove(activeIndex);
+                        let activeArray = Buffer.toArray<Nat>(active);
+                        var done = Buffer.fromArray<Nat>(participations.done);
+                        done.add(removeId);
+                        let doneArray = Buffer.toArray<Nat>(done);
+                        let newParticipations : UserData.Participation = {
+                            active = activeArray;
+                            inactive = participations.inactive;
+                            done = doneArray;
+                        };
+                        // Update the user's participation data
+                        await DB.setParticipation(user, newParticipations);
+                    };
+                };
+            };
+        };
+        return true;
     };
 
     // get time to the blockchain in real time

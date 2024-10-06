@@ -1,6 +1,5 @@
 import Principal "mo:base/Principal";
 import Map "mo:map/Map";
-import Array "mo:base/Array";
 import Buffer "mo:base/Buffer";
 import Iter "mo:base/Iter";
 import Nat "mo:base/Nat";
@@ -169,7 +168,7 @@ actor Db {
 
     };
 
-    public shared ({ caller }) func saveProposal(newProposal : ProposalData.Proposal, invitedUsers : [Principal]) : async ProposalVal.ProposalResult {
+    public shared ({ caller }) func saveProposal(newProposal : ProposalData.Proposal) : async ProposalVal.ProposalResult {
 
         // check if the caller is allowed to perform this action
         if (not isAllowedAction(caller)) {
@@ -179,12 +178,6 @@ actor Db {
         // Increment the proposal ID for the next proposal
         nextProposalId += 1;
         Map.set(proposals, nhash, nextProposalId, newProposal);
-
-        // Add the proposal to the active participations of invited users
-        let areParticipationsSet = await addActiveParticipation(invitedUsers, nextProposalId);
-        if (not areParticipationsSet) {
-            return #err(#ParticipationsNotSet);
-        };
 
         // Return the success message
         return #ok(#SuccessText("Proposal created successfully"));
@@ -221,109 +214,11 @@ actor Db {
         return Iter.toArray(Map.keys(proposals));
     };
 
-    // give participation token to voters
-    public shared func addActiveParticipation(users : [Principal], proposalId : Nat) : async Bool {
-        // Iterate over the list of invited users
-        for (user in users.vals()) {
-            var participations = await getParticipations(user);
-            switch (participations) {
-                case (null) {
-                    return false;
-                };
-                case (?participations) {
-                    // Add the proposal ID to the user's active participations
-                    var active = Buffer.fromArray<Nat>(participations.active);
-                    active.add(proposalId);
-                    let activeArray = Buffer.toArray<Nat>(active);
-                    let newParticipations : UserData.Participation = {
-                        active = activeArray;
-                        inactive = participations.inactive;
-                        done = participations.done;
-                    };
-                    // Update the user's participation data
-                    await setParticipation(user, newParticipations);
-
-                };
-            };
-        };
-        return true;
+    public shared func getNextProposalId() : async Nat {
+        return nextProposalId;
     };
 
-    // change vote from active to incative
-    public shared func changeFromActiveToInactive(users : [Principal], proposalId : Nat) : async Bool {
-        // Iterate over the list of users
-        for (user in users.vals()) {
-            var participations = await getParticipations(user);
-            switch (participations) {
-                case (null) {
-                    return false;
-                };
-                case (?participations) {
-                    // Find the proposal ID in the active participations
-                    let activeIndex = Array.indexOf<Nat>(proposalId, participations.active, Nat.equal);
-                    switch (activeIndex) {
-                        case (null) {
-                            return false;
-                        };
-                        case (?activeIndex) {
-                            // Remove the proposal ID from active and add to inactive participations
-                            var active = Buffer.fromArray<Nat>(participations.active);
-                            let removedId = active.remove(activeIndex);
-                            let activeArray = Buffer.toArray<Nat>(active);
-                            var inactive = Buffer.fromArray<Nat>(participations.inactive);
-                            inactive.add(removedId);
-                            let inactiveArray = Buffer.toArray<Nat>(inactive);
-                            let newParticipations : UserData.Participation = {
-                                active = activeArray;
-                                inactive = inactiveArray;
-                                done = participations.done;
-                            };
-                            // Update the user's participation data
-                            await setParticipation(user, newParticipations);
-                        };
-                    };
-                };
-            };
-        };
-        return true;
-    };
 
-    // change vote from active to done
-    public shared func changeFromActiveToDone(user : Principal, proposalId : Nat) : async Bool {
-        // Retrieve the user's participations
-        var participations = await getParticipations(user);
-        switch (participations) {
-            case (null) {
-                return false;
-            };
-            case (?participations) {
-                // Find the proposal ID in the active participations
-                let activeIndex = Array.indexOf<Nat>(proposalId, participations.active, Nat.equal);
-                switch (activeIndex) {
-                    case (null) {
-                        return false;
-                    };
-                    case (?activeIndex) {
-                        // Move the proposal ID from active to done participations
-                        var active = Buffer.fromArray<Nat>(participations.active);
-                        let removeId = active.remove(activeIndex);
-                        let activeArray = Buffer.toArray<Nat>(active);
-                        var done = Buffer.fromArray<Nat>(participations.done);
-                        done.add(removeId);
-                        let doneArray = Buffer.toArray<Nat>(done);
-                        let newParticipations : UserData.Participation = {
-                            active = activeArray;
-                            inactive = participations.inactive;
-                            done = doneArray;
-                        };
-                        // Update the user's participation data
-                        await setParticipation(user, newParticipations);
-                    };
-                };
-            };
-        };
-        return true;
-    };
 
     private func isAllowedAction(caller : Principal) : Bool {
         if (
