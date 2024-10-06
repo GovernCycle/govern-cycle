@@ -28,7 +28,8 @@ module {
         #UserNotInvited;
         #ProposalAlreadyApproved;
         #InvalidDate;
-        
+        #NotAllowedAction;
+
     };
 
     // Private type to represent successful outcomes of proposal-related operations.
@@ -36,9 +37,10 @@ module {
     // - #Proposal: Contains a single ProposalData.Proposal object.
     // - #FullProposal: Contains a list of tuples, where each tuple includes a Nat (identifier) and a ProposalData.Proposal.
     private type SuccessProposal = {
-        #SuccessText: Text.Text;
-        #Proposal: ProposalData.Proposal;
-        #FullProposal: [(Nat, ProposalData.Proposal)];
+        #SuccessText : Text.Text;
+        #Proposal : ProposalData.Proposal;
+        #FullProposal : [(Nat, ProposalData.Proposal)];
+        #ParticipationsSet;
     };
 
     // Private type to represent specific errors that can occur when retrieving full proposals.
@@ -49,6 +51,7 @@ module {
         #InvalidDate;
         #ParticipationsNotSet;
         #ProposalNotFound;
+        #NotAllowedAction;
     };
 
     // Public type representing the result of a proposal-related operation.

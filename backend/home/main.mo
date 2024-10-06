@@ -7,13 +7,13 @@ import DB "canister:db";
 actor Home {
 
     /// Creates a new user profile.
-    /// 
+    ///
     /// This function checks if the caller is authenticated and if the profile already exists.
     /// If the profile does not exist, it will create a new user profile, delete duplicate roles and jurisdictions, and save the new profile.
-    /// 
+    ///
     /// Parameters:
     /// - `user`: The user information to create the profile.
-    /// 
+    ///
     /// Returns:
     /// - `#err(#UserNotAuthenticated)` if the caller is anonymous.
     /// - `#err(#UserAlreadyExists)` if the user already has a profile.
@@ -29,12 +29,17 @@ actor Home {
 
         let jurisdictions = UserUtils.deleteDuplicateJur(user.jurisdiction);
         let roles = UserUtils.deleteDuplicatedRoles(user.role);
+        var initialState : UserData.State = #Pending;
+
+        if (await DB.isWhitelisted(caller)) {
+            initialState := #Approved;
+        };
 
         let newUser : UserData.User = {
             name = user.name;
             role = roles;
-            state = #Approved;
             jurisdiction = jurisdictions;
+            state = initialState;
             email = user.email;
             phone = user.phone;
             logo = user.logo;
@@ -42,13 +47,13 @@ actor Home {
         };
 
         // Save user and create wallet for the user
-        await DB.saveProfile(newUser, caller);
+        let response = await DB.saveProfile(newUser, caller);
 
-        return #ok(#SuccessText("User created successfully"));
+        return response;
     };
 
     /// Retrieves all profiles from the database.
-    /// 
+    ///
     /// Returns:
     /// - A list of tuples containing the Principal identifier and the user data.
     public func getAllProfiles() : async [(Principal, UserData.User)] {
@@ -56,9 +61,9 @@ actor Home {
     };
 
     /// Retrieves the profile of the caller.
-    /// 
+    ///
     /// This function checks if the caller is authenticated and retrieves their profile from the database.
-    /// 
+    ///
     /// Returns:
     /// - `#err(#UserNotAuthenticated)` if the caller is anonymous.
     /// - `#err(#UserNotFound)` if the profile is not found.
@@ -79,14 +84,14 @@ actor Home {
     };
 
     /// Changes the state of a user profile.
-    /// 
+    ///
     /// This function allows an admin to change the state of a user's profile (e.g., active, inactive).
     /// It checks if the caller is an admin and if their profile is approved.
-    /// 
+    ///
     /// Parameters:
     /// - `state`: The new state to assign to the user.
     /// - `user`: The Principal identifier of the user whose state is being changed.
-    /// 
+    ///
     /// Returns:
     /// - `#err(#UserNotAuthenticated)` if the caller is anonymous.
     /// - `#err(#UserNotFound)` if the user's profile is not found.
@@ -129,25 +134,25 @@ actor Home {
                     manager = userFound.manager;
                 };
 
-                await DB.updateProfile(user, newuser);
+                let response = await DB.updateProfile(user, newuser);
+
+                return response;
             };
         };
-
-        return #ok(#SuccessText("User state changed successfully"));
     };
 
     /// Deletes a user profile.
-    /// 
+    ///
     /// This function allows an admin to delete a user's profile. It checks if the caller is an admin and if their profile is approved.
-    /// 
+    ///
     /// Parameters:
     /// - `user`: The Principal identifier of the user to delete.
-    /// 
+    ///
     /// Returns:
     /// - `#err(#UserNotAuthenticated)` if the caller is anonymous.
     /// - `#err(#UserNotFound)` if the user's profile is not found.
     /// - `#ok(#SuccessText("User deleted successfully"))` if the profile was deleted successfully.
-    public shared ({ caller }) func deleteUser(user : Principal) : async UserVal.AuthenticationResult {
+    public shared ({ caller }) func deleteProfile(user : Principal) : async UserVal.AuthenticationResult {
         if (Principal.isAnonymous(caller)) return #err(#UserNotAuthenticated);
 
         let userAdmin = await DB.getProfile(caller);
@@ -173,17 +178,17 @@ actor Home {
                 return #err(#UserNotFound);
             };
             case (?userFound) {
-                await DB.deleteProfile(user);
+                let response = await DB.deleteProfile(user);
+
+                return response;
             };
         };
-
-        return #ok(#SuccessText("User deleted successfully"));
     };
 
     /// Retrieves the participations of the caller.
-    /// 
+    ///
     /// This function checks if the caller is authenticated and retrieves their participations from the database.
-    /// 
+    ///
     /// Returns:
     /// - `#err(#UserNotAuthenticated)` if the caller is anonymous.
     /// - `#err(#UserNotFound)` if no participations are found.

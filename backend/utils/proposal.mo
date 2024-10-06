@@ -21,6 +21,10 @@ module {
         return false; // If the user is not found, return false.
     };
 
+    public func isAuthor(user: Principal, author: Principal) : Bool {
+        return user == author;
+    };
+
     // Function to check if a user has already voted.
     // - user: The Principal of the user to check.
     // - votes: The list of votes that have been cast.

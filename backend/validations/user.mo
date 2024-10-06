@@ -12,6 +12,7 @@ module {
     // - #UserNotApproved: The user’s account is not approved.
     private type AuthenticationError = {
         #UserNotAuthenticated;
+        #NotAllowedAction;
         #UserNotAuthorized;
         #UserNotFound;
         #UserAlreadyExists;
@@ -26,6 +27,7 @@ module {
         #SuccessText: Text.Text;
         #User: UserData.User;
         #Participation: UserData.Participation;
+        #WhiteListed: [Principal];
     };
 
     // Public type that represents the result of an authentication operation.
