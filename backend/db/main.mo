@@ -218,8 +218,6 @@ actor Db {
         return nextProposalId;
     };
 
-
-
     private func isAllowedAction(caller : Principal) : Bool {
         if (
             Principal.equal(Constants.getHomeId(), caller) or Principal.equal(Constants.getProposalId(), caller)
