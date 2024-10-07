@@ -162,9 +162,11 @@ actor Db {
     // Public method to set a user's participation data.
     // - user: The Principal of the user whose participation data is to be updated.
     // - participation: The new participation data to set.
-    public shared func setParticipation(user : Principal, participation : UserData.Participation) : async () {
+    public shared ({ caller }) func setParticipation(user : Principal, participation : UserData.Participation) : async () {
 
-        Map.set(ledger, phash, user, participation); // Update the user's participation data.
+        if (isAllowedAction(caller)) {
+            Map.set(ledger, phash, user, participation); // Update the user's participation data.
+        };
 
     };
 
@@ -183,9 +185,11 @@ actor Db {
         return #ok(#SuccessText("Proposal created successfully"));
     };
 
-    public shared func updateProposal(proposalId : Nat, newProposal : ProposalData.Proposal) : async () {
+    public shared ({ caller }) func updateProposal(proposalId : Nat, newProposal : ProposalData.Proposal) : async () {
 
-        Map.set(proposals, nhash, proposalId, newProposal);
+        if (isAllowedAction(caller)) {
+            Map.set(proposals, nhash, proposalId, newProposal);
+        };
 
     };
 

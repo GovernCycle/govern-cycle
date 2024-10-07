@@ -221,7 +221,7 @@ actor Proposal {
             case (?proposal) {
                 // Ensure the user is invited to comment
                 if (
-                    not ProposalUtils.isInvitedUser(caller, proposal.invitedUsers) or not ProposalUtils.isAuthor(caller, proposal.author)
+                    not ProposalUtils.isInvitedUser(caller, proposal.invitedUsers) and not ProposalUtils.isAuthor(caller, proposal.author)
                 ) {
                     return #err(#UserNotInvited);
                 };
