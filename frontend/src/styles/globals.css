@@ -13,6 +13,63 @@
   --scroll-progress: 0;
   --max-translate-x: 0;
   --max-translate-y: 0;
+
+
+  /* Label */
+  --color-label-primary: #50BA52;
+  --color-label-primary-i: #50BA52;
+  --color-label-secondary: #50BA52;
+  --color-label-secondary-i: #50BA52;
+  --color-label-ternary: #50BA52;
+  --color-label-ternary-i: #50BA52;
+  /* titles */
+  --color-title-primary: #50BA52;
+  --color-title-primary-i: #50BA52;
+  --color-title-secondary: #50BA52;
+  --color-title-secondary-i: #50BA52;
+  --color-title-ternary: #50BA52;
+  --color-title-ternary-i: #50BA52;
+  /* buttons */
+  --color-button-primary: #50BA52;
+  --color-button-primary-i: #50BA52;
+  --color-button-secondary: #50BA52;
+  --color-button-secondary-i: #50BA52;
+  --color-button-ternary: #50BA52;
+  --color-button-ternary-i: #50BA52;
+  /* backGrounds */
+  --color-backGround-primary: #FBFCFE;
+  --color-backGround-primary-i: #50BA52;
+  --color-backGround-secondary: #50BA52;
+  --color-backGround-secondary-i: #50BA52;
+  --color-backGround-ternary: #50BA52;
+  --color-backGround-ternary-i: #50BA52;
+
+  /* Transitions */
+  --color-Transitions-primary: #5083BA;
+  --color-Transitions-primary-i: #5083BA;
+  --color-Transitions-secondary: #5083BA;
+  --color-Transitions-secondary-i: #5083BA;
+  --color-Transitions-ternary: #5083BA;
+  --color-Transitions-ternary-i: #5083BA;
+
+  /* particles */
+  --color-particles-primary: #BA50B8;
+  --color-particles-primary-i: #5083BA;
+  --color-particles-secondary: #5083BA;
+  --color-particles-secondary-i: #5083BA;
+  --color-particles-ternary: #5083BA;
+  --color-particles-ternary-i: #5083BA;
+
+  --color-green-primary: #50BA52;
+  --color-blue-secondary: #5083BA;
+  --color-purple-accent: #BA50B8;
+  --color-orange-accent: #BA8750;
+
+  --color-white: #ffffff;
+  --color-brown-50: #2D160E;
+  --color-brown-100: #2D160E;
+  --color-orange-400: #FA8716;
+  --color-violet-200: #ddd6fe;
 }
 
 .image-container {
@@ -150,7 +207,7 @@ code .line:not(:last-child)::before {
 
 .text-brown-400 {
   --tw-text-opacity: 1;
-  color: rgb(45 22 14/ / var(--tw-text-opacity));
+  color: rgb(45 22 14/ var(--tw-text-opacity));
 }
 
 .text-orange-400 {

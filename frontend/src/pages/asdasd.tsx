@@ -78,17 +78,17 @@ export default function IcConnectPage() {
     }
   }
 
-  async function deleteUser(userPrincipal: Principal) {
-    try {
-      setLoading(true);
-      const response = await test.deleteUser(userPrincipal);
-      console.log("User deleted", response);
-      setLoading(false);
-    } catch (error) {
-      console.error({ error });
-      setLoading(false);
-    }
-  }
+  // async function deleteUser(userPrincipal: Principal) {
+  //   try {
+  //     setLoading(true);
+  //     const response = await test.deleteUser(userPrincipal);
+  //     console.log("User deleted", response);
+  //     setLoading(false);
+  //   } catch (error) {
+  //     console.error({ error });
+  //     setLoading(false);
+  //   }
+  // }
 
   async function getAllProfiles() {
     try {

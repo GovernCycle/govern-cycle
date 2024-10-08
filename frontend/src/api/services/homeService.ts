@@ -20,7 +20,7 @@ export class HomeAPI {
       throw error;
     }
   }
-
+  
   // Crear un perfil de usuario
   public async createProfile(userRequest: UserRequest): Promise<AuthenticationResult> {
     try {
@@ -32,16 +32,16 @@ export class HomeAPI {
     }
   }
 
-  // Eliminar un usuario
-  public async deleteUser(userPrincipal: Principal): Promise<AuthenticationResult> {
-    try {
-      const result = await this.actor.deleteUser(userPrincipal);
-      return result;
-    } catch (error) {
-      console.error('Error deleting user:', error);
-      throw error;
-    }
-  }
+  // // Eliminar un usuario
+  // public async deleteUser(userPrincipal: Principal): Promise<AuthenticationResult> {
+  //   try {
+  //     const result = await this.actor.deleteUser(userPrincipal);
+  //     return result;
+  //   } catch (error) {
+  //     console.error('Error deleting user:', error);
+  //     throw error;
+  //   }
+  // }
 
   // Obtener todos los perfiles
   public async getAllProfiles(): Promise<Array<[Principal, User]>> {
@@ -66,13 +66,13 @@ export class HomeAPI {
   }
 
   // Estado de la creación del perfil
-  public async getProfileCreationStatus(): Promise<any> {
-    try {
-      const result = await this.actor.getProfilecreaitonstatus();
-      return result;
-    } catch (error) {
-      console.error('Error getting profile creation status:', error);
-      throw error;
-    }
-  }
+  // public async getProfileCreationStatus(): Promise<any> {
+  //   try {
+  //     const result = await this.actor.getProfilecreaitonstatus();
+  //     return result;
+  //   } catch (error) {
+  //     console.error('Error getting profile creation status:', error);
+  //     throw error;
+  //   }
+  // }
 }

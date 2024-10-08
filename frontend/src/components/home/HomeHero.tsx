@@ -18,10 +18,10 @@ export const HomeHero = () => {
   let [isOpen, setIsOpen] = useState(false)
 
   return (
-    <Container className='gap-16 pb-16 pt-20 sm:pb-20 lg:pt-28'>
+    <Container className='gap-16 pb-16 pt-20 sm:pb-20 lg:pt-28 '>
       {/* Text content */}
       <div>
-        <div className='relative z-10 flex flex-col items-center'>
+        <div className='relative z-10 flex flex-col items-center '>
           <ContentPill
             text='Cambia el mundo con tu voto.'
             Icon={FingerPrintIcon}
@@ -29,7 +29,7 @@ export const HomeHero = () => {
           <h1 className='mt-5 max-w-5xl text-center text-[2.75rem] font-bold leading-[1.125] text-brown-100  sm:text-5xl sm:leading-[1.125] md:text-6xl md:leading-[1.125] lg:text-[64px]'>
             Bienvenido a &nbsp;
             <span className='relative inline-block text-nowrap'>
-              <span className='relative z-10 bg-gradient-to-b from-orange-400 via-orange-400 to-white-500 bg-clip-text text-transparent'>
+              <span className='relative z-10 bg-gradient-to-b from-[var(--color-label-primary)] via-[var(--color-Transitions-primary)]  to-[var(--color-label-primary-i)] bg-clip-text text-transparent'>
                 GabbiiDAO
               </span>
               <span className='absolute -top-px left-0 -z-10 text-white-300'>
