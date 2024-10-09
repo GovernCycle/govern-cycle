@@ -170,15 +170,15 @@ function DropDownMenu({
         <MenuItem key={`pages-dropdiwn-link-${link.href}`}>
           <Link
             href={link.href}
-            className='group relative z-10 block text-nowrap px-4 py-2 text-sm font-medium text-violet-50 drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out data-[focus]:text-violet-400/95 data-[focus]:shadow-inner-blur-light data-[focus]:drop-shadow-[-4px_-4px_6px_rgba(196,181,253,0.2)]'
+            className='group relative z-10 block text-nowrap px-4 py-2 text-sm font-medium text-tan-50 drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out data-[focus]:text-carafel-400/95 data-[focus]:shadow-inner-blur-light data-[focus]:drop-shadow-[-4px_-4px_6px_rgba(196,181,253,0.2)]'
           >
             <span className='flex items-center'>
               {link.icon && (
-                <link.icon className='mr-2 h-4 w-4 text-violet-200/60 group-data-[focus]:text-violet-300/80' />
+                <link.icon className='mr-2 h-4 w-4 text-tan-200/60 group-data-[focus]:text-tan-300/80' />
               )}
               {link.label}
             </span>
-            <span className='absolute inset-y-0 left-0 w-px bg-gradient-to-b from-violet-400/0 via-violet-400/90 to-violet-400/0 opacity-0 duration-200 ease-in-out group-data-[focus]:opacity-100' />
+            <span className='absolute inset-y-0 left-0 w-px bg-gradient-to-b from-violet-400/0 via-tan-400/90 to-violet-400/0 opacity-0 duration-200 ease-in-out group-data-[focus]:opacity-100' />
           </Link>
         </MenuItem>
       ))}
@@ -354,13 +354,13 @@ export const  NavbarPill = () => {
                 className={clsx(
                   'relative z-40 hidden h-full items-center px-3 py-2.5 text-sm duration-200 ease-in-out md:inline-flex lg:px-4',
                   pathname === link.href
-                    ? 'font-bold text-brown-400 drop-shadow-[-4px_-4px_6px_rgba(250,135, 22,0.2)]'
-                    : 'font-semibold text-white-50 drop-shadow-[-4px_-4px_6px_rgba(250, 135, 22,0.2)] hover:text-orange-100/95'
+                    ? 'font-bold text-text-accent drop-shadow-[-4px_-4px_6px_var(--color-tan)]'
+                    : 'font-semibold text-text-tan drop-shadow-[-4px_-4px_6px_rgba(250, 135, 22,0.2)] hover:text-tan-100/95'
                 )}
               >
                 {link.label}
                 {pathname == link.href && (
-                  <span className='absolute bottom-0 left-2 right-2 h-3px bg-gradient-to-r from-brown-400/0 via-brown-400/80 to-brown-400/0' />
+                  <span className='absolute bottom-0 left-2 right-2 h-3px bg-gradient-to-r from-carafe-400/0 via-carafe-400/80 to-carafe-400/0' />
                 )}
               </Link>
             ))}
@@ -368,12 +368,12 @@ export const  NavbarPill = () => {
             {/* Pages dropdown button */}
             <MenuButton
               type='button'
-              className='group relative z-40 hidden h-full items-center px-3 py-2.5 text-sm font-medium text-orange-100/95 outline-none drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out hover:text-violet-400/95 data-[open]:text-violet-400 data-[open]:drop-shadow-[-4px_-4px_6px_rgba(196,181,253,0.2)] md:inline-flex lg:px-4'
+              className='group relative z-40 hidden h-full items-center px-3 py-2.5 text-sm font-medium text-tan-100/95 outline-none drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out hover:text-cream-400/95 data-[open]:text-cream-400 data-[open]:drop-shadow-[-4px_-4px_6px_rgba(196,181,253,0.2)] md:inline-flex lg:px-4'
               ref={dropdownButtonRef}
             >
               <span>Pages</span>
 
-              <ChevronDownIcon className='ml-1 h-4.5 w-4.5 text-orange-100/ duration-300 group-hover:text-violet-400/80 group-data-[open]:rotate-180 group-data-[open]:text-violet-400/90' />
+              <ChevronDownIcon className='ml-1 h-4.5 w-4.5 text-orange-100/ duration-300 group-tan:text-text-primary group-data-[open]:rotate-180 group-data-[open]:text-tan-400/90' />
             </MenuButton>
 
             <div className='relative z-20 ml-1 flex items-center sm:ml-3 md:hidden'>
