@@ -1,3 +1,5 @@
+import { backoff } from '@dfinity/agent/lib/cjs/polling/strategy';
+import { text } from 'stream/consumers';
 import type { Config } from 'tailwindcss';
 const defaultTheme = require('tailwindcss/defaultTheme');
 
@@ -55,6 +57,74 @@ const config: Config = {
       animation: {
         infiniteScroll:
           'infiniteScroll var(--_infinite-scroll-duration, 40s) linear infinite',
+      },
+
+      colors: {
+        cream: {
+          50:  '#FFFFFF',
+          100: '#FFFDF5',
+          200: '#FFFCEB',
+          300: '#FFFAD8',
+          400: '#FFF7C4',
+          500: '#FFFEEF', // primary
+          600: '#E6E5D7',
+          700: '#B3B3A4',
+          800: '#808071',
+          900: '#4D4D3F',
+        },
+        carafe: {
+          50:  '#EAE3E2',
+          100: '#DCD2D0',
+          200: '#C1B1AE',
+          300: '#A6918D',
+          400: '#8B716C',
+          500: '#875F59',// primary
+          600: '#6F4B45',
+          700: '#533834',
+          800: '#382624',
+          900: '#1C1312',
+        },
+
+        charcoal: {
+          50:  '#E4E7E8',
+          100: '#CAD1D3',
+          200: '#A5B1B4',
+          300: '#819295',
+          400: '#5C7275',
+          500: '#375257', // primary
+          600: '#2F484D',
+          700: '#24383B',
+          800: '#1A282A',
+          900: '#0F1818',
+        },
+        
+        tan: {
+          50:  '#F1E9E1',
+          100: '#E8E0D6',
+          200: '#D6CCBC',
+          300: '#C4B7A3',
+          400: '#B59D84',
+          500: '#B49870', // primary
+          600: '#A08963',
+          700: '#7A6A4D',
+          800: '#554C36',
+          900: '#2F2E20',
+        },
+
+
+        particles: {
+          primary: 'var(--color-particles-primary)',
+          secondary: 'var(--color-particles-secondary)',
+          tertiary: 'var(--color-particles-ternary)',
+        },
+        text: {
+          primary: 'var(--color-text-primary)',
+          secondary: 'var(--color-text-secondary)',
+          tertiary: 'var(--color-text-ternary)',
+          inverse: 'var(--color-text-inverse)',
+          accent: 'var(--color-text-accent)',
+        },
+
       },
     },
   },

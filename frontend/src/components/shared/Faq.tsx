@@ -79,14 +79,14 @@ export function Faq() {
             text='FAQs'
             iconClassName='h-3.5 w-3.5'
           />
-          <h1 className='mt-5 max-w-5xl text-center text-4xl font-bold leading-extratight text-violet-100 sm:mt-6 sm:text-5xl sm:leading-extratight'>
+          <h1 className='mt-5 max-w-5xl text-center text-4xl font-bold leading-extratight text-[var(--color-title-secondary)] sm:mt-6 sm:text-5xl sm:leading-extratight'>
             Frequently asked questions
           </h1>
-          <p className='mt-5 max-w-2xl text-center text-[17px] leading-8 text-zinc-200 sm:text-lg sm:leading-8'>
+          <p className='mt-5 max-w-2xl text-center text-[17px] leading-8 text-[var(--color-text-primary)] sm:text-lg sm:leading-8'>
             Haven’t found what you’re looking for? Try Nebula’s wiki or{' '}
             <Link
               href='/contact'
-              className='font-medium text-violet-300 underline duration-200 ease-in-out hover:text-violet-400'
+              className='font-medium text-[var(--color-text-accent)] underline duration-200 ease-in-out hover:text-[var(--color-text-inverse)]'
             >
               contact us.
             </Link>
@@ -106,11 +106,11 @@ export function Faq() {
                   'absolute inset-y-0 left-0 h-full w-px bg-gradient-to-b',
                   index % 2 === 0
                     ? Math.floor(index / 2) % 2 === 0
-                      ? 'from-violet-200/[0.025] to-violet-200/[0.1]'
-                      : 'from-violet-200/[0.05] to-violet-200/[0.1] md:from-violet-200/[0.1] md:to-violet-200/[0.025]'
+                      ? 'from-tan-500/[0.025] to-tan-200/[0.1]'
+                      : 'from-tan-500/[0.05] to-tan-200/[0.1] md:from-tan-200/[0.1] md:to-tan-200/[0.025]'
                     : Math.floor(index / 2) % 2 === 0
-                      ? 'from-violet-200/[0.1] to-violet-200/[0.05]'
-                      : 'from-violet-200/[0.1] to-violet-200/[0.025] md:from-violet-200/[0.05] md:to-violet-200/[0.1]'
+                      ? 'from-tan-200/[0.1] to-tan-200/[0.05]'
+                      : 'from-tan-200/[0.1] to-tan-200/[0.025] md:from-tan-200/[0.05] md:to-tan-200/[0.1]'
                 )}
               />
               {/* bottom borders */}
@@ -122,11 +122,11 @@ export function Faq() {
                   faqs.length === index + 1 && 'hidden',
                   index % 2 === 0
                     ? Math.floor(index / 2) % 2 === 0
-                      ? 'from-violet-200/[0.025] to-violet-200/[0.1]'
-                      : 'from-violet-200/[0.1] to-violet-200/[0.025]'
+                      ? 'from-tan-200/[0.025] to-tan-200/[0.1]'
+                      : 'from-tan-200/[0.1] to-tan-200/[0.025]'
                     : Math.floor(index / 2) % 2 === 0
-                      ? 'from-violet-200/[0.1] to-violet-200/[0.025]'
-                      : 'from-violet-200/[0.025] to-violet-200/[0.1]'
+                      ? 'from-tan-200/[0.1] to-tan-200/[0.025]'
+                      : 'from-tan-200/[0.025] to-tan-200/[0.1]'
                 )}
               />
               {/* Right borders */}
@@ -135,15 +135,15 @@ export function Faq() {
                   'absolute inset-y-0 right-0 h-full w-px bg-gradient-to-b',
                   index % 2 === 1
                     ? Math.floor(index / 2) % 2 === 0
-                      ? 'from-violet-200/[0.05] to-violet-200/[0.025] md:from-violet-200/[0.025] md:to-violet-200/[0.1]'
-                      : 'from-violet-200/[0.05] to-violet-200/[0.1] md:from-violet-200/[0.1] md:to-violet-200/[0.025]'
+                      ? 'from-tan-200/[0.05] to-tan-200/[0.025] md:from-tan-200/[0.025] md:to-tan-200/[0.1]'
+                      : 'from-tan-200/[0.05] to-tan-200/[0.1] md:from-tan-200/[0.1] md:to-tan-200/[0.025]'
                     : Math.floor(index / 2) % 2 === 0
-                      ? 'from-violet-200/[0.1] to-violet-200/[0.05] md:hidden'
-                      : 'from-violet-200/[0.025] to-violet-200/[0.05] md:hidden'
+                      ? 'from-tan-200/[0.1] to-tan-200/[0.05] md:hidden'
+                      : 'from-tan-200/[0.025] to-tan-200/[0.05] md:hidden'
                 )}
               />
 
-              <span className='absolute -left-[0.5px] top-1/2 h-8 w-px -translate-y-1/2 translate-x-1/2 bg-violet-100/25 md:bg-violet-100/40' />
+              <span className='absolute -left-[0.5px] top-1/2 h-8 w-px -translate-y-1/2 translate-x-1/2 bg-tan-100/25 md:bg-tan-100/40' />
               <div className='relative h-full w-full overflow-hidden'>
                 <div
                   className='absolute bottom-1/2 left-1/2 right-0 top-0 opacity-0 duration-300 ease-in-out group-hover:opacity-100'
@@ -151,12 +151,12 @@ export function Faq() {
                 >
                   <StarField density='high' maxRadius={1.75} minRadius={1} />
                 </div>
-                <div className='hover-gradient absolute inset-0 -z-10 bg-gradient-to-b from-[#575EFF]/20 to-[#E478FF]/20 opacity-0 blur-4xl duration-300 ease-in-out group-hover:opacity-100' />
+                <div className='hover-gradient absolute inset-0 -z-10 bg-gradient-to-b from-[#375257]/20 to-[#875F59]/20 opacity-0 blur-4xl duration-300 ease-in-out group-hover:opacity-100' />
                 <dl className='relative h-full w-full p-5 sm:px-6 sm:py-7 lg:p-12'>
-                  <dt className='text-base font-bold leading-7 text-violet-50 sm:text-[17px] lg:text-lg'>
+                  <dt className='text-base font-bold leading-7 text-text-secondary sm:text-[17px] lg:text-lg'>
                     {faq.question}
                   </dt>
-                  <dd className='mt-2 text-base leading-7 text-zinc-300 sm:mt-3 sm:text-[17px] lg:text-lg lg:leading-8'>
+                  <dd className='mt-2 text-base leading-7 text-text-tertiary sm:mt-3 sm:text-[17px] lg:text-lg lg:leading-8'>
                     {faq.answer}
                   </dd>
                 </dl>

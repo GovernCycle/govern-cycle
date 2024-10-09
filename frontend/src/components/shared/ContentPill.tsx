@@ -21,7 +21,7 @@ export function ContentPill({
   return (
     <div
       className={cn(
-        'inline-flex w-max rounded-full bg-white ',
+        'inline-flex w-max rounded-full bg-[var(--color-backGround-ternary)]',
         className
       )}
     >
@@ -32,12 +32,12 @@ export function ContentPill({
         )}
       >
         {Icon && (
-          <Icon className={cn('h-4 w-4 text-brown-200', iconClassName)} />
+          <Icon className={cn('h-4 w-4 text-text-primary', iconClassName)} />
         )}
 
         <span
           className={cn(
-            'text-sm font-medium text-brown-100 drop-shadow-[-12px_-4px_6px_rgba(237,233,254,0.2)]',
+            'text-sm font-medium text-text-primary drop-shadow-[-12px_-4px_6px_var(--color-backGround-ternary-i)]',
             textClassName
           )}
         >
