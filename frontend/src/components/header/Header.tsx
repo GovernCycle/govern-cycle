@@ -12,7 +12,7 @@ export const Header = () => {
       <Container className='flex h-full items-center'>
         <nav className='relative z-50 flex w-full items-center justify-between'>
           {/* Logo */}
-          <div className='relative z-10 hidden shrink-0 items-center md:flex'>
+          <div className='relative z-20 hidden shrink-0 items-center md:flex'>
             <Link
               href='/'
               aria-label='Home'

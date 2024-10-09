@@ -324,9 +324,9 @@ export const  NavbarPill = () => {
         <div
           id='pill-nav'
           ref={pillNavRef}
-          className='relative z-40 flex w-full max-w-lg items-center overflow-hidden rounded-full bg-green-900/15 shadow-inner-blur backdrop-blur-lg backdrop-brightness-[85%] transition-[width] duration-500 ease-in-out after:absolute after:inset-0 after:z-10 after:rounded-full after:border after:border-brown-200/[.06] md:w-[unset] md:max-w-none'
+          className='relative z-40 flex w-full max-w-lg items-center overflow-hidden rounded-full bg-charcoal-400 shadow-inner-blur backdrop-blur-lg backdrop-brightness-[85%] transition-[width] duration-500 ease-in-out after:absolute after:inset-0 after:z-10 after:rounded-full after:border after:border-brown-200/[.06] md:w-[unset] md:max-w-none'
         >
-          <div className='flex h-full w-full items-center justify-between rounded-full pl-[18px] pr-5 text-brown-50 md:w-fit md:justify-normal md:px-1.5'>
+          <div className='flex h-full w-full items-center justify-between rounded-full pl-[18px] pr-5 text-text-accent md:w-fit md:justify-normal md:px-1.5'>
             {/* Logo mobile */}
             <div className='relative z-20 flex shrink-0 items-center md:hidden'>
               <Link
