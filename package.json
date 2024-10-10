@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@geist-ui/react": "^2.2.5",
-    "@splidejs/react-splide": "^0.7.12"
+    "@splidejs/react-splide": "^0.7.12",
+    "axios": "^1.7.7"
   }
 }

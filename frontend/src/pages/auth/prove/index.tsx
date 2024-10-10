@@ -1,4 +1,5 @@
 import { UserRequest, Role, User } from '@app/declarations/home/home.did'
+import { useCountry } from '@app/hooks/useCountry';
 import { useHome } from '@app/hooks/useHome';
 import React, { useState } from 'react'
 
@@ -16,6 +17,8 @@ const index = () => {
             phone: "123456789"
         }
     );
+
+    const { getCountry } = useCountry();
 
     const [user, setUser] = useState<User>();
 
@@ -46,15 +49,31 @@ const index = () => {
         }
     }
 
+    const getCountryData = async () => {
+        try {
+            const result = await getCountry('Brasil');
+            console.log(result);
+        } catch (error) {
+            console.error('Error getting country:', error);
+        }
+    }
+
     return (
         <div className='flex flex-col space-y-5'>
             <button
-                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-fit'
                 onClick={saveUser}>Save User</button>
 
             <button
-                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-fit'
                 onClick={getUser}>Get User</button>
+
+            <button
+                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-fit'
+                onClick={getCountryData}
+            >
+                Get country
+            </button>
         </div>
     )
 }
