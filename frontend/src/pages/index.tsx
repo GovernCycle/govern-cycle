@@ -15,12 +15,7 @@ export default function IcConnectPage() {
         <HomeHero />
       </HeroContainer>
       <Divider />
-      <InteractiveCodeSection />
-      <Divider />
-      <Integrations />
       <Features />
-      <Divider />
-      <Testimonials />
       <Divider />
       <Footer />
     </>
