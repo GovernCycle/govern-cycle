@@ -53,7 +53,7 @@ export function TestimonialSlider() {
 
   return (
     <Splide
-      className='mt-16 flex flex-col justify-center lg:mt-0'
+      className='mt-16 flex py-5 flex-col justify-center lg:mt-0 bg-[var(--color-background-card)] rounded-xl'
       ref={splideRef}
       options={{
         type: 'loop',
@@ -74,7 +74,7 @@ export function TestimonialSlider() {
           <SplideSlide key={`testimonial-slider-${index}`}>
             <div className='relative z-10 flex flex-col items-center'>
               <testimonial.logo className='h-10 w-auto' />
-              <p className='mt-7 max-w-sm text-center text-lg font-medium leading-8 text-violet-50 sm:mt-8 sm:text-xl'>
+              <p className='mt-7 max-w-sm text-center text-lg font-medium leading-8 text-[var(--color-text-primary)] sm:mt-8 sm:text-xl'>
                 &ldquo;{testimonial.quote}&rdquo;
               </p>
               <div className='mt-8 flex flex-col items-center'>
@@ -85,10 +85,10 @@ export function TestimonialSlider() {
                     alt={testimonial.name}
                   />
                 </div>
-                <p className='mt-4 font-semibold text-violet-50 sm:text-lg'>
+                <p className='mt-4 font-semibold text-[var(--color-text-primary)] sm:text-lg'>
                   {testimonial.name}
                 </p>
-                <p className='mt-1 text-sm text-violet-100/80 sm:text-base'>
+                <p className='mt-1 text-sm text-[var(--color-text-secondary)] sm:text-base'>
                   {testimonial.title}
                 </p>
               </div>
@@ -108,7 +108,7 @@ export function TestimonialSlider() {
         ))}
       </div>
 
-      <p className='mx-auto mt-12 max-w-sm text-center text-base font-medium leading-7 text-violet-50/95 sm:mt-14 sm:text-[17px] xl:max-w-md'>
+      <p className='mx-auto mt-12 max-w-sm text-center text-base font-medium leading-7 text-[var(--color-text-primary)] sm:mt-14 sm:text-[17px] xl:max-w-md'>
         <span className='bg-gradient-to-r from-purple-300 to-violet-400 bg-clip-text font-semibold text-transparent'>
           10,000+
         </span>{' '}

@@ -23,14 +23,14 @@ export function FormHeader({
       <Link href='/' className='flex flex-shrink-0' aria-label='Home'>
         <Image src={logo} className='h-auto w-12' alt='Logo' />
       </Link>
-      <h1 className='mt-4 text-center text-3xl font-bold text-violet-100'>
+      <h1 className='mt-4 text-center text-3xl font-bold text-[var(--color-text-primary)]'>
         {title}
       </h1>
-      <p className='mt-1.5 text-center text-base leading-relaxed text-zinc-300'>
+      <p className='mt-1.5 text-center text-base leading-relaxed text-[var(--color-text-primary)]'>
         {description}
       </p>
 
-      {socialButtons && (
+      {/* {socialButtons && (
         <div className='mt-8 flex w-full flex-col items-center gap-4 sm:flex-row'>
           <Button
             href='/'
@@ -43,7 +43,7 @@ export function FormHeader({
               <GoogleIcon className='mr-2 h-4 w-4' />
               Google
             </div>
-            <ChevronRightIcon className='h-4 w-4 text-violet-100/75 duration-200 ease-in-out group-hover:text-violet-50/75' />
+            <ChevronRightIcon className='h-4 w-4 text-[var(--color-text-primary)] duration-200 ease-in-out group-hover:text-[var(--color-text-primary)]' />
           </Button>
           <Button
             href='/'
@@ -56,10 +56,10 @@ export function FormHeader({
               <GithubIcon className='mr-2 h-4 w-4' />
               Github
             </div>
-            <ChevronRightIcon className='h-4 w-4 text-violet-100/75 duration-200 ease-in-out group-hover:text-violet-50/75' />
+            <ChevronRightIcon className='h-4 w-4 text-[var(--color-text-primary)] duration-200 ease-in-out group-hover:text-[var(--color-text-primary)]' />
           </Button>
         </div>
-      )}
+      )} */}
     </div>
   )
 }
