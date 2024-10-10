@@ -52,6 +52,7 @@
   --color-background-secondary-i: #b49870;
   --color-background-ternary: #375257;
   --color-background-ternary-i: #B49870;
+  --color-background-card: rgba(55, 82, 87, 0.1);
 
   /* Transitions */
   --color-transitions-primary: #5083BA;
@@ -177,7 +178,13 @@ code .line:not(:last-child)::before {
   }
 }
 
+.image-input{
+  @apply  relative mt-2 flex w-full rounded-md bg-zinc-950/[.01] shadow-inner-blur duration-200 ease-in-out hover:bg-zinc-950/10 has-[:focus]:bg-zinc-950/15
+}
 
+.image-common-label{
+  @apply block text-[var(--color-text-primary)]
+}
 
 .text-brown-50\/80 {
   color: rgb(45 22 14 / 0.8);
@@ -305,3 +312,4 @@ code .line:not(:last-child)::before {
 .bg-white-950\/\[\.01\] {
   background-color: rgba(255, 255, 255, 0.01);
 }
+

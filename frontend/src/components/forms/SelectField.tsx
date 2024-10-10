@@ -9,7 +9,7 @@ interface CustomProps {
 type Props = CustomProps & React.SelectHTMLAttributes<HTMLSelectElement>
 
 const inputClasses =
-  'px-3 py-2.5 transition-colors duration-200 ease-in-out text-sm text-violet-50 placeholder:text-zinc-400/80 focus:outline-none rounded-md ring-1 ring-inset ring-violet-200/[0.06] focus:ring-2 focus:ring-inset focus:ring-violet-300/15 w-full bg-transparent border-0 cursor-pointer'
+  'px-3 py-2.5 transition-colors duration-200 ease-in-out text-sm  placeholder:text-zinc-400/2 focus:outline-none rounded-md ring-1 ring-inset ring-violet-200/[0.06] focus:ring-2 focus:ring-inset focus:ring-violet-300/15 w-full bg-transparent border-0 cursor-pointer'
 
 export function SelectField({
   label,
