@@ -196,15 +196,17 @@ export class Stars {
   }
 
   private createDots(dotCount: number): void {
+    const rootStyles = getComputedStyle(document.documentElement);
+
     for (let i = 0; i < dotCount; i++) {
       const radius = Math.max(Math.random() * this.maxRadius, this.minRadius)
       const x = Math.random() * (this.cssWidth - radius * 2) + radius
       const y = Math.random() * (this.cssHeight - radius * 2) + radius
       const dx = (Math.random() * radius - 1) / 10
       const dy = (Math.random() * radius - 1) / 10
-      const fillColor = '#5083BA'/*6B793E*/
+      const fillColor = rootStyles.getPropertyValue('--color-particles-primary').trim()
       const shadowBlur = 15
-      const shadowColor = '#6B793E'
+      const shadowColor = rootStyles.getPropertyValue('--color-particles-secondary').trim();
       const globalAlpha = Math.random() * 0.1 + 0.35
       const alpha = globalAlpha
 

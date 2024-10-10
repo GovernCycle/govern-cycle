@@ -15,8 +15,6 @@ export default function IcConnectPage() {
         <HomeHero />
       </HeroContainer>
       <Divider />
-      <BentoGridSection />
-      <Divider />
       <InteractiveCodeSection />
       <Divider />
       <Integrations />

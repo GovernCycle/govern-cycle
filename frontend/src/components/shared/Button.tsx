@@ -32,10 +32,10 @@ export const Button = forwardRef<
 
     const buttonVariant = {
       primary:
-        "relative shadow-btn-primary text-[var(--color-text-inverse)] bg-[var(--color-button-primary)] after:content-[''] after:absolute after:inset-0 after:w-full after:h-full after:bg-[var(--color-button-secondary-i)] after:opacity-0 after:transition-all after:duration-200 hover:after:opacity-100 after:shadow-btn-primary-hover after:rounded-lg",
+        "relative text-text-accent bg-[var(--color-button-primary)] after:content-[''] after:absolute after:inset-0 after:w-full after:h-full after:bg-[var(--color-button-primary-i)] after:opacity-0 after:transition-all after:duration-200 hover:after:opacity-100 after:var(--color-button-primary-i) after:rounded-lg",
       secondary:
-        "relative shadow-btn-secondary bg-[var( --color-button-secondary)]/[.01] text-[var(--color-text-secondary)] duration-200 ease-in-out hover:bg-[var(--color-button-secondary)]/[0.03] hover:var(--color-text-secondary) after:content-[''] after:absolute after:inset-0 after:w-full after:h-full after:opacity-0 after:transition-all after:duration-200 hover:after:opacity-100 after:shadow-btn-secondary-hover after:rounded-lg",
-      tertiary: 'text-[var(--color-text-accent)] hover:var(--color-text-inverse)',
+        "relative shadow-btn-secondary bg-[var( --color-button-secondary)]/[.01] text-text-accent duration-200 ease-in-out hover:bg-[var(--color-button-secondary)]/[0.03] hover:var(--color-text-secondary) after:content-[''] after:absolute after:inset-0 after:w-full after:h-full after:opacity-0 after:transition-all after:duration-200 hover:after:opacity-100 after:shadow-btn-secondary-hover after:rounded-lg",
+      tertiary: 'text-text-secondary hover:text-text-tertiary',
     }[variant]
     
 

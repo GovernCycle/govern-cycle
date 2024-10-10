@@ -27,7 +27,7 @@ export const HeroContainer = ({
 
       <div className={cn('overflow-hidden', innerContainerClassName)}>
         {starField && (
-          <div className='absolute inset-0 -z-10 bg-[var(--color-backGround-primary)]' aria-hidden='true'>
+          <div className='absolute inset-0 -z-10 bg-[var(--color-background-primary)]' aria-hidden='true'>
             <StarField />
           </div>
         )}
