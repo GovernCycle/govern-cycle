@@ -26,18 +26,18 @@ export const HomeHero = () => {
             text='Cambia el mundo con tu voto.'
             Icon={FingerPrintIcon}
           />
-          <h1 className='mt-5 max-w-5xl text-center text-[2.75rem] font-bold leading-[1.125] text-brown-100  sm:text-5xl sm:leading-[1.125] md:text-6xl md:leading-[1.125] lg:text-[64px]'>
+          <h1 className='mt-5 max-w-5xl text-center text-[2.75rem] font-bold leading-[1.125] text-text-secondary sm:text-5xl sm:leading-[1.125] md:text-6xl md:leading-[1.125] lg:text-[64px]'>
             Bienvenido a &nbsp;
             <span className='relative inline-block text-nowrap'>
-              <span className='relative z-10 bg-gradient-to-b from-[var(--color-label-primary)] via-[var(--color-Transitions-primary)]  to-[var(--color-label-primary-i)] bg-clip-text text-transparent'>
+              <span className='relative z-10 bg-gradient-to-b  from-cream-500 via-carafe-500 to-cream-500 bg-clip-text text-transparent'>
                 GabbiiDAO
               </span>
-              <span className='absolute -top-px left-0 -z-10 text-white-300'>
+              <span className='absolute -top-px left-0 -z-10 text-charcoal-200'>
                 GabbiiDAO
               </span>
             </span>
           </h1>
-          <p className='mt-5 max-w-xl text-center text-[17px] leading-8 text-brown-200 sm:text-lg sm:leading-8'>
+          <p className='mt-5 max-w-xl text-center text-[17px] leading-8 text-text-tertiary sm:text-lg sm:leading-8'>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at erat nulla. Pellentesque vitae orci turpis.
           </p>
           <div className='mt-8 flex items-center justify-center space-x-3 sm:space-x-5'>
@@ -50,8 +50,8 @@ export const HomeHero = () => {
               onClick={() => setIsOpen(true)}
               className='overflow-hidden'
             >
-              <span className='flex h-7 w-7 items-center justify-center rounded-full bg-white/[.07] transition duration-200 ease-in-out group-hover:bg-white/10'>
-                <PlayCircleIcon className='h-5 w-5 text-brown-50' />
+              <span className='flex h-7 w-7 items-center justify-center rounded-full bg-cream transition duration-200 ease-in-out group-hover:text-text-tertiary'>
+                <PlayCircleIcon className='h-5 w-5 text-text-secondary' />
               </span>
               <span>¿Qué es internet Identity?</span>
             </Button>

@@ -75,14 +75,9 @@ function leftpad(str, len, ch) {
   ];
 
   return (
-    <section className='relative overflow-hidden bg-[linear-gradient(rgba(24,24,27,0.95),rgba(24,24,27,0.95)),linear-gradient(#2E1065,#2E1065)] py-20 sm:py-24 lg:py-32 xl:py-40'>
+    <section className='relative overflow-hidden bg-[linear-gradient(var(--color-background-primary),#B49870)] py-20 sm:py-24 lg:py-32 xl:py-40'>
       <div className='absolute left-0 top-0 w-full max-w-7xl -translate-x-1/2 -translate-y-1/2'>
-        <Image
-          src={spaceSpotlight}
-          alt=''
-          className='h-full w-full object-contain'
-          sizes='(max-width: 1024px) 100vw, 1280px'
-        />
+
       </div>
 
       {/* Stars */}

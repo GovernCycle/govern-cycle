@@ -73,18 +73,18 @@ export const CodeShowcase = ({ features }: Props) => {
             Icon={PresentationChartLineIcon}
             text='Productivity enhancing tools'
           />
-          <h1 className='mt-5 text-4xl font-bold leading-extratight text-violet-100 xl:text-[2.75rem] xl:leading-extratight'>
+          <h1 className='mt-5 text-4xl font-bold leading-extratight text-text-primary xl:text-[2.75rem] xl:leading-extratight'>
             Foundational building blocks for seamless collaboration
           </h1>
 
           {/*  Text content */}
           <div className='mt-6'>
-            <p className='text-lg leading-8 text-zinc-300 lg:text-[17px] xl:text-lg xl:leading-8'>
+            <p className='text-lg leading-8 text-text-tertiary lg:text-[17px] xl:text-lg xl:leading-8'>
               That robust shop as rich siphon in organic french so acerbic
               plunger. Au foam strong irish press go body and sugar kopi
               viennese percolator beans coffee.
             </p>
-            <p className='mt-8 text-lg leading-8 text-zinc-300 lg:text-[17px] lg:leading-8 xl:text-lg xl:leading-8'>
+            <p className='mt-8 text-lg leading-8 text-text-tertiary lg:text-[17px] lg:leading-8 xl:text-lg xl:leading-8'>
               Doppio sugar seasonal in café sugar ut at robust eu percolator
               shop. Kopi est espresso bar to carajillo trifecta robust sit foam
               viennese aromatic variety. Trade panna robust robust trade chicory
@@ -108,13 +108,13 @@ export const CodeShowcase = ({ features }: Props) => {
                   <div className='flex items-center space-x-2'>
                     <Icon
                       icon={feature.icon}
-                      className='h-[17px] w-[17px] text-violet-50 lg:h-4 lg:w-4 xl:h-[17px] xl:w-[17px]'
+                      className='h-[17px] w-[17px] text-text-accent lg:h-4 lg:w-4 xl:h-[17px] xl:w-[17px]'
                     />
-                    <h3 className='text-[17px] font-semibold text-white lg:text-base xl:text-[17px]'>
+                    <h3 className='text-[17px] font-semibold text-text-tertiary lg:text-base xl:text-[17px]'>
                       {feature.title}
                     </h3>
                   </div>
-                  <p className='mt-2 text-[17px] leading-7 text-zinc-300 lg:text-base lg:leading-7 xl:text-[17px] xl:leading-7'>
+                  <p className='mt-2 text-[17px] leading-7 text-text-accent lg:text-base lg:leading-7 xl:text-[17px] xl:leading-7'>
                     {feature.description}
                   </p>
                 </div>

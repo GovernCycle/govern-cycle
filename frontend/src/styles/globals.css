@@ -37,36 +37,34 @@
   --color-text-accent: #FFFEEF; 
   --color-text-inverse: #634642; 
 
-
-
   /* buttons */
-  --color-button-primary: #c9939d;
-  --color-button-primary-i: #50BA52;
-  --color-button-secondary: #509aba;
-  --color-button-secondary-i: #f09c8d;
-  --color-button-ternary: #50BA52;
-  --color-button-ternary-i: #50BA52;
+  --color-button-primary: #B49870;
+  --color-button-primary-i: #375257;
+  --color-button-secondary: #875F59;
+  --color-button-secondary-i: #B49870;
+  --color-button-ternary: #375257;
+  --color-button-ternary-i: #634642;
 
   /* backGrounds */
-  --color-backGround-primary: #e4dede;
-  --color-backGround-primary-i: #50BA52;
-  --color-backGround-secondary: #291feb;
-  --color-backGround-secondary-i: #50BA52;
-  --color-backGround-ternary: #50BA52;
-  --color-backGround-ternary-i: #50BA52;
+  --color-background-primary: rgb(255, 254, 239,0.4);
+  --color-background-primary-i: #B49870;
+  --color-background-secondary: #875F59;
+  --color-background-secondary-i: #b49870;
+  --color-background-ternary: #375257;
+  --color-background-ternary-i: #B49870;
 
   /* Transitions */
-  --color-Transitions-primary: #5083BA;
-  --color-Transitions-primary-i: #5083BA;
-  --color-Transitions-secondary: #5083BA;
-  --color-Transitions-secondary-i: #5083BA;
-  --color-Transitions-ternary: #5083BA;
-  --color-Transitions-ternary-i: #5083BA;
+  --color-transitions-primary: #5083BA;
+  --color-transitions-primary-i: #5083BA;
+  --color-transitions-secondary: #5083BA;
+  --color-transitions-secondary-i: #5083BA;
+  --color-transitions-ternary: #5083BA;
+  --color-transitions-ternary-i: #5083BA;
 
   /* particles */
-  --color-particles-primary: #BA50B8;
+  --color-particles-primary: #375257;
   --color-particles-primary-i: #5083BA;
-  --color-particles-secondary: #5083BA;
+  --color-particles-secondary: #ff9500;
   --color-particles-secondary-i: #5083BA;
   --color-particles-ternary:#053af8;
   --color-particles-ternary-i: #5083BA;
@@ -75,17 +73,13 @@
   --bg-opacity: opacity: 1;
   --tw-text-opacity: 1;
   
-
-  --color-green-primary: #50BA52;
-  --color-blue-secondary: #5083BA;
-  --color-purple-accent: #BA50B8;
-  --color-orange-accent: #BA8750;
-
+/* colors */
+  --color-white: #FFFFFF;
   --color-cream: #FFFEEF;
   --color-carafe: #875F59;
   --color-charcoal: #375257;
   --color-tan: ##B49870;
-  --color-violet-200: #ddd6fe;
+
 }
 
 .bg-violet-200 {

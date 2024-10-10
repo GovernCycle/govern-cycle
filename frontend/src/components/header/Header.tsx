@@ -40,7 +40,7 @@ export const Header = () => {
             </Button>
           </div>
         </nav>
-        <hr className='absolute inset-x-0 bottom-0 h-3px border-0 bg-gradient-to-r from-transparent via-brown-200/15 to-transparent' />
+        <hr className='absolute inset-x-0 bottom-0 h-3px border-0 bg-gradient-to-r from-transparent via-charcoal-500 to-transparent' />
       </Container>
     </header>
   )
