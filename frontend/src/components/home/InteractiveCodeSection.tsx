@@ -75,7 +75,7 @@ function leftpad(str, len, ch) {
   ];
 
   return (
-    <section className='relative overflow-hidden bg-[linear-gradient(var(--color-background-primary),#B49870)] py-20 sm:py-24 lg:py-32 xl:py-40'>
+    <section className='relative overflow-hidden bg-[linear-gradient(var(--color-background-secondary),#B49870)] py-20 sm:py-24 lg:py-32 xl:py-40'>
       <div className='absolute left-0 top-0 w-full max-w-7xl -translate-x-1/2 -translate-y-1/2'>
 
       </div>

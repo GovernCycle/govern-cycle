@@ -38,12 +38,12 @@ export const HomeHero = () => {
             </span>
           </h1>
           <p className='mt-5 max-w-xl text-center text-[17px] leading-8 text-text-tertiary sm:text-lg sm:leading-8'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at erat nulla. Pellentesque vitae orci turpis.
-          </p>
+          Nuestra plataforma de gobernanza descentralizada utiliza tecnología de Internet Identity y blockchain para garantizar que cada voto sobre propuestas ambientales sea auténtico y seguro.
+</p>
           <div className='mt-8 flex items-center justify-center space-x-3 sm:space-x-5'>
             <Button id='top-cta' href='/signup'>
               {' '} 
-              Votar{' '}
+              Comienza a votar{' '}
             </Button>
             <Button
               variant='tertiary'
