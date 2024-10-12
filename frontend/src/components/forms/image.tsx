@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { Label } from './Label';
 
-export const ImageUpload: React.FC = () => {
-    const [selectedImage, setSelectedImage] = useState<File | null>(null);
+export const ImageUpload = ({
+    setImageData,
+}: {
+    setImageData: React.Dispatch<React.SetStateAction<Uint8Array | number[] | null>>;
+}) => {
     const [preview, setPreview] = useState<string | null>(null);
     const [fileName, setFileName] = useState<string | null>(null);
 
@@ -10,13 +13,23 @@ export const ImageUpload: React.FC = () => {
         const file = e.target.files?.[0];
         if (file) {
             setFileName(file.name); // Guarda el nombre del archivo seleccionado
-            setSelectedImage(file);
 
             const reader = new FileReader();
             reader.onloadend = () => {
                 setPreview(reader.result as string); // Muestra la vista previa de la imagen
             };
             reader.readAsDataURL(file);
+            // Convertir la imagen a Uint8Array o number[]
+            const arrayBufferReader = new FileReader();
+            arrayBufferReader.onloadend = () => {
+                const arrayBuffer = arrayBufferReader.result as ArrayBuffer;
+
+                // Convertir ArrayBuffer a Uint8Array
+                const uint8Array = new Uint8Array(arrayBuffer);
+                setImageData(uint8Array); // Guardar Uint8Array en el estado
+            };
+            arrayBufferReader.readAsArrayBuffer(file); // Leer como ArrayBuffer
+
         }
     };
 

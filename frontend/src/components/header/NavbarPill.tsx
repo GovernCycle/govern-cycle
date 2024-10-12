@@ -407,7 +407,7 @@ export const  NavbarPill = () => {
                   className={cn(
                     'z-20 -mr-px ml-3 rounded-full transition-all duration-500 after:rounded-full data-[closed]:translate-x-full data-[closed]:opacity-0 data-[enter]:ease-out data-[leave]:ease-in'
                   )}
-                  href='/signup'
+                  
                   size='sm'
                 >
                 <InternetIdentityButton />

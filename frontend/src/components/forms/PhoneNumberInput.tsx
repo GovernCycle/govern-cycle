@@ -8,11 +8,17 @@ interface CountryOption {
     callingCode: string;
 }
 
-export const PhoneNumberInput: React.FC = () => {
+export const PhoneNumberInput = (
+    { selectedCountry, setSelectedCountry, phoneNumber, setPhoneNumber }:
+    {
+        selectedCountry: CountryOption | undefined;
+        setSelectedCountry: React.Dispatch<React.SetStateAction<CountryOption | undefined>>;
+        phoneNumber: string;
+        setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
+    }
+) => {
     const { getAll } = useCountry(); // Hook personalizado para obtener los datos del país
     const [countries, setCountries] = useState<CountryOption[]>([]);
-    const [selectedCountry, setSelectedCountry] = useState<CountryOption | null>(null);
-    const [phoneNumber, setPhoneNumber] = useState<string>('');
 
     useEffect(() => {
         const fetchCountries = async () => {
@@ -82,7 +88,8 @@ export const PhoneNumberInput: React.FC = () => {
                 </div>
                 <input
                     type="tel"
-                    id="phone-number"
+                    name='phone-number'
+                    required
                     value={phoneNumber}
                     onChange={handlePhoneNumberChange}
                     placeholder="Enter phone number"
