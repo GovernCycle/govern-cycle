@@ -44,7 +44,7 @@ export const RoleDropdown: React.FC = () => {
                         id="role-dropdown"
                         value={currentRole}
                         onChange={handleRoleChange}
-                        className="block w-full text-sm text-[var(--color-text-ternary)] opacity-50 py-2.5 rounded-md border-0 focus:ring-2 focus:ring-inset focus:ring-blue-300 cursor-pointer"
+                        className="block w-full text-sm text-[var(--color-text-ternary)] opacity-50 py-2.5 rounded-md border-0 bg-form-input"
                     >
                         <option value="" disabled>Selecciona un rol</option>
                         {roles.map((role) => (
