@@ -85,7 +85,7 @@ export function Faq() {
           <p className='mt-5 max-w-2xl text-center text-[17px] leading-8 text-[var(--color-text-primary)] sm:text-lg sm:leading-8'>
             Haven’t found what you’re looking for? Try Nebula’s wiki or{' '}
             <Link
-              href='/contact'
+              href='/propuestas'
               className='font-medium text-[var(--color-text-accent)] underline duration-200 ease-in-out hover:text-[var(--color-text-inverse)]'
             >
               contact us.
@@ -118,7 +118,7 @@ export function Faq() {
                 className={cn(
                   'absolute inset-x-0 bottom-0 h-px w-full bg-gradient-to-r',
                   Math.ceil(faqs.length / 2) === Math.floor(index / 2) + 1 &&
-                    'md:hidden',
+                  'md:hidden',
                   faqs.length === index + 1 && 'hidden',
                   index % 2 === 0
                     ? Math.floor(index / 2) % 2 === 0

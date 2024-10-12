@@ -35,12 +35,12 @@ export const Header = () => {
             </Button>
 
             {/* Call to action */}
-            <Button href='/auth/signup' size='sm'>
+            <Button href='/auth/signup' size='sm' variant='secondary'>
               Sign up
             </Button>
           </div>
         </nav>
-        <hr className='absolute inset-x-0 bottom-0 h-3px border-0 bg-gradient-to-r from-transparent via-charcoal-500 to-transparent' />
+        <hr className='absolute inset-x-0 bottom-0 h-3px border-0 bg-gradient-to-r from-transparent via-carafe-500 to-transparent' />
       </Container>
     </header>
   )
