@@ -9,13 +9,15 @@ import { ChevronRightIcon } from '@heroicons/react/16/solid'
 import AuthLayout from '../layout'
 import { ImageUpload } from '@app/components/forms/image'
 import { RoleDropdown } from '@app/components/forms/roleDropDown'
+import { JurisdictionDropdown } from '@app/components/forms/JurisdictionDropdown'
+import { PhoneNumberInput } from '@app/components/forms/PhoneNumberInput'
 
 
 export default function Signup() {
   return (
     <AuthLayout>
       <Container className='max-w-lg py-5 sm:max-w-xl lg:max-w-6xl'>
-        <div className='lg:grid lg:grid-cols-2 lg:gap-x-8 xl:gap-x-36 '>
+        <div className='lg:grid lg:grid-cols-1 lg:gap-x-8 xl:gap-x-36 '>
           <div className='relative z-10 flex flex-col shadow-inner-blur'>
             <ContainerOutline />
 
@@ -54,27 +56,13 @@ export default function Signup() {
                 </div>
 
                 <ImageUpload />
+                <JurisdictionDropdown />
+                <PhoneNumberInput />
                 <RoleDropdown />
-                <TextField
-                  name='password'
-                  type='password'
-                  label='Password'
-                  autoComplete='current-password'
-                  placeholder='Password (min. 6 characters)'
-                  required
-                />
               </div>
 
-              <div className='mt-10 flex items-center justify-between space-x-4'>
-                <p className='text-sm text-black-100/75'>
-                  Already have an account?{' '}
-                  <Link
-                    className='text-black-300/80 underline duration-200 ease-in-out hover:text-black-300'
-                    href='/signin'
-                  >
-                    Sign in
-                  </Link>
-                </p>
+              <div className='mt-5 flex items-center justify-between space-x-4'>
+
                 <Button type='submit' className='sm:px-5'>
                   <span>Continue</span>
                   <ChevronRightIcon className='h-4 w-4' />
@@ -82,7 +70,7 @@ export default function Signup() {
               </div>
             </form>
           </div>
-          <TestimonialSlider />
+          {/* <TestimonialSlider /> */}
         </div>
       </Container>
     </AuthLayout>

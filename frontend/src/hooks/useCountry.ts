@@ -7,7 +7,7 @@ export const useCountry = () => {
   };
 
   const getAll = async () => {
-    const response = await axios.get<Country>('https://restcountries.com/v3.1/all');
+    const response = await axios.get<Country[]>('https://restcountries.com/v3.1/all'); // Nota que aquí se especifica que se espera un array
     return response.data;
   }
 
