@@ -19,6 +19,7 @@ import {
   UserPlusIcon,
   LockOpenIcon,
   ExclamationCircleIcon,
+  MegaphoneIcon,
 } from '@heroicons/react/16/solid'
 import { usePathname } from 'next/navigation'
 import {
@@ -41,11 +42,11 @@ import { InternetIdentityButton } from '@bundly/ares-react'
 
 const pages = [
   { label: 'Home', href: '/', icon: HomeIcon },
-  { label: 'Actions', href: '/actions', icon: UsersIcon },
+  //{ label: 'Actions', href: '/actions', icon: UsersIcon },//
   {
-    label: 'Pricing',
-    href: '/pricing',
-    icon: CreditCardIcon,
+    label: 'Proposal',
+    href: '/proposal',
+    icon: MegaphoneIcon,
   },
   {
     label: 'Contact',
@@ -68,8 +69,8 @@ const pages = [
 
 const links = [
   { label: 'Home', href: '/' },
-  { label: 'Actions', href: '/actions' },
-  { label: 'Pricing', href: '/pricing' },
+  //{ label: 'Actions', href: '/actions' },//
+  { label: 'Proposal', href: '/proposal' },
   { label: 'Contact', href: '/contact' },
 ]
 
@@ -79,10 +80,10 @@ function Hamburger() {
       className='group relative z-50 ml-4 h-3.5 w-5 rotate-0 transform cursor-pointer transition duration-500 ease-in-out focus:outline-none'
       aria-label='Toggle Navigation'
     >
-      <span className='absolute left-0 top-0 block h-0.5 w-full rotate-0 transform rounded-full bg-violet-50/95 opacity-100 transition-all duration-300 ease-in-out group-hover:bg-white group-data-[open]:left-1/2 group-data-[open]:top-1 group-data-[open]:w-0'></span>
-      <span className='absolute left-0 top-1.5 block h-0.5 w-full rotate-0 transform rounded-full bg-violet-50/95 opacity-100 transition-all duration-300 ease-in-out group-hover:bg-white group-data-[open]:rotate-45'></span>
-      <span className='absolute left-0 top-1.5 block h-0.5 w-full rotate-0 transform rounded-full bg-violet-50/95 opacity-100 transition-all duration-300 ease-in-out group-hover:bg-white group-data-[open]:-rotate-45'></span>
-      <span className='absolute left-0 top-3 block h-0.5 w-full rotate-0 transform rounded-full bg-violet-50/95 opacity-100 transition-all duration-300 ease-in-out group-hover:bg-white group-data-[open]:left-1/2 group-data-[open]:top-1.5 group-data-[open]:w-0'></span>
+      <span className='absolute left-0 top-0 block h-0.5 w-full rotate-0 transform rounded-full bg-tan-50/95 opacity-100 transition-all duration-300 ease-in-out group-hover:bg-cream group-data-[open]:left-1/2 group-data-[open]:top-1 group-data-[open]:w-0'></span>
+      <span className='absolute left-0 top-1.5 block h-0.5 w-full rotate-0 transform rounded-full bg-tan-50/95 opacity-100 transition-all duration-300 ease-in-out group-hover:bg-cream group-data-[open]:rotate-45'></span>
+      <span className='absolute left-0 top-1.5 block h-0.5 w-full rotate-0 transform rounded-full bg-tan-50/95 opacity-100 transition-all duration-300 ease-in-out group-hover:bg-cream group-data-[open]:-rotate-45'></span>
+      <span className='absolute left-0 top-3 block h-0.5 w-full rotate-0 transform rounded-full bg-tan-50/95 opacity-100 transition-all duration-300 ease-in-out group-hover:bg-cream group-data-[open]:left-1/2 group-data-[open]:top-1.5 group-data-[open]:w-0'></span>
     </PopoverButton>
   )
 }
@@ -98,7 +99,7 @@ function MobileNavItem({
     <PopoverButton
       as={Link}
       href={href}
-      className='px-1.5 pb-2 pt-4 text-[15px] font-medium text-violet-50 drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out hover:text-violet-400/95'
+      className='px-1.5 pb-2 pt-4 text-[15px] font-medium text-cream drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out hover:text-text-inverse'
     >
       {children}
     </PopoverButton>
@@ -112,7 +113,7 @@ function MobileNavigation() {
         transition
         className='w-full max-w-lg overflow-hidden rounded-xl bg-[#1F1F24]/80 px-5 pb-5 pt-4 shadow-inner-blur backdrop-blur-lg backdrop-brightness-[85%] transition-all duration-300 after:absolute after:inset-0 after:rounded-xl after:border after:border-violet-200/[.06] data-[closed]:-translate-y-16 data-[closed]:scale-90 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in sm:left-6 sm:right-6 sm:mx-6'
       >
-        <nav className='relative z-10 flex flex-col divide-y divide-violet-200/5'>
+        <nav className='relative z-10 flex flex-col divide-y divide-charcoal-200/5'>
           {links.map((link, index) => (
             <MobileNavItem key={`mobile-navbar-link-${index}`} href={link.href}>
               {link.label}
@@ -121,7 +122,7 @@ function MobileNavigation() {
 
           <Disclosure as='div' className='block w-full'>
             {/* Pages dropdown button */}
-            <DisclosureButton className='group flex w-full items-center justify-between px-1.5 pb-2 pt-4 text-[15px] font-medium text-violet-50 drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out hover:text-violet-400/95 data-[open]:text-violet-400/95'>
+            <DisclosureButton className='group flex w-full items-center justify-between px-1.5 pb-2 pt-4 text-[15px] font-medium text-cream drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out hover:text-charcoal-400/95 data-[open]:text-charcoal-400/95'>
               <span>Pages</span>
 
               <ChevronRightIcon className='ml-2 h-4.5 w-4.5 text-violet-100/80 duration-200 ease-in-out group-hover:text-violet-400/80 group-data-[open]:rotate-90 group-data-[open]:text-violet-400/90' />
