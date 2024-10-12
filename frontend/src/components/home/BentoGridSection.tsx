@@ -54,18 +54,18 @@ export const BentoGridSection = () => {
       <Container className='py-20 sm:py-24'>
         {/* Text content */}
         <div className='relative z-10 flex flex-col items-center'>
-          <h1 className='max-w-5xl overflow-hidden text-wrap text-center text-4xl font-bold leading-extratight text-brown-100 sm:text-5xl sm:leading-extratight'>
-            Simplify Your Workflow with&nbsp;
+          <h1 className='max-w-5xl overflow-hidden text-wrap text-center text-4xl font-bold leading-extratight text-text-secondary sm:text-5xl sm:leading-extratight'>
+            Procesos de&nbsp;
             <span className='relative inline-block text-nowrap'>
-              <span className='relative z-10 bg-gradient-to-b from-orange-400 via-orange-400 to-orange-500 bg-clip-text text-transparent'>
-                Versatile Tools
+              <span className='relative z-10 bg-gradient-to-b from-cream-400 via-carafe-400 to-cream-500 bg-clip-text text-transparent'>
+                votación
               </span>
-              <span className='absolute -top-px left-0 -z-10 text-white-300'>
-                Versatile Tools
+              <span className='absolute -top-px left-0 -z-10 text-carafe-500'>
+                votación
               </span>
             </span>
           </h1>
-          <p className='mt-5 max-w-xl text-center text-[17px] leading-8 text-brown-200 sm:text-lg sm:leading-8'>
+          <p className='mt-5 max-w-xl text-center text-[17px] leading-8 text-text-tertiary sm:text-lg sm:leading-8'>
             Iced pumpkin mug in ut shop a doppio panna milk press americano cup
             bar fair, lait that galão irish redeye galão.
           </p>
@@ -93,8 +93,8 @@ export const BentoGridSection = () => {
           {/* Bento grid */}
           <div className='cards space-y-2 lg:grid lg:grid-cols-2 lg:gap-2 lg:space-y-0'>
             {/* Card 1 - full-width */}
-            <div className="card relative col-span-2 overflow-hidden rounded-xl bg-violet-200/5 p-[1.5px] before:absolute before:left-0 before:top-0 before:z-30 before:h-full before:w-full before:rounded-xl before:opacity-0 before:transition-opacity before:duration-500 before:content-[''] after:absolute after:left-0 after:top-0 after:z-10 after:h-full after:w-full after:rounded-xl after:opacity-0 after:transition-opacity after:duration-500 after:content-[''] hover:before:opacity-100 hover:after:opacity-100">
-              <div className='relative z-30 w-full overflow-hidden rounded-xl bg-white/[0.01] shadow-inner-blur-no-border backdrop-blur-lg backdrop-brightness-50'>
+            <div className="card relative col-span-2 overflow-hidden rounded-xl bg-charcoal-500 p-[1.5px] before:absolute before:left-0 before:top-0 before:z-30 before:h-full before:w-full before:rounded-xl before:opacity-0 before:transition-opacity before:duration-500 before:content-[''] after:absolute after:left-0 after:top-0 after:z-10 after:h-full after:w-full after:rounded-xl after:opacity-0 after:transition-opacity after:duration-500 after:content-[''] hover:before:opacity-100 hover:after:opacity-100">
+              <div className='relative z-30 w-full overflow-hidden rounded-xl bg-white/[0.1] shadow-inner-blur-no-border backdrop-blur-lg backdrop-brightness-50'>
                 <div className='absolute inset-0 -z-10 opacity-60'>
                   <Image src={globeGlow} alt='' className='h-full w-full' />
                 </div>
@@ -102,21 +102,21 @@ export const BentoGridSection = () => {
                   {/* Card content */}
                   <div className='col-span-12 px-8 pb-4 pt-10 sm:px-10 sm:pt-12 lg:col-span-7 lg:py-12 lg:pr-0 xl:col-span-1 xl:py-16 xl:pl-12'>
                     <div>
-                      <p className='text-sm font-bold text-violet-400'>
+                      <p className='text-sm font-bold text-cream-500'>
                         <span className='relative inline-block text-nowrap'>
-                          <span className='relative z-10 bg-gradient-to-b from-violet-400 via-violet-400 to-violet-500 bg-clip-text leading-none text-transparent'>
-                            Global Edge
+                          <span className='relative z-10 bg-gradient-to-b from-charcoal-500 via-cream-500 to-charcoal-500 bg-clip-text leading-none text-transparent'>
+                            [ubicación]
                           </span>
-                          <span className='absolute left-0 top-[-0.5px] -z-10 text-violet-300'>
-                            Global Edge
+                          <span className='absolute left-0 top-[-0.5px] -z-10 text-cream-500'>
+                            [ubicación]
                           </span>
                         </span>
                       </p>
-                      <h3 className='mt-3 text-3xl font-bold text-violet-100 sm:mt-4'>
-                        Connectivity at scale
+                      <h3 className='mt-3 text-4xl font-bold text-cream-500 sm:mt-4'>
+                        Nombre del proyecto
                       </h3>
-                      <p className='mt-2 text-base text-zinc-300 sm:mt-3'>
-                        Flavour iced spice pumpkin filter coffee macchiato sugar
+                      <p className='mt-2 text-base text-text-accent sm:mt-3'>
+                        [Descripción]   Flavour iced spice pumpkin filter coffee macchiato sugar
                         luwak affogato sugar java and. Brewed shop lungo in eu
                         robust milk medium caramelization robusta.
                       </p>
@@ -124,32 +124,33 @@ export const BentoGridSection = () => {
                       {/* Features */}
                       <div className='mt-6 grid gap-x-2 gap-y-4 sm:mt-7 sm:grid-cols-2 sm:gap-y-5'>
                         <div className='flex items-center space-x-2'>
-                          <GlobeAmericasIcon className='h-4 w-4 text-violet-300/85' />
-                          <p className='text-sm font-medium text-violet-100'>
-                            A global community of workers
+                          <GlobeAmericasIcon className='h-4 w-4 text-tan-500' />
+                          <p className='text-sm font-medium text-tan-500'>
+                            [Estado]
                           </p>
                         </div>
                         <div className='flex items-center space-x-2'>
-                          <ChatBubbleLeftRightIcon className='h-4 w-4 text-violet-300/85' />
-                          <p className='text-sm font-medium text-violet-100'>
-                            Stay connected with your team
+                          <ChatBubbleLeftRightIcon className='h-4 w-4 text-tan-500' />
+                          <p className='text-sm font-medium text-tan-500'>
+                            [Unidades ambientales]
                           </p>
                         </div>
                         <div className='flex items-center space-x-2'>
-                          <CircleStackIcon className='h-4 w-4 text-violet-300/85' />
-                          <p className='text-sm font-medium text-violet-100'>
-                            Over 30 distributed data centers
+                          <CircleStackIcon className='h-4 w-4 text-tan-500' />
+                          <p className='text-sm font-medium text-tan-500'>
+                            [Blog]
                           </p>
                         </div>
-                        <div className='flex items-center space-x-2'>
+                        {/* <div className='flex items-center space-x-2'>
                           <CalendarDaysIcon className='h-4 w-4 text-violet-300/85' />
                           <p className='text-sm font-medium text-violet-100'>
                             Timezone synchronization
                           </p>
-                        </div>
+                        </div> */}
                       </div>
 
-                      <div className='relative z-50 mt-9 sm:mt-10'>
+                      <div className='relative z-50 mt-9 sm:mt-10 flex items-center space-x-16'>
+                        {/* Botón */}
                         <Button
                           href='#'
                           variant='secondary'
@@ -159,7 +160,19 @@ export const BentoGridSection = () => {
                           <span>Learn more</span>
                           <ChevronRightIcon className='h-4 w-4' />
                         </Button>
+
+                        {/* Checkbox*/}
+                        <div className='flex items-center space-x-4'>
+                          <label className='text-lg font-bold text-cream-500'>
+                            Votar
+                          </label>
+                          <input
+                            type="checkbox"
+                            className='h-5 w-5 border-2 border-cream-500 rounded bg-transparent appearance-none checked:bg-carafe checked:border-carafe-500 focus:outline-none focus:ring-0'
+                          />
+                        </div>
                       </div>
+
                     </div>
                   </div>
 
@@ -178,7 +191,7 @@ export const BentoGridSection = () => {
             </div>
 
             {/* Card 2 */}
-            <div className="card relative col-span-1 overflow-hidden rounded-xl bg-violet-200/5 p-[1.5px] before:absolute before:left-0 before:top-0 before:z-30 before:h-full before:w-full before:rounded-xl before:opacity-0 before:transition-opacity before:duration-500 before:content-[''] after:absolute after:left-0 after:top-0 after:z-10 after:h-full after:w-full after:rounded-xl after:opacity-0 after:transition-opacity after:duration-500 after:content-[''] hover:before:opacity-100 hover:after:opacity-100">
+            {/*<div className="card relative col-span-1 overflow-hidden rounded-xl bg-violet-200/5 p-[1.5px] before:absolute before:left-0 before:top-0 before:z-30 before:h-full before:w-full before:rounded-xl before:opacity-0 before:transition-opacity before:duration-500 before:content-[''] after:absolute after:left-0 after:top-0 after:z-10 after:h-full after:w-full after:rounded-xl after:opacity-0 after:transition-opacity after:duration-500 after:content-[''] hover:before:opacity-100 hover:after:opacity-100">
               <div className='relative z-30 h-full w-full overflow-hidden rounded-xl bg-white/[0.01] shadow-inner-blur-no-border backdrop-blur-lg backdrop-brightness-50'>
                 <div className='absolute inset-0 -z-10'>
                   <Image
@@ -191,7 +204,7 @@ export const BentoGridSection = () => {
 
                 <div className='flex h-full w-full flex-col rounded-xl'>
                   {/* Card content */}
-                  <div className='px-8 pb-8 pt-10 sm:px-10 sm:pt-12 xl:px-12 xl:pt-16'>
+            {/*<div className='px-8 pb-8 pt-10 sm:px-10 sm:pt-12 xl:px-12 xl:pt-16'>
                     <div>
                       <p className='text-sm font-bold text-violet-400'>
                         <span className='relative inline-block text-nowrap'>
@@ -227,7 +240,7 @@ export const BentoGridSection = () => {
                   </div>
 
                   {/* Graphic */}
-                  <div className='relative h-48 sm:h-56 md:h-60 lg:h-[unset] lg:flex-1'>
+            {/*<div className='relative h-48 sm:h-56 md:h-60 lg:h-[unset] lg:flex-1'>
                     <div className='absolute inset-x-0 inset-y-0'>
                       <Image
                         src={binaryCodeBg}
@@ -246,9 +259,9 @@ export const BentoGridSection = () => {
                 </div>
               </div>
             </div>
-
+            
             {/* Card 3 */}
-            <div className="card relative col-span-1 overflow-hidden rounded-xl bg-violet-200/5 p-[1.5px] before:absolute before:left-0 before:top-0 before:z-30 before:h-full before:w-full before:rounded-xl before:opacity-0 before:transition-opacity before:duration-500 before:content-[''] after:absolute after:left-0 after:top-0 after:z-10 after:h-full after:w-full after:rounded-xl after:opacity-0 after:transition-opacity after:duration-500 after:content-[''] hover:before:opacity-100 hover:after:opacity-100">
+            {/*<div className="card relative col-span-1 overflow-hidden rounded-xl bg-violet-200/5 p-[1.5px] before:absolute before:left-0 before:top-0 before:z-30 before:h-full before:w-full before:rounded-xl before:opacity-0 before:transition-opacity before:duration-500 before:content-[''] after:absolute after:left-0 after:top-0 after:z-10 after:h-full after:w-full after:rounded-xl after:opacity-0 after:transition-opacity after:duration-500 after:content-[''] hover:before:opacity-100 hover:after:opacity-100">
               <div className='relative z-30 w-full overflow-hidden rounded-xl bg-white/[0.01] shadow-inner-blur-no-border backdrop-blur-lg backdrop-brightness-50'>
                 <div className='absolute inset-0 top-0 -z-10'>
                   <Image
@@ -261,10 +274,10 @@ export const BentoGridSection = () => {
 
                 <div className='flex w-full flex-col rounded-xl'>
                   {/* Graphic */}
-                  <div className='h-56 max-[510px]:h-40'></div>
+            {/*<div className='h-56 max-[510px]:h-40'></div>
 
                   {/* Card content */}
-                  <div className='px-8 pb-10 pt-8 sm:px-10 sm:pb-12 xl:px-12'>
+            {/*<div className='px-8 pb-10 pt-8 sm:px-10 sm:pb-12 xl:px-12'>
                     <div>
                       <p className='text-sm font-bold text-violet-400'>
                         <span className='relative inline-block text-nowrap'>
@@ -300,11 +313,11 @@ export const BentoGridSection = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 
-        <Stats />
+        {/* <Stats /> */}
       </Container>
     </section>
   )

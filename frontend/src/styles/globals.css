@@ -164,8 +164,8 @@ code .line:not(:last-child)::before {
 .card::before {
   background: radial-gradient(
     1200px circle at var(--mouse-x) var(--mouse-y),
-    rgba(250, 135, 22, 0.25),
-    transparent 40%
+    rgba(255, 254, 239, 0.40),
+    transparent 30%
   );
 }
 .card::after {
