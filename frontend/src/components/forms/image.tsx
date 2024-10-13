@@ -39,10 +39,10 @@ export const ImageUpload = ({
                 <Label name={"image-upload"}>
                     Logo
                 </Label>
-                <div className='image-input'>
+                <div className='common-input'>
                     <label
                         htmlFor="image-upload"
-                        className=" block  text-sm text-[var(--color-text-ternary)] opacity-50 py-2.5 px-2.5 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-[var(--color-text-ternary)] hover:file:bg-blue-100 cursor-pointer "
+                        className=" block   text-sm text-[var(--color-text-ternary)]  py-2.5 px-2.5 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold  file:text-[var(--color-text-ternary)]  cursor-pointer "
                     >
                         {fileName ? fileName : "Subir Logo"}
                     </label>

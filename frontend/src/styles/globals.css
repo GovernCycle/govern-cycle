@@ -51,6 +51,8 @@
   --color-background-secondary: #875F59;
   --color-background-secondary-i: #b49870;
   --color-background-ternary: #375257;
+  --color-background-ternary-op: rgb(255, 254, 239, 0.9); /* Aquí el 0.05 es equivalente a 5% de opacidad */
+
   --color-background-ternary-i: #B49870;
   --color-background-card: rgba(55, 82, 87, 0.1);
 
@@ -183,9 +185,19 @@ code .line:not(:last-child)::before {
   }
 }
 
-.image-input{
-  @apply  relative mt-2 flex w-full rounded-md bg-zinc-950/[.01] shadow-inner-blur duration-200 ease-in-out hover:bg-zinc-950/10 has-[:focus]:bg-zinc-950/15
+.common-input {
+  @apply relative mt-2 flex w-full rounded-md bg-white border-none; /* Fondo blanco sin sombra inicial */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
 }
+
+.common-input:hover {
+  @apply bg-gray-100 shadow-md; /* Aparece la sombra y cambia ligeramente el color al hacer hover */
+}
+
+.common-input:active {
+  @apply bg-gray-200 shadow-lg; /* Aumenta la sombra y se aclara más al hacer click */
+}
+
 
 .image-common-label{
   @apply block text-[var(--color-text-primary)]

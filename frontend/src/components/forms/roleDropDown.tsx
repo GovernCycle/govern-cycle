@@ -40,7 +40,7 @@ export const RoleDropdown = ({
                         value={currentRole}
                         name='roles'
                         onChange={handleRoleChange}
-                        className="block w-full text-sm text-[var(--color-text-ternary)] opacity-50 py-2.5 rounded-md border-0 bg-form-input"
+                        className="common-input"
                     >
                         <option value="" disabled>Selecciona un rol</option>
                         {roles.map((role) => (
@@ -62,7 +62,7 @@ export const RoleDropdown = ({
 
             {selectedRoles.length > 0 && (
                 <div>
-                    <p className="text-sm text-[var(--color-text-ternary)] opacity-50 py-2.5">Selected Roles:</p>
+                    <p className="text-sm text-[var(--color-text-ternary)]  py-2.5">Selected Roles:</p>
                     <ul className="grid grid-cols-2 gap-4">
                         {selectedRoles.map((role) => (
                             <li key={role} className="block text-sm text-[var(--color-text-ternary)] py-2.5 px-2.5">
