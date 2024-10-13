@@ -142,7 +142,7 @@ export const ProposalCard = () => {
                       </div>
 
                       <Image
-                        src={teamPhoto} // esta es una imagen de prueba, se debe cambiar por la imagen de la propuesta
+                        src={teamPhoto} 
                         alt='Two men chatting and smiling in a casual workspace'
                         className='relative h-full w-full rounded-lg object-cover'
                       />
