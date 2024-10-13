@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { NavbarPill } from '@/components/header/NavbarPill'
 import { Container } from '@/components/shared/Container'
 import { Button } from '@/components/shared/Button'
+import { InternetIdentityButton } from '@bundly/ares-react';
 
 import logo from '@/images/logo.png'
 
@@ -25,14 +26,23 @@ export const Header = () => {
           <NavbarPill />
 
           <div className='hidden items-center md:flex lg:space-x-3 xl:space-x-4'>
-            <Button
-              href='/auth/signin'
-              variant='tertiary'
-              size='sm'
-              className='overflow-hidden'
-            >
-              Sign in
-            </Button>
+            <div className="lg:flex lg:flex-1 lg:justify-end">
+              <InternetIdentityButton style={
+                {
+                  color: 'white',
+                  backgroundColor: 'var(--color-button-primary)',
+                  border: '1px solid white',
+                  borderRadius: '0.5rem',
+                  padding: '0.5rem 1rem',
+                  fontSize: '1rem',
+                  fontWeight: 'bold',
+                  cursor: 'pointer',
+                  position: 'relative',
+                  overflow: 'hidden' 
+                }
+              }/>
+
+            </div>
 
             {/* Call to action */}
             <Button href='/auth/signup' size='sm' variant='secondary'>
