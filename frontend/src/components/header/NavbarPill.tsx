@@ -38,8 +38,6 @@ import {
 
 import logo from '@/images/logo.png'
 import logoIcon from '@/images/logo-icon.png'
-import { InternetIdentityButton } from '@bundly/ares-react'
-
 const pages = [
   { label: 'Home', href: '/', icon: HomeIcon },
   //{ label: 'Actions', href: '/actions', icon: UsersIcon },//
@@ -397,18 +395,9 @@ export const NavbarPill = () => {
               className='invisible absolute hidden md:block'
               ref={navCtaContainerRef}
             >
-              <Transition show={showButton}>
-                <Button
-                  id='nav-cta'
-                  className={cn(
-                    'z-20 -mr-px ml-3 rounded-full transition-all duration-500 after:rounded-full data-[closed]:translate-x-full data-[closed]:opacity-0 data-[enter]:ease-out data-[leave]:ease-in'
-                  )}
-                  
-                  size='sm'
-                >
-                  <InternetIdentityButton />
-                </Button>
-              </Transition>
+             {/*<Transition show={showButton}>
+   //Si queremos que al hacer scroll se muestre el botón de inicio de sesión y registro, debemos ingresar aquí código del botón.
+              </Transition>*/}
             </div>
           </div>
         </div>

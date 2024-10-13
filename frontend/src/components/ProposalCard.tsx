@@ -1,10 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import { Stats } from '@/components/home/Stats'
 import { Container } from '@/components/shared/Container'
 import { Button } from '@/components/shared/Button'
-import { StarField } from '@/components/shared/StarField'
 import { useEffect } from 'react'
 import teamPhoto from '@/images/team-photo.jpg'
 
@@ -13,18 +11,11 @@ import {
   GlobeAmericasIcon,
   ChatBubbleLeftRightIcon,
   CircleStackIcon,
-  CalendarDaysIcon,
   ChevronRightIcon,
 } from '@heroicons/react/16/solid'
 
-import globe from '@/images/globe.svg?url'
-import globeGlow from '@/images/globe-glow.svg?url'
-import binaryCodeBg from '@/images/binary-code-bg.svg?url'
-import encryptionIcon from '@/images/encryption-icon.svg?url'
 
-import spaceSpotlight from '@/images/space-spotlight-3.png'
-import encryptionGradient from '@/images/encryption-gradient.png'
-import teamIntegrations from '@/images/team-integrations.png'
+import globeGlow from '@/images/globe-glow.svg?url'
 
 export const ProposalCard = () => {
   const handleCardMouseMove = (event: MouseEvent) => {
@@ -54,7 +45,7 @@ export const ProposalCard = () => {
   return (
     <section className='relative overflow-hidden'>
       <Container className='py-20 sm:py-24'>
-        {/* Bento grid */}
+        {/* grid */}
         <div className='cards space-y-2 lg:grid lg:grid-cols-2 lg:gap-2 lg:space-y-0'>
           {/* Card 1 - full-width */}
           <div className="card relative col-span-2 overflow-hidden rounded-xl bg-charcoal-500 p-[1.5px] before:absolute before:left-0 before:top-0 before:z-30 before:h-full before:w-full before:rounded-xl before:opacity-0 before:transition-opacity before:duration-500 before:content-[''] after:absolute after:left-0 after:top-0 after:z-10 after:h-full after:w-full after:rounded-xl after:opacity-0 after:transition-opacity after:duration-500 after:content-[''] hover:before:opacity-100 hover:after:opacity-100">
@@ -110,7 +101,7 @@ export const ProposalCard = () => {
                     <div className='relative z-50 mt-9 sm:mt-10 flex items-center space-x-16'>
                       {/* Botón */}
                       <Button
-                        href='#'
+                        href='/proposal-detail'
                         variant='secondary'
                         size='md'
                         className='relative z-50 cursor-pointer'
