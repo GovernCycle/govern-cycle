@@ -4,12 +4,14 @@ import { Client, InternetIdentity } from '@bundly/ares-core';
 import { IcpConnectContextProvider } from '@bundly/ares-react';
 import { candidCanisters } from '@app/canisters';
 import { useEffect, useState } from 'react';
-import RootLayout from '@app/layouts/layout';
 import '@/styles/globals.css';
+import { User } from '@app/declarations/home/home.did';
+import { UserContext } from '@app/context/userContext';
 
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [client, setClient] = useState<Client | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const createClient = async () => {
@@ -21,8 +23,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         providers: [
           new InternetIdentity({
             providerUrl:
-              process.env.NEXT_PUBLIC_INTERNET_IDENTITY_URL! ,
-              // process.env.NEXT_PUBLIC_INTERNET_IDENTITY_URL! || 'https://identity.ic0.app',
+              process.env.NEXT_PUBLIC_INTERNET_IDENTITY_URL!,
+            // process.env.NEXT_PUBLIC_INTERNET_IDENTITY_URL! || 'https://identity.ic0.app',
           }),
         ],
       });
@@ -37,8 +39,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <IcpConnectContextProvider client={client}>
-      {/* Wrap the Component inside RootLayout */}
+      <UserContext.Provider value={{ user, setUser }}>
+        {/* Wrap the Component inside RootLayout */}
         <Component {...pageProps} />
+      </UserContext.Provider>
     </IcpConnectContextProvider>
   );
 }

@@ -17,7 +17,7 @@ import spaceSpotlight from '@/images/space-spotlight.png'
 const features = [
   {
     icon: UsersIcon,
-    title: 'Regístrate de forma segura: ',
+    title: 'Regístrate de forma segura. ',
     description:
       'Usa Internet Identity para garantizar que tu identidad esté protegida en cada proceso.',
   },
@@ -25,8 +25,8 @@ const features = [
     icon: CursorArrowRippleIcon,
     title: 'Explora propuestas ambientales.',
     description:
-    'Participa en decisiones que impactarán directamente en la conservación y protección de nuestro planeta',
-    },
+      'Participa en decisiones que impactarán directamente en la conservación y protección de nuestro planeta',
+  },
   {
     icon: ShieldCheckIcon,
     title: 'Vota de manera segura.',
@@ -49,7 +49,7 @@ export function Features() {
 
 
         {/* Graphic */}
-        <div className='relative mt-5 w-full rounded-xl border border-tan-200/[.08] bg-white/[.01] p-1 shadow-inner-blur sm:mt-16 sm:rounded-2xl sm:p-2 lg:mt-18'>
+        <div className='relative mt-5 w-full rounded-xl border border-tan-200/[.08] bg-cream/[.01] p-1 shadow-inner-blur sm:mt-16 sm:rounded-2xl sm:p-2 lg:mt-18'>
 
           {/* Stars */}
           <div
@@ -69,22 +69,21 @@ export function Features() {
 
         {/* Text content */}
         <div className='relative flex flex-col items-center'>
-          <h1 className='max-w-5xl text-center text-4xl font-bold leading-extratight text-text-tertiary sm:text-5xl sm:leading-extratight'>
-            Aprende cómo participar en decisiones ambientales seguras y recibe,
+          <h1 className='max-w-5xl text-center text-4xl font-bold leading-extratight text-text-secondary sm:text-5xl sm:leading-extratight'>
+            Aprende cómo participar en decisiones ambientales seguras y recibe
             <span className='relative inline-block text-nowrap'>
-              <span className='relative z-10 bg-gradient-to-b from-cream-400 via-charcoal-400 to-cream-500 bg-clip-text text-transparent'>
+              <span className='relative z-10 bg-gradient-to-b from-cream-400 via-carafe-400 to-cream-500 bg-clip-text text-transparent'>
                 recompenzas
               </span>
-              <span className='absolute -top-px left-0 -z-10 text-charcoal-500'>
+              <span className='absolute -top-px left-0 -z-10 text-carafe-500'>
                 recompenzas
               </span>
             </span>
           </h1>
-          <p className='mt-5 max-w-xl text-center text-lg leading-8 text-text-secondary'>
+          <p className='mt-5 max-w-xl text-center text-lg leading-8 text-text-tertiary'>
             ¿Cómo funciona? Es bastante simple.
           </p>
         </div>
-
         {/* Features */}
         <div className='relative mx-auto mt-10 grid max-w-lg grid-cols-1 gap-x-6 gap-y-5 sm:mt-16 sm:max-w-2xl sm:grid-cols-2 sm:gap-y-9 md:mt-18 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
           {features.map((feature, index) => (
@@ -98,6 +97,13 @@ export function Features() {
               </p>
             </div>
           ))}
+          {/* Stars */}
+          <div
+            className='absolute -top-30 left-1/2 -z-10 h-56 w-full max-w-3xl -translate-x-1/2'
+            aria-hidden='true'
+          >
+            <StarField density='medium' maxRadius={1} />
+          </div>
         </div>
       </Container>
     </section>

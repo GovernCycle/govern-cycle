@@ -49,8 +49,8 @@ const pages = [
     icon: MegaphoneIcon,
   },
   {
-    label: 'Contact',
-    href: '/contact',
+    label: 'Propuestas',
+    href: '/Propuestas',
     icon: EnvelopeOpenIcon,
   },
   {
@@ -69,9 +69,15 @@ const pages = [
 
 const links = [
   { label: 'Home', href: '/' },
+<<<<<<< HEAD
   //{ label: 'Actions', href: '/actions' },//
   { label: 'Proposal', href: '/proposal' },
   { label: 'Contact', href: '/contact' },
+=======
+  { label: 'Actions', href: '/actions' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'Propuestas', href: '/propuestas' },
+>>>>>>> Front-NA
 ]
 
 function Hamburger() {
@@ -132,11 +138,11 @@ function MobileNavigation() {
                 <Link
                   key={`mobile-navbar-dropdown-link-${link.href}`}
                   href={link.href}
-                  className='group relative z-10 block text-nowrap py-2 text-sm font-medium text-violet-50 drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out hover:text-violet-400/95 hover:drop-shadow-[-4px_-4px_6px_rgba(196,181,253,0.2)]'
+                  className='group relative z-10 block text-nowrap py-2 text-sm font-medium text-cream-50 drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out hover:text-cream-500/95 hover:drop-shadow-[-4px_-4px_6px_rgba(196,181,253,0.2)]'
                 >
                   <span className='flex items-center'>
                     {link.icon && (
-                      <link.icon className='mr-2 h-4 w-4 text-violet-100/60 group-hover:text-violet-300/80' />
+                      <link.icon className='mr-2 h-4 w-4 text-cream-500/60 group-hover:text-cream-500/80' />
                     )}
                     {link.label}
                   </span>
@@ -159,7 +165,7 @@ function DropDownMenu({
 }) {
   return (
     <MenuItems
-      className='fixed z-20 hidden w-48 space-y-0.5 rounded-lg bg-[#1F1F24]/70 py-2.5 shadow-inner-blur outline-none backdrop-blur-lg backdrop-brightness-[85%] transition-all ease-in-out after:absolute after:inset-0 after:rounded-lg after:border after:border-violet-200/[.06] focus:outline-none data-[closed]:-translate-y-2 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in md:block'
+      className='fixed z-20 hidden w-48 space-y-0.5 rounded-lg bg-[#375257]/90 py-2.5 shadow-inner-blur outline-none backdrop-blur-lg backdrop-brightness-[85%] transition-all ease-in-out after:absolute after:inset-0 after:rounded-lg after:border after:border-cream-500/[.06] focus:outline-none data-[closed]:-translate-y-2 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in md:block'
       transition
       style={{
         top: `${dropdownGap}px`,
@@ -171,7 +177,7 @@ function DropDownMenu({
         <MenuItem key={`pages-dropdiwn-link-${link.href}`}>
           <Link
             href={link.href}
-            className='group relative z-10 block text-nowrap px-4 py-2 text-sm font-medium text-tan-50 drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out data-[focus]:text-carafel-400/95 data-[focus]:shadow-inner-blur-light data-[focus]:drop-shadow-[-4px_-4px_6px_rgba(196,181,253,0.2)]'
+            className='group relative z-10 block text-nowrap px-4 py-2 text-sm font-medium text-tan-50 drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out data-[focus]:text-white-400/95 data-[focus]:shadow-inner-blur-light data-[focus]:drop-shadow-[-4px_-4px_6px_rgba(196,181,253,0.2)]'
           >
             <span className='flex items-center'>
               {link.icon && (
@@ -187,7 +193,7 @@ function DropDownMenu({
   )
 }
 
-export const  NavbarPill = () => {
+export const NavbarPill = () => {
   const pathname = usePathname()
   // Initialize to true in order to dynamically get width of the cta button
   const [showButton, setShowButton] = useState(true)
@@ -369,7 +375,7 @@ export const  NavbarPill = () => {
             {/* Pages dropdown button */}
             <MenuButton
               type='button'
-              className='group relative z-40 hidden h-full items-center px-3 py-2.5 text-sm font-medium text-tan-100/95 outline-none drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out hover:text-cream-400/95 data-[open]:text-cream-400 data-[open]:drop-shadow-[-4px_-4px_6px_rgba(196,181,253,0.2)] md:inline-flex lg:px-4'
+              className='group relative z-40 hidden h-full items-center px-3 py-2.5 text-sm font-semibold text-cream-500/50 outline-none drop-shadow-[-4px_-4px_6px_rgba(255, 254, 239,0.2)] duration-200 ease-in-out hover:text-cream-500/100 data-[open]:text-cream-500 data-[open]:drop-shadow-[-4px_-4px_6px_rgba(255, 254, 239,0.2)] md:inline-flex lg:px-4'
               ref={dropdownButtonRef}
             >
               <span>Pages</span>
@@ -408,10 +414,10 @@ export const  NavbarPill = () => {
                   className={cn(
                     'z-20 -mr-px ml-3 rounded-full transition-all duration-500 after:rounded-full data-[closed]:translate-x-full data-[closed]:opacity-0 data-[enter]:ease-out data-[leave]:ease-in'
                   )}
-                  href='/signup'
+                  
                   size='sm'
                 >
-                <InternetIdentityButton />
+                  <InternetIdentityButton />
                 </Button>
               </Transition>
             </div>

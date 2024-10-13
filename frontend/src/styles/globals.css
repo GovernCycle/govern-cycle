@@ -83,6 +83,11 @@
 
 }
 
+
+.bg-form-input{
+ @apply bg-zinc-950/[.01] shadow-inner-blur duration-200 ease-in-out hover:bg-zinc-950/10 has-[:focus]:bg-zinc-950/15 
+}
+
 .bg-violet-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(221 214 254 / var(--tw-bg-opacity)) /* #ddd6fe */;
@@ -159,8 +164,8 @@ code .line:not(:last-child)::before {
 .card::before {
   background: radial-gradient(
     1200px circle at var(--mouse-x) var(--mouse-y),
-    rgba(250, 135, 22, 0.25),
-    transparent 40%
+    rgba(255, 254, 239, 0.40),
+    transparent 30%
   );
 }
 .card::after {

@@ -1,22 +1,18 @@
 import { useState } from 'react';
 import { Label } from './Label';
 import { Button } from '../shared/Button';
+import { roles } from '@app/utils';
 
 // Definimos los roles como strings
-const roles: string[] = [
-    'Academy',
-    'TechnicalExpert',
-    'ProjectDeveloper',
-    'Register',
-    'TechnicalSecretariat',
-    'Government',
-    'Standard',
-    'Validator',
-    'Community'
-];
 
-export const RoleDropdown: React.FC = () => {
-    const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
+
+export const RoleDropdown = ({
+    selectedRoles,
+    setSelectedRoles,
+}: {
+    selectedRoles: string[];
+    setSelectedRoles: React.Dispatch<React.SetStateAction<string[]>>;
+}) => {
     const [currentRole, setCurrentRole] = useState<string>('');
 
     const handleRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -41,15 +37,15 @@ export const RoleDropdown: React.FC = () => {
                 </Label>
                 <div className='flex space-x-2'>
                     <select
-                        id="role-dropdown"
                         value={currentRole}
+                        name='roles'
                         onChange={handleRoleChange}
-                        className="block w-full text-sm text-[var(--color-text-ternary)] opacity-50 py-2.5 rounded-md border-0 focus:ring-2 focus:ring-inset focus:ring-blue-300 cursor-pointer"
+                        className="block w-full text-sm text-[var(--color-text-ternary)] opacity-50 py-2.5 rounded-md border-0 bg-form-input"
                     >
                         <option value="" disabled>Selecciona un rol</option>
                         {roles.map((role) => (
-                            <option key={role} value={role}>
-                                {role}
+                            <option key={role.label} value={role.value}>
+                                {role.label}
                             </option>
                         ))}
                     </select>
@@ -58,7 +54,7 @@ export const RoleDropdown: React.FC = () => {
                         onClick={addRole}
 
                     >
-                        Add Role
+                        Agregar rol
                     </Button>
                 </div>
             </div>

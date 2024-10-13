@@ -41,8 +41,7 @@ const navigation = [
       { name: 'Press', href: '#' },
       { name: 'News', href: '#' },
       { name: 'Media kit', href: '#' },
-      { name: 'Contact', href: '/contact' },
-    ],
+      { name: 'Propuestas', href: '/propuestas' },],
   },
   {
     icon: integrations,
