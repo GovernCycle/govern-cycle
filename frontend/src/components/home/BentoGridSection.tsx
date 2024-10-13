@@ -52,7 +52,7 @@ export const BentoGridSection = () => {
   return (
     <section className='relative overflow-hidden'>
       <Container className='py-20 sm:py-24'>
-        {/* Text content */}
+        {/* Text content 
         <div className='relative z-10 flex flex-col items-center'>
           <h1 className='max-w-5xl overflow-hidden text-wrap text-center text-4xl font-bold leading-extratight text-text-secondary sm:text-5xl sm:leading-extratight'>
             Procesos de&nbsp;
@@ -69,26 +69,18 @@ export const BentoGridSection = () => {
             Iced pumpkin mug in ut shop a doppio panna milk press americano cup
             bar fair, lait that galão irish redeye galão.
           </p>
-        </div>
+        </div>*/}
 
         {/* Bentro grid container */}
-        <div className='relative mx-auto mt-14 max-w-2xl sm:mt-16 lg:mt-[70px] lg:max-w-none'>
-          <div className='absolute -left-56 -right-56 -top-80 sm:-left-48 sm:-right-48 md:left-1/2 md:w-full md:max-w-6xl md:-translate-x-1/2 lg:-top-96'>
-            <Image
-              src={spaceSpotlight}
-              alt=''
-              className='h-full w-full object-contain'
-              sizes='(max-width: 768px) 100vw, 1152px'
-            />
-          </div>
+        
 
-          {/* Stars */}
+          {/* Stars 
           <div
             className='absolute -top-48 left-1/2 -z-10 h-56 w-full max-w-3xl -translate-x-1/2'
             aria-hidden='true'
           >
             <StarField density='medium' maxRadius={2.5} minRadius={1.25} />
-          </div>
+          </div>*/}
 
           {/* Bento grid */}
           <div className='cards space-y-2 lg:grid lg:grid-cols-2 lg:gap-2 lg:space-y-0'>
@@ -315,7 +307,7 @@ export const BentoGridSection = () => {
               </div>
             </div> */}
           </div>
-        </div>
+        
 
         {/* <Stats /> */}
       </Container>

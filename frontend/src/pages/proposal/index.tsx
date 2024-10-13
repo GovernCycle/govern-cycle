@@ -5,6 +5,8 @@ import { Faq } from '@/components/shared/Faq'
 import { Divider } from '@/components/shared/Divider'
 import { Footer } from '@/components/shared/Footer'
 import { BentoGridSection } from '@/components/home/BentoGridSection'
+import SearchBar from '@app/components/forms/searchBar'
+import { ProposalCard } from '../../components/ProposalCard'
 
 export const metadata = {
   title: 'Propuestas',
@@ -21,12 +23,12 @@ export default function Propuestas() {
       >
         {/* <ContactHero /> */}
       </HeroContainer>
-      <BentoGridSection />
-      {/* <Divider /> */}
-      {/* <PopularLinks />
+      <SearchBar />
+      <ProposalCard />
       <Divider />
-      <Faq /> */}
-      {/* <Divider /> */}
+      <ProposalCard />
+      <Divider />
+      <ProposalCard />
       <Footer />
     </>
   )
