@@ -204,9 +204,9 @@ export class Stars {
       const y = Math.random() * (this.cssHeight - radius * 2) + radius
       const dx = (Math.random() * radius - 1) / 10
       const dy = (Math.random() * radius - 1) / 10
-      const fillColor = '#375257'; /*rootStyles.getPropertyValue('--color-particles-primary').trim()*/
+      const fillColor = rootStyles.getPropertyValue('--color-particles-primary').trim();
       const shadowBlur = 15
-      const shadowColor = '#B49870';/*rootStyles.getPropertyValue('--color-particles-secondary').trim();*/
+      const shadowColor = rootStyles.getPropertyValue('--color-particles-secondary').trim();
       const globalAlpha = Math.random() * 0.1 + 0.35
       const alpha = globalAlpha
 
