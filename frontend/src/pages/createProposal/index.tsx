@@ -7,12 +7,13 @@ import { ChevronRightIcon } from '@heroicons/react/16/solid'
 import { ImageUpload } from '@app/components/forms/image'
 import { RoleDropdown } from '@app/components/forms/roleDropDown'
 import { JurisdictionDropdown } from '@app/components/forms/JurisdictionDropdown'
-import { PhoneNumberInput } from '@app/components/forms/PhoneNumberInput'
 import { useState } from 'react'
-import { Jurisdiction, Role, UserRequest } from '@app/declarations/home/home.did'
-import { useHome } from '@app/hooks/useHome'
 import Swal from 'sweetalert2'
 import AuthLayout from '../auth/layout'
+import { LinkList } from '@app/components/forms/LinkList'
+import { useProposal } from '@app/hooks/useProposal'
+import { ProposalRequest } from '@app/declarations/proposal/proposal.did'
+import { Jurisdiction, Role } from '@app/declarations/home/home.did'
 
 interface SelectedJurisdiction {
     continent: string;
@@ -20,20 +21,13 @@ interface SelectedJurisdiction {
     city: string;
 }
 
-interface CountryOption {
-    name: string;
-    flag: string;
-    callingCode: string;
-}
-
 export default function CreateProposal() {
 
     const [selectedJurisdictions, setSelectedJurisdictions] = useState<SelectedJurisdiction[]>([]);
-    const [selectedCountry, setSelectedCountry] = useState<CountryOption>();
-    const [phoneNumber, setPhoneNumber] = useState<string>('');
     const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
+    const [listedLinks, setListedLinks] = useState<string[]>([]);
     const [imageData, setImageData] = useState<Uint8Array | number[] | null>(null); // Estado para guardar los datos
-    const { createProfile } = useHome();
+    const { createProposal } = useProposal();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -64,24 +58,33 @@ export default function CreateProposal() {
             return
         }
 
-        const formData = new FormData(e.currentTarget)
-        const data = Object.fromEntries(formData.entries())
-        console.log(data)
+        const formData = new FormData(e.currentTarget);
+        const data = Object.fromEntries(formData.entries());
+        const date = new Date(data.LimitDate as string);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Los meses comienzan en 0, por eso se suma 1
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const formattedDate = `${year}-${month}-${day}:${hours}:${minutes}`;
 
-        const newUser: UserRequest = {
-            name: data['first-name'] as string,
-            manager: [],
-            email: data['email'] as string,
-            phone: phoneNumber,
-            logo: imageData,
-            role: selectedRoles.map((role) => ({ [role]: null })) as Role[],
-            jurisdiction: selectedJurisdictions.map((jurisdiction) => ({
+        const newProposal: ProposalRequest = {
+            name: data.name as string,
+            threshold: BigInt(data.threshold as string),
+            description: [data.description as string],
+            location: selectedJurisdictions.map((jurisdiction) => ({
                 continent: [jurisdiction.continent],
                 country: [jurisdiction.country],
                 region: [jurisdiction.city]
             })) as Jurisdiction[],
+            invitedRoles: selectedRoles.map((role) => ({ [role]: null })) as Role[],
+            environmentalUnits: BigInt(data.UnidadesAmbientales as string),
+            deadline: formattedDate,
+            links: listedLinks,
+            photo: imageData,
         }
-        const result = await createProfile(newUser)
+
+        const result = await createProposal(newProposal);
 
         if ('ok' in result && 'SuccessText' in result.ok) {
             Swal.fire({
@@ -90,12 +93,49 @@ export default function CreateProposal() {
                 icon: 'success',
             })
         }
-        if ('err' in result && 'UserAlreadyExists' in result.err) {
-            Swal.fire({
-                title: 'Error',
-                text: 'User already exists',
-                icon: 'error',
-            })
+        if ('err' in result) {
+            if ('UserNotAuthenticated' in result.err) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'User Not Authenticated',
+                    icon: 'error',
+                })
+            }
+            if ('ProposalNotFound' in result.err) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Proposal Not Found',
+                    icon: 'error',
+                })
+            }
+            if ('NoUsersFound' in result.err) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'No Users Found',
+                    icon: 'error',
+                })
+            }
+            if ('UserNotApproved' in result.err) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'User Not Approved',
+                    icon: 'error',
+                })
+            }
+            if ('InvalidDate' in result.err) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Invalid Date',
+                    icon: 'error',
+                })
+            }
+            if ('UserNotAuthorized' in result.err) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'User Not Authorized',
+                    icon: 'error',
+                })
+            }
         }
     }
 
@@ -115,17 +155,17 @@ export default function CreateProposal() {
                                 <div className='space-y-8 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:space-y-0'>
                                     <TextField
                                         label='Nombre'
-                                        name='first-name'
-                                        autoComplete='Nombres'
-                                        placeholder='Escribe tu nombre'
+                                        name='name'
+                                        placeholder='Escribe el nombre del proyecto'
                                         required
                                     />
                                     <TextField
-                                        label='Email'
-                                        name='email'
-                                        type='email'
+                                        label='Umbral'
+                                        name='threshold'
+                                        type='number'
+                                        min={0}
                                         autoComplete='email'
-                                        placeholder='johnnybravo@gmail.com'
+                                        placeholder='Cantidad mínima de votos para aprobar la propuesta'
                                         required
                                     />
                                     <TextField
@@ -139,9 +179,7 @@ export default function CreateProposal() {
                                     <TextField
                                         label='Fecha Limite'
                                         name='LimitDate'
-                                        type='date'
-                                        autoComplete='LimitDate'
-                                        placeholder='johnnybravo@gmail.com'
+                                        type='datetime-local'
                                         required
                                     />
                                 </div>
@@ -153,18 +191,19 @@ export default function CreateProposal() {
                                     label='Descripción'
                                     name='description'
                                     elementType="textarea"
-
                                     autoComplete='description'
-                                    placeholder='johnnybravo@gmail.com'
                                     required
                                 />
                                 <ImageUpload setImageData={setImageData} />
+
+                                <LinkList listedLinks={listedLinks} setListedLinks={setListedLinks} />
+
                             </div>
 
                             <div className='mt-5 flex items-center justify-between space-x-4'>
 
                                 <Button type='submit' className='sm:px-5'>
-                                    <span>Registrar</span>
+                                    <span>Crear propuesta</span>
                                     <ChevronRightIcon className='h-4 w-4' />
                                 </Button>
                             </div>

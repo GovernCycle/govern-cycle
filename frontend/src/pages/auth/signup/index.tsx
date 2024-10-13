@@ -97,6 +97,14 @@ export default function Signup() {
         icon: 'error',
       })
     }
+
+    if ('err' in result && 'UserNotAuthenticated' in result.err) {
+      Swal.fire({
+        title: 'Error',
+        text: 'User Not Authenticated',
+        icon: 'error',
+      })
+    }
   }
 
   return (
