@@ -7,6 +7,8 @@ import spaceWavesPng from '@/images/hero-space-waves.png'
 interface HeroContainerProps {
   starField?: boolean
   header?: boolean
+  starfieldWhite?: boolean
+  form?: boolean
   bgGradientClassName?: string
   innerContainerClassName?: string
   className?: string
@@ -16,6 +18,8 @@ interface HeroContainerProps {
 export const HeroContainer = ({
   starField = true,
   header = true,
+  form = false,
+  starfieldWhite = false,
   bgGradientClassName = '',
   innerContainerClassName = '',
   className,
@@ -26,11 +30,17 @@ export const HeroContainer = ({
       {header && <Header />}
 
       <div className={cn('overflow-hidden', innerContainerClassName)}>
-        {starField && (
+        {starField && form && (
+          <div className='absolute inset-0 z-0 bg-[var(--color-background-ternary)]' aria-hidden='true'>
+            {/* <StarField /> */}
+          </div>
+        )}
+        {starField && !form && (
           <div className='absolute inset-0 -z-10 bg-[var(--color-background-primary)]' aria-hidden='true'>
             <StarField />
           </div>
         )}
+
 
         {children}
       </div>

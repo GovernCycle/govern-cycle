@@ -109,10 +109,10 @@ export default function Signup() {
 
   return (
     <AuthLayout>
-      <Container className='max-w-lg py-5 sm:max-w-xl lg:max-w-6xl'>
+      <Container className='max-w-lg py-5  sm:max-w-xl lg:max-w-6xl'>
         <div className='lg:grid lg:grid-cols-1 lg:gap-x-8 xl:gap-x-36 '>
-          <div className='relative z-10 flex flex-col shadow-inner-blur'>
-            <ContainerOutline />
+          <div className='relative z-0 flex flex-col shadow-inner-blur bg-[var(--color-background-ternary-op)] rounded-2xl'>
+            {/* <ContainerOutline /> */}
 
             <FormHeader
               title='Bienvenidos a Gabbi DAO'
@@ -136,7 +136,6 @@ export default function Signup() {
                     placeholder='johnnybravo@gmail.com'
                     required
                   />
-
                 </div>
 
                 <ImageUpload setImageData={setImageData} />
