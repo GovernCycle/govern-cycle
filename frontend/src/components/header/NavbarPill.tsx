@@ -44,14 +44,9 @@ const pages = [
   { label: 'Home', href: '/', icon: HomeIcon },
   //{ label: 'Actions', href: '/actions', icon: UsersIcon },//
   {
-    label: 'Proposal',
+    label: 'Propuestas',
     href: '/proposal',
     icon: MegaphoneIcon,
-  },
-  {
-    label: 'Propuestas',
-    href: '/Propuestas',
-    icon: EnvelopeOpenIcon,
   },
   {
     label: 'Sign in',
@@ -68,16 +63,10 @@ const pages = [
 ]
 
 const links = [
-  { label: 'Home', href: '/' },
-<<<<<<< HEAD
+  { label: 'Inicio', href: '/' },
   //{ label: 'Actions', href: '/actions' },//
-  { label: 'Proposal', href: '/proposal' },
-  { label: 'Contact', href: '/contact' },
-=======
-  { label: 'Actions', href: '/actions' },
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'Propuestas', href: '/propuestas' },
->>>>>>> Front-NA
+  { label: 'Propuestas', href: '/proposal' },
+  //{ label: 'Contact', href: '/contact' },//
 ]
 
 function Hamburger() {
@@ -131,7 +120,7 @@ function MobileNavigation() {
             <DisclosureButton className='group flex w-full items-center justify-between px-1.5 pb-2 pt-4 text-[15px] font-medium text-cream drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out hover:text-charcoal-400/95 data-[open]:text-charcoal-400/95'>
               <span>Pages</span>
 
-              <ChevronRightIcon className='ml-2 h-4.5 w-4.5 text-violet-100/80 duration-200 ease-in-out group-hover:text-violet-400/80 group-data-[open]:rotate-90 group-data-[open]:text-violet-400/90' />
+              <ChevronRightIcon className='ml-2 h-4.5 w-4.5 text-violet-100/80 duration-200 ease-in-out group-hover:text-cream-400/80 group-data-[open]:rotate-90 group-data-[open]:text-tan-400/90' />
             </DisclosureButton>
             <DisclosurePanel className='space-y-1 px-3 pt-0.5'>
               {pages.map((link) => (
@@ -149,7 +138,7 @@ function MobileNavigation() {
                 </Link>
               ))}
             </DisclosurePanel>
-          </Disclosure>
+          </Disclosure> 
         </nav>
       </PopoverPanel>
     </div>

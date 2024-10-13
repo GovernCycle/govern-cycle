@@ -1,30 +1,34 @@
 import { HeroContainer } from '@/components/shared/HeroContainer'
-import { PricingHero } from '@/components/pricing/PricingHero'
-import { PricingTable } from '@/components/pricing/PricingTable'
+import { ContactHero } from '@/components/contact/ContactHero'
+import { PopularLinks } from '@/components/contact/PopularLinks'
 import { Faq } from '@/components/shared/Faq'
 import { Divider } from '@/components/shared/Divider'
 import { Footer } from '@/components/shared/Footer'
+import { BentoGridSection } from '@/components/home/BentoGridSection'
+import SearchBar from '@app/components/forms/searchBar'
+import { ProposalCard } from '../../components/ProposalCard'
 
 export const metadata = {
-  title: 'Pricing',
+  title: 'Propuestas',
   description:
-    'Nebula offers scalable pricing plans to suit your remote work requirements. Choose the plan that fits your team best.',
+    "Need assistance or have questions? Contact Nebula's team for prompt support and information.",
 }
 
-export default function Pricing() {
+export default function Propuestas() {
   return (
     <>
       <HeroContainer
-        starField={false}
-        bgGradientClassName='opacity-60 lg:opacity-90 xl:opacity-100'
+        className='overflow-visible overflow-x-clip'
+        bgGradientClassName='inset-x-0 bottom-0 -top-32 opacity-80 sm:opacity-100'
       >
-        <PricingHero />
+        {/* <ContactHero /> */}
       </HeroContainer>
+      <SearchBar />
+      <ProposalCard />
       <Divider />
-      <PricingTable />
+      <ProposalCard />
       <Divider />
-      <Faq />
-      <Divider />
+      <ProposalCard />
       <Footer />
     </>
   )
