@@ -1,4 +1,3 @@
-import { ProposalDetail } from '@app/components/proposal/ProposalDetail';
 import { UserRequest, Role, User } from '@app/declarations/home/home.did'
 import { useCountry } from '@app/hooks/useCountry';
 import { useHome } from '@app/hooks/useHome';
@@ -60,23 +59,22 @@ const index = () => {
     }
 
     return (
-        // <div className='flex flex-col space-y-5'>
-        //     <button
-        //         className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-fit'
-        //         onClick={saveUser}>Save User</button>
+        <div className='flex flex-col space-y-5'>
+            <button
+                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-fit'
+                onClick={saveUser}>Save User</button>
 
-        //     <button
-        //         className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-fit'
-        //         onClick={getUser}>Get User</button>
+            <button
+                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-fit'
+                onClick={getUser}>Get User</button>
 
-        //     <button
-        //         className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-fit'
-        //         onClick={getCountryData}
-        //     >
-        //         Get country
-        //     </button>
-        // </div>
-        <ProposalDetail />
+            <button
+                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-fit'
+                onClick={getCountryData}
+            >
+                Get country
+            </button>
+        </div>
     )
 }
 
