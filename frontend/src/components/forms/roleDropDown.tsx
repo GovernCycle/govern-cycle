@@ -54,7 +54,7 @@ export const RoleDropdown = ({
                         onClick={addRole}
 
                     >
-                        Add Role
+                        Agregar rol
                     </Button>
                 </div>
             </div>
