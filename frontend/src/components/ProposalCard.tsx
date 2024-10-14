@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { Container } from '@/components/shared/Container'
 import { Button } from '@/components/shared/Button'
 import { useEffect } from 'react'
-import teamPhoto from '@/images/team-photo.jpg'
 import { Proposal, StateProposal } from '@app/declarations/proposal/proposal.did'
 
 
@@ -111,7 +110,7 @@ export const ProposalCard = ({
                       <span className='relative inline-block text-nowrap'>
                         <span className='relative z-10 bg-gradient-to-b from-charcoal-500 via-cream-500 to-charcoal-500 bg-clip-text leading-none text-transparent'>
                           {
-                            proposal[1].deadline
+                            `${proposal[1].startDate} - ${proposal[1].deadline}`
                           }
                         </span>
                       </span>
