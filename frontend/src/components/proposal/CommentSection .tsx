@@ -1,41 +1,74 @@
 import { useState } from 'react';
 import { Button } from '@/components/shared/Button';
 import { TextField } from '@/components/forms/TextField';
+import { Comment } from '@app/declarations/proposal/proposal.did';
+import { useProposal } from '@app/hooks/useProposal';
+import Swal from 'sweetalert2';
 
-export const CommentSection = () => {
-  const [comments, setComments] = useState([
-    {
-      username: 'Rony Johnson',
-      text: 'Esta propuesta es muy interesante. Me gustaría saber más detalles sobre la implementación.',
-      timestamp: '2 horas atrás',
-    },
-    {
-      username: 'Jaime Pérez',
-      text: 'Estoy de acuerdo, me parece que tiene mucho potencial para el equipo.',
-      timestamp: '1 hora atrás',
-    },
-  ]);
+export const CommentSection = ({
+  comments,
+  proposalId,
+  loadProposal,
+}: {
+  comments: Comment[]
+  proposalId: bigint,
+  loadProposal: () => Promise<void>
+}) => {
 
-  const [newComment, setNewComment] = useState('');
+  const { addComment } = useProposal();
 
-  const handleCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewComment(e.target.value);
-  };
 
-  const handleSubmitComment = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmitComment = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (newComment.trim()) {
-      setComments([
-        ...comments,
-        {
-          username: 'YourUsername', // Cambia esto por el nombre del usuario actual
-          text: newComment,
-          timestamp: 'Justo ahora',
-        },
-      ]);
-      setNewComment(''); // Limpia el campo de comentario
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+    const topic = data.tema as string;
+    const detail = data.detail as string;
+
+    try {
+      const result = await addComment(topic, detail, proposalId);
+      if ('ok' in result) {
+        Swal.fire({
+          title: 'Success',
+          text: 'Comment added successfully',
+          icon: 'success',
+        });
+        loadProposal();
+      }
+
+      if ('err' in result) {
+        if ('ProposalNotFound' in result.err) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Proposal not found',
+            icon: 'error',
+          });
+        }
+        if ('UserNotInvited' in result.err) {
+          Swal.fire({
+            title: 'Error',
+            text: 'User not invited',
+            icon: 'error',
+          });
+        }
+        if ('ProposalAlreadyApproved' in result.err) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Proposal already approved',
+            icon: 'error',
+          });
+        }
+      }
+
     }
-  };
+    catch (error) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Error adding comment',
+        icon: 'error',
+      });
+    }
+  }
 
   return (
     <div className='max-w-lg py-5 sm:max-w-xl lg:max-w-6xl '>
@@ -49,10 +82,10 @@ export const CommentSection = () => {
               {comments.map((comment, index) => (
                 <div key={index} className='border-b border-charcoal-500/10 py-4'>
                   <div className='flex items-center justify-between'>
-                    <span className='font-semibold text-text-tertiary'>{comment.username}</span> 
-                    <span className='text-sm text-text-primary'>{comment.timestamp}</span>
+                    <span className='font-semibold text-text-tertiary'>{comment.detail}</span>
+                    <span className='text-sm text-text-primary'>{comment.tema}</span>
                   </div>
-                  <p className='mt-2 text-text-secondary'>{comment.text}</p>
+                  <p className='mt-2 text-text-secondary'>{comment.detail}</p>
                 </div>
               ))}
             </div>
@@ -60,12 +93,16 @@ export const CommentSection = () => {
             {/* Formulario de nuevo comentario */}
             <form onSubmit={handleSubmitComment} className='mt-8 space-y-6 '>
               <TextField
+                label='Tema'
+                name='tema'
+                placeholder='Tema del comentario'
+                required
+              />
+              <TextField
                 label='Escribe tu comentario'
-                name='comment'
+                name='detail'
                 placeholder='Añade un comentario.   ..'
                 required
-                value={newComment}
-                onChange={handleCommentChange}
               />
               <Button type='submit' className='sm:px-5'>
                 <span>Agregar comentario</span>

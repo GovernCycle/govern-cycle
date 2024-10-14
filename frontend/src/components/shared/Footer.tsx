@@ -22,64 +22,51 @@ type Props = {
 const navigation = [
   {
     icon: browser,
-    label: 'Product',
+    label: 'Plataforma',
     links: [
-      { name: 'Overview', href: '#' },
-      { name: 'Integrations', href: '#' },
-      { name: 'Solutions', href: '#' },
-      { name: 'Tutorials', href: '#' },
-      { name: 'Pricing', href: '/pricing' },
-      { name: 'Releases', href: '#' },
+      { name: 'Visión general', href: '#' },
+      { name: 'Propuestas activas', href: '/proposal' },
+      { name: 'Guías de uso', href: '#' },
+      { name: 'Nuevas funcionalidades', href: '#' },
     ],
   },
   {
     icon: company,
-    label: 'Company',
+    label: 'Comunidad',
     links: [
-      { name: 'About us', href: '/about' },
-      { name: 'Careers', href: '#' },
-      { name: 'Press', href: '#' },
-      { name: 'News', href: '#' },
-      { name: 'Media kit', href: '#' },
-      { name: 'Propuestas', href: '/propuestas' },],
+      { name: 'Sobre nosotros', href: '/about' },
+      { name: 'Noticias', href: '#' },
+      { name: 'Foro de usuarios', href: '#' },
+    ],
   },
   {
     icon: integrations,
-    label: 'Integrations',
+    label: 'Propuestas',
     links: [
-      { name: 'Slack', href: '#' },
-      { name: 'Trello', href: '#' },
-      { name: 'Quickbooks', href: '#', new: true },
-      { name: 'Dropbox', href: '#' },
-      { name: 'Gmail', href: '#' },
-      { name: 'Salesforce', href: '#' },
+      { name: 'Cómo crear propuesta', href: '/proposal', new: true },
+      { name: 'Propuestas recientes', href: '/proposal' },
     ],
   },
   {
     icon: resources,
-    label: 'Resources',
+    label: 'Recursos',
     links: [
       { name: 'Blog', href: '#' },
-      { name: 'Newsletter', href: '#' },
-      { name: 'Events', href: '#' },
-      { name: 'Help center', href: '#' },
-      { name: 'Tutorials', href: '#' },
-      { name: 'Support', href: '#' },
+      { name: 'Videos explicativos', href: '#' },
+      { name: 'Eventos', href: '#' },
     ],
   },
   {
     icon: scale,
     label: 'Legal',
     links: [
-      { name: 'Terms', href: '#' },
-      { name: 'Privacy', href: '#' },
-      { name: 'Cookies', href: '#' },
-      { name: 'Licenses', href: '#' },
-      { name: 'Security', href: '#' },
-      { name: 'Settings', href: '#' },
+      { name: 'Términos de uso', href: '#' },
+      { name: 'Privacidad', href: '#' },
+      { name: 'Licencias', href: '#' },
+      { name: 'Seguridad', href: '#' },
     ],
   },
-]
+];
 
 export function Footer({ cta = true }: Props) {
   return (
@@ -99,7 +86,7 @@ export function Footer({ cta = true }: Props) {
         <div className='h-full w-full rounded-t-[100%] bg-[linear-gradient(var(--color-charcoal),var(--color-charcoal)),linear-gradient(#375257,#375257)] pb-16 pt-24 sm:pt-28 md:pt-32 lg:pt-40'>
           <div className='mx-auto w-screen'>
             <div className='mx-auto max-w-lg px-5 sm:max-w-xl sm:px-6 md:max-w-3xl lg:max-w-screen-xl lg:px-8'>
-              <div className='grid grid-cols-2 gap-12 sm:grid-cols-2 sm:gap-16 md:grid-cols-3 lg:grid-cols-5 lg:gap-8'>
+              <div className='grid grid-cols-2 gap-12 sm:grid-cols-2 sm:gap-16 md:grid-cols-3 lg:grid-cols-5 lg:gap-8 justify-center'>
                 {navigation.map((navCol, navColIndex) => (
                   <div
                     key={`footer-navCol-${navColIndex}`}
@@ -172,10 +159,10 @@ export function Footer({ cta = true }: Props) {
                         key={`footer-social-${social.name}`}
                         href={social.href}
                         aria-label={social.ariaLabel}
-                        className='group flex items-center space-x-2 text-sm font-semibold text-tan-50/90 drop-shadow-[-2px_-4px_6px_var(--color-tan-200)]'
+                        className='group flex items-center space-x-2 text-sm font-semibold text-cream-50/90 drop-shadow-[-2px_-4px_6px_var(--color-tan-200)]'
                       >
-                        <social.icon className='h-4 w-4 duration-200 ease-in-out group-hover:text-carafe-300/85' />
-                        <span className='hidden duration-200 ease-in-out group-hover:text-cream-400/95 lg:inline'>
+                        <social.icon className='h-4 w-4 duration-200 ease-in-out group-hover:text-charcoal-100/95' />
+                        <span className='hidden duration-200 ease-in-out group-hover:text-charcoal-100/95 lg:inline'>
                           {social.label}
                         </span>
                       </a>
@@ -184,7 +171,7 @@ export function Footer({ cta = true }: Props) {
                 </div>
               </div>
               <p className='mt-10 text-center text-[15px] text-cream-400/90 sm:mt-12'>
-                © {new Date().getFullYear()} Nebula, Inc. All rights reserved.
+                © {new Date().getFullYear()} GabbiiDAO. Todos los derechos reservados. 
               </p>
             </div>
           </div>
