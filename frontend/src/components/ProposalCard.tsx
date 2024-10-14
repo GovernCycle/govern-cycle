@@ -66,8 +66,13 @@ export const ProposalCard = ({
     const blob = new Blob([byteArr], { type: 'image/png' });
     const url = URL.createObjectURL(blob);
     return url;
-}
+  }
 
+
+  const formatDate = (date: string) => {
+    const formattedDate = new Date(date);
+    return formattedDate.toDateString();
+  }
 
   const renderEnvironmentalUnits = (environmentalUnits: bigint) => {
     return `${environmentalUnits} Unidades Ambientales`
@@ -110,7 +115,7 @@ export const ProposalCard = ({
                       <span className='relative inline-block text-nowrap'>
                         <span className='relative z-10 bg-gradient-to-b from-charcoal-500 via-cream-500 to-charcoal-500 bg-clip-text leading-none text-transparent'>
                           {
-                            `${proposal[1].startDate} - ${proposal[1].deadline}`
+                            `${formatDate(proposal[1].startDate)} - ${formatDate(proposal[1].deadline)}`
                           }
                         </span>
                       </span>
@@ -149,14 +154,14 @@ export const ProposalCard = ({
                     <div className='relative z-50 mt-9 sm:mt-10 flex items-center space-x-16 justify-center'>
                       {/* Botón */}
                       <Link href={`/proposal/${proposal[0].toString()}`}>
-                      <Button
-                        variant='secondary'
-                        size='md'
-                        className='relative z-50 cursor-pointer'
-                      >
-                        <span>Más información</span>
-                        <ChevronRightIcon className='h-4 w-4' />
-                      </Button>
+                        <Button
+                          variant='secondary'
+                          size='md'
+                          className='relative z-50 cursor-pointer'
+                        >
+                          <span>Más información</span>
+                          <ChevronRightIcon className='h-4 w-4' />
+                        </Button>
                       </Link>
 
                       {/* Checkbox*/}

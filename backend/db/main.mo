@@ -18,10 +18,10 @@ actor Db {
     let whitelist = Map.new<Principal, Bool>();
 
     // A stable variable that holds the initial authors who are automatically whitelisted
-    stable var initial : Text = "u2f3m-lfbpz-lm4ij-nqt36-rtext-gacuy-cpmt7-qsym3-7ixym-fcr7y-3ae";
+    stable var initialAuthor : Text = "hyagt-lc2eh-ltnc5-laqjt-adpxt-ldez2-ckfcj-bn6e4-iee4f-s76zf-nae";
 
-    // Add initial author to the whitelist
-    Map.set(whitelist, phash, Principal.fromText(initial), true);
+    // Add initialAuthor author to the whitelist
+    Map.set(whitelist, phash, Principal.fromText(initialAuthor), true);
 
     // A map to store user profiles with their corresponding Principal as the key.
     let users = Map.new<Principal, UserData.User>();

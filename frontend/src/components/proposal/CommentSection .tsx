@@ -4,6 +4,7 @@ import { TextField } from '@/components/forms/TextField';
 import { Comment } from '@app/declarations/proposal/proposal.did';
 import { useProposal } from '@app/hooks/useProposal';
 import Swal from 'sweetalert2';
+import { handleProposalResult } from '@app/utils';
 
 export const CommentSection = ({
   comments,
@@ -16,6 +17,7 @@ export const CommentSection = ({
 }) => {
 
   const { addComment } = useProposal();
+
 
 
   const handleSubmitComment = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -33,31 +35,15 @@ export const CommentSection = ({
           text: 'Comment added successfully',
           icon: 'success',
         });
-        loadProposal();
+        await loadProposal();
       }
-
       if ('err' in result) {
-        if ('ProposalNotFound' in result.err) {
-          Swal.fire({
-            title: 'Error',
-            text: 'Proposal not found',
-            icon: 'error',
-          });
-        }
-        if ('UserNotInvited' in result.err) {
-          Swal.fire({
-            title: 'Error',
-            text: 'User not invited',
-            icon: 'error',
-          });
-        }
-        if ('ProposalAlreadyApproved' in result.err) {
-          Swal.fire({
-            title: 'Error',
-            text: 'Proposal already approved',
-            icon: 'error',
-          });
-        }
+        const handleError = handleProposalResult(result.err);
+        Swal.fire({
+          title: 'Error',
+          text: handleError,
+          icon: 'error',
+        });
       }
 
     }
@@ -83,7 +69,7 @@ export const CommentSection = ({
                 <div key={index} className='border-b border-charcoal-500/10 py-4'>
                   <div className='flex items-center justify-between'>
                     <span className='font-semibold text-text-tertiary'>{comment.detail}</span>
-                    <span className='text-sm text-text-primary'>{comment.tema}</span>
+                    <span className='text-sm text-text-primary'>{comment.user.toString()}</span>
                   </div>
                   <p className='mt-2 text-text-secondary'>{comment.detail}</p>
                 </div>

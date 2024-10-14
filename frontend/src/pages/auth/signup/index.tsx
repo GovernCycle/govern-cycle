@@ -13,7 +13,7 @@ import { Jurisdiction, Role, UserRequest } from '@app/declarations/home/home.did
 import { useHome } from '@app/hooks/useHome'
 import Swal from 'sweetalert2'
 import { SelectedJurisdiction } from '@app/utils/jurisdiction'
-import { CountryOption } from '@app/utils'
+import { CountryOption, handleProfileResult } from '@app/utils'
 import { useAuth } from '@bundly/ares-react'
 
 
@@ -27,29 +27,29 @@ export default function Signup() {
   const { createProfile, getProfile } = useHome();
   const { isAuthenticated } = useAuth();
 
-  useEffect(() => {
-    const handleUserCheck = async () => {
-      if (!isAuthenticated) {
-        Swal.fire({
-          title: 'Error',
-          text: 'You must be authenticated with internet identity to access this page',
-          icon: 'error',
-        });
-        return;
-      }
+  // useEffect(() => {
+  //   const handleUserCheck = async () => {
+  //     if (!isAuthenticated) {
+  //       Swal.fire({
+  //         title: 'Error',
+  //         text: 'You must be authenticated with internet identity to access this page',
+  //         icon: 'error',
+  //       });
+  //       return;
+  //     }
 
-      const userExists = await checkUserExists();
-      if (userExists) {
-        Swal.fire({
-          title: 'Ya estás en Gabbi DAO',
-          text: 'User already exists',
-          icon: 'success',
-        });
-      };
+  //     const userExists = await checkUserExists();
+  //     if (userExists) {
+  //       Swal.fire({
+  //         title: 'Ya estás en Gabbi DAO',
+  //         text: 'User already exists',
+  //         icon: 'success',
+  //       });
+  //     };
 
-      handleUserCheck();
-    }
-  }, [isAuthenticated]);
+  //     handleUserCheck();
+  //   }
+  // }, [isAuthenticated]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -106,20 +106,13 @@ export default function Signup() {
         icon: 'success',
       })
     }
-    if ('err' in result && 'UserAlreadyExists' in result.err) {
+    if ('err' in result) {
+      const handleError = handleProfileResult(result.err);
       Swal.fire({
         title: 'Error',
-        text: 'User already exists',
+        text: handleError,
         icon: 'error',
-      })
-    }
-
-    if ('err' in result && 'UserNotAuthenticated' in result.err) {
-      Swal.fire({
-        title: 'Error',
-        text: 'User Not Authenticated',
-        icon: 'error',
-      })
+      });
     }
   }
 
@@ -139,53 +132,51 @@ export default function Signup() {
   return (
     <AuthLayout>
       <Container className='max-w-lg py-5  sm:max-w-xl lg:max-w-6xl'>
-        {isAuthenticated && !checkUserExists() && (
-          <div className='lg:grid lg:grid-cols-1 lg:gap-x-8 xl:gap-x-36 '>
-            <div className='relative z-0 flex flex-col shadow-inner-blur bg-[var(--color-background-ternary-op)] rounded-2xl'>
-              {/* <ContainerOutline /> */}
+        <div className='lg:grid lg:grid-cols-1 lg:gap-x-8 xl:gap-x-36 '>
+          <div className='relative z-0 flex flex-col shadow-inner-blur bg-[var(--color-background-ternary-op)] rounded-2xl'>
+            {/* <ContainerOutline /> */}
 
-              <FormHeader
-                title='Bienvenidos a Gabbi DAO'
-                description='Completa los datos para comenzar'
-              />
-              <form onSubmit={handleSubmit} className='mt-9 px-6 pb-10 sm:px-10'>
-                <div className='space-y-8'>
-                  <div className='space-y-8 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:space-y-0'>
-                    <TextField
-                      label='Nombre'
-                      name='first-name'
-                      autoComplete='Nombres'
-                      placeholder='Escribe tu nombre'
-                      required
-                    />
-                    <TextField
-                      label='Email'
-                      name='email'
-                      type='email'
-                      autoComplete='email'
-                      placeholder='johnnybravo@gmail.com'
-                      required
-                    />
-                  </div>
-
-                  <ImageUpload setImageData={setImageData} />
-                  <JurisdictionDropdown selectedJurisdictions={selectedJurisdictions} setSelectedJurisdictions={setSelectedJurisdictions} />
-                  <PhoneNumberInput selectedCountry={selectedCountry} setSelectedCountry={setSelectedCountry}
-                    phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber} />
-                  <RoleDropdown selectedRoles={selectedRoles} setSelectedRoles={setSelectedRoles} />
+            <FormHeader
+              title='Bienvenidos a Gabbi DAO'
+              description='Completa los datos para comenzar'
+            />
+            <form onSubmit={handleSubmit} className='mt-9 px-6 pb-10 sm:px-10'>
+              <div className='space-y-8'>
+                <div className='space-y-8 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:space-y-0'>
+                  <TextField
+                    label='Nombre'
+                    name='first-name'
+                    autoComplete='Nombres'
+                    placeholder='Escribe tu nombre'
+                    required
+                  />
+                  <TextField
+                    label='Email'
+                    name='email'
+                    type='email'
+                    autoComplete='email'
+                    placeholder='johnnybravo@gmail.com'
+                    required
+                  />
                 </div>
 
-                <div className='mt-5 flex items-center justify-between space-x-4'>
+                <ImageUpload setImageData={setImageData} />
+                <JurisdictionDropdown selectedJurisdictions={selectedJurisdictions} setSelectedJurisdictions={setSelectedJurisdictions} />
+                <PhoneNumberInput selectedCountry={selectedCountry} setSelectedCountry={setSelectedCountry}
+                  phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber} />
+                <RoleDropdown selectedRoles={selectedRoles} setSelectedRoles={setSelectedRoles} />
+              </div>
 
-                  <Button type='submit' className='sm:px-5'>
-                    <span>Registrar</span>
-                    <ChevronRightIcon className='h-4 w-4' />
-                  </Button>
-                </div>
-              </form>
-            </div>
+              <div className='mt-5 flex items-center justify-between space-x-4'>
+
+                <Button type='submit' className='sm:px-5'>
+                  <span>Registrar</span>
+                  <ChevronRightIcon className='h-4 w-4' />
+                </Button>
+              </div>
+            </form>
           </div>
-        )}
+        </div>
       </Container>
     </AuthLayout>
   )

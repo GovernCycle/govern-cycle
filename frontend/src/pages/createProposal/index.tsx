@@ -14,7 +14,7 @@ import { LinkList } from '@app/components/forms/LinkList'
 import { useProposal } from '@app/hooks/useProposal'
 import { ProposalRequest } from '@app/declarations/proposal/proposal.did'
 import { Jurisdiction, Role } from '@app/declarations/home/home.did'
-import { LinkOption } from '@app/utils'
+import { handleProposalResult, LinkOption } from '@app/utils'
 import { Link } from '@app/declarations/proposal/proposal.did'
 import { SelectedJurisdiction } from '@app/utils/jurisdiction'
 
@@ -94,48 +94,12 @@ export default function CreateProposal() {
             })
         }
         if ('err' in result) {
-            if ('UserNotAuthenticated' in result.err) {
-                Swal.fire({
-                    title: 'Error',
-                    text: 'User Not Authenticated',
-                    icon: 'error',
-                })
-            }
-            if ('ProposalNotFound' in result.err) {
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Proposal Not Found',
-                    icon: 'error',
-                })
-            }
-            if ('NoUsersFound' in result.err) {
-                Swal.fire({
-                    title: 'Error',
-                    text: 'No Users Found',
-                    icon: 'error',
-                })
-            }
-            if ('UserNotApproved' in result.err) {
-                Swal.fire({
-                    title: 'Error',
-                    text: 'User Not Approved',
-                    icon: 'error',
-                })
-            }
-            if ('InvalidDate' in result.err) {
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Invalid Date',
-                    icon: 'error',
-                })
-            }
-            if ('UserNotAuthorized' in result.err) {
-                Swal.fire({
-                    title: 'Error',
-                    text: 'User Not Authorized',
-                    icon: 'error',
-                })
-            }
+            const handleError = handleProposalResult(result.err);
+            Swal.fire({
+                title: 'Error',
+                text: handleError,
+                icon: 'error',
+            })
         }
     }
 
