@@ -14,18 +14,15 @@ import { LinkList } from '@app/components/forms/LinkList'
 import { useProposal } from '@app/hooks/useProposal'
 import { ProposalRequest } from '@app/declarations/proposal/proposal.did'
 import { Jurisdiction, Role } from '@app/declarations/home/home.did'
-
-interface SelectedJurisdiction {
-    continent: string;
-    country: string;
-    city: string;
-}
+import { LinkOption } from '@app/utils'
+import { Link } from '@app/declarations/proposal/proposal.did'
+import { SelectedJurisdiction } from '@app/utils/jurisdiction'
 
 export default function CreateProposal() {
 
     const [selectedJurisdictions, setSelectedJurisdictions] = useState<SelectedJurisdiction[]>([]);
     const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
-    const [listedLinks, setListedLinks] = useState<string[]>([]);
+    const [listedLinks, setListedLinks] = useState<LinkOption[]>([]);
     const [imageData, setImageData] = useState<Uint8Array | number[] | null>(null); // Estado para guardar los datos
     const { createProposal } = useProposal();
 
@@ -71,7 +68,7 @@ export default function CreateProposal() {
         const newProposal: ProposalRequest = {
             name: data.name as string,
             threshold: BigInt(data.threshold as string),
-            description: [data.description as string],
+            description: [data.descriptions as string],
             location: selectedJurisdictions.map((jurisdiction) => ({
                 continent: [jurisdiction.continent],
                 country: [jurisdiction.country],
@@ -80,7 +77,10 @@ export default function CreateProposal() {
             invitedRoles: selectedRoles.map((role) => ({ [role]: null })) as Role[],
             environmentalUnits: BigInt(data.UnidadesAmbientales as string),
             deadline: formattedDate,
-            links: listedLinks,
+            links: listedLinks.map((link) => ({
+                url: link.url,
+                description: link.description,
+            })) as Link[],
             photo: imageData,
         }
 
@@ -189,9 +189,9 @@ export default function CreateProposal() {
                                 <RoleDropdown selectedRoles={selectedRoles} setSelectedRoles={setSelectedRoles} />
                                 <TextField
                                     label='Descripción'
-                                    name='description'
+                                    name='descriptions'
                                     elementType="textarea"
-                                    autoComplete='description'
+                                    placeholder='Escribe una descripción de la propuesta'
                                     required
                                 />
                                 <ImageUpload setImageData={setImageData} />
