@@ -1,4 +1,4 @@
-import { ProposalDetail } from '@app/components/proposal/ProposalDetail';
+import { ProposalDetails } from '@app/components/proposal/ProposalDetail';
 import { UserRequest, Role, User } from '@app/declarations/home/home.did'
 import { useCountry } from '@app/hooks/useCountry';
 import { useHome } from '@app/hooks/useHome';
@@ -76,7 +76,7 @@ const index = () => {
         //         Get country
         //     </button>
         // </div>
-        <ProposalDetail />
+        <ProposalDetails />
     )
 }
 
