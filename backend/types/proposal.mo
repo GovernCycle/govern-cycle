@@ -31,7 +31,12 @@ module {
         invitedRoles: [UserTypes.Role];         // A list of roles invited to participate in the proposal.
         invitedUsers: [Principal];              // A list of specific users invited to participate.
         votes : [Vote];                         // A list of votes that have been cast on the proposal.
-        links : [Text];                         // A list of relevant links (as Text).
+        links : [Link];                         // A list of relevant links (as Text).
+    };
+
+    public type Link = {
+        url: Text;
+        description: Text;
     };
 
     // Type used to request a proposal, typically for creating or editing.
@@ -44,7 +49,7 @@ module {
         threshold : Nat;                        // The threshold required for the proposal.
         location : [UserTypes.Jurisdiction];    // A list of jurisdictions for the proposal.
         invitedRoles: [UserTypes.Role];         // A list of roles invited to participate.
-        links: [Text];                          // A list of relevant links for the proposal.
+        links: [Link];                          // A list of relevant links for the proposal.
     };
 
     // Enum representing the state of the proposal.

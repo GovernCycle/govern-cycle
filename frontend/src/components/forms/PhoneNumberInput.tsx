@@ -10,12 +10,12 @@ interface CountryOption {
 
 export const PhoneNumberInput = (
     { selectedCountry, setSelectedCountry, phoneNumber, setPhoneNumber }:
-    {
-        selectedCountry: CountryOption | undefined;
-        setSelectedCountry: React.Dispatch<React.SetStateAction<CountryOption | undefined>>;
-        phoneNumber: string;
-        setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
-    }
+        {
+            selectedCountry: CountryOption | undefined;
+            setSelectedCountry: React.Dispatch<React.SetStateAction<CountryOption | undefined>>;
+            phoneNumber: string;
+            setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
+        }
 ) => {
     const { getAll } = useCountry(); // Hook personalizado para obtener los datos del país
     const [countries, setCountries] = useState<CountryOption[]>([]);
@@ -26,7 +26,7 @@ export const PhoneNumberInput = (
                 const data = await getAll();
                 const formattedData = data.map((country: any) => ({
                     name: country.name.common,
-                    flag: country.flags.png, 
+                    flag: country.flags.png,
                     callingCode: country.idd.root + (country.idd.suffixes?.[0] || ''),
                 }));
 
@@ -35,25 +35,25 @@ export const PhoneNumberInput = (
                 );
 
                 setCountries(formattedData);
-                setSelectedCountry(formattedData[0]); 
+                setSelectedCountry(formattedData[0]);
             } catch (error) {
                 console.error('Error fetching countries:', error);
             }
         };
         fetchCountries();
-    }, []); 
+    }, []);
 
     const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const callingCode = e.target.value;
         const country = countries.find(c => c.callingCode === callingCode);
         if (country) {
-            setSelectedCountry(country); 
+            setSelectedCountry(country);
         }
     };
 
     const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        if (/^\d*$/.test(value)) { 
+        if (/^\d*$/.test(value)) {
             setPhoneNumber(value);
         }
     };
@@ -65,9 +65,9 @@ export const PhoneNumberInput = (
                 <div className="relative flex justify-center items-center w-60">
                     <select
                         id="country-code-dropdown"
-                        value={selectedCountry?.callingCode || ''} 
+                        value={selectedCountry?.callingCode || ''}
                         onChange={handleCountryChange}
-                        className="bg-form-input block w-full text-sm py-2.5 pr-8 rounded-md border-0 pl-10 "
+                        className="common-input py-2.5 pr-8 rounded-md border-0 pl-10 "
                     >
                         {countries.map((country) => (
                             <option
@@ -93,7 +93,7 @@ export const PhoneNumberInput = (
                     value={phoneNumber}
                     onChange={handlePhoneNumberChange}
                     placeholder="Enter phone number"
-                    className="block w-full text-sm py-2.5 rounded-md border-0 bg-form-input"
+                    className="common-input"
                     pattern="[0-9]*" // Solo permite números
                 />
             </div>

@@ -14,7 +14,7 @@ export class Dot {
     public shadowColor: string,
     public globalAlpha: number,
     public alpha: number
-  ) {}
+  ) { }
 
   public updateDots(
     canvas: HTMLCanvasElement,
@@ -88,6 +88,7 @@ export class Stars {
   private prevCssHeight: number = 0
   private fadeDuration: number = 700
   private observer: IntersectionObserver
+  private color: string = ""
 
   constructor(
     canvas: HTMLCanvasElement | null,
@@ -98,6 +99,7 @@ export class Stars {
     this.maxRadius = maxRadius
     this.minRadius = minRadius
     this.density = density
+
     if (!canvas || !canvas.parentElement) {
       throw new Error('Canvas or canvas container not found')
     }

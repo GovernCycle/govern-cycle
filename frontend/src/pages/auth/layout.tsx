@@ -1,45 +1,92 @@
 import Image from 'next/image'
 import { HeroContainer } from '@/components/shared/HeroContainer'
 import { Button } from '@/components/shared/Button'
-import { Constellation } from '@/components/auth/Constellation'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 
 import spaceSpotlight from '@/images/space-spotlight.png'
-import cosmicButterfly from '@/images/cosmic-butterfly.png'
+import forestLignthing from '@/images/forest-light-background.png'
+import FortestLeft from '@/images/forest-green-left.png'
+import FortestRight from '@/images/forest-green-right.png'
+import birdsLeft from '@/images/birds1.png'
+import birdsRight from '@/images/birds2.png'
+import cloudLeft from '@/images/Cloud1.png'
+import cloudRight from '@/images/Cloud2.png'
 
 export default function AuthLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <HeroContainer
       header={false}
-      className='flex min-h-screen items-center justify-center overflow-hidden py-16 sm:py-20'
+      starField={true}
+      starfieldWhite={true}
+      form={true}
+      className='flex min-h-screen items-center justify-center overflow-hidden '
       bgGradientClassName='-top-48 bottom-0 h-[calc(100%_+_320px)]'
       innerContainerClassName='w-full overflow-hidden sm:overflow-visible'
     >
-      <div className='absolute -right-48 top-64 max-w-6xl translate-x-16 translate-y-full sm:top-96 sm:translate-y-1/3 md:right-0 md:w-full lg:top-0 lg:translate-x-1/4 lg:translate-y-0'>
+      <div className='absolute bottom-0 left-0 right-0 z-0'>
         <Image
-          src={spaceSpotlight}
+          src={forestLignthing}
           alt=''
-          className='h-full w-full object-contain opacity-50 lg:opacity-75'
-          sizes='(max-width: 768px) 100vw, 1152px'
-          priority
-        />
-      </div>
-
-      <div className='absolute -left-96 -right-96 -top-96 bottom-0 -z-10'>
-        <Image
-          src={cosmicButterfly}
-          alt=''
-          className='h-[calc(100%_+_384px)] w-[calc(100%_+_768px)] opacity-10 lg:opacity-5'
+          className='w-full h-auto object-cover custom-scale'
           sizes='(max-width: 1024px) 100vw, 1024px'
           priority
         />
       </div>
 
-      <Constellation />
+      <div className="absolute bottom-0 left-0 z-3 animate-slide-in-left">
+        <Image
+          src={FortestLeft}
+          alt=""
+          className="h-auto w-[60vw] object-cover lg:w-[60vw]"
+          sizes="(max-width: 1024px) 60vw, 512px"
+          priority
+        />
+      </div>
+
+      <div className="absolute bottom-0 right-0 z-4 animate-slide-in-right ">
+        <Image
+          src={FortestRight}
+          alt=""
+          className="h-auto w-[70vw] object-cover lg:w-[70vw]"
+          sizes="(max-width: 1024px) 60vw, 512px"
+          priority
+        />
+      </div>
+
+      {/* Cambiar `fixed` por `absolute` */}
+      <div className="absolute top-10 left-[20%] z-5 animate-combined-left">
+        <Image
+          src={birdsLeft}
+          alt=""
+          className="h-auto w-[20vw] object-cover"
+        />
+      </div>
+
+      <div className="absolute top-10 right-[20%] z-5 animate-combined-right">
+        <Image
+          src={birdsRight}
+          alt=""
+          className="h-auto w-[20vw] object-cover"
+        />
+      </div>
+      <div className="absolute top-10 left-[5%] z-5 animate-cloud-left">
+        <Image
+          src={cloudLeft}
+          alt=""
+          className="h-auto w-[20vw] object-cover"
+        />
+      </div>
+
+      <div className="absolute top-96 right-[20%] z-5 animate-cloud-right">
+        <Image
+          src={cloudRight}
+          alt=""
+          className="h-auto w-[10vw] object-cover"
+        />
+      </div>
+
 
       <Button
         href='/'

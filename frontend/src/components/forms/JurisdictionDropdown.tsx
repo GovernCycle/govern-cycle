@@ -98,7 +98,7 @@ export const JurisdictionDropdown = ({
 
                         <label>Jurisdicción por continente</label>
                         <select onChange={handleContinentChange}
-                            className='block w-full text-sm text-[var(--color-text-ternary)] opacity-50 py-2.5 rounded-md border-0 bg-form-input'>
+                            className='common-input'>
                             <option value="" disabled>Select a Continent</option>
                             {regions.map((region) => (
                                 <option key={region} value={region}>
@@ -111,7 +111,7 @@ export const JurisdictionDropdown = ({
                         <label>Jurisdicción por país</label>
                         <select
                             onChange={handleCountryChange}
-                            className="block w-full text-sm text-[var(--color-text-ternary)] opacity-50 py-2.5 rounded-md border-0 bg-form-input"
+                            className="common-input"
                         >
                             <option value="" disabled>Select a country</option>
                             {countries.map((country) => (
@@ -125,7 +125,7 @@ export const JurisdictionDropdown = ({
                         <label>Jurisdicción por ciudad</label>
                         <select
                             onChange={handleCountryByCityChange}
-                            className="block w-full text-sm text-[var(--color-text-ternary)] opacity-50 py-2.5 rounded-md border-0 bg-form-input"
+                            className="common-input"
                         >
                             <option value="" disabled>Select a country</option>
                             {countries.map((country) => (
@@ -137,7 +137,7 @@ export const JurisdictionDropdown = ({
                         {countryJurisdiction && (
                             <div>
                                 <select onChange={handleCityChange}
-                                    className='block w-full text-sm text-[var(--color-text-ternary)] opacity-50 py-2.5 rounded-md border-0 bg-form-input'>
+                                    className='common-input'>
                                     <option value="" disabled>Select a city</option>
                                     {cities.map((city) => (
                                         <option key={city} value={city}>
