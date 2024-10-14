@@ -51,7 +51,7 @@
   --color-background-secondary: #875F59;
   --color-background-secondary-i: #b49870;
   --color-background-ternary: #375257;
-  --color-background-ternary-op: rgb(255, 254, 239, 0.9); /* Aquí el 0.05 es equivalente a 5% de opacidad */
+  --color-background-ternary-op: rgb(255, 254, 239, 0.3); /* Aquí el 0.05 es equivalente a 5% de opacidad */
 
   --color-background-ternary-i: #B49870;
   --color-background-card: rgba(55, 82, 87, 0.1);
@@ -330,3 +330,146 @@ code .line:not(:last-child)::before {
   background-color: rgba(255, 255, 255, 0.01);
 }
 
+
+
+
+/* 
+
+  SingUP Styles and animations
+
+*/
+
+/* Definición de los keyframes para las animaciones */
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Clases para las animaciones */
+.animate-slide-in-left {
+  animation: slide-in-left 1.5s ease-out forwards;
+  left: 0;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 1.5s ease-out forwards;
+  right: 0;
+}
+
+/* General adjustments */
+.w-full {
+  width: 100%;
+}
+.h-auto {
+  height: auto;
+}
+
+.custom-scale {
+  transform: scale(4); /* Ajusta este valor según lo necesario */
+  transform-origin: center;
+}
+
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+
+.animate-combined-left {
+  animation: slide-in-left 1.5s ease-out forwards, float 4s ease-in-out 1.5s infinite;
+}
+
+.animate-combined-right {
+  animation: slide-in-right 1.5s ease-out forwards, float 4s ease-in-out 1.5s infinite;
+}
+
+/* Animación para mover la nube izquierda desde el borde y luego flotar */
+@keyframes cloud-move-left {
+  0% {
+    transform: translateX(-150%); /* Comienza fuera de la pantalla */
+  }
+  100% {
+    transform: translateX(0); /* Se posiciona en su lugar */
+  }
+}
+
+@keyframes cloud-move-right {
+  0% {
+    transform: translateX(150%); /* Comienza fuera de la pantalla */
+  }
+  100% {
+    transform: translateX(0); /* Se posiciona en su lugar */
+  }
+}
+
+/* Animación continua para hacer flotar las nubes de izquierda a derecha */
+@keyframes cloud-float-left {
+  0% {
+    transform: translateX(0); /* Posición inicial */
+  }
+  50% {
+    transform: translateX(10px); /* Flota un poco a la derecha */
+  }
+  100% {
+    transform: translateX(0); /* Vuelve a la posición inicial */
+  }
+}
+
+@keyframes cloud-float-right {
+  0% {
+    transform: translateX(0); /* Posición inicial */
+  }
+  50% {
+    transform: translateX(-10px); /* Flota un poco a la izquierda */
+  }
+  100% {
+    transform: translateX(0); /* Vuelve a la posición inicial */
+  }
+}
+
+/* Aplicar las animaciones combinadas */
+.animate-cloud-left {
+  animation: cloud-move-left 2.5s ease-out forwards, cloud-float-left 4s ease-in-out 5s infinite;
+}
+
+.animate-cloud-right {
+  animation: cloud-move-right 2.5s ease-out forwards , cloud-float-right 4s ease-in-out 6s infinite;
+}
