@@ -15,7 +15,7 @@ export type SocialMedia =
   | 'instagram'
   | 'linkedin'
   | 'mail'
-  | 'x'
+  | 'X'
   | 'twitch'
   | 'whatsApp'
   | 'snapchat'

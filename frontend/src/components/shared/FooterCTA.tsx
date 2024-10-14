@@ -15,10 +15,10 @@ export function FooterCTA() {
             Únete a &nbsp;
             <span className='relative inline-block text-nowrap'>
               <span className='relative z-10 bg-gradient-to-b from-cream-500 via-carafe-500 to-cream-500 bg-clip-text text-transparent'>
-                Gabbii.
+                Gabbii
               </span>
               <span className='absolute -top-px left-0 -z-10 text-charcoal-200'>
-                Gabbii.
+                Gabbii
               </span>
             </span>
           </h1>
