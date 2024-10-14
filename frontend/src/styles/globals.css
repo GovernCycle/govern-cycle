@@ -51,7 +51,8 @@
   --color-background-secondary: #875F59;
   --color-background-secondary-i: #b49870;
   --color-background-ternary: #375257;
-  --color-background-ternary-op: rgb(255, 254, 239, 0.3); /* Aquí el 0.05 es equivalente a 5% de opacidad */
+  --color-background-ternary-op: rgb(255, 254, 239, 0.2); /* Aquí el 0.05 es equivalente a 5% de opacidad */
+  --text-label-primary: #FFFEEF; /* Aquí el 0.05 es equivalente a 5% de opacidad */
 
   --color-background-ternary-i: #B49870;
   --color-background-card: rgba(55, 82, 87, 0.1);
@@ -186,7 +187,7 @@ code .line:not(:last-child)::before {
 }
 
 .common-input {
-  @apply relative mt-2 flex w-full rounded-md bg-white border-none; /* Fondo blanco sin sombra inicial */
+  @apply relative  flex w-full rounded-md bg-white border-none; /* Fondo blanco sin sombra inicial */
   transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
 }
 

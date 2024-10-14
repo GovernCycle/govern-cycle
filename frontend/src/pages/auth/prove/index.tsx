@@ -19,9 +19,7 @@ const index = () => {
     );
 
     const { getCountry } = useCountry();
-
     const [user, setUser] = useState<User>();
-
     const saveUser = async () => {
         try {
             const result = await createProfile(userToSave);
@@ -33,7 +31,6 @@ const index = () => {
         } catch (error) {
             console.error('Error creating profile:', error);
         }
-
     }
 
     const getUser = async () => {

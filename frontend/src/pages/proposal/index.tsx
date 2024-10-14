@@ -22,13 +22,13 @@ export default function Proposals() {
   const { isAuthenticated } = useAuth();
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      Swal.fire({
-        title: 'Error',
-        text: 'You need to login to view proposals',
-        icon: 'error',
-      });
-    }
+    // if (!isAuthenticated) {
+    //   Swal.fire({
+    //     title: 'Error',
+    //     text: 'You need to login to view proposals',
+    //     icon: 'error',
+    //   });
+    // }
     const retrieveProposals = async () => {
       try {
         const result = await getAllProposals();
@@ -46,7 +46,7 @@ export default function Proposals() {
     }
     retrieveProposals();
   }
-    , [isAuthenticated]);
+    , []);
 
 
   return (

@@ -15,7 +15,8 @@ import Swal from 'sweetalert2'
 import { SelectedJurisdiction } from '@app/utils/jurisdiction'
 import { CountryOption } from '@app/utils'
 import { useAuth } from '@bundly/ares-react'
-
+import SimpleBar from 'simplebar-react';
+import 'simplebar/dist/simplebar.min.css';
 
 export default function Signup() {
 
@@ -138,16 +139,17 @@ export default function Signup() {
 
   return (
     <AuthLayout>
-      <Container className='max-w-lg py-5  sm:max-w-xl lg:max-w-6xl'>
-        {isAuthenticated && !checkUserExists() && (
-          <div className='lg:grid lg:grid-cols-1 lg:gap-x-8 xl:gap-x-36 '>
-            <div className='relative z-0 flex flex-col shadow-inner-blur bg-[var(--color-background-ternary-op)] rounded-2xl'>
-              {/* <ContainerOutline /> */}
+      <Container className='max-w-lg py-5 sm:max-w-xl lg:max-w-6xl'>
+        {(
+          <div className='lg:grid lg:grid-cols-1 lg:gap-x-8 xl:gap-x-36'>
+            <SimpleBar style={{ maxHeight: '90vh' }} className='relative z-0 flex flex-col shadow-inner-blur bg-[var(--color-background-ternary-op)] rounded-2xl'>
 
+              {/* Contenido dentro de SimpleBar */}
               <FormHeader
                 title='Bienvenidos a Gabbi DAO'
                 description='Completa los datos para comenzar'
               />
+
               <form onSubmit={handleSubmit} className='mt-9 px-6 pb-10 sm:px-10'>
                 <div className='space-y-8'>
                   <div className='space-y-8 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:space-y-0'>
@@ -176,14 +178,13 @@ export default function Signup() {
                 </div>
 
                 <div className='mt-5 flex items-center justify-between space-x-4'>
-
                   <Button type='submit' className='sm:px-5'>
                     <span>Registrar</span>
                     <ChevronRightIcon className='h-4 w-4' />
                   </Button>
                 </div>
               </form>
-            </div>
+            </SimpleBar>
           </div>
         )}
       </Container>

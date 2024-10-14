@@ -23,10 +23,10 @@ export function FormHeader({
       <Link href='/' className='flex flex-shrink-0' aria-label='Home'>
         <Image src={logo} className='h-auto w-12' alt='Logo' />
       </Link>
-      <h1 className='mt-4 text-center text-3xl font-bold text-[var(--color-text-primary)]'>
+      <h1 className='mt-4 text-center text-3xl font-bold text-[var(--color-title-primary-i)]'>
         {title}
       </h1>
-      <p className='mt-1.5 text-center text-base leading-relaxed text-[var(--color-text-primary)]'>
+      <p className='mt-1.5 text-center text-base leading-relaxed text-[var(--color-title-primary-i)]'>
         {description}
       </p>
 
