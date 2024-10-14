@@ -78,7 +78,6 @@ export default function AuthLayout({
           className="h-auto w-[20vw] object-cover"
         />
       </div>
-
       <div className="absolute top-96 right-[20%] z-5 animate-cloud-right">
         <Image
           src={cloudRight}
@@ -86,8 +85,6 @@ export default function AuthLayout({
           className="h-auto w-[10vw] object-cover"
         />
       </div>
-
-
       <Button
         href='/'
         variant='secondary'
