@@ -27,11 +27,11 @@ export function TextField({
   return (
     <div className={className}>
       {label && (
-        <Label name={name} link={link}>
+        <Label name={name} link={link} >
           {label}
         </Label>
       )}
-      <div className='group relative mt-2 flex w-full rounded-md bg-zinc-950/[.01] shadow-inner-blurcommon-input'>
+      <div className='group relative mt-2 flex w-full rounded-md bg-zinc-950/[.01] shadow-inner-blur common-input'>
         {elementType === 'textarea' ? (
           <textarea
             id={name}

@@ -9,7 +9,7 @@ import { RoleDropdown } from '@app/components/forms/roleDropDown'
 import { JurisdictionDropdown } from '@app/components/forms/JurisdictionDropdown'
 import { useState } from 'react'
 import Swal from 'sweetalert2'
-import AuthLayout from '../auth/layout'
+
 import { LinkList } from '@app/components/forms/LinkList'
 import { useProposal } from '@app/hooks/useProposal'
 import { ProposalRequest } from '@app/declarations/proposal/proposal.did'
@@ -17,6 +17,9 @@ import { Jurisdiction, Role } from '@app/declarations/home/home.did'
 import { handleProposalResult, LinkOption } from '@app/utils'
 import { Link } from '@app/declarations/proposal/proposal.did'
 import { SelectedJurisdiction } from '@app/utils/jurisdiction'
+import SimpleBar from 'simplebar-react';
+import 'simplebar/dist/simplebar.min.css';
+import AuthLayout from '../auth/layout'
 
 export default function CreateProposal() {
 
@@ -106,51 +109,60 @@ export default function CreateProposal() {
     return (
         <AuthLayout>
             <Container className='max-w-lg py-5 sm:max-w-xl lg:max-w-6xl'>
-                <div className='lg:grid lg:grid-cols-1 lg:gap-x-8 xl:gap-x-36 '>
-                    <div className='relative z-10 flex flex-col shadow-inner-blur'>
-                        <ContainerOutline />
-
+                <div className='lg:grid lg:grid-cols-1 lg:gap-x-8 xl:gap-x-36'>
+                    <SimpleBar style={{ maxHeight: '90vh' }} className='relative z-0 flex flex-col shadow-inner-blur bg-[var(--color-background-ternary-op)] rounded-2xl'>
                         <FormHeader
                             title='Agrega Tu Proyecto'
                             description='Completa los datos para registrar tu propuesta'
                         />
+
                         <form onSubmit={handleSubmit} className='mt-9 px-6 pb-10 sm:px-10 '>
                             <div className='space-y-8 lg:grid-cols-2'>
-                                <div className='space-y-8 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:space-y-0'>
-                                    <TextField
-                                        label='Nombre'
-                                        name='name'
-                                        placeholder='Escribe el nombre del proyecto'
-                                        required
-                                    />
-                                    <TextField
-                                        label='Umbral'
-                                        name='threshold'
-                                        type='number'
-                                        min={0}
-                                        autoComplete='email'
-                                        placeholder='Cantidad mínima de votos para aprobar la propuesta'
-                                        required
-                                    />
-                                    <TextField
-                                        label='Unidades ambientales'
-                                        name='UnidadesAmbientales'
-                                        type='number'
-                                        autoComplete='UnidadesAmbientales'
-                                        placeholder='0'
-                                        required
-                                    />
-                                    <TextField
-                                        label='Fecha Limite'
-                                        name='LimitDate'
-                                        type='datetime-local'
-                                        required
-                                    />
+                                <div className='sm:grid sm:grid-cols-2 sm:gap-x-6'>
+                                    <div className='space-y-4'>
+                                        <TextField
+                                            label='Nombre'
+                                            name='name'
+                                            placeholder='Escribe el nombre del proyecto'
+                                            required
+                                        />
+                                        <TextField
+                                            label='Umbral'
+                                            name='threshold'
+                                            type='number'
+                                            min={0}
+                                            autoComplete='email'
+                                            placeholder='Cantidad mínima de votos para aprobar la propuesta'
+                                            required
+                                        />
+                                    </div>
+                                    <div className='space-y-4'>
+                                        <TextField
+                                            label='Unidades ambientales'
+                                            name='UnidadesAmbientales'
+                                            type='number'
+                                            autoComplete='UnidadesAmbientales'
+                                            placeholder='0'
+                                            required
+                                        />
+                                        <TextField
+                                            label='Fecha Limite'
+                                            name='LimitDate'
+                                            type='datetime-local'
+                                            required
+                                        />
+                                    </div>
                                 </div>
 
-                                <JurisdictionDropdown selectedJurisdictions={selectedJurisdictions} setSelectedJurisdictions={setSelectedJurisdictions} />
+                                <JurisdictionDropdown
+                                    selectedJurisdictions={selectedJurisdictions}
+                                    setSelectedJurisdictions={setSelectedJurisdictions}
+                                />
 
-                                <RoleDropdown selectedRoles={selectedRoles} setSelectedRoles={setSelectedRoles} />
+                                <RoleDropdown
+                                    selectedRoles={selectedRoles}
+                                    setSelectedRoles={setSelectedRoles}
+                                />
                                 <TextField
                                     label='Descripción'
                                     name='descriptions'
@@ -165,14 +177,13 @@ export default function CreateProposal() {
                             </div>
 
                             <div className='mt-5 flex items-center justify-between space-x-4'>
-
                                 <Button type='submit' className='sm:px-5'>
                                     <span>Crear propuesta</span>
                                     <ChevronRightIcon className='h-4 w-4' />
                                 </Button>
                             </div>
                         </form>
-                    </div>
+                    </SimpleBar>
                 </div>
             </Container>
         </AuthLayout>

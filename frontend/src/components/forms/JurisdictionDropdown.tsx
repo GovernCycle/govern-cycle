@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Label } from './Label';
+
 import { useCountry } from '@app/hooks/useCountry';
 import { Button } from '../shared/Button';
 import { regions } from '@app/utils/region';
+import { Label } from './Label';
 
 interface CountryOption {
     name: string;
@@ -92,11 +93,11 @@ export const JurisdictionDropdown = ({
 
     return (
         <div className="space-y-2">
-            <div className="space-y-1">
-                <div className="flex space-x-2">
-                    <div className='w-full flex flex-col space-y-1 items-center'>
+            <div className="space-y-5">
+                <div className="flex space-x-4">
+                    <div className='w-full flex flex-col space-y-2 '>
 
-                        <label>Jurisdicción por continente</label>
+                        <Label name={"Jurisdicción"}>Jurisdicción por continente</Label>
                         <select onChange={handleContinentChange}
                             className='common-input'>
                             <option value="" disabled>Select a Continent</option>
@@ -107,8 +108,8 @@ export const JurisdictionDropdown = ({
                             ))}
                         </select>
                     </div>
-                    <div className='w-full flex flex-col space-y-1 items-center'>
-                        <label>Jurisdicción por país</label>
+                    <div className='w-full flex flex-col space-y-2 '>
+                        <Label name={"Jurisdicción"}>Jurisdicción por país</Label>
                         <select
                             onChange={handleCountryChange}
                             className="common-input"
@@ -121,8 +122,8 @@ export const JurisdictionDropdown = ({
                             ))}
                         </select>
                     </div>
-                    <div className='w-full flex flex-col space-y-1 items-center'>
-                        <label>Jurisdicción por ciudad</label>
+                    <div className='w-full flex flex-col space-y-2 '>
+                        <Label name={"Jurisdicción"}>Jurisdicción por ciudad</Label>
                         <select
                             onChange={handleCountryByCityChange}
                             className="common-input"
