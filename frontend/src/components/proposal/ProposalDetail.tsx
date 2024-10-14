@@ -9,7 +9,7 @@ import { Proposal } from '@app/declarations/proposal/proposal.did'
 import { useProposal } from '@app/hooks/useProposal'
 import Swal from 'sweetalert2'
 import { useAuth } from '@bundly/ares-react'
-import { Alert } from '@mui/material'
+import { handleProposalResult } from '@app/utils'
 
 
 export const ProposalDetails = ({
@@ -43,30 +43,15 @@ export const ProposalDetails = ({
                     text: 'Voted successfully',
                     icon: 'success',
                 });
-                loadProposal();
+                await loadProposal();
             }
             if ('err' in result) {
-                if ('UserAlreadyVoted' in result.err) {
-                    Swal.fire({
-                        title: 'Error',
-                        text: 'User already voted',
-                        icon: 'error',
-                    });
-                }
-                if ('UserNotInvited' in result.err) {
-                    Swal.fire({
-                        title: 'Error',
-                        text: 'User not invited',
-                        icon: 'error',
-                    });
-                }
-                if ('ProposalAlreadyApproved' in result.err) {
-                    Swal.fire({
-                        title: 'Error',
-                        text: 'Proposal already approved',
-                        icon: 'error',
-                    });
-                }
+                const errorResult = handleProposalResult(result.err);
+                Swal.fire({
+                    title: 'Error',
+                    text: errorResult,
+                    icon: 'error',
+                });
             }
         } catch (error) {
             Swal.fire({

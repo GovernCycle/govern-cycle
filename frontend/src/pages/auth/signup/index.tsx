@@ -13,7 +13,7 @@ import { Jurisdiction, Role, UserRequest } from '@app/declarations/home/home.did
 import { useHome } from '@app/hooks/useHome'
 import Swal from 'sweetalert2'
 import { SelectedJurisdiction } from '@app/utils/jurisdiction'
-import { CountryOption } from '@app/utils'
+import { CountryOption, handleProfileResult } from '@app/utils'
 import { useAuth } from '@bundly/ares-react'
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
@@ -28,29 +28,29 @@ export default function Signup() {
   const { createProfile, getProfile } = useHome();
   const { isAuthenticated } = useAuth();
 
-  useEffect(() => {
-    const handleUserCheck = async () => {
-      if (!isAuthenticated) {
-        Swal.fire({
-          title: 'Error',
-          text: 'You must be authenticated with internet identity to access this page',
-          icon: 'error',
-        });
-        return;
-      }
+  // useEffect(() => {
+  //   const handleUserCheck = async () => {
+  //     if (!isAuthenticated) {
+  //       Swal.fire({
+  //         title: 'Error',
+  //         text: 'You must be authenticated with internet identity to access this page',
+  //         icon: 'error',
+  //       });
+  //       return;
+  //     }
 
-      const userExists = await checkUserExists();
-      if (userExists) {
-        Swal.fire({
-          title: 'Ya estás en Gabbi DAO',
-          text: 'User already exists',
-          icon: 'success',
-        });
-      };
+  //     const userExists = await checkUserExists();
+  //     if (userExists) {
+  //       Swal.fire({
+  //         title: 'Ya estás en Gabbi DAO',
+  //         text: 'User already exists',
+  //         icon: 'success',
+  //       });
+  //     };
 
-      handleUserCheck();
-    }
-  }, [isAuthenticated]);
+  //     handleUserCheck();
+  //   }
+  // }, [isAuthenticated]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -107,20 +107,13 @@ export default function Signup() {
         icon: 'success',
       })
     }
-    if ('err' in result && 'UserAlreadyExists' in result.err) {
+    if ('err' in result) {
+      const handleError = handleProfileResult(result.err);
       Swal.fire({
         title: 'Error',
-        text: 'User already exists',
+        text: handleError,
         icon: 'error',
-      })
-    }
-
-    if ('err' in result && 'UserNotAuthenticated' in result.err) {
-      Swal.fire({
-        title: 'Error',
-        text: 'User Not Authenticated',
-        icon: 'error',
-      })
+      });
     }
   }
 
@@ -170,12 +163,12 @@ export default function Signup() {
                     />
                   </div>
 
-                  <ImageUpload setImageData={setImageData} />
-                  <JurisdictionDropdown selectedJurisdictions={selectedJurisdictions} setSelectedJurisdictions={setSelectedJurisdictions} />
-                  <PhoneNumberInput selectedCountry={selectedCountry} setSelectedCountry={setSelectedCountry}
-                    phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber} />
-                  <RoleDropdown selectedRoles={selectedRoles} setSelectedRoles={setSelectedRoles} />
-                </div>
+                <ImageUpload setImageData={setImageData} />
+                <JurisdictionDropdown selectedJurisdictions={selectedJurisdictions} setSelectedJurisdictions={setSelectedJurisdictions} />
+                <PhoneNumberInput selectedCountry={selectedCountry} setSelectedCountry={setSelectedCountry}
+                  phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber} />
+                <RoleDropdown selectedRoles={selectedRoles} setSelectedRoles={setSelectedRoles} />
+              </div>
 
                 <div className='mt-5 flex items-center justify-between space-x-4'>
                   <Button type='submit' className='sm:px-5'>
