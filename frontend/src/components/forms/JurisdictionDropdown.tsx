@@ -168,8 +168,9 @@ export const JurisdictionDropdown = ({
                                 key={index}
                                 className="block text-sm text-white py-2.5 px-2.5"
                             >
-                                {jurisdiction.continent || 'N/A'} -{' '}
-                                {jurisdiction.country || 'N/A'} -{' '}
+                                {jurisdiction.continent ? `${jurisdiction.continent}, ` : ''}
+                                {jurisdiction.country ? `${jurisdiction.country}, ` : ''}
+                                {jurisdiction.city ? jurisdiction.city : ''}
                                 <button
                                     type="button"
                                     onClick={() => removeJurisdiction(jurisdiction)}

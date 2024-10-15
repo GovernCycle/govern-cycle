@@ -3,7 +3,6 @@ import { Container } from '@/components/shared/Container'
 import { Button } from '@/components/shared/Button'
 import { TextField } from '@/components/forms/TextField'
 import { ChevronRightIcon } from '@heroicons/react/16/solid'
-import { ImageUpload } from '@app/components/forms/image'
 import { RoleDropdown } from '@app/components/forms/roleDropDown'
 import { JurisdictionDropdown } from '@app/components/forms/JurisdictionDropdown'
 import { useState } from 'react'
@@ -35,7 +34,7 @@ export default function CreateProposal() {
         if (selectedJurisdictions.length === 0) {
             Swal.fire({
                 title: 'Error',
-                text: 'Please select a jurisdiction',
+                text: 'Please select a location',
                 icon: 'error',
             })
             return
@@ -45,15 +44,6 @@ export default function CreateProposal() {
             Swal.fire({
                 title: 'Error',
                 text: 'Please select a role',
-                icon: 'error',
-            })
-            return
-        }
-
-        if (imageData === null) {
-            Swal.fire({
-                title: 'Error',
-                text: 'Please upload a logo',
                 icon: 'error',
             })
             return

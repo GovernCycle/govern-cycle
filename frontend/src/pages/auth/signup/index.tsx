@@ -55,7 +55,7 @@ export default function Signup() {
     if (selectedJurisdictions.length === 0) {
       Swal.fire({
         title: 'Error',
-        text: 'Please select a jurisdiction',
+        text: 'Please select a location',
         icon: 'error',
       })
       return

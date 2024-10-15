@@ -1,10 +1,7 @@
 export const regions: string[] = [
-    "World",
     "Africa",
     "Americas",
-    "Latin America and the Caribbean",
     "Northern America",
-    "Antarctica",
     "Asia",
     "Central Asia",
     "Eastern Asia",
@@ -16,12 +13,4 @@ export const regions: string[] = [
     "Northern Europe",
     "Southern Europe",
     "Western Europe",
-    "Landlocked Developing Countries (LLDC)",
-    "Least Developed Countries (LDC)",
-    "Oceania",
-    "Australia and New Zealand",
-    "Melanesia",
-    "Micronesia",
-    "Polynesia",
-    "Small Island Developing States (SIDS)"
-];
+    "Oceania",];
