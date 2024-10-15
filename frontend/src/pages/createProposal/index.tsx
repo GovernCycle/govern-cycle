@@ -1,6 +1,5 @@
 import { FormHeader } from '@/components/auth/FormHeader'
 import { Container } from '@/components/shared/Container'
-import { ContainerOutline } from '@/components/shared/ContainerOutline'
 import { Button } from '@/components/shared/Button'
 import { TextField } from '@/components/forms/TextField'
 import { ChevronRightIcon } from '@heroicons/react/16/solid'
@@ -20,17 +19,20 @@ import { SelectedJurisdiction } from '@app/utils/jurisdiction'
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 import AuthLayout from '../auth/layout'
+import Loading from '@app/components/loading/Loading'
 
 export default function CreateProposal() {
 
     const [selectedJurisdictions, setSelectedJurisdictions] = useState<SelectedJurisdiction[]>([]);
     const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
     const [listedLinks, setListedLinks] = useState<LinkOption[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
     const [imageData, setImageData] = useState<Uint8Array | number[] | null>(null); // Estado para guardar los datos
     const { createProposal } = useProposal();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        setIsLoading(true);
         if (selectedJurisdictions.length === 0) {
             Swal.fire({
                 title: 'Error',
@@ -95,6 +97,7 @@ export default function CreateProposal() {
                 text: result.ok.SuccessText,
                 icon: 'success',
             })
+            setIsLoading(false);
         }
         if ('err' in result) {
             const handleError = handleProposalResult(result.err);
@@ -103,6 +106,7 @@ export default function CreateProposal() {
                 text: handleError,
                 icon: 'error',
             })
+            setIsLoading(false);
         }
     }
 
@@ -115,6 +119,12 @@ export default function CreateProposal() {
                             title='Agrega Tu Proyecto'
                             description='Completa los datos para registrar tu propuesta'
                         />
+
+                        {isLoading && (
+                            <div className='flex justify-center w-full items-center'>
+                                <Loading />
+                            </div>
+                        )}
 
                         <form onSubmit={handleSubmit} className='mt-9 px-6 pb-10 sm:px-10 '>
                             <div className='space-y-8 lg:grid-cols-2'>
@@ -185,6 +195,7 @@ export default function CreateProposal() {
                         </form>
                     </SimpleBar>
                 </div>
+
             </Container>
         </AuthLayout>
     )

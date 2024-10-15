@@ -9,7 +9,7 @@ export const useHome = () => {
     const { currentIdentity } = useAuth();
     const home = useCandidActor<CandidActors>("home",
         currentIdentity, {
-        canisterId: process.env.NEXT_PUBLIC_HOME_CANISTER_ID!,
+        canisterId: "htqbp-5iaaa-aaaal-qjr2q-cai",
     }
     ) as CandidActors["home"];
 

@@ -9,6 +9,7 @@ import { useAuth } from '@bundly/ares-react'
 import { Button } from '@app/components/shared/Button'
 import { PlusIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
+import Loading from '@app/components/loading/Loading'
 
 
 export const metadata = {
@@ -20,6 +21,7 @@ export const metadata = {
 export default function Proposals() {
 
   const [proposals, setProposals] = useState<[bigint, Proposal][]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const { getAllProposals } = useProposal();
   const { isAuthenticated } = useAuth();
 
@@ -36,6 +38,7 @@ export default function Proposals() {
         const result = await getAllProposals();
         if ('ok' in result && 'FullProposal' in result.ok) {
           setProposals(result.ok.FullProposal);
+          setIsLoading(false);
         }
       } catch (error) {
         Swal.fire({
@@ -44,6 +47,7 @@ export default function Proposals() {
           icon: 'error',
         });
       }
+      setIsLoading(false);
     }
     retrieveProposals();
   }
@@ -59,6 +63,12 @@ export default function Proposals() {
         {/* <ContactHero /> */}
       </HeroContainer>
       <div className='w-full flex justify-center mt-10'>
+
+        {isLoading && (
+          <div className='flex justify-center w-full items-center'>
+            <Loading />
+          </div>
+        )}
         <Link href='/createProposal'>
           <Button className='hover:bg-carafe-500 rounded-full'>
             <PlusIcon className='text-white font-extrabold h-5 w-5' />
