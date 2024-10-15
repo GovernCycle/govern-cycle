@@ -36,7 +36,7 @@ export const HomeHero = () => {
           Nuestra plataforma de gobernanza descentralizada utiliza tecnología de Internet Identity y blockchain para garantizar que cada voto sobre propuestas ambientales sea auténtico y seguro.
 </p>
           <div className='mt-8 flex items-center justify-center space-x-3 sm:space-x-5'>
-            <Button id='top-cta' href='/signup'>
+            <Button id='top-cta' href='/proposal'>
               {' '} 
               Comienza a votar{' '}
             </Button>

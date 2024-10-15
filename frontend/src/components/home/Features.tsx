@@ -85,11 +85,11 @@ export function Features() {
           </p>
         </div>
         {/* Features */}
-        <div className='relative mx-auto mt-10 grid max-w-lg grid-cols-1 gap-x-6 gap-y-5 sm:mt-16 sm:max-w-2xl sm:grid-cols-2 sm:gap-y-9 md:mt-18 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
+        <div className='relative mx-auto mt-10 grid items-center px-24 justify-center max-w-lg grid-cols-1 gap-x-4 gap-y-4 sm:mt-18 sm:max-w-2xl sm:grid-cols-2 sm:gap-y-2 md:mt-10 lg:max-w-none lg:grid-cols-2'>
           {features.map((feature, index) => (
-            <div key={`feature-${index}`}>
-              <feature.icon className='-mt-0.5 mr-1.5 inline h-5 w-5 shrink-0 text-text-primary sm:h-[21px] sm:w-[21px] ' />
-              <p className='inline text-[17px] leading-7 text-text-tertiary md:text-lg md:leading-8 '>
+            <div key={`feature-${index}`} className='flex flex-col w-full'>
+              <feature.icon className='mt-0.5 mr-1.5 h-5 w-5 shrink-0 text-text-primary sm:h-[21px]' />
+              <p className='text-[17px] leading-7 text-text-tertiary md:text-lg md:leading-8'>
                 <span className='font-semibold text-text-primary'>
                   {feature.title}
                 </span>{' '}

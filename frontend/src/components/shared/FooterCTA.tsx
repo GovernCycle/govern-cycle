@@ -26,7 +26,7 @@ export function FooterCTA() {
           Sé parte de la solución a los desafíos ambientales de nuestro tiempo. En Gabbii, tu voz cuenta, y tus acciones hacen la diferencia.
           </p>
           <div className='mt-8 flex items-center justify-center space-x-3 sm:space-x-5'>
-            <Button href='/signup'> Registrate </Button>
+            <Button href='/auth/signup'> Registrate </Button>
           </div>
         </div>
       </Container>
