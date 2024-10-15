@@ -38,7 +38,7 @@ import {
 
 import logo from '@/images/logo.png'
 import logoIcon from '@/images/logo-icon.png'
-const pages = [
+{/*const pages = [
   { label: 'Home', href: '/', icon: HomeIcon },
   //{ label: 'Actions', href: '/actions', icon: UsersIcon },//
   {
@@ -57,8 +57,7 @@ const pages = [
     href: 'password-reset',
     icon: LockOpenIcon,
   },
-  { label: '404', href: '/404', icon: ExclamationCircleIcon },
-]
+]*/}
 
 const links = [
   { label: 'Inicio', href: '/' },
@@ -113,8 +112,8 @@ function MobileNavigation() {
             </MobileNavItem>
           ))}
 
-          <Disclosure as='div' className='block w-full'>
-            {/* Pages dropdown button */}
+          {/*<Disclosure as='div' className='block w-full'>
+             {/* Pages dropdown button 
             <DisclosureButton className='group flex w-full items-center justify-between px-1.5 pb-2 pt-4 text-[15px] font-medium text-cream drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out hover:text-charcoal-400/95 data-[open]:text-charcoal-400/95'>
               <span>Pages</span>
 
@@ -136,7 +135,7 @@ function MobileNavigation() {
                 </Link>
               ))}
             </DisclosurePanel>
-          </Disclosure> 
+          </Disclosure> */}
         </nav>
       </PopoverPanel>
     </div>
@@ -160,7 +159,7 @@ function DropDownMenu({
       }}
       modal={false}
     >
-      {pages.map((link) => (
+      {/*{pages.map((link) => (
         <MenuItem key={`pages-dropdiwn-link-${link.href}`}>
           <Link
             href={link.href}
@@ -175,7 +174,7 @@ function DropDownMenu({
             <span className='absolute inset-y-0 left-0 w-px bg-gradient-to-b from-violet-400/0 via-tan-400/90 to-violet-400/0 opacity-0 duration-200 ease-in-out group-data-[focus]:opacity-100' />
           </Link>
         </MenuItem>
-      ))}
+      ))}*/}
     </MenuItems>
   )
 }
@@ -359,7 +358,7 @@ export const NavbarPill = () => {
               </Link>
             ))}
 
-            {/* Pages dropdown button */}
+            {/* Pages dropdown button 
             <MenuButton
               type='button'
               className='group relative z-40 hidden h-full items-center px-3 py-2.5 text-sm font-semibold text-cream-500/50 outline-none drop-shadow-[-4px_-4px_6px_rgba(255, 254, 239,0.2)] duration-200 ease-in-out hover:text-cream-500/100 data-[open]:text-cream-500 data-[open]:drop-shadow-[-4px_-4px_6px_rgba(255, 254, 239,0.2)] md:inline-flex lg:px-4'
@@ -368,7 +367,7 @@ export const NavbarPill = () => {
               <span>Pages</span>
 
               <ChevronDownIcon className='ml-1 h-4.5 w-4.5 text-orange-100/ duration-300 group-tan:text-text-primary group-data-[open]:rotate-180 group-data-[open]:text-tan-400/90' />
-            </MenuButton>
+            </MenuButton>*/}
 
             <div className='relative z-20 ml-1 flex items-center sm:ml-3 md:hidden'>
               <Button

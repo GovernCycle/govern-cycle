@@ -45,7 +45,7 @@ export const Header = () => {
             </div>
 
             {/* Call to action */}
-            <Button href='/auth/signup' size='sm' variant='secondary'>
+            <Button href='/auth/signup' size='lg' variant='secondary'>
               Sign up
             </Button>
           </div>
