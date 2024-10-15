@@ -21,7 +21,7 @@ import AuthLayout from '../auth/layout'
 import Loading from '@app/components/loading/Loading'
 
 export default function CreateProposal() {
-    
+
     const [selectedJurisdictions, setSelectedJurisdictions] = useState<SelectedJurisdiction[]>([]);
     const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
     const [listedLinks, setListedLinks] = useState<LinkOption[]>([]);
