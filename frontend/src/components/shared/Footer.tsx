@@ -62,8 +62,6 @@ export function Footer({ cta = true }: Props) {
   return (
     <section className={clsx({ 'overflow-hidden': cta })}>
       <div className='relative'>
-        {cta && <FooterCTA />}
-
         {/* Stars */}
         <div
           className='absolute -bottom-4 left-1/2 -z-10 h-48 w-full max-w-3xl -translate-x-1/2 md:-bottom-8 md:h-64 lg:-bottom-12'

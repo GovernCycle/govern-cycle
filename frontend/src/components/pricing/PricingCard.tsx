@@ -2,7 +2,6 @@ import Image from 'next/image'
 import { Button } from '@/components/shared/Button'
 import { ContentPill } from '@/components/shared/ContentPill'
 import { StarField } from '@/components/shared/StarField'
-
 import spaceSpotlight from '@/images/space-spotlight.png'
 
 interface Feature {
