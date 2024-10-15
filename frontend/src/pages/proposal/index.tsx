@@ -69,10 +69,14 @@ export default function Proposals() {
             <Loading />
           </div>
         )}
-        <Link href='/createProposal'>
-          <Button className='hover:bg-carafe-500 rounded-full'>
-            <PlusIcon className='text-white font-extrabold h-5 w-5' />
-          </Button>
+        <Link href='/createProposal' className={`${isLoading ? 'hidden' : ''}`}>
+          <div className='flex flex-col space-y-5 justify-center items-center'>
+
+            <label className='text-2xl font-bold text-carafe-500'>Crea una propuesta</label>
+            <Button className='hover:bg-carafe-500 rounded-full w-fit'>
+              <PlusIcon className='text-white font-extrabold h-5 w-5' />
+            </Button>
+          </div>
         </Link>
       </div>
 
