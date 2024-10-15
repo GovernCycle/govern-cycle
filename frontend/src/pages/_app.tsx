@@ -24,25 +24,26 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           new InternetIdentity({
             providerUrl:
               process.env.NEXT_PUBLIC_INTERNET_IDENTITY_URL!,
-            // process.env.NEXT_PUBLIC_INTERNET_IDENTITY_URL! || 'https://identity.ic0.app',
           }),
         ],
       });
-
       setClient(client);
     };
 
     createClient();
   }, []);
 
-  if (!client) return <div>Loading...</div>; // Ensure the client is ready before rendering the app
+  useEffect(() => {
+    console.log('User', user); // Muestra el usuario cuando cambia
+  }, [user]);
+
+  if (!client) return <div>Loading...</div>; // Asegúrate de que el cliente esté listo antes de renderizar la app
 
   return (
     <IcpConnectContextProvider client={client}>
       <UserContext.Provider value={{ user, setUser }}>
-        {/* Wrap the Component inside RootLayout */}
         <Component {...pageProps} />
       </UserContext.Provider>
     </IcpConnectContextProvider>
-  );
+  );
 }

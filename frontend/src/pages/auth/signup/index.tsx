@@ -16,6 +16,7 @@ import { CountryOption, handleProfileResult } from '@app/utils'
 import { useAuth } from '@bundly/ares-react'
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
+import { useUser } from '@app/context/userContext'
 
 export default function Signup() {
 
@@ -24,6 +25,7 @@ export default function Signup() {
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
   const { createProfile } = useHome();
+  const {user} = useUser();
   const { isAuthenticated } = useAuth();
 
   // useEffect(() => {
@@ -49,6 +51,11 @@ export default function Signup() {
   //     handleUserCheck();
   //   }
   // }, [isAuthenticated]);
+
+  useEffect(() => {
+    console.log('User', user);
+  }
+  , [user]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

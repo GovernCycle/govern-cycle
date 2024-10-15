@@ -6,8 +6,22 @@ import { Button } from '@/components/shared/Button'
 import { InternetIdentityButton } from '@bundly/ares-react';
 
 import logo from '@/images/logo.png'
+import { useUser } from '@app/context/userContext'
+import { useHome } from '@app/hooks/useHome'
 
 export const Header = () => {
+  const {setUser} = useUser();
+  const {getProfile} = useHome();
+
+  const handleOnSuccess = async () => {
+    const result = await getProfile();
+    if('ok' in result) {
+      if('User' in result.ok) {
+        setUser(result.ok.User);
+        console.log('User', result.ok.User);
+    }
+  }
+}
   return (
     <header className='relative h-20'>
       <Container className='flex h-full items-center'>
@@ -27,7 +41,9 @@ export const Header = () => {
 
           <div className='hidden items-center md:flex lg:space-x-3 xl:space-x-4'>
             <div className="lg:flex lg:flex-1 lg:justify-end">
-              <InternetIdentityButton style={
+              <InternetIdentityButton 
+              onSuccess={handleOnSuccess}
+              style={
                 {
                   color: 'white',
                   backgroundColor: 'var(--color-button-primary)',
