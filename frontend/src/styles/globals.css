@@ -51,7 +51,8 @@
   --color-background-secondary: #875F59;
   --color-background-secondary-i: #b49870;
   --color-background-ternary: #375257;
-  --color-background-ternary-op: rgb(255, 254, 239, 0.3); /* Aquí el 0.05 es equivalente a 5% de opacidad */
+  --color-background-ternary-op: rgb(255, 254, 239, 0.2); /* Aquí el 0.05 es equivalente a 5% de opacidad */
+  --text-label-primary: #FFFEEF; /* Aquí el 0.05 es equivalente a 5% de opacidad */
 
   --color-background-ternary-i: #B49870;
   --color-background-card: rgba(55, 82, 87, 0.1);
@@ -186,7 +187,7 @@ code .line:not(:last-child)::before {
 }
 
 .common-input {
-  @apply relative mt-2 flex w-full rounded-md bg-white border-none; /* Fondo blanco sin sombra inicial */
+  @apply relative  flex w-full rounded-md bg-white border-none; /* Fondo blanco sin sombra inicial */
   transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
 }
 
@@ -472,4 +473,73 @@ code .line:not(:last-child)::before {
 
 .animate-cloud-right {
   animation: cloud-move-right 2.5s ease-out forwards , cloud-float-right 4s ease-in-out 6s infinite;
+}
+
+
+
+/* 
+
+
+Loading animation
+
+
+
+*/
+
+
+/* Animación para los árboles */
+@keyframes treeFadeIn {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Animación para la nube izquierda */
+@keyframes cloudSlideInLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Animación para la nube derecha */
+@keyframes cloudSlideInRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Aplicar las animaciones con diferentes duraciones */
+.tree-fade-in-1s {
+  animation: treeFadeIn 1s ease-in-out forwards;
+}
+
+.tree-fade-in-3s {
+  animation: treeFadeIn 3s ease-in-out forwards;
+}
+
+.tree-fade-in-6s {
+  animation: treeFadeIn 6s ease-in-out forwards;
+}
+
+.cloud-slide-in-left {
+  animation: cloudSlideInLeft 3s ease-in-out forwards;
+}
+
+.cloud-slide-in-right {
+  animation: cloudSlideInRight 3s ease-in-out forwards;
 }

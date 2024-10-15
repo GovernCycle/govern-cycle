@@ -7,7 +7,7 @@ export const useProposal = () => {
     const { currentIdentity } = useAuth();
     const proposal = useCandidActor<CandidActors>("proposal",
         currentIdentity, {
-        canisterId: "h2tkt-laaaa-aaaal-qjr3a-cai",
+        canisterId: process.env.NEXT_PUBLIC_PROPOSAL_CANISTER_ID!,
     }
     ) as CandidActors["proposal"];
 

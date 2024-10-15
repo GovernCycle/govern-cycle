@@ -58,7 +58,6 @@ export default function Proposals() {
       >
         {/* <ContactHero /> */}
       </HeroContainer>
-
       <div className='w-full flex justify-center mt-10'>
         <Link href='/createProposal'>
           <Button className='hover:bg-carafe-500 rounded-full'>
