@@ -474,3 +474,72 @@ code .line:not(:last-child)::before {
 .animate-cloud-right {
   animation: cloud-move-right 2.5s ease-out forwards , cloud-float-right 4s ease-in-out 6s infinite;
 }
+
+
+
+/* 
+
+
+Loading animation
+
+
+
+*/
+
+
+/* Animación para los árboles */
+@keyframes treeFadeIn {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Animación para la nube izquierda */
+@keyframes cloudSlideInLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Animación para la nube derecha */
+@keyframes cloudSlideInRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Aplicar las animaciones con diferentes duraciones */
+.tree-fade-in-1s {
+  animation: treeFadeIn 1s ease-in-out forwards;
+}
+
+.tree-fade-in-3s {
+  animation: treeFadeIn 3s ease-in-out forwards;
+}
+
+.tree-fade-in-6s {
+  animation: treeFadeIn 6s ease-in-out forwards;
+}
+
+.cloud-slide-in-left {
+  animation: cloudSlideInLeft 3s ease-in-out forwards;
+}
+
+.cloud-slide-in-right {
+  animation: cloudSlideInRight 3s ease-in-out forwards;
+}
