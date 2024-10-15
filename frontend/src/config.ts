@@ -9,6 +9,9 @@ import amazon from './images/logos/amazon.svg'
 import stripe from './images/logos/stripe.svg'
 import facebook from './images/logos/facebook.svg'
 import oracle from './images/logos/oracle.svg'
+import next from './images/logos/next-logo.svg'
+import icp from './images/logos/icp-logo.svg'
+import motoko from './images/logos/motoko-logo.svg'
 
 import twitterIcon from '@/icons/nucleo/twitter.svg'
 import githubIcon from '@/icons/nucleo/github.svg'
@@ -55,14 +58,7 @@ export const SOCIALS: SocialObjects = [
 ]
 
 export const CLIENTS: Clients = [
-  { name: 'Daily News', logo: dailyNews },
-  { name: 'Netflix', logo: netflix },
-  { name: 'Github', logo: github },
-  { name: 'Tinder', logo: tinder },
-  { name: 'Facebook', logo: facebook },
-  { name: 'Ticketmaster', logo: ticketmaster },
-  { name: 'Amazon', logo: amazon },
-  { name: 'Stripe', logo: stripe },
-  { name: 'Apple', logo: apple },
-  { name: 'Oracle', logo: oracle },
+  { name: 'Next', logo: next },
+  { name: 'ICP', logo: icp },
+  { name: 'Motoko', logo: motoko },
 ]

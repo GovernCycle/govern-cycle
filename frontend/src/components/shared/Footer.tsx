@@ -144,7 +144,7 @@ export function Footer({ cta = true }: Props) {
                       <Image
                         src={logo}
                         alt=''
-                        className='h-6 w-auto sm:inline sm:h-7 xl:h-8'
+                        className='h-6 w-auto sm:inline sm:h-8 xl:h-10'
                       />
                       <Image
                         src={logoIcon}
