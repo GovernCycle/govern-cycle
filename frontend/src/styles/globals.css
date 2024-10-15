@@ -1,0 +1,553 @@
+@tailwind base;
+@tailwind components;
+@import './vendors/odometer-theme-default.css';
+@tailwind utilities;
+
+
+/* Additional styles */
+
+:root {
+  --font-geist-sans: 'Geist Sans', sans-serif;
+  --font-geist-mono: 'Geist Mono', monospace;
+
+  --scroll-progress: 0;
+  --max-translate-x: 0;
+  --max-translate-y: 0;
+
+
+  /* Label */
+  --color-label-primary: #50BA52;
+  --color-label-primary-i: #50BA52;
+  --color-label-secondary: #50BA52;
+  --color-label-secondary-i: #50BA52;
+  --color-label-ternary: #50BA52;
+  --color-label-ternary-i: #50BA52;
+  /* titles */
+  --color-title-primary: #B49870;
+  --color-title-primary-i: #cab79e;
+  --color-title-secondary: #875F59;
+  --color-title-secondary-i: #ba958f;
+  --color-title-ternary: #375257;
+  --color-title-ternary-i: #546c70;
+
+  /* text */
+  --color-text-primary: #B49870; 
+  --color-text-secondary: #875F59; 
+  --color-text-ternary: #375257;
+  --color-text-accent: #FFFEEF; 
+  --color-text-inverse: #634642; 
+
+  /* buttons */
+  --color-button-primary: #B49870;
+  --color-button-primary-i: #375257;
+  --color-button-secondary: #875F59;
+  --color-button-secondary-i: #B49870;
+  --color-button-ternary: #375257;
+  --color-button-ternary-i: #634642;
+
+  /* backGrounds */
+  --color-background-primary: rgb(255, 254, 239,0.4);
+  --color-background-primary-i: #B49870;
+  --color-background-secondary: #875F59;
+  --color-background-secondary-i: #b49870;
+  --color-background-ternary: #375257;
+  --color-background-ternary-op: rgba(55, 82, 87, 0.5); /* Aquí el 0.05 es equivalente a 5% de opacidad */
+  --text-label-primary: #FFFEEF; /* Aquí el 0.05 es equivalente a 5% de opacidad */
+
+  --color-background-ternary-i: #B49870;
+  --color-background-card: rgba(55, 82, 87, 0.1);
+
+  /* Transitions */
+  --color-transitions-primary: #5083BA;
+  --color-transitions-primary-i: #5083BA;
+  --color-transitions-secondary: #5083BA;
+  --color-transitions-secondary-i: #5083BA;
+  --color-transitions-ternary: #5083BA;
+  --color-transitions-ternary-i: #5083BA;
+
+  /* particles */
+  --color-particles-primary: #375257;
+  --color-particles-primary-i: #5083BA;
+  --color-particles-secondary: #ff9500;
+  --color-particles-secondary-i: #5083BA;
+  --color-particles-ternary:#053af8;
+  --color-particles-ternary-i: #5083BA;
+
+  /*opacity */
+  --bg-opacity: opacity: 1;
+  --tw-text-opacity: 1;
+  
+/* colors */
+  --color-white: #FFFFFF;
+  --color-cream: #FFFEEF;
+  --color-carafe: #875F59;
+  --color-charcoal: #375257;
+  --color-tan: ##B49870;
+
+}
+
+
+.bg-form-input{
+ @apply bg-zinc-950/[.01] shadow-inner-blur duration-200 ease-in-out hover:bg-zinc-950/10 has-[:focus]:bg-zinc-950/15 
+}
+
+.bg-violet-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(221 214 254 / var(--tw-bg-opacity)) /* #ddd6fe */;
+}
+
+.text-white-300 {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.image-container {
+  --overshoot-translate: calc(var(--initial-translate) * -1);
+  transform: translateY(
+    calc(
+      var(--initial-translate) * (1 - var(--scroll-progress)) +
+        var(--overshoot-translate) * var(--scroll-progress)
+    )
+  ) !important;
+  transition: transform 0.3s ease-out;
+}
+
+.images-wrapper {
+  transform: translate(
+    calc(var(--max-translate-x) * var(--scroll-progress)),
+    calc(var(--max-translate-y) * var(--scroll-progress))
+  ) !important;
+  transition: transform 0.3s ease-out;
+}
+@font-face {
+  font-family: 'GeistSans';
+  src: url('/fonts/GeistSans.woff2') format('woff2'),
+       url('/fonts/GeistSans.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GeistMono';
+  src: url('/fonts/GeistMono.woff2') format('woff2'),
+       url('/fonts/GeistMono.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+code {
+  @apply [counter-increment:step_0] [counter-reset:line];
+}
+
+code .line:not(:last-child)::before {
+  @apply mr-6 inline-block w-max text-right text-[#BABED8]/30 content-[counter(line)] [counter-increment:line];
+}
+
+.splide__slide pre.shiki {
+  @apply h-full rounded-b-lg p-5 text-sm font-medium;
+}
+
+.feature.active {
+  @apply bg-zinc-950/[.01] shadow-inner-blur;
+}
+
+.feature:not(.active) {
+  @apply hover:bg-zinc-950/[.01] hover:shadow-inner-blur-light;
+}
+
+.feature.active > div {
+  @apply border-violet-200;
+  border-opacity: 6;
+}
+
+.feature:not(.active) > div {
+  @apply border-transparent;
+}
+
+.card::before {
+  background: radial-gradient(
+    1200px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 254, 239, 0.40),
+    transparent 30%
+  );
+}
+.card::after {
+  background: radial-gradient(
+    800px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.25),
+    transparent 40%
+  );
+}
+
+/* Firefox specific styles */
+@-moz-document url-prefix() {
+  .hover-gradient {
+    @apply !from-[#575EFF]/10 !to-[#E478FF]/10;
+  }
+}
+
+.common-input {
+  @apply relative  flex w-full rounded-md bg-white border-none; /* Fondo blanco sin sombra inicial */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+}
+
+.common-input:hover {
+  @apply bg-gray-100 shadow-md; /* Aparece la sombra y cambia ligeramente el color al hacer hover */
+}
+
+.common-input:active {
+  @apply bg-gray-200 shadow-lg; /* Aumenta la sombra y se aclara más al hacer click */
+}
+
+
+.image-common-label{
+  @apply block text-[var(--color-text-primary)]
+}
+
+.text-brown-50\/80 {
+  color: rgb(45 22 14 / 0.8);
+}
+.text-brown-100 {
+  --tw-text-opacity: 1;
+  color: rgb(45 22 14/ var(--tw-text-opacity));
+}
+
+
+.after\:border-violet-200\/\[\.04\]::after {
+  content: var(--tw-content);
+  border-color: rgb(221 214 254 / .04);
+}
+
+.from-orange-400 {
+  --tw-gradient-from: #FA7416 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(250 135 22/ 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.via-orange-400 {
+  --tw-gradient-to: rgb(250 135 22/ 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), #FA7416 var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+
+.via-orange-200\/15 {
+  --tw-gradient-to: rgb(250 135 22 / 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), rgb(250 135 22 / 0.15) var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+.text-brown-50 {
+  --tw-text-opacity: 1;
+  color: rgb(45 22 14 / var(--tw-text-opacity)) /* #f5f3ff */;
+}
+.text-white-50 {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) /* #f5f3ff */;
+}
+
+.text-brown-100 {
+  --tw-text-opacity: 1;
+  color: rgb(45 22 14/ var(--tw-text-opacity)) /* #ede9fe */;
+}
+
+.text-brown-400 {
+  --tw-text-opacity: 1;
+  color: rgb(45 22 14/ var(--tw-text-opacity));
+}
+
+.text-orange-400 {
+  color: rgb(250 135 22 );
+}
+
+.via-brown-100\/15 {
+  --tw-gradient-to: rgb(45 22 14/ 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), rgb(45 22 14/ 0.15) var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+
+.border-brown-200\/\[\.06\] {
+  border-color: rgba(45, 22, 14, 0.355);
+}
+
+
+.text-brown-200 {
+  --tw-text-opacity: 1;
+  color: rgb(45 22 14 / var(--tw-text-opacity)) /* #e4e4e7 */;
+}
+
+.to-white-500 {
+  --tw-gradient-to: #ffffff var(--tw-gradient-to-position);
+}
+
+.hover\:text-orange-400\/95:hover {
+  color: rgb(250 135 22 / 0.95);
+}
+
+.from-orange-400\/0 {
+  --tw-gradient-from: rgb(250 135 22  / 0) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(250 135 22  / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.via-orange-400\/80 {
+  --tw-gradient-to: rgb(250 135 22 / 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), rgb(250 135 22 / 0.8) var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+
+.to-orange-400\/0 {
+  --tw-gradient-to: rgb(250 135 22/ 0) var(--tw-gradient-to-position);
+}
+  
+.after\:border-brown-200\/\[\.06\]::after {
+  content: var(--tw-content);
+  border-color: rgba(45, 22, 14, 0); /* nav bar border */
+}
+
+.bg-green-900\/15 {
+  background-color: rgba(107, 121, 62, 0.577);
+}
+
+.h-3px {
+  height: 3px;
+}
+
+.from-brown-400\/0 {
+  --tw-gradient-from: rgba(107, 121, 62, 0.108) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgba(107, 121, 62, 0.14) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.via-brown-400\/80 {
+  --tw-gradient-to: rgba(107, 121, 62, 0.604)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), rgba(45, 22, 14, 0.668) var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+
+.to-brown-400\/0 {
+  --tw-gradient-to: rgba(107, 121, 62, 0.126) var(--tw-gradient-to-position);
+}
+
+.via-brown-200\/15 {
+  --tw-gradient-to: rgb(45 22 14/ 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), rgb(45 22 14 / 0.15) var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+
+.bg-white-950\/\[\.01\] {
+  background-color: rgba(255, 255, 255, 0.01);
+}
+
+
+
+
+/* 
+
+  SingUP Styles and animations
+
+*/
+
+/* Definición de los keyframes para las animaciones */
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Clases para las animaciones */
+.animate-slide-in-left {
+  animation: slide-in-left 1.5s ease-out forwards;
+  left: 0;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 1.5s ease-out forwards;
+  right: 0;
+}
+
+/* General adjustments */
+.w-full {
+  width: 100%;
+}
+.h-auto {
+  height: auto;
+}
+
+.custom-scale {
+  transform: scale(4); /* Ajusta este valor según lo necesario */
+  transform-origin: center;
+}
+
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+
+.animate-combined-left {
+  animation: slide-in-left 1.5s ease-out forwards, float 4s ease-in-out 1.5s infinite;
+}
+
+.animate-combined-right {
+  animation: slide-in-right 1.5s ease-out forwards, float 4s ease-in-out 1.5s infinite;
+}
+
+/* Animación para mover la nube izquierda desde el borde y luego flotar */
+@keyframes cloud-move-left {
+  0% {
+    transform: translateX(-150%); /* Comienza fuera de la pantalla */
+  }
+  100% {
+    transform: translateX(0); /* Se posiciona en su lugar */
+  }
+}
+
+@keyframes cloud-move-right {
+  0% {
+    transform: translateX(150%); /* Comienza fuera de la pantalla */
+  }
+  100% {
+    transform: translateX(0); /* Se posiciona en su lugar */
+  }
+}
+
+/* Animación continua para hacer flotar las nubes de izquierda a derecha */
+@keyframes cloud-float-left {
+  0% {
+    transform: translateX(0); /* Posición inicial */
+  }
+  50% {
+    transform: translateX(10px); /* Flota un poco a la derecha */
+  }
+  100% {
+    transform: translateX(0); /* Vuelve a la posición inicial */
+  }
+}
+
+@keyframes cloud-float-right {
+  0% {
+    transform: translateX(0); /* Posición inicial */
+  }
+  50% {
+    transform: translateX(-10px); /* Flota un poco a la izquierda */
+  }
+  100% {
+    transform: translateX(0); /* Vuelve a la posición inicial */
+  }
+}
+
+/* Aplicar las animaciones combinadas */
+.animate-cloud-left {
+  animation: cloud-move-left 2.5s ease-out forwards, cloud-float-left 4s ease-in-out 5s infinite;
+}
+
+.animate-cloud-right {
+  animation: cloud-move-right 2.5s ease-out forwards , cloud-float-right 4s ease-in-out 6s infinite;
+}
+
+
+
+/* 
+
+
+Loading animation
+
+
+
+*/
+
+
+/* Animación para los árboles */
+@keyframes treeFadeIn {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Animación para la nube izquierda */
+@keyframes cloudSlideInLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Animación para la nube derecha */
+@keyframes cloudSlideInRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Aplicar las animaciones con diferentes duraciones */
+.tree-fade-in-1s {
+  animation: treeFadeIn 1s ease-in-out forwards;
+}
+
+.tree-fade-in-3s {
+  animation: treeFadeIn 3s ease-in-out forwards;
+}
+
+.tree-fade-in-6s {
+  animation: treeFadeIn 6s ease-in-out forwards;
+}
+
+.cloud-slide-in-left {
+  animation: cloudSlideInLeft 3s ease-in-out forwards;
+}
+
+.cloud-slide-in-right {
+  animation: cloudSlideInRight 3s ease-in-out forwards;
+}
+
+
+.spinner-border {
+  border-top-color: transparent;
+  border-right-color: #3498db;
+  border-bottom-color: #3498db;
+  border-left-color: #3498db;
+}

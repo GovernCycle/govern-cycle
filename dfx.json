@@ -8,6 +8,9 @@
   },
   "canisters": {
     "home": {
+      "dependencies": [
+        "db"
+      ],
       "type": "motoko",
       "main": "backend/home/main.mo",
       "declarations": {
@@ -16,6 +19,9 @@
       }
     },
     "proposal": {
+      "dependencies": [
+        "db"
+      ],
       "type": "motoko",
       "main": "backend/proposal/main.mo",
       "declarations": {
@@ -44,7 +50,9 @@
       ],
       "type": "assets",
       "output_env_file": ".env",
-      "domains": ["gabbii.xyz"]
+      "domains": [
+        "gabbii.xyz"
+      ]
     },
     "internet_identity": {
       "type": "custom",
@@ -52,7 +60,7 @@
       "wasm": "https://github.com/dfinity/internet-identity/releases/download/release-2024-08-08/internet_identity_dev.wasm.gz",
       "remote": {
         "id": {
-          "ic": "rdmx6-jaaaa-aaaaa-aaadq-cai"
+          "ic": "br5f7-7uaaa-aaaaa-qaaca-cai"
         }
       },
       "frontend": {}
