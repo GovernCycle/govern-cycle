@@ -27,13 +27,6 @@ export const ProposalDetails = ({
     const { voteProposal } = useProposal();
     const { isAuthenticated } = useAuth();
 
-    const renderImage = () => {
-        const byteArr = new Uint8Array(proposal.photo);
-        const blob = new Blob([byteArr], { type: 'image/png' });
-        const url = URL.createObjectURL(blob);
-        return url;
-    }
-
     const handleVote = async (choice: boolean) => {
         try {
             const result = await voteProposal(choice, proposalId);
@@ -74,7 +67,7 @@ export const ProposalDetails = ({
                 <div className='relative mt-12 h-96 w-full rounded-2xl bg-tan/[.01] shadow-inner-blur m-3 sm:mt-14'>
                     <div className='h-full w-full rounded-2xl border border-charcoal-500[0.2] p-2'>
                         <div className='absolute'></div>
-                        <img src={renderImage()} alt='Team photo' className='object-cover w-full h-full rounded-2xl' />
+                        <img src={proposal.photo} alt='Team photo' className='object-cover w-full h-full rounded-2xl' />
                     </div>
                 </div>
             </div>
