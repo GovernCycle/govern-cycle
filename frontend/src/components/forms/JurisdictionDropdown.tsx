@@ -69,7 +69,7 @@ export const JurisdictionDropdown = ({
         } finally {
             setLoadingCities(false); // Ocultar el estado de cargando
         }
-    }, 500); 
+    }, 500);
 
     const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const countryName = e.target.value;
@@ -148,26 +148,6 @@ export const JurisdictionDropdown = ({
                         </div>
                     )}
 
-                    {/* Ciudad (aparece solo si hay país seleccionado) */}
-                    {showCities && (
-                        <div className="w-full flex flex-col space-y-2">
-                            <Label name="Ubicación">Ciudad</Label>
-                            {loadingCities ? ( // Mostrar un indicador de cargando si aún no tenemos las ciudades
-                                <p>Loading cities...</p>
-                            ) : (
-                                <select onChange={handleCityChange} className="common-input">
-                                    <option value="" disabled>
-                                        Selecciona una ciudad
-                                    </option>
-                                    {cities.map((city) => (
-                                        <option key={city} value={city}>
-                                            {city}
-                                        </option>
-                                    ))}
-                                </select>
-                            )}
-                        </div>
-                    )}
 
                 </div>
 
@@ -190,7 +170,6 @@ export const JurisdictionDropdown = ({
                             >
                                 {jurisdiction.continent || 'N/A'} -{' '}
                                 {jurisdiction.country || 'N/A'} -{' '}
-                                {jurisdiction.city || 'N/A'}
                                 <button
                                     type="button"
                                     onClick={() => removeJurisdiction(jurisdiction)}

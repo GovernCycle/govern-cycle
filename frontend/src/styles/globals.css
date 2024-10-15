@@ -543,3 +543,11 @@ Loading animation
 .cloud-slide-in-right {
   animation: cloudSlideInRight 3s ease-in-out forwards;
 }
+
+
+.spinner-border {
+  border-top-color: transparent;
+  border-right-color: #3498db;
+  border-bottom-color: #3498db;
+  border-left-color: #3498db;
+}
