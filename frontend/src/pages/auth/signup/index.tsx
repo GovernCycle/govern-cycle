@@ -120,7 +120,7 @@ export default function Signup() {
               />
 
               <form onSubmit={handleSubmit} className='mt-9 px-6 pb-10 sm:px-10'>
-                <div className='space-y-8'>
+                <div className='space-y-6'>
                   <div className='space-y-8 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:space-y-0'>
                     <TextField
                       label='Nombre'

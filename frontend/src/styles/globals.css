@@ -51,7 +51,7 @@
   --color-background-secondary: #875F59;
   --color-background-secondary-i: #b49870;
   --color-background-ternary: #375257;
-  --color-background-ternary-op: rgb(255, 254, 239, 0.2); /* Aquí el 0.05 es equivalente a 5% de opacidad */
+  --color-background-ternary-op: rgba(55, 82, 87, 0.5); /* Aquí el 0.05 es equivalente a 5% de opacidad */
   --text-label-primary: #FFFEEF; /* Aquí el 0.05 es equivalente a 5% de opacidad */
 
   --color-background-ternary-i: #B49870;
