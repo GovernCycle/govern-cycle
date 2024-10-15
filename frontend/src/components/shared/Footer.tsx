@@ -53,7 +53,7 @@ const navigation = [
     icon: scale,
     label: 'Legal',
     links: [
-      // { name: 'Términos de uso', href: '#' },
+      { name: 'Licencia', target: '_blank', href: 'https://drive.google.com/file/d/1kuj3qplxCkml6AG49lKGsw4F185WOfLX/view?usp=drive_link',  },
     ],
   },
 ];

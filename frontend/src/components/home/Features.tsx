@@ -70,13 +70,13 @@ export function Features() {
         {/* Text content */}
         <div className='relative flex flex-col items-center'>
           <h1 className='max-w-5xl text-center text-4xl font-bold leading-extratight text-text-secondary sm:text-5xl sm:leading-extratight'>
-            Aprende cómo participar en decisiones ambientales seguras y recibe
+            Aprende cómo participar en decisiones ambientales seguras y recibe{' '}
             <span className='relative inline-block text-nowrap'>
               <span className='relative z-10 bg-gradient-to-b from-cream-400 via-carafe-400 to-cream-500 bg-clip-text text-transparent'>
-                recompenzas
+                recompensas
               </span>
               <span className='absolute -top-px left-0 -z-10 text-carafe-500'>
-                recompenzas
+                recompensas
               </span>
             </span>
           </h1>
