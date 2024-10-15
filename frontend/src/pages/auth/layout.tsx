@@ -2,8 +2,6 @@ import Image from 'next/image'
 import { HeroContainer } from '@/components/shared/HeroContainer'
 import { Button } from '@/components/shared/Button'
 import { XMarkIcon } from '@heroicons/react/24/solid'
-
-import spaceSpotlight from '@/images/space-spotlight.png'
 import forestLignthing from '@/images/forest-light-background.png'
 import FortestLeft from '@/images/forest-green-left.png'
 import FortestRight from '@/images/forest-green-right.png'

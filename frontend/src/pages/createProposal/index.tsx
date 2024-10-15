@@ -8,7 +8,6 @@ import { RoleDropdown } from '@app/components/forms/roleDropDown'
 import { JurisdictionDropdown } from '@app/components/forms/JurisdictionDropdown'
 import { useState } from 'react'
 import Swal from 'sweetalert2'
-
 import { LinkList } from '@app/components/forms/LinkList'
 import { useProposal } from '@app/hooks/useProposal'
 import { ProposalRequest } from '@app/declarations/proposal/proposal.did'
@@ -86,7 +85,7 @@ export default function CreateProposal() {
                 url: link.url,
                 description: link.description,
             })) as Link[],
-            photo: imageData,
+            photo: data.logo as string,
         }
 
         const result = await createProposal(newProposal);
@@ -180,8 +179,13 @@ export default function CreateProposal() {
                                     placeholder='Escribe una descripción de la propuesta'
                                     required
                                 />
-                                <ImageUpload setImageData={setImageData} />
 
+                                <TextField
+                                    label='Logo'
+                                    name='logo'
+                                    placeholder='Sube tu logo'
+                                    required
+                                />
                                 <LinkList listedLinks={listedLinks} setListedLinks={setListedLinks} />
 
                             </div>

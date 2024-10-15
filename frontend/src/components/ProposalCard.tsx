@@ -61,13 +61,6 @@ export const ProposalCard = ({
     }
   }
 
-  const renderImage = () => {
-    const byteArr = new Uint8Array(proposal[1].photo);
-    const blob = new Blob([byteArr], { type: 'image/png' });
-    const url = URL.createObjectURL(blob);
-    return url;
-  }
-
 
   const formatDate = (date: string) => {
     const formattedDate = new Date(date);
@@ -176,7 +169,7 @@ export const ProposalCard = ({
                     <div className='h-full w-full rounded-2xl border border-violet-200/[.08] p-2'>
                       <div className='absolute -bottom-48 -left-48 -right-16 -top-36'>
                       </div>
-                      <img src={renderImage()} alt='Proposal Photo' className='object-cover w-full h-full rounded-2xl' />
+                      <img src={proposal[1].photo} alt='Proposal Photo' className='object-cover w-full h-full rounded-2xl' />
                     </div>
                   </div>
                 </div>

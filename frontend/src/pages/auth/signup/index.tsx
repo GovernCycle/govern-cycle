@@ -4,7 +4,6 @@ import { Button } from '@/components/shared/Button'
 import { TextField } from '@/components/forms/TextField'
 import { ChevronRightIcon } from '@heroicons/react/16/solid'
 import AuthLayout from '../layout'
-import { ImageUpload } from '@app/components/forms/image'
 import { RoleDropdown } from '@app/components/forms/roleDropDown'
 import { JurisdictionDropdown } from '@app/components/forms/JurisdictionDropdown'
 import { PhoneNumberInput } from '@app/components/forms/PhoneNumberInput'
@@ -24,8 +23,7 @@ export default function Signup() {
   const [selectedCountry, setSelectedCountry] = useState<CountryOption>();
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
-  const [imageData, setImageData] = useState<Uint8Array | number[] | null>(null); // Estado para guardar los datos
-  const { createProfile, getProfile } = useHome();
+  const { createProfile } = useHome();
   const { isAuthenticated } = useAuth();
 
   // useEffect(() => {
@@ -72,15 +70,6 @@ export default function Signup() {
       return
     }
 
-    if (imageData === null) {
-      Swal.fire({
-        title: 'Error',
-        text: 'Please upload a logo',
-        icon: 'error',
-      })
-      return
-    }
-
     const formData = new FormData(e.currentTarget)
     const data = Object.fromEntries(formData.entries())
     console.log(data)
@@ -90,7 +79,7 @@ export default function Signup() {
       manager: [],
       email: data['email'] as string,
       phone: phoneNumber,
-      logo: imageData,
+      logo: data.logo as string,
       role: selectedRoles.map((role) => ({ [role]: null })) as Role[],
       jurisdiction: selectedJurisdictions.map((jurisdiction) => ({
         continent: [jurisdiction.continent],
@@ -102,7 +91,7 @@ export default function Signup() {
 
     if ('ok' in result && 'SuccessText' in result.ok) {
       Swal.fire({
-        title: 'Success',
+        title: 'Quedas pendiente de aprobación por Secretaría Técnica',
         text: result.ok.SuccessText,
         icon: 'success',
       })
@@ -115,19 +104,6 @@ export default function Signup() {
         icon: 'error',
       });
     }
-  }
-
-  const checkUserExists = async () => {
-    try {
-      const result = await getProfile();
-      if ('ok' in result && 'User' in result.ok) {
-        return true;
-      }
-    } catch (error) {
-      return false;
-
-    }
-    return false;
   }
 
   return (
@@ -163,12 +139,17 @@ export default function Signup() {
                     />
                   </div>
 
-                <ImageUpload setImageData={setImageData} />
-                <JurisdictionDropdown selectedJurisdictions={selectedJurisdictions} setSelectedJurisdictions={setSelectedJurisdictions} />
-                <PhoneNumberInput selectedCountry={selectedCountry} setSelectedCountry={setSelectedCountry}
-                  phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber} />
-                <RoleDropdown selectedRoles={selectedRoles} setSelectedRoles={setSelectedRoles} />
-              </div>
+                  <TextField
+                    label='Logo'
+                    name='logo'
+                    placeholder='Sube tu logo'
+                    required
+                  />
+                  <JurisdictionDropdown selectedJurisdictions={selectedJurisdictions} setSelectedJurisdictions={setSelectedJurisdictions} />
+                  <PhoneNumberInput selectedCountry={selectedCountry} setSelectedCountry={setSelectedCountry}
+                    phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber} />
+                  <RoleDropdown selectedRoles={selectedRoles} setSelectedRoles={setSelectedRoles} />
+                </div>
 
                 <div className='mt-5 flex items-center justify-between space-x-4'>
                   <Button type='submit' className='sm:px-5'>
