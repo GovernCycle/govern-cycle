@@ -7,7 +7,7 @@ const index = () => {
     return (
         <>
             <HeroContainer
-                starField={false}
+                starField={true}
                 bgGradientClassName='opacity-60 lg:opacity-90 xl:opacity-100'
             >
             </HeroContainer>

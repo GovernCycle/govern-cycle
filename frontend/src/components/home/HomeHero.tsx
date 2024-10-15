@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { Container } from '@/components/shared/Container'
 import { Button } from '@/components/shared/Button'
 import { ContentPill } from '@/components/shared/ContentPill'
@@ -9,10 +8,6 @@ import { Dialog, DialogPanel, DialogBackdrop } from '@headlessui/react'
 import { BellIcon, FingerPrintIcon, SparklesIcon, XMarkIcon } from '@heroicons/react/16/solid'
 import { PlayCircleIcon } from '@heroicons/react/20/solid'
 import { CLIENTS } from '@/config'
-
-import appScreenshot from '@/images/app-screenshot.png'
-import cosmicButterfly from '@/images/cosmic-butterfly.png'
-import { BeakerIcon } from '@heroicons/react/24/solid'
 
 export const HomeHero = () => {
   let [isOpen, setIsOpen] = useState(false)
@@ -87,7 +82,7 @@ export const HomeHero = () => {
                   className='absolute h-full w-full rounded-lg'
                   allow='autoplay'
                   title='Video'
-                  src='https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1'
+                  src='https://www.youtube.com/embed/oxEr8UzGeBo?autoplay=1'
                 ></iframe>
               </div>
             </DialogPanel>

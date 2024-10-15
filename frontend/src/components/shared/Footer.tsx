@@ -24,46 +24,36 @@ const navigation = [
     icon: browser,
     label: 'Plataforma',
     links: [
-      { name: 'Visión general', href: '#' },
       { name: 'Propuestas activas', href: '/proposal' },
-      { name: 'Guías de uso', href: '#' },
-      { name: 'Nuevas funcionalidades', href: '#' },
     ],
   },
   {
     icon: company,
     label: 'Comunidad',
     links: [
-      { name: 'Sobre nosotros', href: '/about' },
-      { name: 'Noticias', href: '#' },
-      { name: 'Foro de usuarios', href: '#' },
+      // { name: 'Foro de usuarios', href: 'https://x.com/' },
     ],
   },
   {
     icon: integrations,
     label: 'Propuestas',
     links: [
-      { name: 'Cómo crear propuesta', href: '/proposal', new: true },
-      { name: 'Propuestas recientes', href: '/proposal' },
+      { name: 'Crear propuesta', href: '/createProposal' },
     ],
   },
   {
     icon: resources,
     label: 'Recursos',
     links: [
-      { name: 'Blog', href: '#' },
-      { name: 'Videos explicativos', href: '#' },
-      { name: 'Eventos', href: '#' },
+      { name: 'Crea tu Internet Identity', target: '_blank', href: 'https://www.youtube.com/watch?v=llJWe55VYsE', new: false}, 
+      { name: 'Eventos', target: '_blank',  href: 'https://x.com/GabbiiDAO' },
     ],
   },
   {
     icon: scale,
     label: 'Legal',
     links: [
-      { name: 'Términos de uso', href: '#' },
-      { name: 'Privacidad', href: '#' },
-      { name: 'Licencias', href: '#' },
-      { name: 'Seguridad', href: '#' },
+      // { name: 'Términos de uso', href: '#' },
     ],
   },
 ];
@@ -111,18 +101,20 @@ export function Footer({ cta = true }: Props) {
                             >
                               <Link
                                 href={link.href}
-                                className='text-sm font-semibold leading-none text-text-accent  hover:text-tan-400/95'
+                                className='text-sm font-semibold leading-none text-text-accent hover:text-tan-400/95'
+                                target={link.href.startsWith('http') && !link.href.includes(window.location.hostname) ? '_blank' : '_self'}
+                                rel={link.href.startsWith('http') && !link.href.includes(window.location.hostname) ? 'noopener noreferrer' : undefined}
                               >
                                 {link.name}
                               </Link>
-                              {link.new && (
+                              {/* {link.new && (
                                 <ContentPill
                                   className='ml-3'
                                   text='New'
                                   innerClassName='px-2 py-0.5'
                                   textClassName='text-xs text-violet-200'
                                 />
-                              )}
+                              )} */}
                               <span className='absolute -inset-y-1.5 -left-[26.5px] w-px bg-gradient-to-b from-cream-400/0 via-cream-400/90 to-cream-400/0 opacity-0 duration-200 ease-in-out group-hover:opacity-100' />
                             </li>
                           ))}
@@ -144,7 +136,7 @@ export function Footer({ cta = true }: Props) {
                       <Image
                         src={logo}
                         alt=''
-                        className='h-6 w-auto sm:inline sm:h-7 xl:h-8'
+                        className='h-6 w-auto sm:inline sm:h-8 xl:h-10'
                       />
                       <Image
                         src={logoIcon}
@@ -159,6 +151,8 @@ export function Footer({ cta = true }: Props) {
                         key={`footer-social-${social.name}`}
                         href={social.href}
                         aria-label={social.ariaLabel}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className='group flex items-center space-x-2 text-sm font-semibold text-cream-50/90 drop-shadow-[-2px_-4px_6px_var(--color-tan-200)]'
                       >
                         <social.icon className='h-4 w-4 duration-200 ease-in-out group-hover:text-charcoal-100/95' />
