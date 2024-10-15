@@ -9,7 +9,7 @@ type Props = {
 export function Label({ name, link, children }: Props) {
   return (
     <div className='flex items-end justify-between text-sm leading-none'>
-      <label htmlFor={name} className='block text-[var(--color-text-primary)]'>
+      <label htmlFor={name} className='block text-[var(--text-label-primary)]'>
         {children}
       </label>
 

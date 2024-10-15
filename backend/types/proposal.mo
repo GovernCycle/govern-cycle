@@ -24,7 +24,7 @@ module {
         startDate : Text;                       // The start date of the proposal (as Text).
         deadline : Text;                        // The deadline for the proposal (as Text).
         state : StateProposal;                  // The current state of the proposal (Pending, Approved, or Rejected).
-        photo : Blob;                           // A blob representing the photo/image associated with the proposal.
+        photo : Text;                           // A blob representing the photo/image associated with the proposal.
         comments : [Comment];                   // A list of comments made on the proposal.
         threshold : Nat;                        // The minimum threshold required for the proposal (e.g., for approval).
         description : ?Text;                    // An optional description of the proposal.
@@ -43,7 +43,7 @@ module {
     public type ProposalRequest = {
         name : Text;                            // The name/title of the proposal.
         deadline : Text;                        // The deadline for the proposal (as Text).
-        photo : Blob;                           // A photo associated with the proposal (as a Blob).
+        photo : Text;                           // A photo associated with the proposal (as a Blob).
         description : ?Text;                    // An optional description for the proposal.
         environmentalUnits : Nat;               // The number of environmental units involved.
         threshold : Nat;                        // The threshold required for the proposal.

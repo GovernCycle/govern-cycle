@@ -19,7 +19,7 @@ export const Header = () => {
               aria-label='Home'
               className='flex flex-shrink-0 items-center'
             >
-              <Image src={logo} alt='' className='h-7 w-auto lg:h-8' />
+              <Image src={logo} alt='' className='h-12 w-auto lg:h-15' />
             </Link>
           </div>
 

@@ -9,7 +9,7 @@ import { Proposal } from '@app/declarations/proposal/proposal.did'
 import { useProposal } from '@app/hooks/useProposal'
 import Swal from 'sweetalert2'
 import { useAuth } from '@bundly/ares-react'
-import { Alert } from '@mui/material'
+import { handleProposalResult } from '@app/utils'
 
 
 export const ProposalDetails = ({
@@ -27,13 +27,6 @@ export const ProposalDetails = ({
     const { voteProposal } = useProposal();
     const { isAuthenticated } = useAuth();
 
-    const renderImage = () => {
-        const byteArr = new Uint8Array(proposal.photo);
-        const blob = new Blob([byteArr], { type: 'image/png' });
-        const url = URL.createObjectURL(blob);
-        return url;
-    }
-
     const handleVote = async (choice: boolean) => {
         try {
             const result = await voteProposal(choice, proposalId);
@@ -43,30 +36,15 @@ export const ProposalDetails = ({
                     text: 'Voted successfully',
                     icon: 'success',
                 });
-                loadProposal();
+                await loadProposal();
             }
             if ('err' in result) {
-                if ('UserAlreadyVoted' in result.err) {
-                    Swal.fire({
-                        title: 'Error',
-                        text: 'User already voted',
-                        icon: 'error',
-                    });
-                }
-                if ('UserNotInvited' in result.err) {
-                    Swal.fire({
-                        title: 'Error',
-                        text: 'User not invited',
-                        icon: 'error',
-                    });
-                }
-                if ('ProposalAlreadyApproved' in result.err) {
-                    Swal.fire({
-                        title: 'Error',
-                        text: 'Proposal already approved',
-                        icon: 'error',
-                    });
-                }
+                const errorResult = handleProposalResult(result.err);
+                Swal.fire({
+                    title: 'Error',
+                    text: errorResult,
+                    icon: 'error',
+                });
             }
         } catch (error) {
             Swal.fire({
@@ -89,7 +67,7 @@ export const ProposalDetails = ({
                 <div className='relative mt-12 h-96 w-full rounded-2xl bg-tan/[.01] shadow-inner-blur m-3 sm:mt-14'>
                     <div className='h-full w-full rounded-2xl border border-charcoal-500[0.2] p-2'>
                         <div className='absolute'></div>
-                        <img src={renderImage()} alt='Team photo' className='object-cover w-full h-full rounded-2xl' />
+                        <img src={proposal.photo} alt='Team photo' className='object-cover w-full h-full rounded-2xl' />
                     </div>
                 </div>
             </div>

@@ -31,9 +31,9 @@ export const RoleDropdown = ({
 
     return (
         <div className="space-y-2">
-            <div className="space-y-1">
+            <div className="space-y-2">
                 <Label name="role-dropdown" >
-                    Select Role
+                    Selecciona un Rol
                 </Label>
                 <div className='flex space-x-2'>
                     <select
@@ -62,17 +62,17 @@ export const RoleDropdown = ({
 
             {selectedRoles.length > 0 && (
                 <div>
-                    <p className="text-sm text-[var(--color-text-ternary)]  py-2.5">Selected Roles:</p>
+                    <p className="text-sm text-white ">Roles seleccionados</p>
                     <ul className="grid grid-cols-2 gap-4">
                         {selectedRoles.map((role) => (
-                            <li key={role} className="block text-sm text-[var(--color-text-ternary)] py-2.5 px-2.5">
+                            <li key={role} className="block text-sm text-white  py-2.5 px-2.5">
                                 {role}
                                 <button
                                     type="button"
                                     onClick={() => removeRole(role)}
                                     className="ml-4 py-1 px-2 bg-red-50 text-red-700 rounded-md hover:bg-red-100 cursor-pointer"
                                 >
-                                    Remove
+                                    Remover
                                 </button>
                             </li>
                         ))}

@@ -1,6 +1,5 @@
 import { City, Country } from '@app/types/country';
 import axios from 'axios';
-import { get } from 'http';
 import { useCallback } from 'react';
 
 export const useCountry = () => {

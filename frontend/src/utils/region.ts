@@ -1,7 +1,16 @@
-export const regions = [
+export const regions: string[] = [
     "Africa",
     "Americas",
+    "Northern America",
     "Asia",
-    "Europa",
-    "Oceania",
-]
+    "Central Asia",
+    "Eastern Asia",
+    "South-eastern Asia",
+    "Southern Asia",
+    "Western Asia",
+    "Europe",
+    "Eastern Europe",
+    "Northern Europe",
+    "Southern Europe",
+    "Western Europe",
+    "Oceania",];

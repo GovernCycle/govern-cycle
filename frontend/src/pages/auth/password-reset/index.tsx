@@ -11,7 +11,6 @@ import AuthLayout from '../layout'
 export default function PasswordReset() {
   return (
     <AuthLayout>
-
       <Container className='max-w-lg py-5 sm:max-w-xl'>
         <div className='relative z-10 flex flex-col shadow-inner-blur'>
           <ContainerOutline />
@@ -20,8 +19,8 @@ export default function PasswordReset() {
             description='Enter your email below and we will send you an email with instruction to reset your password.'
             socialButtons={false}
           />
-
           <form action='#' method='POST' className='mt-8 px-6 pb-10 sm:px-10'>
+
             <div className='space-y-8'>
               <TextField
                 label='Email'
@@ -34,6 +33,7 @@ export default function PasswordReset() {
             </div>
 
             <div className='mt-10 flex items-center justify-between space-x-4'>
+
               <p className='text-sm text-violet-100/75'>
                 Know your password?{' '}
                 <Link
@@ -43,6 +43,7 @@ export default function PasswordReset() {
                   Sign in
                 </Link>
               </p>
+
               <Button type='submit' className='sm:px-5'>
                 <span>Reset password</span>
                 <ChevronRightIcon className='h-4 w-4' />

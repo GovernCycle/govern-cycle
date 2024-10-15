@@ -53,7 +53,7 @@ module {
         jurisdiction : [Jurisdiction];          // A list of jurisdictions associated with the user.
         email : Text;                           // The user's email address.
         phone : Text;                           // The user's phone number.
-        logo : Blob;                            // A blob representing the user's logo or image.
+        logo : Text;                            // A blob representing the user's logo or image.
         manager : ?Text;                        // An optional field for the user's manager name.
     };
 
@@ -64,7 +64,7 @@ module {
         jurisdiction : [Jurisdiction];          // A list of jurisdictions associated with the user.
         email : Text;                           // The user's email address.
         phone : Text;                           // The user's phone number.
-        logo : Blob;                            // A blob representing the user's logo or image.
+        logo : Text;                            // A blob representing the user's logo or image.
         manager : ?Text;                        // An optional field for the user's manager name.
     };
 
