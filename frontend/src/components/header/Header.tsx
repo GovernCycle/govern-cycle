@@ -3,11 +3,18 @@ import Image from 'next/image'
 import { NavbarPill } from '@/components/header/NavbarPill'
 import { Container } from '@/components/shared/Container'
 import { Button } from '@/components/shared/Button'
-import { InternetIdentityButton } from '@bundly/ares-react';
+import { InternetIdentityButton, useAuth } from '@bundly/ares-react';
 
 import logo from '@/images/logo.png'
+import { useState } from 'react'
 
 export const Header = () => {
+
+  const { currentIdentity } = useAuth();
+  const [isLogged, setIsLogged] = useState(false);
+  const handleSuccess = () => {
+    setIsLogged(true);
+  }
   return (
     <header className='relative h-20'>
       <Container className='flex h-full items-center'>
@@ -27,20 +34,30 @@ export const Header = () => {
 
           <div className='hidden items-center md:flex lg:space-x-3 xl:space-x-4'>
             <div className="lg:flex lg:flex-1 lg:justify-end">
-              <InternetIdentityButton style={
-                {
-                  color: 'white',
-                  backgroundColor: 'var(--color-button-primary)',
-                  border: '1px solid white',
-                  borderRadius: '0.5rem',
-                  padding: '0.5rem 1rem',
-                  fontSize: '1rem',
-                  fontWeight: 'bold',
-                  cursor: 'pointer',
-                  position: 'relative',
-                  overflow: 'hidden' 
-                }
-              }/>
+              <div className={`${isLogged ? 'hidden' : ''}`}>
+
+                <InternetIdentityButton
+                  onSuccess={handleSuccess}
+                  style={
+                    {
+                      color: 'white',
+                      backgroundColor: 'var(--color-button-primary)',
+                      border: '1px solid white',
+                      borderRadius: '0.5rem',
+                      padding: '0.5rem 1rem',
+                      fontSize: '1rem',
+                      fontWeight: 'bold',
+                      cursor: 'pointer',
+                      position: 'relative',
+                      overflow: 'hidden'
+                    }
+                  } />
+              </div>
+              <div className={`${!isLogged ? 'hidden' : ''}`}>
+
+                <span className='font-bold bg-yellow-700 hover:bg-yellow-900 rounded-full p-4 text-white'>Logged in as {currentIdentity.getPrincipal().toString().slice(0, 5)}</span>
+              </div>
+
 
             </div>
 
