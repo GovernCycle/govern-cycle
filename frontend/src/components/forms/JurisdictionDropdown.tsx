@@ -120,7 +120,7 @@ export const JurisdictionDropdown = ({
                     <div className="w-full flex flex-col space-y-2">
                         <Label name="Ubicación">Ubicación por continente</Label>
                         <select onChange={handleContinentChange} className="common-input">
-                            <option value="" disabled>
+                            <option value="" disabled selected>
                                 Selecciona un Continente
                             </option>
                             {regions.map((region) => (
@@ -136,7 +136,7 @@ export const JurisdictionDropdown = ({
                         <div className="w-full flex flex-col space-y-2">
                             <Label name="Ubicación">País</Label>
                             <select onChange={handleCountryChange} className="common-input">
-                                <option value="" disabled>
+                                <option value="" disabled selected>
                                     Selecciona un País
                                 </option>
                                 {countries.map((country) => (

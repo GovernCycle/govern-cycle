@@ -32,7 +32,7 @@ export const RoleDropdown = ({
     return (
         <div className="space-y-2">
             <div className="space-y-2">
-                <Label name="role-dropdown" >
+                <Label name="role-dropdown">
                     Selecciona un Rol
                 </Label>
                 <div className='flex space-x-2'>
@@ -42,7 +42,7 @@ export const RoleDropdown = ({
                         onChange={handleRoleChange}
                         className="common-input"
                     >
-                        <option value="" disabled>Selecciona un rol</option>
+                        <option value="" disabled selected>Selecciona un rol</option>
                         {roles.map((role) => (
                             <option key={role.label} value={role.value}>
                                 {role.label}

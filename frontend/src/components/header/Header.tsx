@@ -6,15 +6,23 @@ import { Button } from '@/components/shared/Button'
 import { InternetIdentityButton, useAuth } from '@bundly/ares-react';
 
 import logo from '@/images/logo.png'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export const Header = () => {
 
-  const { currentIdentity } = useAuth();
+  const { currentIdentity, isAuthenticated } = useAuth();
   const [isLogged, setIsLogged] = useState(false);
   const handleSuccess = () => {
     setIsLogged(true);
   }
+  useEffect(() => {
+    if (isAuthenticated) {
+      setIsLogged(true);
+    } else {
+      setIsLogged(false);
+    }
+  }
+    , [isAuthenticated])
   return (
     <header className='relative h-20'>
       <Container className='flex h-full items-center'>
