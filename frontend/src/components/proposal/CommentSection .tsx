@@ -62,8 +62,8 @@ export const CommentSection = ({
             comments.map((comment, index) => (
               <div key={index} className="border rounded-lg p-4 shadow-sm bg-white">
                 <div className="flex justify-between items-center">
-                  <span className="font-semibold text-gray-800">{comment.detail}</span>
-                  <span className="text-sm text-gray-500">{comment.user.toString()}</span>
+                  <span className="font-semibold text-gray-800">{comment.tema}</span>
+                  <span className="text-sm text-gray-500">{comment.user.toString().slice(0,5)}</span>
                 </div>
                 <p className="mt-2 text-gray-600">{comment.detail}</p>
               </div>

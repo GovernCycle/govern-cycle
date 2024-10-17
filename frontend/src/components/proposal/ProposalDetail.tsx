@@ -1,7 +1,5 @@
 import { Container } from '@/components/shared/Container';
 import { StarField } from '@/components/shared/StarField';
-import { ContentPill } from '@/components/shared/ContentPill';
-import { BuildingOffice2Icon } from '@heroicons/react/16/solid';
 import { HandThumbUpIcon, HandThumbDownIcon, ArrowLeftIcon } from '@heroicons/react/16/solid';
 import { CommentSection } from './CommentSection ';
 import { InterestLinks } from './InterestLinks';
