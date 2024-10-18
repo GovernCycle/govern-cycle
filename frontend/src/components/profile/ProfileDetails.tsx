@@ -1,79 +1,104 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from '@/components/shared/Container';
+import { useHome } from '@app/hooks/useHome';
+import { useAuth } from '@bundly/ares-react';
+import Alert from '@mui/material/Alert';
+import { Participation } from '@app/declarations/db/db.did';
+import Swal from 'sweetalert2';
+import Loading from '../loading/Loading';
+import { ProposalRow } from './ProposalRow';
 
-interface Proposal {
-  id: string;
-  status: 'activa' | 'vencida' | 'accionada';
-}
+export function ProfileDetails() {
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [participations, setParticipations] = useState<Participation>();
+  const [UserNotFound, setUserNotFound] = useState<boolean>(false);
 
-interface ProfileDetailsProps {
-  proposals: Proposal[];
-}
+  const { getMyParticipations } = useHome();
+  const { isAuthenticated } = useAuth();
 
-export function ProfileDetails({ proposals }: ProfileDetailsProps) {
-  const activeProposals = proposals.filter((p) => p.status === 'activa');
-  const expiredProposals = proposals.filter((p) => p.status === 'vencida');
-  const actionedProposals = proposals.filter((p) => p.status === 'accionada');
+  useEffect(() => {
+    const retrieveParticipations = async () => {
+      if (isAuthenticated) {
+        setIsLoaded(true);
+        try {
+          const result = await getMyParticipations();
+          if ('ok' in result && 'Participation' in result.ok) {
+            setParticipations(result.ok.Participation);
+            setUserNotFound(false);
+          }
+          if ('err' in result && 'UserNotFound' in result.err) {
+            setUserNotFound(true);
+          }
 
-  const getProposalIds = (proposals: Proposal[]) => proposals.map((p) => p.id);
+        } catch (e) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al obtener las participaciones',
+          });
+        }
+        setIsLoaded(false);
+      }
+    };
+    retrieveParticipations();
+  }, [isAuthenticated]);
 
   return (
     <Container className="pb-8 sm:pb-16 lg:pt-16 ">
+      {!isAuthenticated && (
+        <Alert severity="info">Debes iniciar sesión para ver tus propuestas</Alert>
+      )}
 
-    <div className='-mx-5 -my-2 mt-5 overflow-x-auto sm:-mx-6 sm:mt-16 lg:-mx-8'>
-      <div className='inline-block min-w-full px-5 py-2 align-middle sm:px-6 lg:px-8'>
-        <div className='min-w-full space-y-12'>
-          <table className='min-w-full'>
-            <thead>
-              <tr className='border-b border-charcoal-500'>
-                <th className='text-left text-sm font-semibold text-text-secondary sm:pl-2'>
-                  Estado
-                </th>
-                <th className='text-center text-sm font-semibold text-text-secondary'>
-                  Propuestas Activas
-                </th>
-                <th className='text-center text-sm font-semibold text-text-secondary'>
-                  Propuestas Vencidas
-                </th>
-                <th className='text-center text-sm font-semibold text-text-secondary'>
-                  Propuestas Accionadas
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className='w-full border-b border-charcoal-500'>
-                <td className='whitespace-nowrap py-5 font-semibold pl-6 text-left text-sm  text-text-secondary sm:py-6 sm:pl-8'>
-                  
-                </td>
-                <td className='px-4 py-5 text-center text-sm text-text-tertiary'>
-                  {activeProposals.length}
-                </td>
-                <td className='px-4 py-5 text-center text-sm text-text-tertiary'>
-                  {expiredProposals.length}
-                </td>
-                <td className='px-4 py-5 text-center text-sm text-charcoal-500'>
-                  {actionedProposals.length}
-                </td>
-              </tr>
-              <tr className='w-full border-b border-charcoal-500'>
-                <td className='whitespace-nowrap font-semibold py-5 pl-6 text-left text-sm  text-text-secondary sm:py-6 sm:pl-8'>
-                  
-                </td>
-                <td className='px-4 py-5 text-center text-sm text-text-tertiary'>
-                  {getProposalIds(activeProposals).join(', ') || 'ID Propuesta: No hay propuestas activas'}
-                </td>
-                <td className='px-4 py-5 text-center text-sm text-text-tertiary'>
-                  {getProposalIds(expiredProposals).join(', ') || 'ID Propuesta:  No hay propuestas vencidas'}
-                </td>
-                <td className='px-4 py-5 text-center text-sm text-text-tertiary'>
-                  {getProposalIds(actionedProposals).join(', ') || 'ID Propuesta: No hay propuestas accionadas'}
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      {UserNotFound && (
+        <Alert severity="error">Usuario no encontrado. Primero debes registrarte</Alert>
+      )}
+
+      {isLoaded && isAuthenticated && <Loading />}
+
+      {participations && (
+        <div className='flex-col justify-center space-y-4'>
+
+          <Alert severity="info">
+            Si el usuario está en estado Pendiente o Rechazado, no podrá participar en propuestas.
+          </Alert>
+          <div className='-mx-5 -my-2 mt-5 overflow-x-auto sm:-mx-6 sm:mt-16 lg:-mx-8'>
+            <div className='inline-block min-w-full px-5 py-2 align-middle sm:px-6 lg:px-8'>
+              <div className='min-w-full overflow-hidden border border-gray-300 rounded-lg shadow-sm'>
+                <table className='min-w-full bg-white'>
+                  <thead>
+                    <tr className='bg-gray-50 border-b'>
+                      <th className='text-left text-sm font-semibold text-gray-700 sm:pl-2 p-4'>
+                        Estado
+                      </th>
+                      <th className='text-center text-sm font-semibold text-gray-700 p-4'>
+                        Cantidad
+                      </th>
+                      <th className='text-center text-sm font-semibold text-gray-700 p-4'>
+                        IDs de Propuestas
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {/* Fila para propuestas activas */}
+                    <tr className='border-b'>
+                      <ProposalRow proposal={participations?.active || []} title='Propuestas Activas' />
+                    </tr>
+
+                    {/* Fila para propuestas inactivas */}
+                    <tr className='border-b'>
+                      <ProposalRow proposal={participations?.inactive || []} title='Propuestas Inactivas' />
+                    </tr>
+
+                    {/* Fila para propuestas accionadas */}
+                    <tr>
+                      <ProposalRow proposal={participations?.done || []} title='Propuestas Accionadas' />
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
     </Container>
   );
 }

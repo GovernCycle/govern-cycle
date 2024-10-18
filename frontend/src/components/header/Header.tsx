@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { NavbarPill } from '@/components/header/NavbarPill'
 import { Container } from '@/components/shared/Container'
 import { Button } from '@/components/shared/Button'
-import { InternetIdentityButton, useAuth } from '@bundly/ares-react';
+import { InternetIdentityButton, useAuth, LogoutButton } from '@bundly/ares-react';
 
 import logo from '@/images/logo.png'
 import { useEffect, useState } from 'react'
@@ -61,9 +61,25 @@ export const Header = () => {
                     }
                   } />
               </div>
-              <div className={`${!isLogged ? 'hidden' : ''}`}>
+              <div className={`${!isLogged ? 'hidden' : ''} flex items-center space-x-2`}>
 
-                <span className='font-bold bg-yellow-700 hover:bg-yellow-900 rounded-full p-4 text-white'>Logged in as {currentIdentity.getPrincipal().toString().slice(0, 5)}</span>
+                <span className='font-bold bg-yellow-700 hover:bg-yellow-900 rounded-full p-2 text-white'>Logged in as {currentIdentity.getPrincipal().toString().slice(0, 5)}</span>
+                <LogoutButton
+                identity={currentIdentity}
+                  style={
+                    {
+                      color: 'white',
+                      backgroundColor: 'var(--color-button-primary)',
+                      border: '1px solid white',
+                      borderRadius: '0.5rem',
+                      padding: '0.5rem 1rem',
+                      fontSize: '1rem',
+                      fontWeight: 'bold',
+                      cursor: 'pointer',
+                      position: 'relative',
+                      overflow: 'hidden'
+                    }
+                  } />
               </div>
 
 

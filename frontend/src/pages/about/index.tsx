@@ -6,6 +6,8 @@ import { WorkCulture } from '@/components/about/WorkCulture'
 import { OpenPositions } from '@/components/about/OpenPositions'
 import { Divider } from '@/components/shared/Divider'
 import { Footer } from '@/components/shared/Footer'
+import { useContext } from 'react'
+import { UserContext } from '@app/context/userContext'
 
 export const metadata = {
   title: 'About',

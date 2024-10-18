@@ -4,6 +4,7 @@ import { ProposalDetails } from '@app/components/proposal/ProposalDetail'
 import { useParams } from 'next/navigation'
 import { useProposal } from '@app/hooks/useProposal';
 import { Proposal } from '@app/declarations/proposal/proposal.did';
+import Swal from 'sweetalert2';
 
 export default function ViewProposal() {
     const params = useParams<{ slug?: string }>(); // Make slug optional
@@ -19,11 +20,13 @@ export default function ViewProposal() {
                     const result = await getProposal(proposalId);
                     if ('ok' in result && 'Proposal' in result.ok) {
                         setProposal(result.ok.Proposal);
-                        console.log('Proposal:', result.ok.Proposal);
                     }
                 }
             } catch (error) {
-                console.error('Error retrieving proposal:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Hubo un error al obtener la propuesta',
+                });
             }
         }
         retrieveProposal();

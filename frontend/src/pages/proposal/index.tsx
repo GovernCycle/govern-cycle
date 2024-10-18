@@ -5,34 +5,20 @@ import { useProposal } from '@app/hooks/useProposal'
 import { useEffect, useState } from 'react'
 import { Proposal } from '@app/declarations/proposal/proposal.did'
 import Swal from 'sweetalert2'
-import { useAuth } from '@bundly/ares-react'
 import { Button } from '@app/components/shared/Button'
 import { PlusIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import Loading from '@app/components/loading/Loading'
 
 
-export const metadata = {
-  title: 'Propuestas',
-  description:
-    "Need assistance or have questions? Contact Nebula's team for prompt support and information.",
-}
 
 export default function Proposals() {
 
   const [proposals, setProposals] = useState<[bigint, Proposal][]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { getAllProposals } = useProposal();
-  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
-    // if (!isAuthenticated) {
-    //   Swal.fire({
-    //     title: 'Error',
-    //     text: 'You need to login to view proposals',
-    //     icon: 'error',
-    //   });
-    // }
     const retrieveProposals = async () => {
       try {
         const result = await getAllProposals();
@@ -43,7 +29,7 @@ export default function Proposals() {
       } catch (error) {
         Swal.fire({
           title: 'Error',
-          text: 'Error retrieving proposals',
+          text: 'Hubo un error al cargar las propuestas',
           icon: 'error',
         });
       }

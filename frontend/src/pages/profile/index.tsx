@@ -1,7 +1,6 @@
 import { HeroContainer } from '@/components/shared/HeroContainer'
 import { ProfileHeader } from '@/components/profile/ProfileHeader'
 import { ProfileDetails } from '@/components/profile/ProfileDetails'
-import { Divider } from '@/components/shared/Divider'
 import { Footer } from '@/components/shared/Footer'
 
 export default function Profile() {
@@ -14,7 +13,7 @@ export default function Profile() {
             >
                 <ProfileHeader />
             </HeroContainer>
-            <ProfileDetails proposals={[]} />
+            <ProfileDetails/>
             <Footer />
         </>
     )

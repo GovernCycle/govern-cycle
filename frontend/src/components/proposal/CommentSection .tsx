@@ -28,7 +28,7 @@ export const CommentSection = ({
       if ('ok' in result) {
         Swal.fire({
           title: 'Success',
-          text: 'Comment added successfully',
+          text: 'Comentario agregado exitosamente',
           icon: 'success',
         });
         await loadProposal();
@@ -44,7 +44,7 @@ export const CommentSection = ({
     } catch (error) {
       Swal.fire({
         title: 'Error',
-        text: 'Error adding comment',
+        text: 'Hubo un error al agregar el comentario',
         icon: 'error',
       });
     }

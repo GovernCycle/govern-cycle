@@ -27,7 +27,7 @@ export const ProposalDetails = ({
             if ('ok' in result) {
                 Swal.fire({
                     title: 'Success',
-                    text: 'Voted successfully',
+                    text: 'Voto registrado exitosamente',
                     icon: 'success',
                 });
                 await loadProposal();
@@ -43,7 +43,7 @@ export const ProposalDetails = ({
         } catch (error) {
             Swal.fire({
                 title: 'Error',
-                text: 'Error voting',
+                text: 'Hubo un error al registrar el voto',
                 icon: 'error',
             });
         }
