@@ -1,9 +1,25 @@
-import { User } from "@app/declarations/db/db.did";
+import { User } from "@app/declarations/home/home.did";
 import { createContext } from "react";
 
-interface UserContextProps {
-    user: User | null;
-    setUser: (user: User | null) => void;
+export interface UserContextProps {
+  user: User;
+  setUser: (user: User) => void;
 }
 
-export const UserContext = createContext<UserContextProps | null>(null);
+export const defaultUser: User = {
+  state: { 'Rejected' : null },
+  name: '',
+  email: '',
+  phone: '',
+  logo: '',
+  role: [],
+  jurisdiction: [],
+  manager: [],
+};
+
+const defaultUserContext: UserContextProps = {
+  user: defaultUser,
+  setUser: () => {},
+};
+
+export const UserContext = createContext<UserContextProps>(defaultUserContext);

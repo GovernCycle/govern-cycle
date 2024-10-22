@@ -1,33 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Container } from '@/components/shared/Container';
 import { useHome } from '@app/hooks/useHome';
-import { useAuth } from '@bundly/ares-react';
 import Alert from '@mui/material/Alert';
 import { Participation } from '@app/declarations/db/db.did';
 import Swal from 'sweetalert2';
 import Loading from '../loading/Loading';
 import { ProposalRow } from './ProposalRow';
+import { User } from '@app/declarations/home/home.did';
 
-export function ProfileDetails() {
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+export function ProfileDetails({
+  user,
+  setUser,
+}: {
+  user: User;
+  setUser: (user: User) => void
+}) {
+  const [isLoading, setisLoading] = useState<boolean>(false);
   const [participations, setParticipations] = useState<Participation>();
-  const [UserNotFound, setUserNotFound] = useState<boolean>(false);
-
   const { getMyParticipations } = useHome();
-  const { isAuthenticated } = useAuth();
+
 
   useEffect(() => {
     const retrieveParticipations = async () => {
-      if (isAuthenticated) {
-        setIsLoaded(true);
+      if (user.role.length > 0) {
+        setisLoading(true);
         try {
           const result = await getMyParticipations();
           if ('ok' in result && 'Participation' in result.ok) {
             setParticipations(result.ok.Participation);
-            setUserNotFound(false);
           }
           if ('err' in result && 'UserNotFound' in result.err) {
-            setUserNotFound(true);
           }
 
         } catch (e) {
@@ -36,23 +38,20 @@ export function ProfileDetails() {
             title: 'Error al obtener las participaciones',
           });
         }
-        setIsLoaded(false);
+        setisLoading(false);
       }
     };
     retrieveParticipations();
-  }, [isAuthenticated]);
+  }, []);
 
   return (
     <Container className="pb-8 sm:pb-16 lg:pt-16 ">
-      {!isAuthenticated && (
-        <Alert severity="info">Debes iniciar sesión para ver tus propuestas</Alert>
+      {user.role.length == 0 && (
+        <Alert severity="info">Debes iniciar sesión o registrarte para ver tus propuestas</Alert>
       )}
 
-      {UserNotFound && (
-        <Alert severity="error">Usuario no encontrado. Primero debes registrarte</Alert>
-      )}
 
-      {isLoaded && isAuthenticated && <Loading />}
+      {isLoading && <Loading />}
 
       {participations && (
         <div className='flex-col justify-center space-y-4'>

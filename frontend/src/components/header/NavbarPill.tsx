@@ -32,6 +32,7 @@ const links = [
   { label: 'Signup', href: '/auth/signup' },
   { label: 'Inicio', href: '/' },
   { label: 'Propuestas', href: '/proposal' },
+  { label: 'Perfil', href: '/profile' },
 
 ]
 
