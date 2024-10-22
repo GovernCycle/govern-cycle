@@ -30,27 +30,12 @@ const testimonials = [
     quote:
       'Lorem ipsum dolor sit amet consectetur blandit bibendum adipiscing proin tempor. Orci feugiat nec quisque tempor est neque tincidunt odio sollicitudin semper maecenas sollicitudin laoreet viverra.',
   },
-  {
-    companyLogo: fictionalLogo03,
-    avatar: avatar3,
-    name: 'Olivia Simmons',
-    title: 'Engineer at DevTech',
-    quote:
-      'Lorem ipsum dolor sit amet consectetur blandit bibendum adipiscing proin tempor. Orci feugiat nec quisque tempor est neque tincidunt odio sollicitudin semper maecenas sollicitudin laoreet viverra.',
-  },
-  {
-    companyLogo: fictionalLogo04,
-    avatar: avatar4,
-    name: 'Sophia Johnson',
-    title: 'Developer at Tinker',
-    quote:
-      'Lorem ipsum dolor sit amet consectetur blandit bibendum adipiscing proin tempor. Orci feugiat nec quisque tempor est neque tincidunt odio sollicitudin semper maecenas sollicitudin laoreet viverra.',
-  },
+
 ]
 
 export function InvestorTestimonials() {
   return (
-    <Container className='relative mt-16 max-w-2xl sm:mt-20 md:max-w-screen-xl lg:mt-28'>
+    <Container className='relative my-16 max-w-2xl sm:mt-20 md:max-w-screen-xl lg:mt-28'>
       {/* Social proof */}
       <div>
         <div className='absolute -left-96 -right-96 -top-96 bottom-0 -z-10'>
@@ -90,7 +75,7 @@ export function InvestorTestimonials() {
                 className={cn(
                   'absolute inset-x-0 bottom-0 h-px w-full bg-gradient-to-r',
                   Math.ceil(testimonials.length / 2) ===
-                    Math.floor(index / 2) + 1 && 'md:hidden',
+                  Math.floor(index / 2) + 1 && 'md:hidden',
                   testimonials.length === index + 1 && 'hidden',
                   index % 2 === 0
                     ? Math.floor(index / 2) % 2 === 0
