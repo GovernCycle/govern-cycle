@@ -8,19 +8,7 @@ import { getOffsetTop, cn } from '@/lib/utils'
 // @ts-ignore
 import { debounce, throttle } from 'lodash'
 import { Button } from '@/components/shared/Button'
-import {
-  ChevronDownIcon,
-  ChevronRightIcon,
-  HomeIcon,
-  UsersIcon,
-  CreditCardIcon,
-  EnvelopeOpenIcon,
-  UserCircleIcon,
-  UserPlusIcon,
-  LockOpenIcon,
-  ExclamationCircleIcon,
-  MegaphoneIcon,
-} from '@heroicons/react/16/solid'
+
 import { usePathname } from 'next/navigation'
 import {
   Popover,
@@ -38,32 +26,13 @@ import {
 
 import logo from '@/images/logo.png'
 import logoIcon from '@/images/logo-icon.png'
-{/*const pages = [
-  { label: 'Home', href: '/', icon: HomeIcon },
-  //{ label: 'Actions', href: '/actions', icon: UsersIcon },//
-  {
-    label: 'Propuestas',
-    href: '/proposal',
-    icon: MegaphoneIcon,
-  },
-  {
-    label: 'Sign in',
-    href: '/signin',
-    icon: UserCircleIcon,
-  },
-  { label: 'Sign up', href: '/signup', icon: UserPlusIcon },
-  {
-    label: 'Password reset',
-    href: 'password-reset',
-    icon: LockOpenIcon,
-  },
-]*/}
+import { InternetIdentityButton, LogoutButton, useAuth } from '@bundly/ares-react'
 
 const links = [
+  { label: 'Signup', href: '/auth/signup' },
   { label: 'Inicio', href: '/' },
-  //{ label: 'Actions', href: '/actions' },//
   { label: 'Propuestas', href: '/proposal' },
-  //{ label: 'Contact', href: '/contact' },//
+
 ]
 
 function Hamburger() {
@@ -179,7 +148,27 @@ function DropDownMenu({
   )
 }
 
-export const NavbarPill = () => {
+export const NavbarPill = ({
+  isLogged,
+  setIsLogged,
+}: {
+
+  isLogged: boolean
+  setIsLogged: (value: boolean) => void
+
+}) => {
+  const { isAuthenticated, currentIdentity } = useAuth();
+  const handleSuccess = () => {
+    setIsLogged(true);
+  }
+  useEffect(() => {
+    if (isAuthenticated) {
+      setIsLogged(true);
+    } else {
+      setIsLogged(false);
+    }
+  }
+    , [isAuthenticated])
   const pathname = usePathname()
   // Initialize to true in order to dynamically get width of the cta button
   const [showButton, setShowButton] = useState(true)
@@ -358,34 +347,47 @@ export const NavbarPill = () => {
               </Link>
             ))}
 
-            {/* Pages dropdown button 
-            <MenuButton
-              type='button'
-              className='group relative z-40 hidden h-full items-center px-3 py-2.5 text-sm font-semibold text-cream-500/50 outline-none drop-shadow-[-4px_-4px_6px_rgba(255, 254, 239,0.2)] duration-200 ease-in-out hover:text-cream-500/100 data-[open]:text-cream-500 data-[open]:drop-shadow-[-4px_-4px_6px_rgba(255, 254, 239,0.2)] md:inline-flex lg:px-4'
-              ref={dropdownButtonRef}
-            >
-              <span>Pages</span>
-
-              <ChevronDownIcon className='ml-1 h-4.5 w-4.5 text-orange-100/ duration-300 group-tan:text-text-primary group-data-[open]:rotate-180 group-data-[open]:text-tan-400/90' />
-            </MenuButton>*/}
-
             <div className='relative z-20 ml-1 flex items-center sm:ml-3 md:hidden'>
-              <Button
-                href='/signin'
-                variant='tertiary'
-                size='sm'
-                className='overflow-hidden'
-              >
-                Sign in
-              </Button>
+              <div className={`${isLogged ? 'hidden' : ''} p-1 `}>
 
-              <Button
-                className='-mr-px rounded-full after:rounded-full'
-                href='/signup'
-                size='sm'
-              >
-                Get started
-              </Button>
+                <InternetIdentityButton
+                  onSuccess={handleSuccess}
+                  style={
+                    {
+                      color: 'white',
+                      backgroundColor: 'var(--color-button-primary)',
+                      border: '1px solid white',
+                      borderRadius: '0.5rem',
+                      padding: '0.5rem 1rem',
+                      fontSize: '0.5rem',
+                      fontWeight: 'bold',
+                      cursor: 'pointer',
+                      position: 'relative',
+                      overflow: 'hidden'
+                    }
+                  } />
+              </div>
+
+              <div className={`${!isLogged ? 'hidden' : ''} flex items-center space-x-2 p-1`}>
+                <span className='font-bold bg-yellow-700 hover:bg-yellow-900 rounded-full p-2 text-white'>Logged in as {currentIdentity.getPrincipal().toString().slice(0, 5)}</span>
+                <LogoutButton
+                  identity={currentIdentity}
+                  style={
+                    {
+                      color: 'white',
+                      backgroundColor: 'var(--color-button-primary)',
+                      border: '1px solid white',
+                      borderRadius: '0.5rem',
+                      padding: '0.5rem 1rem',
+                      fontSize: '0.5rem',
+                      fontWeight: 'bold',
+                      cursor: 'pointer',
+                      position: 'relative',
+                      overflow: 'hidden'
+                    }
+                  } />
+              </div>
+
 
               <Hamburger />
             </div>
@@ -394,7 +396,7 @@ export const NavbarPill = () => {
               className='invisible absolute hidden md:block'
               ref={navCtaContainerRef}
             >
-             {/*<Transition show={showButton}>
+              {/*<Transition show={showButton}>
    //Si queremos que al hacer scroll se muestre el botón de inicio de sesión y registro, debemos ingresar aquí código del botón.
               </Transition>*/}
             </div>

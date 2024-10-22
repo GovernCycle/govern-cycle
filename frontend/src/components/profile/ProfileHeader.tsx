@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { UserIcon } from '@heroicons/react/16/solid';
 import { Container } from '@/components/shared/Container';
-import { Button } from '@/components/shared/Button'; // Asegúrate de tener un componente Button estilizado
+import { Button } from '@/components/shared/Button';
 
 export function ProfileHeader() {
   const textHeaderRef = useRef<HTMLDivElement>(null);

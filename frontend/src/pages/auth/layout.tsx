@@ -87,7 +87,7 @@ export default function AuthLayout({
         href='/'
         variant='secondary'
         size='md'
-        className='absolute right-4 top-4 hidden p-2 sm:flex lg:right-12 lg:top-12 lg:p-2.5'
+        className='absolute right-4 top-4 p-1 sm:flex lg:right-12 lg:top-12 lg:p-2.5'
       >
         <XMarkIcon className='h-4.5 w-4.5 lg:h-5 lg:w-5' />
       </Button>

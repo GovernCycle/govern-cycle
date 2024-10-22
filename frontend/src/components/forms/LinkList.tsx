@@ -41,7 +41,7 @@ export const LinkList = ({
 
 
     return (
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-x-3">
 
             <div className="flex items-center space-x-4">
                 <TextField

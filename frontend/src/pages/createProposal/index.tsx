@@ -102,7 +102,7 @@ export default function CreateProposal() {
 
     return (
         <ProposalLayout>
-            <Container className='max-w-lg py-5 sm:max-w-xl lg:max-w-6xl'>
+            <Container className='max-w-lg py-5 sm:max-w-xl lg:max-w-6xl m-6'>
                 <div className='lg:grid lg:grid-cols-1 lg:gap-x-8 xl:gap-x-36'>
                     <SimpleBar style={{ maxHeight: '90vh' }} className='relative z-0 flex flex-col shadow-inner-blur bg-[var(--color-background-ternary-op)] rounded-2xl'>
                         <FormHeader

@@ -38,7 +38,7 @@ export const Header = () => {
             </Link>
           </div>
 
-          <NavbarPill />
+          <NavbarPill isLogged={isLogged} setIsLogged={setIsLogged}/>
 
           <div className='hidden items-center md:flex lg:space-x-3 xl:space-x-4'>
             <div className="lg:flex lg:flex-1 lg:justify-end">
