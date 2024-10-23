@@ -3,15 +3,13 @@ import 'tailwindcss/tailwind.css';
 import { Client, InternetIdentity } from '@bundly/ares-core';
 import { IcpConnectContextProvider } from '@bundly/ares-react';
 import { candidCanisters } from '@app/canisters';
-import { useContext, useEffect, useState } from 'react';
 import '@/styles/globals.css';
-import { defaultUser, UserContext } from '@app/context/userContext';
-import { User } from '@app/declarations/home/home.did';
-
+import { UserContext, useUserState } from '@app/context/userContext';
+import { useState, useEffect } from 'react';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [client, setClient] = useState<Client | null>(null);
-  const [user, setUser] = useState<User>(defaultUser);
+  const userState = useUserState(); // Uso del estado del usuario
 
   useEffect(() => {
     const createClient = async () => {
@@ -22,9 +20,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         candidCanisters,
         providers: [
           new InternetIdentity({
-            providerUrl:
-              process.env.NEXT_PUBLIC_INTERNET_IDENTITY_URL!,
-            // process.env.NEXT_PUBLIC_INTERNET_IDENTITY_URL! || 'https://identity.ic0.app',
+            providerUrl: process.env.NEXT_PUBLIC_INTERNET_IDENTITY_URL!,
           }),
         ],
       });
@@ -35,12 +31,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     createClient();
   }, []);
 
-  if (!client) return <div>Loading...</div>; // Ensure the client is ready before rendering the app
+  if (!client) return <div>Loading...</div>;
 
   return (
     <IcpConnectContextProvider client={client}>
-      <UserContext.Provider value={{user, setUser}}>
-        {/* Wrap the Component inside RootLayout */}
+      <UserContext.Provider value={userState}>
         <Component {...pageProps} />
       </UserContext.Provider>
     </IcpConnectContextProvider>

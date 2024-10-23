@@ -7,7 +7,7 @@ import { InternetIdentityButton, useAuth, LogoutButton } from '@bundly/ares-reac
 
 import logo from '@/images/logo.png'
 import { useContext, useEffect, useState } from 'react'
-import { defaultUser, UserContext } from '@app/context/userContext'
+import { UserContext } from '@app/context/userContext'
 import { useHome } from '@app/hooks/useHome'
 
 export const Header = () => {
