@@ -5,7 +5,7 @@ import { TextField } from '@/components/forms/TextField'
 import { ChevronRightIcon } from '@heroicons/react/16/solid'
 import { RoleDropdown } from '@app/components/forms/roleDropDown'
 import { JurisdictionDropdown } from '@app/components/forms/JurisdictionDropdown'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import Swal from 'sweetalert2'
 import { LinkList } from '@app/components/forms/LinkList'
 import { useProposal } from '@app/hooks/useProposal'
@@ -16,9 +16,10 @@ import { Link } from '@app/declarations/proposal/proposal.did'
 import { SelectedJurisdiction } from '@app/utils/jurisdiction'
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
-import AuthLayout from '../auth/layout'
 import Loading from '@app/components/loading/Loading'
 import ProposalLayout from './layout'
+import { UserContext } from '@app/context/userContext'
+import { Alert } from '@mui/material'
 
 export default function CreateProposal() {
 
@@ -26,8 +27,11 @@ export default function CreateProposal() {
     const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
     const [listedLinks, setListedLinks] = useState<LinkOption[]>([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [imageData, setImageData] = useState<Uint8Array | number[] | null>(null); // Estado para guardar los datos
     const { createProposal } = useProposal();
+    const { user, setUser } = useContext(UserContext);
+
+    const isProjectDeveloper = user.role.some(role => 'ProjectDeveloper' in role);
+    const isApproved = 'Approved' in user.state;
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -102,97 +106,103 @@ export default function CreateProposal() {
 
     return (
         <ProposalLayout>
-            <Container className='max-w-lg py-5 sm:max-w-xl lg:max-w-6xl m-6'>
-                <div className='lg:grid lg:grid-cols-1 lg:gap-x-8 xl:gap-x-36'>
-                    <SimpleBar style={{ maxHeight: '90vh' }} className='relative z-0 flex flex-col shadow-inner-blur bg-[var(--color-background-ternary-op)] rounded-2xl'>
-                        <FormHeader
-                            title='Agrega Tu Proyecto'
-                            description='Completa los datos para registrar tu propuesta'
-                        />
+            {(!isProjectDeveloper || !isApproved) && (
+                <Alert severity='error' className='z-[1000] absolute'>
+                    No tienes permisos para acceder a esta página
+                </Alert>)}
+            {isProjectDeveloper && isApproved && (
+                <Container className='max-w-lg py-5 sm:max-w-xl lg:max-w-6xl m-6'>
+                    <div className='lg:grid lg:grid-cols-1 lg:gap-x-8 xl:gap-x-36'>
+                        <SimpleBar style={{ maxHeight: '90vh' }} className='relative z-0 flex flex-col shadow-inner-blur bg-[var(--color-background-ternary-op)] rounded-2xl'>
+                            <FormHeader
+                                title='Agrega Tu Proyecto'
+                                description='Completa los datos para registrar tu propuesta'
+                            />
 
-                        {isLoading && (
-                            <div className='flex justify-center w-full items-center'>
-                                <Loading />
-                            </div>
-                        )}
-                        {!isLoading && (
-                            <form onSubmit={handleSubmit} className='mt-9 px-6 pb-10 sm:px-10 '>
-                                <div className='space-y-8 lg:grid-cols-2'>
-                                    <div className='sm:grid sm:grid-cols-2 sm:gap-x-6'>
-                                        <div className='space-y-4'>
-                                            <TextField
-                                                label='Nombre'
-                                                name='name'
-                                                placeholder='Escribe el nombre del proyecto'
-                                                required
-                                            />
-                                            <TextField
-                                                label='Umbral'
-                                                name='threshold'
-                                                type='number'
-                                                min={0}
-                                                autoComplete='email'
-                                                placeholder='Cantidad mínima de votos para aprobar la propuesta'
-                                                required
-                                            />
+                            {isLoading && (
+                                <div className='flex justify-center w-full items-center'>
+                                    <Loading />
+                                </div>
+                            )}
+                            {!isLoading && (
+                                <form onSubmit={handleSubmit} className='mt-9 px-6 pb-10 sm:px-10 '>
+                                    <div className='space-y-8 lg:grid-cols-2'>
+                                        <div className='sm:grid sm:grid-cols-2 sm:gap-x-6'>
+                                            <div className='space-y-4'>
+                                                <TextField
+                                                    label='Nombre'
+                                                    name='name'
+                                                    placeholder='Escribe el nombre del proyecto'
+                                                    required
+                                                />
+                                                <TextField
+                                                    label='Umbral'
+                                                    name='threshold'
+                                                    type='number'
+                                                    min={0}
+                                                    autoComplete='email'
+                                                    placeholder='Cantidad mínima de votos para aprobar la propuesta'
+                                                    required
+                                                />
+                                            </div>
+                                            <div className='space-y-4'>
+                                                <TextField
+                                                    label='Unidades ambientales'
+                                                    name='UnidadesAmbientales'
+                                                    type='number'
+                                                    autoComplete='UnidadesAmbientales'
+                                                    placeholder='0'
+                                                    required
+                                                />
+                                                <TextField
+                                                    label='Fecha Limite'
+                                                    name='LimitDate'
+                                                    type='datetime-local'
+                                                    required
+                                                />
+                                            </div>
                                         </div>
-                                        <div className='space-y-4'>
-                                            <TextField
-                                                label='Unidades ambientales'
-                                                name='UnidadesAmbientales'
-                                                type='number'
-                                                autoComplete='UnidadesAmbientales'
-                                                placeholder='0'
-                                                required
-                                            />
-                                            <TextField
-                                                label='Fecha Limite'
-                                                name='LimitDate'
-                                                type='datetime-local'
-                                                required
-                                            />
-                                        </div>
+
+                                        <JurisdictionDropdown
+                                            selectedJurisdictions={selectedJurisdictions}
+                                            setSelectedJurisdictions={setSelectedJurisdictions}
+                                        />
+
+                                        <RoleDropdown
+                                            selectedRoles={selectedRoles}
+                                            setSelectedRoles={setSelectedRoles}
+                                        />
+                                        <TextField
+                                            label='Descripción'
+                                            name='descriptions'
+                                            elementType="textarea"
+                                            placeholder='Escribe una descripción de la propuesta'
+                                            required
+                                        />
+
+                                        <TextField
+                                            label='Logo'
+                                            name='logo'
+                                            placeholder='Sube tu logo'
+                                            required
+                                        />
+                                        <LinkList listedLinks={listedLinks} setListedLinks={setListedLinks} />
+
                                     </div>
 
-                                    <JurisdictionDropdown
-                                        selectedJurisdictions={selectedJurisdictions}
-                                        setSelectedJurisdictions={setSelectedJurisdictions}
-                                    />
+                                    <div className='mt-5 flex items-center justify-between space-x-4'>
+                                        <Button type='submit' className='sm:px-5'>
+                                            <span>Crear propuesta</span>
+                                            <ChevronRightIcon className='h-4 w-4' />
+                                        </Button>
+                                    </div>
+                                </form>
+                            )}
+                        </SimpleBar>
+                    </div>
 
-                                    <RoleDropdown
-                                        selectedRoles={selectedRoles}
-                                        setSelectedRoles={setSelectedRoles}
-                                    />
-                                    <TextField
-                                        label='Descripción'
-                                        name='descriptions'
-                                        elementType="textarea"
-                                        placeholder='Escribe una descripción de la propuesta'
-                                        required
-                                    />
-
-                                    <TextField
-                                        label='Logo'
-                                        name='logo'
-                                        placeholder='Sube tu logo'
-                                        required
-                                    />
-                                    <LinkList listedLinks={listedLinks} setListedLinks={setListedLinks} />
-
-                                </div>
-
-                                <div className='mt-5 flex items-center justify-between space-x-4'>
-                                    <Button type='submit' className='sm:px-5'>
-                                        <span>Crear propuesta</span>
-                                        <ChevronRightIcon className='h-4 w-4' />
-                                    </Button>
-                                </div>
-                            </form>
-                        )}
-                    </SimpleBar>
-                </div>
-
-            </Container>
+                </Container>
+            )}
         </ProposalLayout>
     )
 }

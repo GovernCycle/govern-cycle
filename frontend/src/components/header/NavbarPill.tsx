@@ -3,30 +3,25 @@
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useRef, useState, Fragment } from 'react'
-import { getOffsetTop, cn } from '@/lib/utils'
+import { useEffect, useRef, useState, Fragment, useContext } from 'react'
+import { getOffsetTop } from '@/lib/utils'
 // @ts-ignore
 import { debounce, throttle } from 'lodash'
-import { Button } from '@/components/shared/Button'
 
 import { usePathname } from 'next/navigation'
 import {
   Popover,
   PopoverButton,
   PopoverPanel,
-  Transition,
   Menu,
-  MenuButton,
-  MenuItem,
   MenuItems,
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
+
 } from '@headlessui/react'
 
 import logo from '@/images/logo.png'
 import logoIcon from '@/images/logo-icon.png'
 import { InternetIdentityButton, LogoutButton, useAuth } from '@bundly/ares-react'
+import { UserContext } from '@app/context/userContext'
 
 const links = [
   { label: 'Signup', href: '/auth/signup' },
@@ -35,6 +30,8 @@ const links = [
   { label: 'Perfil', href: '/profile' },
 
 ]
+
+
 
 function Hamburger() {
   return (
@@ -159,6 +156,20 @@ export const NavbarPill = ({
 
 }) => {
   const { isAuthenticated, currentIdentity } = useAuth();
+  const { user, setUser } = useContext(UserContext);
+
+  const isTechnicalSeccretariat = user.role.some(role => 'TechnicalSecretariat' in role);
+  const isApproved = 'Approved' in user.state;
+
+  const navlinks = [
+    { label: 'Signup', href: '/auth/signup' },
+    { label: 'Inicio', href: '/' },
+    { label: 'Propuestas', href: '/proposal' },
+    { label: 'Perfil', href: '/profile' },
+    // Agregar el enlace al dashboard de administración si el usuario es TechnicalSecretariat y está aprobado
+    ...(isTechnicalSeccretariat && isApproved ? [{ label: 'Dashboard', href: '/admin/dashboard' }] : []),
+  ];
+
   const handleSuccess = () => {
     setIsLogged(true);
   }
@@ -330,7 +341,7 @@ export const NavbarPill = ({
               </Link>
             </div>
 
-            {links.map((link, index) => (
+            {navlinks.map((link, index) => (
               <Link
                 key={`desktop-navbar-link-${index}`}
                 href={link.href}

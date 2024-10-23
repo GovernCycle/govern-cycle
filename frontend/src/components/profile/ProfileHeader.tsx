@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
 import { Container } from '@/components/shared/Container';
 import { Button } from '@/components/shared/Button';
+import { State, User } from '@app/declarations/home/home.did';
+import Link from 'next/link';
 
 export function ProfileHeader({
   user,
