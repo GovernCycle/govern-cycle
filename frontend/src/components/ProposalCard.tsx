@@ -169,7 +169,7 @@ export const ProposalCard = ({
                     <div className='h-full w-full rounded-2xl border border-violet-200/[.08] p-2'>
                       <div className='absolute -bottom-48 -left-48 -right-16 -top-36'>
                       </div>
-                      <img src={proposal[1].photo instanceof Uint8Array ? `data:image/jpeg;base64,${Buffer.from(proposal[1].photo as unknown as number[]).toString('base64')}` : proposal[1].photo as unknown as string} alt='Proposal Photo' className='object-cover w-full h-full rounded-2xl' />
+                      <img src={proposal[1].photo} alt='Proposal Photo' className='object-cover w-full h-full rounded-2xl' />
                     </div>
                   </div>
                 </div>
