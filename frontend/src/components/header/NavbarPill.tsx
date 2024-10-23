@@ -29,7 +29,7 @@ import logoIcon from '@/images/logo-icon.png'
 import { InternetIdentityButton, LogoutButton, useAuth } from '@bundly/ares-react'
 
 const links = [
-  { label: 'Signup', href: '/auth/signup' },
+  { label: 'Regístro', href: '/auth/signup' },
   { label: 'Inicio', href: '/' },
   { label: 'Propuestas', href: '/proposal' },
   { label: 'Perfil', href: '/profile' },
@@ -366,7 +366,9 @@ export const NavbarPill = ({
                       position: 'relative',
                       overflow: 'hidden'
                     }
-                  } />
+                  } >
+                  Inicia sesión
+                  </InternetIdentityButton>
               </div>
 
               <div className={`${!isLogged ? 'hidden' : ''} flex items-center space-x-2 p-1`}>
@@ -386,7 +388,9 @@ export const NavbarPill = ({
                       position: 'relative',
                       overflow: 'hidden'
                     }
-                  } />
+                  }>
+                    Cerrar sesión
+                  </LogoutButton>
               </div>
 
 

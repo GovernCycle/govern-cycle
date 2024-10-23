@@ -1,6 +1,9 @@
 import React, { useRef } from 'react';
 import { Container } from '@/components/shared/Container';
 import { Button } from '@/components/shared/Button';
+import { User } from '@app/declarations/home/home.did';
+import { State } from '@app/declarations/db/db.did';
+import Link from 'next/link';
 
 export function ProfileHeader({
   user,
@@ -30,7 +33,7 @@ export function ProfileHeader({
 
           {/* Header Section */}
           <div ref={textHeaderRef} className="lg:col-span-7 xl:col-span-1 flex items-center space-x-3">
-            <img src={user.logo} alt="User Logo" className="h-16 w-16 rounded-full" />
+            <img src={typeof user.logo === 'string' ? user.logo : `data:image/png;base64,${Buffer.from(user.logo).toString('base64')}`} alt="User Logo" className="h-16 w-16 rounded-full" />
             <h1 className="text-3xl font-bold leading-tight text-charcoal-500 sm:text-4xl lg:text-4xl">
               {user.name}
             </h1>

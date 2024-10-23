@@ -59,7 +59,9 @@ export const Header = () => {
                       position: 'relative',
                       overflow: 'hidden'
                     }
-                  } />
+                  } >
+                    Inicia sesión
+                    </InternetIdentityButton>
               </div>
               <div className={`${!isLogged ? 'hidden' : ''} flex items-center space-x-2`}>
 
@@ -87,7 +89,7 @@ export const Header = () => {
 
             {/* Call to action */}
             <Button href='/auth/signup' size='lg' variant='secondary'>
-              Sign up
+              Regístrate
             </Button>
           </div>
         </nav>

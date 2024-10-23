@@ -84,7 +84,7 @@ export const ProposalDetails = ({
             {/* Imagen */}
             <div className="relative col-span-12 h-64 lg:col-span-5 lg:h-auto xl:col-span-1 mb-8">
                 <div className="relative h-96 w-full rounded-2xl bg-gray-50 shadow-inner-blur m-3">
-                    <img src={proposal.photo} alt="Team photo" className="object-cover w-full h-full rounded-2xl shadow-md" />
+                    <img src={`data:image/jpeg;base64,${Buffer.from(proposal.photo).toString('base64')}`} alt="Team photo" className="object-cover w-full h-full rounded-2xl shadow-md" />
                 </div>
             </div>
 

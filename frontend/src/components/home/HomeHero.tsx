@@ -16,10 +16,12 @@ import {
   ShieldCheckIcon,
   UserPlusIcon,
   GlobeAsiaAustraliaIcon,
-  GlobeEuropeAfricaIcon
+  GlobeEuropeAfricaIcon,
+  PlusIcon
 } from '@heroicons/react/16/solid'
 import { PlayCircleIcon } from '@heroicons/react/20/solid'
 import { CLIENTS } from '@/config'
+import Link from 'next/link'
 
 
 export const HomeHero = () => {
@@ -36,41 +38,51 @@ export const HomeHero = () => {
               <div className='cards space-y-2 grid gap-6 grid-cols-1 lg:grid-cols-2 lg:gap-2 lg:space-y-0'>
 
                 {/* Card 1 */}
-                <div className="card relative col-span-1 overflow-hidden rounded-xl bg-transparent p-[1.5px] before:absolute before:left-0 before:top-0 before:z-30 before:h-full before:w-full before:rounded-xl before:opacity-0 before:transition-opacity before:duration-500 before:content-[''] after:absolute after:left-0 after:top-0 after:z-10 after:h-full after:w-full after:rounded-xl after:opacity-0 after:transition-opacity after:duration-500 after:content-[''] hover:before:opacity-100 hover:after:opacity-100">
-                  <div className='relative z-10 h-full w-full overflow-hidden rounded-xl'>
-
+                <div className="card relative col-span-1 overflow-hidden rounded-xl bg-transparent p-[1.5px]">
+                  <div className='relative z-20 h-full w-full overflow-hidden rounded-xl'>
                     <div className='flex h-full w-full flex-col rounded-xl'>
 
-                      {/* Card content */}
-                      <div className='px-8 pb-8 pt-10 sm:px-10 sm:pt-0 xl:px-0 xl:pt-0'>
-                        <GlobeEuropeAfricaIcon className='h-20 w-20 mx-auto text-tan-500' />
-                        <h3 className='text-lg font-semibold text-text-tertiary text-center mb-5'>Salvar el medio ambiente nunca habia sido tan fácil:</h3>
 
+                      {/* Card content */}
+                      <div className='px-8 pb-8 pt-10 sm:px-10 sm:pt-0 xl:px-0 xl:pt-0'>                        
                         <div>
                           <div className='grid grid-cols-1 gap-4'>
                             {/* Minicard 1 */}
-                            <div className='flex rounded-lg bg-tan-950/[.01] shadow-inner-blur'>
-                              <div className='relative flex flex-col w-full overflow-hidden rounded-lg border border-tan-200/[.06] p-4'>
-                                <div className='flex items-start space-x-2'>
-                                  {/* Heroicon */}
-                                  <UserPlusIcon className='h-8 w-8' />
-                                  {/* Texto y botón */}
-                                  <div className='flex flex-col w-full'>
-                                    <div className='flex justify-between items-center'>
-                                      <h3 className='text-lg font-semibold text-text-secondary text-left'>
-                                        Regístrate de forma segura
-                                      </h3>
-                                      <Button variant='primary'>
-                                        Registrate
-                                      </Button>
+                            <div className='px-8 pb-8 pt-10 sm:px-10 sm:pt-0 xl:px-0 xl:pt-0'>
+                              <GlobeEuropeAfricaIcon className='h-20 w-20 mx-auto text-tan-500' />
+                              <h3 className='text-lg font-semibold text-text-tertiary text-center mb-5'>
+                                Salvar el medio ambiente nunca había sido tan fácil:
+                              </h3>
+
+                              <div className='grid grid-cols-1 gap-4'>
+                                {/* Minicard 1 */}
+                                <div className='flex rounded-lg bg-tan-950/[.01] shadow-inner-blur'>
+                                  <div className='relative flex flex-col w-full overflow-hidden rounded-lg border border-tan-200/[.06] p-4'>
+                                    <div className='flex items-start space-x-2'>
+                                      <UserPlusIcon className='h-8 w-8' />
+
+                                      <div className='flex flex-col w-full'>
+                                        <div className='flex justify-between items-center'>
+                                          <h3 className='text-lg font-semibold text-text-secondary text-left'>
+                                            Regístrate de forma segura
+                                          </h3>
+
+                                          <Link href='/auth/signup'>
+                                            <Button className='hover:bg-carafe-500 rounded-full w-fit z-30' variant='primary'>
+                                              Regístrate
+                                            </Button>
+                                          </Link>
+                                        </div>
+                                        <p className='mt-1 text-sm text-text-secondary text-left'>
+                                          Obtén tu internet identity.
+                                        </p>
+                                      </div>
                                     </div>
-                                    <p className='mt-1 text-sm text-text-secondary text-left'>
-                                      Obten tu internet identity.
-                                    </p>
                                   </div>
                                 </div>
                               </div>
                             </div>
+
 
 
                             {/* Minicard 2 */}
@@ -92,7 +104,7 @@ export const HomeHero = () => {
 
                                   {/* Contenedor del botón */}
                                   <div className='flex items-center ml-4'>
-                                    <Button variant='primary'>
+                                    <Button variant='secondary' href='/proposal'>
                                       Explorar propuestas
                                     </Button>
                                   </div>
@@ -120,7 +132,7 @@ export const HomeHero = () => {
 
                                   {/* Contenedor del botón */}
                                   <div className='flex items-center ml-4'>
-                                    <Button variant='primary'>
+                                    <Button variant='primary' href='/proposal'>
                                       Ir a votar
                                     </Button>
                                   </div>
@@ -177,7 +189,7 @@ export const HomeHero = () => {
                           </p>
 
                           <div className='mt-8 flex items-center justify-center space-x-3 sm:space-x-5'>
-                            
+
                             <Button
                               variant='tertiary'
                               onClick={() => setIsOpen(true)}

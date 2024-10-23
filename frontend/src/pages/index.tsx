@@ -6,6 +6,7 @@ import { Footer } from '@/components/shared/Footer'
 import { use, useContext, useEffect } from 'react'
 import { UserContext } from '@app/context/userContext'
 import { useHome } from '@app/hooks/useHome'
+import { InvestorTestimonials } from '@app/components/pricing/InvestorTestimonials'
 
 export default function IcConnectPage() {
 
