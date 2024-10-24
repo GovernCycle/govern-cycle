@@ -45,15 +45,15 @@ const navigation = [
     icon: resources,
     label: 'Recursos',
     links: [
-      { name: 'Crea tu Internet Identity', target: '_blank', href: 'https://www.youtube.com/watch?v=llJWe55VYsE', new: false}, 
-      { name: 'Eventos', target: '_blank',  href: 'https://x.com/GabbiiDAO' },
+      { name: 'Crea tu Internet Identity', target: '_blank', href: 'https://www.youtube.com/watch?v=llJWe55VYsE', new: false },
+      { name: 'Eventos', target: '_blank', href: 'https://x.com/GabbiiDAO' },
     ],
   },
   {
     icon: scale,
     label: 'Legal',
     links: [
-      { name: 'Licencia', target: '_blank', href: 'https://drive.google.com/file/d/1kuj3qplxCkml6AG49lKGsw4F185WOfLX/view?usp=drive_link',  },
+      { name: 'Licencia', target: '_blank', href: 'https://drive.google.com/file/d/1kuj3qplxCkml6AG49lKGsw4F185WOfLX/view?usp=drive_link', },
     ],
   },
 ];
@@ -163,7 +163,7 @@ export function Footer({ cta = true }: Props) {
                 </div>
               </div>
               <p className='mt-10 text-center text-[15px] text-cream-400/90 sm:mt-12'>
-                © {new Date().getFullYear()} GabbiiDAO. Todos los derechos reservados. 
+                © {new Date().getFullYear()} GabbiiDAO. Todos los derechos reservados.
               </p>
             </div>
           </div>
