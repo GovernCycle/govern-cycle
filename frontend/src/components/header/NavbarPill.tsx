@@ -24,7 +24,6 @@ import { InternetIdentityButton, LogoutButton, useAuth } from '@bundly/ares-reac
 import { UserContext } from '@app/context/userContext'
 
 const links = [
-  { label: 'Regístro', href: '/auth/signup' },
   { label: 'Inicio', href: '/' },
   { label: 'Propuestas', href: '/proposal' },
   { label: 'Perfil', href: '/profile' },
@@ -70,7 +69,7 @@ function MobileNavigation() {
     <div className='absolute inset-x-0 top-[60px] z-30 mx-5 flex justify-center sm:mx-6 md:hidden'>
       <PopoverPanel
         transition
-        className='w-full max-w-lg overflow-hidden rounded-xl bg-[#1F1F24]/80 px-5 pb-5 pt-4 shadow-inner-blur backdrop-blur-lg backdrop-brightness-[85%] transition-all duration-300 after:absolute after:inset-0 after:rounded-xl after:border after:border-violet-200/[.06] data-[closed]:-translate-y-16 data-[closed]:scale-90 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in sm:left-6 sm:right-6 sm:mx-6'
+        className='w-full max-w-lg overflow-hidden rounded-xl  px-5 pb-5 pt-4 shadow-inner-blur backdrop-blur-lg backdrop-brightness-[85%] transition-all duration-300 after:absolute after:inset-0 after:rounded-xl after:border after:border-violet-200/[.06] data-[closed]:-translate-y-16 data-[closed]:scale-90 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in sm:left-6 sm:right-6 sm:mx-6'
       >
         <nav className='relative z-10 flex flex-col divide-y divide-charcoal-200/5'>
           {links.map((link, index) => (
@@ -79,30 +78,7 @@ function MobileNavigation() {
             </MobileNavItem>
           ))}
 
-          {/*<Disclosure as='div' className='block w-full'>
-             {/* Pages dropdown button 
-            <DisclosureButton className='group flex w-full items-center justify-between px-1.5 pb-2 pt-4 text-[15px] font-medium text-cream drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out hover:text-charcoal-400/95 data-[open]:text-charcoal-400/95'>
-              <span>Pages</span>
 
-              <ChevronRightIcon className='ml-2 h-4.5 w-4.5 text-violet-100/80 duration-200 ease-in-out group-hover:text-cream-400/80 group-data-[open]:rotate-90 group-data-[open]:text-tan-400/90' />
-            </DisclosureButton>
-            <DisclosurePanel className='space-y-1 px-3 pt-0.5'>
-              {pages.map((link) => (
-                <Link
-                  key={`mobile-navbar-dropdown-link-${link.href}`}
-                  href={link.href}
-                  className='group relative z-10 block text-nowrap py-2 text-sm font-medium text-cream-50 drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out hover:text-cream-500/95 hover:drop-shadow-[-4px_-4px_6px_rgba(196,181,253,0.2)]'
-                >
-                  <span className='flex items-center'>
-                    {link.icon && (
-                      <link.icon className='mr-2 h-4 w-4 text-cream-500/60 group-hover:text-cream-500/80' />
-                    )}
-                    {link.label}
-                  </span>
-                </Link>
-              ))}
-            </DisclosurePanel>
-          </Disclosure> */}
         </nav>
       </PopoverPanel>
     </div>
@@ -126,22 +102,8 @@ function DropDownMenu({
       }}
       modal={false}
     >
-      {/*{pages.map((link) => (
-        <MenuItem key={`pages-dropdiwn-link-${link.href}`}>
-          <Link
-            href={link.href}
-            className='group relative z-10 block text-nowrap px-4 py-2 text-sm font-medium text-tan-50 drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out data-[focus]:text-white-400/95 data-[focus]:shadow-inner-blur-light data-[focus]:drop-shadow-[-4px_-4px_6px_rgba(196,181,253,0.2)]'
-          >
-            <span className='flex items-center'>
-              {link.icon && (
-                <link.icon className='mr-2 h-4 w-4 text-tan-200/60 group-data-[focus]:text-tan-300/80' />
-              )}
-              {link.label}
-            </span>
-            <span className='absolute inset-y-0 left-0 w-px bg-gradient-to-b from-violet-400/0 via-tan-400/90 to-violet-400/0 opacity-0 duration-200 ease-in-out group-data-[focus]:opacity-100' />
-          </Link>
-        </MenuItem>
-      ))}*/}
+
+
     </MenuItems>
   )
 }
@@ -162,7 +124,6 @@ export const NavbarPill = ({
   const isApproved = 'Approved' in user.state;
 
   const navlinks = [
-    { label: 'Signup', href: '/auth/signup' },
     { label: 'Inicio', href: '/' },
     { label: 'Propuestas', href: '/proposal' },
     { label: 'Perfil', href: '/profile' },
@@ -379,11 +340,12 @@ export const NavbarPill = ({
                     }
                   } >
                   Inicia sesión
-                  </InternetIdentityButton>
+                </InternetIdentityButton>
               </div>
 
               <div className={`${!isLogged ? 'hidden' : ''} flex items-center space-x-2 p-1`}>
-                <span className='font-bold bg-yellow-700 hover:bg-yellow-900 rounded-full p-2 text-white'>Logged in as {currentIdentity.getPrincipal().toString().slice(0, 5)}</span>
+                <span className=" bg-gradient-to-b w-auto max-w-40 
+             rounded-xl p-2 text-white mx-4"> Usuario: {currentIdentity.getPrincipal().toString().slice(0, 5)}</span>
                 <LogoutButton
                   identity={currentIdentity}
                   style={
@@ -400,8 +362,8 @@ export const NavbarPill = ({
                       overflow: 'hidden'
                     }
                   }>
-                    Cerrar sesión
-                  </LogoutButton>
+                  Cerrar sesión
+                </LogoutButton>
               </div>
 
 
