@@ -87,7 +87,6 @@ export const CommentSection = ({
     <TextField
         name="detail"
         placeholder="Escribe tu comentario aquí..."
-        multiline
         rows={4}
         className="w-full p-3 rounded-lg focus:ring focus:ring-cream-200 focus:outline-none"
         required
