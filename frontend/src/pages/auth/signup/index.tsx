@@ -91,7 +91,8 @@ export default function Signup() {
 
   return (
     <AuthLayout>
-      <Container className='max-w-lg py-5 sm:max-w-xl lg:max-w-6xl m-6'>
+      <Container className='max-w-lg w-full py-5 sm:max-w-xl lg:max-w-6xl mx-auto'>
+
         {user.role.length != 0 && (
           <Alert
             severity='info'
