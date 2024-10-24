@@ -7,11 +7,12 @@ import { useContext, useEffect } from 'react'
 import { UserContext } from '@app/context/userContext'
 import { useHome } from '@app/hooks/useHome'
 import { InvestorTestimonials } from '@app/components/pricing/InvestorTestimonials'
+import { Card1 } from '@app/components/home/Card1'
 
 export default function IcConnectPage() {
 
   const userContext = useContext(UserContext);
-  const { user, setUser } = userContext; 
+  const { user, setUser } = userContext;
   const { getProfile } = useHome();
 
   useEffect(() => {
@@ -35,6 +36,8 @@ export default function IcConnectPage() {
       <HeroContainer>
         <HomeHero />
       </HeroContainer>
+      <Divider />
+      <Card1 />
       <Divider />
       <Mision />
       <Divider />
