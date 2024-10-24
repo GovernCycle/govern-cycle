@@ -14,7 +14,7 @@ export const Header = () => {
 
   const { currentIdentity, isAuthenticated } = useAuth();
   const [isLogged, setIsLogged] = useState(false);
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, logout } = useContext(UserContext);
   const { getProfile } = useHome();
   const handleSuccess = async () => {
     setIsLogged(true);
@@ -28,6 +28,11 @@ export const Header = () => {
       console.log(e);
     }
 
+  }
+
+  const handleLogout = () => {
+    logout();
+    setIsLogged(false);
   }
 
   useEffect(() => {
@@ -75,28 +80,31 @@ export const Header = () => {
                       overflow: 'hidden'
                     }
                   } >
-                    Inicia sesión
-                    </InternetIdentityButton>
+                  Inicia sesión
+                </InternetIdentityButton>
               </div>
               <div className={`${!isLogged ? 'hidden' : ''} flex items-center space-x-2`}>
 
                 <span className='font-bold bg-yellow-700 hover:bg-yellow-900 rounded-full p-2 text-white'>Logged in as {currentIdentity.getPrincipal().toString().slice(0, 5)}</span>
-                <LogoutButton
-                  identity={currentIdentity}
-                  style={
-                    {
-                      color: 'white',
-                      backgroundColor: 'var(--color-button-primary)',
-                      border: '1px solid white',
-                      borderRadius: '0.5rem',
-                      padding: '0.5rem 1rem',
-                      fontSize: '1rem',
-                      fontWeight: 'bold',
-                      cursor: 'pointer',
-                      position: 'relative',
-                      overflow: 'hidden'
-                    }
-                  } />
+                <button onClick={handleLogout}>
+
+                  <LogoutButton
+                    identity={currentIdentity}
+                    style={
+                      {
+                        color: 'white',
+                        backgroundColor: 'var(--color-button-primary)',
+                        border: '1px solid white',
+                        borderRadius: '0.5rem',
+                        padding: '0.5rem 1rem',
+                        fontSize: '1rem',
+                        fontWeight: 'bold',
+                        cursor: 'pointer',
+                        position: 'relative',
+                        overflow: 'hidden'
+                      }
+                    } />
+                </button>
               </div>
 
 

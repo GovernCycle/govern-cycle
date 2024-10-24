@@ -6,10 +6,13 @@ import { candidCanisters } from '@app/canisters';
 import '@/styles/globals.css';
 import { UserContext, useUserState } from '@app/context/userContext';
 import { useState, useEffect } from 'react';
+import useCheckDelegationChains from '@app/hooks/useCheckDelegationChains';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [client, setClient] = useState<Client | null>(null);
   const userState = useUserState(); // Uso del estado del usuario
+
+  useCheckDelegationChains(); // Verificar las cadenas de delegación
 
   useEffect(() => {
     const createClient = async () => {
