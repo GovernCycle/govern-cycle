@@ -11,7 +11,7 @@ import { ContentPill } from '../shared/ContentPill';
 import Swal from 'sweetalert2';
 import { Footer } from '../shared/Footer';
 import { NavbarPill } from '../header/NavbarPill';
-import Header from '../header';
+import { Header } from '../header/Header';
 
 interface ProposalDetailsProps {
     proposalId: bigint;
@@ -66,8 +66,9 @@ export const ProposalDetails: React.FC<ProposalDetailsProps> = ({
     };
 
     return (
-        <Container className="max-w-lg py-5 sm:max-w-xl lg:max-w-6xl relative  p-6 rounded-lg shadow-lg">
+        <Container>
             <Header />
+        <Container className="max-w-lg py-5 sm:max-w-xl lg:max-w-6xl relative  p-6 rounded-lg shadow-lg">
             {/* Botón para regresar */}
             <div className='mb-16'>
 
@@ -107,7 +108,7 @@ export const ProposalDetails: React.FC<ProposalDetailsProps> = ({
                                 })}`}
                             />
                         </div>
-                        <div className="p-5">
+                        <div className="pt-10">
                             <h2 className="mt-5 text-4xl font-bold leading-tight text-text-tertiary lg:text-[2.0rem] xl:leading-tight">
                                 {proposal.name}
                             </h2>
@@ -211,8 +212,8 @@ export const ProposalDetails: React.FC<ProposalDetailsProps> = ({
 
             {/* Links de interés */}
             <InterestLinks interestLinks={proposal.links} />
-            <Footer />
         </Container>
-
+                    <Footer />
+        </Container>
     );
 };
