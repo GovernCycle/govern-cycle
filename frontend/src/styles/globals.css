@@ -43,6 +43,7 @@
   --color-button-secondary: #875F59;
   --color-button-secondary-i: #B49870;
   --color-button-ternary: #375257;
+  --color-button-fourth: #FFFEEF;
   --color-button-ternary-i: #634642;
 
   /* backGrounds */
@@ -574,4 +575,37 @@ Loading animation
     margin-bottom: 16px !important;
     padding: 0 !important;
   }
+}
+
+
+/* globals.css */
+.btn-internet-identity {
+  @apply bg-blue-500 text-white border border-white rounded-md px-4 py-2 text-sm font-bold cursor-pointer relative overflow-hidden transition-all duration-300 ease-in-out;
+}
+
+.btn-internet-identity:hover {
+  background-image: linear-gradient(to right, #3b82f6, #6366f1, #8b5cf6);
+}
+
+.button-header {
+  display: inline-block;
+  color: white;
+  background-image:linear-gradient(180deg, var(--color-button-ternary) 60%, var(--color-button-fourth) 100%);
+  border: 1px solid white;
+  border-radius: 0.8rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover animation */
+.button-header:hover {
+  transform: scale(1.02);
+  border-color: var(--color-button-secondary);
 }

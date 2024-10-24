@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { PricingCard } from './PricingCard'
-import { InvestorTestimonials } from './InvestorTestimonials'
+import { EventComponent } from './eventComponent'
 import { Container } from '@/components/shared/Container'
 import { ContentPill } from '@/components/shared/ContentPill'
 import { StarField } from '@/components/shared/StarField'
@@ -232,7 +232,7 @@ export function PricingHero() {
         </Container>
       </div>
 
-      <InvestorTestimonials />
+      <EventComponent />
     </div>
   )
 }
