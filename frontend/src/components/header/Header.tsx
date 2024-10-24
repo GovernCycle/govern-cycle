@@ -6,15 +6,35 @@ import { Button } from '@/components/shared/Button'
 import { InternetIdentityButton, useAuth, LogoutButton } from '@bundly/ares-react';
 
 import logo from '@/images/logo.png'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { UserContext } from '@app/context/userContext'
+import { useHome } from '@app/hooks/useHome'
 
 export const Header = () => {
 
   const { currentIdentity, isAuthenticated } = useAuth();
   const [isLogged, setIsLogged] = useState(false);
-  const handleSuccess = () => {
+  const { user, setUser, logout } = useContext(UserContext);
+  const { getProfile } = useHome();
+  const handleSuccess = async () => {
     setIsLogged(true);
+    try {
+      const result = await getProfile();
+      if ('ok' in result && 'User' in result.ok) {
+        setUser(result.ok.User);
+      }
+    }
+    catch (e) {
+      console.log(e);
+    }
+
   }
+
+  const handleLogout = () => {
+    logout();
+    setIsLogged(false);
+  }
+
   useEffect(() => {
     if (isAuthenticated) {
       setIsLogged(true);
@@ -38,7 +58,7 @@ export const Header = () => {
             </Link>
           </div>
 
-          <NavbarPill isLogged={isLogged} setIsLogged={setIsLogged}/>
+          <NavbarPill isLogged={isLogged} setIsLogged={setIsLogged} />
 
           <div className='hidden items-center md:flex lg:space-x-3 xl:space-x-4'>
             <div className="lg:flex lg:flex-1 lg:justify-end">
@@ -60,28 +80,31 @@ export const Header = () => {
                       overflow: 'hidden'
                     }
                   } >
-                    Inicia sesión
-                    </InternetIdentityButton>
+                  Inicia sesión
+                </InternetIdentityButton>
               </div>
               <div className={`${!isLogged ? 'hidden' : ''} flex items-center space-x-2`}>
 
                 <span className='font-bold bg-yellow-700 hover:bg-yellow-900 rounded-full p-2 text-white'>Logged in as {currentIdentity.getPrincipal().toString().slice(0, 5)}</span>
-                <LogoutButton
-                identity={currentIdentity}
-                  style={
-                    {
-                      color: 'white',
-                      backgroundColor: 'var(--color-button-primary)',
-                      border: '1px solid white',
-                      borderRadius: '0.5rem',
-                      padding: '0.5rem 1rem',
-                      fontSize: '1rem',
-                      fontWeight: 'bold',
-                      cursor: 'pointer',
-                      position: 'relative',
-                      overflow: 'hidden'
-                    }
-                  } />
+                <button onClick={handleLogout}>
+
+                  <LogoutButton
+                    identity={currentIdentity}
+                    style={
+                      {
+                        color: 'white',
+                        backgroundColor: 'var(--color-button-primary)',
+                        border: '1px solid white',
+                        borderRadius: '0.5rem',
+                        padding: '0.5rem 1rem',
+                        fontSize: '1rem',
+                        fontWeight: 'bold',
+                        cursor: 'pointer',
+                        position: 'relative',
+                        overflow: 'hidden'
+                      }
+                    } />
+                </button>
               </div>
 
 

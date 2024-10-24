@@ -86,6 +86,19 @@
 
 }
 
+@layer base {
+  html, body {
+    @apply bg-[var(--color-background-primary)] min-h-screen; /* Alternativa a min-height: 100vh */
+
+  }
+}
+
+#__next {
+  min-height: 100vh; /* Si usas Next.js */
+  display: flex;
+  flex-direction: column;
+}
+
 
 .bg-form-input{
  @apply bg-zinc-950/[.01] shadow-inner-blur duration-200 ease-in-out hover:bg-zinc-950/10 has-[:focus]:bg-zinc-950/15 

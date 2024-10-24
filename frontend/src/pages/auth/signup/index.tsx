@@ -17,6 +17,7 @@ import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 import { UserContext } from '@app/context/userContext'
 import { Alert } from '@mui/material'
+import Loading from '@app/components/loading/Loading'
 
 export default function Signup() {
 
@@ -27,6 +28,7 @@ export default function Signup() {
   const { createProfile } = useHome();
   const userContext = useContext(UserContext);
   const { user, setUser } = userContext;
+  const [isLoading, setIsLoading] = useState(false);
 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -66,6 +68,7 @@ export default function Signup() {
         region: [jurisdiction.city]
       })) as Jurisdiction[],
     }
+    setIsLoading(true)
     const result = await createProfile(newUser)
 
     if ('ok' in result && 'SuccessText' in result.ok) {
@@ -83,11 +86,13 @@ export default function Signup() {
         icon: 'error',
       });
     }
+    setIsLoading(false)
   }
 
   return (
     <AuthLayout>
-      <Container className='max-w-lg py-5 sm:max-w-xl lg:max-w-6xl m-6'>
+      <Container className='max-w-lg w-full py-5 sm:max-w-xl lg:max-w-6xl mx-auto'>
+
         {user.role.length != 0 && (
           <Alert
             severity='info'
@@ -106,46 +111,52 @@ export default function Signup() {
               title='Bienvenidos a Gabbi DAO'
               description='Completa los datos para comenzar'
             />
+            {isLoading && (
+              <div className='flex justify-center w-full items-center'>
+                <Loading />
+              </div>
+            )}
+            {!isLoading && (
+              <form onSubmit={handleSubmit} className='mt-9 px-6 pb-10 sm:px-10'>
+                <div className='space-y-6'>
+                  <div className='space-y-8 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:space-y-0'>
+                    <TextField
+                      label='Nombre'
+                      name='first-name'
+                      autoComplete='Nombres'
+                      placeholder='Escribe tu nombre'
+                      required
+                    />
+                    <TextField
+                      label='Email'
+                      name='email'
+                      type='email'
+                      autoComplete='email'
+                      placeholder='johnnybravo@gmail.com'
+                      required
+                    />
+                  </div>
 
-            <form onSubmit={handleSubmit} className='mt-9 px-6 pb-10 sm:px-10'>
-              <div className='space-y-6'>
-                <div className='space-y-8 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:space-y-0'>
                   <TextField
-                    label='Nombre'
-                    name='first-name'
-                    autoComplete='Nombres'
-                    placeholder='Escribe tu nombre'
+                    label='Logo'
+                    name='logo'
+                    placeholder='Sube tu logo'
                     required
                   />
-                  <TextField
-                    label='Email'
-                    name='email'
-                    type='email'
-                    autoComplete='email'
-                    placeholder='johnnybravo@gmail.com'
-                    required
-                  />
+                  <JurisdictionDropdown selectedJurisdictions={selectedJurisdictions} setSelectedJurisdictions={setSelectedJurisdictions} />
+                  <PhoneNumberInput selectedCountry={selectedCountry} setSelectedCountry={setSelectedCountry}
+                    phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber} />
+                  <RoleDropdown selectedRoles={selectedRoles} setSelectedRoles={setSelectedRoles} />
                 </div>
 
-                <TextField
-                  label='Logo'
-                  name='logo'
-                  placeholder='Sube tu logo'
-                  required
-                />
-                <JurisdictionDropdown selectedJurisdictions={selectedJurisdictions} setSelectedJurisdictions={setSelectedJurisdictions} />
-                <PhoneNumberInput selectedCountry={selectedCountry} setSelectedCountry={setSelectedCountry}
-                  phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber} />
-                <RoleDropdown selectedRoles={selectedRoles} setSelectedRoles={setSelectedRoles} />
-              </div>
-
-              <div className='mt-5 flex items-center justify-between space-x-4'>
-                <Button type='submit' className='sm:px-5'>
-                  <span>Registrar</span>
-                  <ChevronRightIcon className='h-4 w-4' />
-                </Button>
-              </div>
-            </form>
+                <div className='mt-5 flex items-center justify-between space-x-4'>
+                  <Button type='submit' className='sm:px-5'>
+                    <span>Registrar</span>
+                    <ChevronRightIcon className='h-4 w-4' />
+                  </Button>
+                </div>
+              </form>
+            )}
           </SimpleBar>
         </div>
       </Container>
