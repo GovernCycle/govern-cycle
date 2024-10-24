@@ -2,7 +2,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { NavbarPill } from '@/components/header/NavbarPill'
 import { Container } from '@/components/shared/Container'
-import { Button } from '@/components/shared/Button'
 import { InternetIdentityButton, useAuth, LogoutButton } from '@bundly/ares-react';
 
 import logo from '@/images/logo.png'
@@ -10,6 +9,7 @@ import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '@app/context/userContext'
 import { useHome } from '@app/hooks/useHome'
 import { SignupButton } from '../shared/SignupButton'
+import { useRouter } from 'next/router';
 
 export const Header = () => {
 
@@ -17,12 +17,16 @@ export const Header = () => {
   const [isLogged, setIsLogged] = useState(false);
   const { user, setUser, logout } = useContext(UserContext);
   const { getProfile } = useHome();
+  const router = useRouter();
+
   const handleSuccess = async () => {
     setIsLogged(true);
     try {
       const result = await getProfile();
       if ('ok' in result && 'User' in result.ok) {
         setUser(result.ok.User);
+        router.reload();
+
       }
     }
     catch (e) {
