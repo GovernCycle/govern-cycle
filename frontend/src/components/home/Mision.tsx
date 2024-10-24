@@ -32,7 +32,7 @@ const careerBenefits = [
         borderClassName:
             'md:hidden before:hidden before:sm:block lg:block after:inset-x-0 after:bottom-0 after:h-px after:w-full after:bg-gradient-to-r after:from-violet-200/[0.075] after:to-violet-200/[0.025] lg:after:from-violet-200/[0.125] lg:after:to-transparent before:content-[""] before:absolute before:left-0 before:h-full before:w-px before:bg-gradient-to-b md:before:from-violet-200/[.01] md:before:to-violet-200/[0.125] before:from-violet-200/[0.075] before:to-violet-200/[0.025]',
     },
-    
+
 ]
 
 export function Mision() {
@@ -62,16 +62,16 @@ export function Mision() {
 
                 {/* Objetives of the app */}
                 <div className='relative mt-12 sm:mt-18'>
-                    <div className='relative mt-8 flex flex-wrap items-stretch justify-center'>
+                    <div className='relative mt-8 flex flex-wrap items-stretch justify-center gap-6'>
                         {careerBenefits.map((benefit) => (
                             <div
                                 key={`benefit-${benefit.title}`}
                                 className={cn(
-                                    "group relative w-full bg-gradient-to-b after:absolute after:content-[''] sm:w-1/2 md:w-1/3 lg:w-1/4",
+                                    "group relative w-full sm:w-1/2 md:w-1/3 lg:w-1/4 bg-gradient-to-b after:absolute after:content-['']",
                                     benefit.borderClassName
                                 )}
                             >
-                                <div className='relative h-full w-full overflow-hidden'>
+                                <div className='relative flex h-full w-full flex-col '>
                                     <div
                                         className='absolute inset-0 opacity-0 duration-300 ease-in-out group-hover:opacity-100'
                                         aria-hidden='true'
@@ -79,13 +79,12 @@ export function Mision() {
                                         <StarField density='high' maxRadius={1.75} minRadius={1} />
                                     </div>
                                     <div className='hover-gradient absolute inset-0 -z-10 bg-gradient-to-b from-[#875F59]/30 to-[#B49870]/30 opacity-0 blur-4xl duration-300 ease-in-out group-hover:opacity-100' />
-                                    <div className='relative z-10 flex h-full w-full flex-1 flex-col justify-center px-4 py-5 sm:px-5 sm:py-6 lg:py-7 xl:p-8'>
-                                        <benefit.icon className='h-6 w-6 text-text-tertiary sm:h-7 sm:w-7 xl:h-8 xl:w-8' />
-
-                                        <h4 className='mt-5 text-base font-bold text-text-tertiary xl:mt-6 xl:text-lg'>
+                                    <div className='relative z-10 flex flex-col flex-grow justify-center px-6 py-8 sm:px-8'>
+                                        <benefit.icon className='h-8 w-8 text-text-tertiary sm:h-9 sm:w-9' />
+                                        <h4 className='mt-6 text-lg font-bold text-text-tertiary'>
                                             {benefit.title}
                                         </h4>
-                                        <p className='mt-1 line-clamp-2 text-base text-text-primary xl:text-lg'>
+                                        <p className='mt-3 text-base text-text-primary'>
                                             {benefit.description}
                                         </p>
                                     </div>
@@ -93,6 +92,7 @@ export function Mision() {
                             </div>
                         ))}
                     </div>
+
                 </div>
             </Container>
         </section>
