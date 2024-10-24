@@ -34,13 +34,6 @@ export const ProposalDetails: React.FC<ProposalDetailsProps> = ({
         return '';
     };
 
-    const getStateStyle = (state: StateProposal) => {
-        if ('Approved' in state) return 'bg-green-500 text-white';
-        if ('Rejected' in state) return 'bg-red-500 text-white';
-        if ('Pending' in state) return 'bg-yellow-500 text-white';
-        return '';
-    };
-
     const handleVote = async (choice: boolean) => {
         try {
             const result = await voteProposal(choice, proposalId);
