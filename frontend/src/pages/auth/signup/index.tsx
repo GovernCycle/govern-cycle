@@ -111,7 +111,9 @@ export default function Signup() {
               description='Completa los datos para comenzar'
             />
             {isLoading && (
-              <Loading />
+              <div className='flex justify-center w-full items-center'>
+                <Loading />
+              </div>
             )}
             {!isLoading && (
               <form onSubmit={handleSubmit} className='mt-9 px-6 pb-10 sm:px-10'>
