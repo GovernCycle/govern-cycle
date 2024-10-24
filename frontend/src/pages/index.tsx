@@ -6,7 +6,7 @@ import { Footer } from '@/components/shared/Footer'
 import { useContext, useEffect } from 'react'
 import { UserContext } from '@app/context/userContext'
 import { useHome } from '@app/hooks/useHome'
-import { InvestorTestimonials } from '@app/components/pricing/InvestorTestimonials'
+import { EventComponent } from '@app/components/pricing/eventComponent'
 import { Card1 } from '@app/components/home/Card1'
 
 export default function IcConnectPage() {
@@ -41,7 +41,7 @@ export default function IcConnectPage() {
       <Divider />
       <Mision />
       <Divider />
-      <InvestorTestimonials />
+      <EventComponent />
       <Divider />
       <Footer />
     </>

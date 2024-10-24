@@ -9,7 +9,7 @@ export function InterestLinks({
   interestLinks: Link[];
 }) {
   return (
-    <section className="relative overflow-hidden py-16 sm:py-20 bg-gray-50">
+    <section className="relative overflow-hidden py-16 sm:py-20">
       <Container className="max-w-4xl">
         {/* Título de la sección */}
         <h2 className="text-3xl font-bold text-gray-900 mb-12">Enlaces de Interés</h2>

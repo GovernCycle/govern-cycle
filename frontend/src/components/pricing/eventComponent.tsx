@@ -5,7 +5,7 @@ import { useState } from 'react';
 import eventImage from '@/images/Event_Image.jpg'; // Imagen del evento
 import backgroundImg from '/mnt/data/image.png'; // Nueva imagen de fondo
 
-export function InvestorTestimonials() {
+export function EventComponent() {
   const [showConfetti, setShowConfetti] = useState(false);
 
   // Manejar el clic en la imagen para mostrar el confetti
@@ -38,7 +38,7 @@ export function InvestorTestimonials() {
           </div>
 
           <p className="text-lg text-zinc-200 leading-8">
-            Únete a nosotros para el evento COP16 organizado por Gabbii DAO y KaidáO con el apoyo de Internet Computer. Vive la tecnología, la cultura y la innovación con la Universidad de Antioquia como nuestra aliada.
+            Únete a nosotros para el evento COP16 organizado por Gabbii DAO y con el apoyo de Internet Computer. Vive la tecnología, la cultura y la innovación con la Universidad de Antioquia como nuestra aliada.
           </p>
 
           <div className="mt-6 flex items-center">
@@ -58,7 +58,7 @@ export function InvestorTestimonials() {
         </div>
 
         {/* Imagen del Evento a la Derecha */}
-        <div className="md:w-1/2 flex justify-center">
+        <div className="md:w-1/2 flex justify-center hover:">
           <Image
             onClick={handleImageClick} // 
             src={eventImage}

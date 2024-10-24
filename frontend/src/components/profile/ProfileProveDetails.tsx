@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Container } from '@/components/shared/Container';
 import { useHome } from '@app/hooks/useHome';
 import Alert from '@mui/material/Alert';
