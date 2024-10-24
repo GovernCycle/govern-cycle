@@ -9,6 +9,9 @@ import { useRouter } from 'next/router';
 import { useProposal } from '@app/hooks/useProposal';
 import { ContentPill } from '../shared/ContentPill';
 import Swal from 'sweetalert2';
+import { Footer } from '../shared/Footer';
+import { NavbarPill } from '../header/NavbarPill';
+import Header from '../header';
 
 interface ProposalDetailsProps {
     proposalId: bigint;
@@ -24,7 +27,7 @@ export const ProposalDetails: React.FC<ProposalDetailsProps> = ({
     const router = useRouter();
     const { voteProposal } = useProposal();
 
-    const getVotesCount = (type: boolean) => 
+    const getVotesCount = (type: boolean) =>
         proposal.votes.filter((vote) => vote.approved === type).length;
 
     const getStateText = (state: StateProposal): string => {
@@ -59,11 +62,12 @@ export const ProposalDetails: React.FC<ProposalDetailsProps> = ({
                 text: 'Hubo un error al registrar el voto',
                 icon: 'error',
             });
-        }
-    };
+        }
+    };
 
     return (
         <Container className="max-w-lg py-5 sm:max-w-xl lg:max-w-6xl relative  p-6 rounded-lg shadow-lg">
+            <Header />
             {/* Botón para regresar */}
             <div className='mb-16'>
 
@@ -103,9 +107,12 @@ export const ProposalDetails: React.FC<ProposalDetailsProps> = ({
                                 })}`}
                             />
                         </div>
-                        <h2 className="mt-5 text-4xl font-bold leading-tight text-text-tertiary lg:text-[2.0rem] xl:leading-tight">
-                            {proposal.name}
-                        </h2>
+                        <div className="p-5">
+                            <h2 className="mt-5 text-4xl font-bold leading-tight text-text-tertiary lg:text-[2.0rem] xl:leading-tight">
+                                {proposal.name}
+                            </h2>
+                        </div>
+
 
                         {/* Estado de la propuesta */}
                         <ContentPill
@@ -142,7 +149,7 @@ export const ProposalDetails: React.FC<ProposalDetailsProps> = ({
                             <button
                                 className="flex items-center justify-between w-full px-6 py-4 border border-charcoal-500 rounded-md text-carafe-700 hover:bg-tan-100 hover:border-tan-400 transition-colors duration-300 shadow-sm"
                                 onClick={() => handleVote(false)}
-                           >
+                            >
                                 <HandThumbDownIcon className="h-6 w-6 text-tan-600" />
                                 <span className="ml-3 font-semibold">Votar en contra</span>
                             </button>
@@ -204,6 +211,8 @@ export const ProposalDetails: React.FC<ProposalDetailsProps> = ({
 
             {/* Links de interés */}
             <InterestLinks interestLinks={proposal.links} />
+            <Footer />
         </Container>
+
     );
 };
