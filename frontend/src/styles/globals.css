@@ -93,6 +93,11 @@
   }
 }
 
+#__next {
+  min-height: 100vh; /* Si usas Next.js */
+  display: flex;
+  flex-direction: column;
+}
 
 
 .bg-form-input{
