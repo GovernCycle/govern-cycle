@@ -312,7 +312,8 @@ actor Proposal {
                             };
 
                             // Move the invited users' participations from active to inactive
-                            let areParticipationsSet = await changeFromActiveToInactive(proposal.invitedUsers, p);
+                            let notVotedUsers = ProposalUtils.checkUsersThatNotVoted(proposal.invitedUsers, proposal.votes);
+                            let areParticipationsSet = await changeFromActiveToInactive(notVotedUsers, p);
                             if (not areParticipationsSet) {
                                 return #err(#ParticipationsNotSet);
                             };
