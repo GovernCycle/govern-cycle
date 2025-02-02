@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 export const ProposalRow = ({
     proposal,
     title
@@ -15,7 +17,11 @@ export const ProposalRow = ({
             </td>
             <td className='px-4 py-5 text-center text-sm text-gray-600'>
                 {proposal.map((id, index) => (
-                    <div key={index}>{id.toString()}</div>
+                    <Link className="hover:underline hover:text-blue-500" 
+                        href={`/proposal/${id.toString()}`}
+                        key={index}>
+                        {id.toString()}
+                    </Link>
                 ))}
             </td>
         </>

@@ -343,7 +343,8 @@ actor Proposal {
                             };
 
                             // Move the invited users' participations from active to inactive
-                            let areParticipationsSet = await changeFromActiveToInactive(proposal.invitedUsers, p);
+                            let notVotedUsers = ProposalUtils.checkUsersThatNotVoted(proposal.invitedUsers, proposal.votes);
+                            let areParticipationsSet = await changeFromActiveToInactive(notVotedUsers, p);
                             if (not areParticipationsSet) {
                                 return #err(#ParticipationsNotSet);
                             };
@@ -450,14 +451,6 @@ actor Proposal {
                 return #err(#ProposalNotFound);
             };
             case (?proposalFound) {
-                // Check if the proposal is still pending
-                if (proposalFound.state == #Pending) {
-                    //remove the proposal from the active participations of invited users
-                    let areParticipationsSet = await changeFromActiveToInactive(proposalFound.invitedUsers, idProposal);
-                    if (not areParticipationsSet) {
-                        return #err(#ParticipationsNotSet);
-                    };
-                };
                 // Delete the proposal from the map
                 let response = await DB.deleteProposal(idProposal);
                 return response;

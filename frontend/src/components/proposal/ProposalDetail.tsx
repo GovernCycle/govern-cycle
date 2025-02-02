@@ -168,7 +168,7 @@ export const ProposalDetails: React.FC<ProposalDetailsProps> = ({
                                 <div className="w-full bg-gray-200 rounded-full h-5">
                                     <div
                                         className="bg-indigo-500 h-5 rounded-full"
-                                        style={{ width: `${(getVotesCount(false) / Number(proposal.threshold)) * 100}%` }}
+                                        style={{ width: `${(getVotesCount(true) / Number(proposal.threshold)) * 100}%` }}
                                     ></div>
                                 </div>
                             </div>
