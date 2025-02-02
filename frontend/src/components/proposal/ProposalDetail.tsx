@@ -142,7 +142,7 @@ export const ProposalDetails: React.FC<ProposalDetailsProps> = ({
                         <div className="mt-6 flex flex-col space-y-4 w-full">
                             <button
                                 className="flex items-center justify-between w-full px-6 py-4 border border-charcoal-500 rounded-md  text-carafe-700 hover:bg-tan-100 hover:border-tan-400 transition-colors duration-300 shadow-sm"
-                                onClick={() => handleVote(false)}
+                                onClick={() => handleVote(true)}
                             >
                                 <HandThumbUpIcon className="h-6 w-6 text-charcoal-600" />
                                 <span className="ml-3 font-semibold">Votar a favor</span>

@@ -94,4 +94,17 @@ module {
         };
     };
 
+    // get aprove proposals
+    public func getApprovedProposals(proposals : [ProposalData.Proposal]) : [ProposalData.Proposal] {
+        let approvedProposalsBuffer = Buffer.Buffer<ProposalData.Proposal>(1); // Buffer to store approved proposals.
+        for (proposal in proposals.vals()) {
+            // Loop through the proposals.
+            if (proposal.state == #Approved) {
+                // If the proposal is approved, add it to the buffer.
+                approvedProposalsBuffer.add(proposal);
+            };
+        };
+        return Buffer.toArray(approvedProposalsBuffer); // Return the list of approved proposals.
+    };
+
 };

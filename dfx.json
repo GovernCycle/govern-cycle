@@ -29,6 +29,17 @@
         "output": "frontend/src/declarations/proposal"
       }
     },
+    "nft": {
+      "dependencies": [
+        "db"
+      ],
+      "type": "motoko",
+      "main": "backend/nft/main.mo",
+      "declarations": {
+        "node_compatibility": true,
+        "output": "frontend/src/declarations/nft"
+      }
+    },
     "db": {
       "type": "motoko",
       "main": "backend/db/main.mo",

@@ -29,6 +29,7 @@ module {
         #ProposalAlreadyApproved;
         #InvalidDate;
         #NotAllowedAction;
+        #NFTNotMinted;
 
     };
 
@@ -52,6 +53,7 @@ module {
         #ParticipationsNotSet;
         #ProposalNotFound;
         #NotAllowedAction;
+        #NFTNotMinted;
     };
 
     // Public type representing the result of a proposal-related operation.

@@ -7,7 +7,7 @@ export const useProposal = () => {
     const { currentIdentity } = useAuth();
     const proposal = useCandidActor<CandidActors>("proposal",
         currentIdentity, {
-        canisterId: "h2tkt-laaaa-aaaal-qjr3a-cai",
+        canisterId: "b7ki6-kaaaa-aaaap-qht4a-cai",
     }
     ) as CandidActors["proposal"];
 

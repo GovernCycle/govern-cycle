@@ -2,6 +2,9 @@ import Nat "mo:base/Nat";
 import Array "mo:base/Array";
 import Buffer "mo:base/Buffer";
 import Principal "mo:base/Principal";
+import Blob "mo:base/Blob";
+import Text "mo:base/Text";
+import Debug "mo:base/Debug";
 import ProposalData "../types/proposal";
 import UserData "../types/user";
 import DateTime "mo:datetime/DateTime";
@@ -9,6 +12,8 @@ import ProposalVal "../validations/proposal";
 import UserUtils "../utils/user";
 import ProposalUtils "../utils/proposal";
 import DB "canister:db";
+import NFT "canister:nft";
+import NFTtype "../nft/Types";
 
 actor Proposal {
 
@@ -156,6 +161,32 @@ actor Proposal {
                     let areParticipationsSet = await changeFromActiveToInactive(usersThatNotVoted, proposalId);
                     if (not areParticipationsSet) {
                         return #err(#ParticipationsNotSet);
+                    };
+
+                    let metadata : [NFTtype.MetadataPart] = [
+                        {
+                            purpose = #Preview;
+                            key_val_data = [
+                                {
+                                    key = proposal.name;
+                                    val = #TextContent(proposal.photo);
+                                },                               
+                            ];
+                            
+                            data = Blob.fromArray([8]); // Datos adicionales en formato blob
+                        },                        
+                    ];   
+
+                    
+                    // Mint the NFT
+                    let mintResult = await NFT.mintDip721(proposal.author, metadata);
+                    switch (mintResult) {
+                        case (#Ok(_)) {
+                           
+                        };
+                        case (#Err(_)) {
+                            return #err(#NFTNotMinted);
+                        };
                     };
                 };
 
